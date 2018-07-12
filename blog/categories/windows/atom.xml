@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: windows | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/windows/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[WSL - Ubuntu 18.04 - xfce4-terminal]]></title>
+    <link href="http://itoutline.me/2018/05/05/Ubuntu-18-04/"/>
+    <updated>2018-05-05T16:15:00+00:00</updated>
+    <id>http://itoutline.me/2018/05/05/Ubuntu-18-04</id>
+    <content type="html"><![CDATA[<p>Ubuntu 18.04 ma nowszą wersję xfce4-terminal 0.8.7.3 i jest w niej poprawiony pewien szczegół który mnie irytował, przypadkowe przechodzenie w tryb zaznaczania przy kliknięciu na okno xfce4. Bardzo łatwo było to zrobić i jeśli akurat miało się coś w schowku to trzeba było ponownie do niego kopiować. Teraz jest normalnie a na dodatek zaznaczenie blokowe w terminalu z wciśniętym <kbd>Shift</kbd> i <kbd>Ctrl</kbd> działa świetnie.</p>
+
+<p>Została też poprawiona obsługa zmiennej <code>TERM</code> i <code>COLORTERM</code>, teraz sam xfce4 ustawia je bez konieczności dosyć złej praktyki modyfikowania ich w <code>.bashrc</code> itp.:
+<code>
+TERM=xterm-256color
+COLORTERM=truecolor
+</code></p>
+
+<p>Testowałem różne rozwiązania terminalowe na Windows - mintty, putty (via server ssh), Hyper, cmder), chyba tylko xfce4-terminal jest teraz bardzo bliski tego czego bym oczekiwał po terminalu (nawet mimo tego, że trzeba go uruchamiać przez Server X). Jest prawie tak dobry jak iTerm2 na OSX ;)</p>
+
+<p>Dla odważnych <code>sudo do-release-upgrade -d</code> :)</p>
+
+<p> <img src="/images/xfce4-terminal-WSL.png"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Picocom na Cygwin/Windows10]]></title>
+    <link href="http://itoutline.me/2016/05/27/picocom-na-cygwin-slash-windows10/"/>
+    <updated>2016-05-27T20:11:00+00:00</updated>
+    <id>http://itoutline.me/2016/05/27/picocom-na-cygwin-slash-windows10</id>
+    <content type="html"><![CDATA[<p>Działa i instalacja poszła wyjątkowo łatwo:
+<code>
+git clone https://github.com/npat-efault/picocom; cd picocom &amp;&amp; make
+</code>
+<code>
+Cloning into 'picocom'...
+remote: Counting objects: 701, done.
+remote: Total 701 (delta 0), reused 0 (delta 0), pack-reused 701
+Receiving objects: 100% (701/701), 490.39 KiB | 493.00 KiB/s, done.
+Resolving deltas: 100% (445/445), done.
+cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o linenoise-1.0/linenoise.o -c linenoise-1.0/linenoise.c
+cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o picocom.o -c picocom.c
+cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o term.o -c term.c
+cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o fdio.o -c fdio.c
+cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o split.o -c split.c
+cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o termios2.o -c termios2.c
+cc -g -o picocom  linenoise-1.0/linenoise.o picocom.o term.o fdio.o split.o termios2.o
+</code>
+Gdyby nie było <code>make</code> to <code>apt-cyg install make</code>.</p>
+
+<p>Trzeba tylko pamiętać, że np. COM4 to /dev/ttyS3:</p>
+
+<pre><code>$ ./picocom.exe -b 115200 /dev/ttyS3
+picocom v2.3a
+
+port is        : /dev/ttyS3
+flowcontrol    : none
+baudrate is    : 115200
+parity is      : none
+databits are   : 8
+stopbits are   : 1
+escape is      : C-a
+local echo is  : no
+noinit is      : no
+noreset is     : no
+nolock is      : no
+send_cmd is    : sz -vv
+receive_cmd is : rz -vv -E
+imap is        :
+omap is        :
+emap is        : crcrlf,delbs,
+logfile is     : none
+
+Type [C-a] [C-h] to see available commands
+
+Terminal ready
+
+HiZ&gt;
+HiZ&gt;
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Problem Bitlocker]]></title>
+    <link href="http://itoutline.me/2013/04/16/problem-bitlocker/"/>
+    <updated>2013-04-16T13:42:27+00:00</updated>
+    <id>http://itoutline.me/2013/04/16/problem-bitlocker</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/BitLocker_icon.png" width="150"></p>
+
+<p>Przyznam, że nigdy nie myślałem, że coś takiego może mi sie przydarzyć&hellip; ale jednak. Klucze do bitlockera miałem zapisane na karcie micro-SD włożonej do miniaturowego czytnika USB. W pewnym momencie pojawił się nowy element w pobliżu komputera w postaci drukarki, &ldquo;głównej winowajczyjni&rdquo; ;). Drukarka była niestety zbyt blisko czytnika i prawdopodobnie za którymś razem spowodowała jakieś większe przesunięcie się czytnika, co zakończyło się strukturą katalogów na karcie jak poniżej. Oczywiście mogłem to sprawdzić tylko na ja jakimś innym komputerze ponieważ komputer który zabezpieczała ta karta w ogóle nie miał zamiaru się z nią uruchomić.</p>
+
+<p><img src="/images/Bitlocker_sd_card_1.png"></p>
+
+<!--more -->
+
+
+<p>W sumie zbytnio się tym nie przejąłem dopóki nie wyszło na jaw, że zapasowe klucze przechowywane &ldquo;gdzieś&rdquo; w sieci pochodzą sprzed ostatniej instalacji Windows-a. Następnie zaczęło się gorączkowe poszukiwanie papierowej kopii &ldquo;Bitlocker Recovery Key&rdquo;. Nie trudno się domyśleć, że ukryłem ją dobrze. Ostatecznie okazało się, że nawet za dobrze. Poza tym miałem silne przeczucie, że znajdę tam te same klucze co w sieci. Plecy były mokre, ileś tam lat zdjęć o ironio zabezpieczonych RAID-em wydawały się stracone na dobre.</p>
+
+<p>Niestety żaden program do odzyskiwania danych nie odnalazł interesujących mnie plików, jak to zwykle bywa bez problemu można było odtworzyć rzeczy zupełnie archaiczne i kompletnie zbędne. Zacząłem nawet szukać czy jakoś nie da się &ldquo;złamać&rdquo; Bitlockera i jedyne co znalazłem to możliwość odzyskania kluczy z obrazu pamięci wyciągniętego przez FireWire z działającej maszyny za pomocą <a href="http://www.lostpassword.com/">Passware Kit</a>. Mój komputer był już po restarcie czyli nawet taka ekwilibrystyka nie wchodziła w grę.</p>
+
+<p>W akcie desperacji pomyślałem, że przeszukam jakimś edytorem HEX tą kartę i może coś tam znajdę. Skorzystałem z całkiem przyjemnego i darmowego edytora <a href="http://www.wxhexeditor.org/">wxHexEditor</a>. Wyszukiwanie ciągu znaków takich jak &ldquo;bitlocker&rdquo;, &ldquo;recovery&rdquo; nic nie dawało. Dopiero przy przeglądaniu PGUP/PGDOWN trafiłem na coś co spowodowało, że serce &ldquo;nabrało obrotów&rdquo;:</p>
+
+<p><img src="/images/Bitlocker_wxHexEditor_1.png"></p>
+
+<p>Kiedy zobaczyłem, że &ldquo;Recovery key identification&rdquo; pokrywa się z tym o który jestem proszony na ekranie a na dodatek po &ldquo;BitLocker Recovery Key&rdquo; są jakieś cyfry o mało nie zemdlałem ;). To i tak był dopiero jeden z dysków&hellip; Z drugim poszło już znacznie łatwiej, po prostu wyszukałem ciągu HEX:</p>
+
+<pre><code>4200690074004C006F0063006B00650072 = B.i.t.l.o.c.k.e.r
+5200650063006F0076006500720079 = R.e.c.o.v.e.r.y
+</code></pre>
+
+<p>Jeśli Twój napęd USB na którym były zapisane informacje dot. Bitlockera się uszkodził ale da się jeszcze go odczytać, można spróbować wyszukać jednego z powyższych ciągów znaków. W okolicy powinny być cyfry umożliwiajace uruchomienie komputera.</p>
+
+<p><img src="/images/Bitlocker_search_wxHexEditor_1.png"></p>
+
+<p>Wnioski z tej sytuacji nasunęły mi się następujące:</p>
+
+<ul>
+<li><p>Coś co niesie za sobą jakieś ryzyko i jest wykonywane po raz pierwszy, jest wykonywane starannie. Za pierwszym razem miałem kopię w sieci i wydrukowane klucze. Kiedy drugi raz użyłem Bitlockera zapomniałem o tym jak ważny jest backup tych informacji.</p></li>
+<li><p>Naprawdę miałem szczęście, że plik z &ldquo;recovery key&rdquo; przetrwał na karcie SD w sposób nie naruszony. Ciekawe, że żaden z programów nie był w stanie go znaleźć (ostatecznie znalazłem wszystkie cztery pliki w <a href="http://www.wxhexeditor.org/">wxHexEditor</a> - dwa z pierwszego użycia Bitlockera i kolejne, po reinstalacji systemu).</p></li>
+<li><p>Całkiem sensowne wydaje się zrobienie kilku katalagów w których będą zapisane klucze. Dzięki temu znacząco zwiękaszmy szansę, na ich odzyskanie. Chociaż zdecydowanie lepiej mieć po prostu więcej ich kopii na innych nośnikach.</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

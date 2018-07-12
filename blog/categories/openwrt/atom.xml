@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: openwrt | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/openwrt/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Unblock-us i Openwrt]]></title>
+    <link href="http://itoutline.me/2012/11/03/unblock-us-i-openwrt/"/>
+    <updated>2012-11-03T22:52:45+00:00</updated>
+    <id>http://itoutline.me/2012/11/03/unblock-us-i-openwrt</id>
+    <content type="html"><![CDATA[<p>Unblock-us.com to serwis, który umożliwia dostęp do <a href="http://www.unblock-us.com/supported-services">usług</a> posiadających ograniczenia regionalne podczas gdy jesteśmy akurat za granicą. Jest o tyle lepszy od rozwiązań opartych na VPN, że nie musimy niczego instalować i prędkość naszego połączenia nie jest ograniczona jak to ma zazwyczaj miejsce w przypadku dostawców rozwiązań VPN.</p>
+
+<p>W przypadku OpenWrt konfiguracja jest bardzo prosta (oczywiście to nie jedyny sposób, ale właśnie z tą metodą nigdy nie miałem problemów). Tworzymy nowy plik zawierający informację o serwerach DNS i umieszczamy w nim wpisy związane z Unblock-us.com np. <code>/etc/my_resolv.conf</code>:</p>
+
+<pre><code># Interface lan
+nameserver 184.106.242.193
+nameserver 208.122.23.23
+nameserver 208.122.23.22
+# Interface wan
+nameserver 184.106.242.193
+nameserver 208.122.23.23
+nameserver 208.122.23.22
+</code></pre>
+
+<p>Następnie modyfikujemy plik <code>/etc/config/dhcp</code>, komentujemy linię zawierającą dane oryginalnego pliku i dodajemy nasz:</p>
+
+<pre><code>#option resolvfile '/tmp/resolv.conf.auto';
+option resolvfile '/etc/my_resolv.conf';
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

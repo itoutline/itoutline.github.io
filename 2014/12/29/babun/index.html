@@ -1,0 +1,665 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Babun - itoutline.me</title>
+  <meta name="author" content="itoutline.me">
+
+  
+  <meta name="description" content="Tak się nieszczęśliwie poukładało w moim życiu, że na jakiś czas wylądowałem z windowsowym laptopem. Zawsze kiedy musiałem korzystać z systemu MS &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://itoutline.me/2014/12/29/babun/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="itoutline.me" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/keys.css" rel="stylesheet" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">itoutline.me</a></h1>
+  
+    <h2>&nbsp;</h2>
+  
+  <meta name="google-translate-customization" content="e81cdd0ed4c87a5-36a8c112e17b44b8-g4197450913b80893-c"></meta>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'pl', multilanguagePage: true, autoDisplay: false}, 'google_translate_element');
+}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="itoutline.me">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+   
+	
+    <h1 class="entry-title">Babun</h1>
+	
+ 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-29T08:53:51+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:53 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Tak się nieszczęśliwie poukładało w moim życiu, że na jakiś czas wylądowałem z windowsowym laptopem. Zawsze kiedy musiałem korzystać z systemu MS instalowałem od razu <a href="https://www.cygwin.com">Cygwina</a>. Niestety czasami nie była to &ldquo;bułka z masłem&rdquo;, często coś tam nie do końca działało albo były problemy z samą instalacją. Zdarzało się, że trochę pracy było potrzebne ale i tak świetnie, że komuś się chciało i Cygwin w ogóle powstał. Teraz jest jeszcze lepiej bo powstało coś dającego Cygwina w bardzo fajnym opakowaniu. Mowa o <a href="https://github.com/babun/babun">Babun</a>.</p>
+
+<h3>Instalacja</h3>
+
+<p>Sprowadza się do pobrania archiwum, rozpakowania i uruchomieniu skryptu. Standardowo instaluje się w katalogu domowym jako <code>.babun</code>.</p>
+
+<h3>Pierwsze wrażenia</h3>
+
+<p>Na pulpicie tworzy się skrót, który uruchamia terminal mintty a tam od razu mamy skonfigurowane zsh i jest git. Instalacja/deinstalacja pakietów za pomocą <code>pact install</code> oraz <code>pact remove</code> jest dużym plusem. Usunięcie Babun-a to skasowania jego katalogu, uwielbiam tego typu programy :)</p>
+
+<h3>Serwer SSH</h3>
+
+<p>Serwer SSH na Windowsie to chyba nigdy nie było proste. Tutaj też nie działa bez drobnych modyfikacji ale nie jest najgorzej. No i trzeba przyznać, że w Windows 8.1 dodawanie i usuwanie serwisów nawet z poziomu Babuna/Cygwina nie wymaga restartu. Miłe zaskoczenie.</p>
+
+<p>Zaczynamy od uruchomienia Babuna jako Administrator i wydajemy następujące komendy:</p>
+
+<pre><code>/usr/bin/chmod +r /etc/passwd
+/usr/bin/chmod +r /etc/group
+/usr/bin/chmod +x /var
+/usr/bin/ssh-host-config
+</code></pre>
+
+<p>Proces instalacji wyglądał u mnie tak:</p>
+
+<pre><code>ssh-keygen: generating new host keys: RSA1 RSA DSA ECDSA ED25519
+*** Info: Creating default /etc/ssh_config file
+*** Info: Creating default /etc/sshd_config file
+*** Info: Privilege separation is set to yes by default since OpenSSH 3.3.
+*** Info: However, this requires a non-privileged account called 'sshd'.
+*** Info: For more info on privilege separation read /usr/share/doc/openssh/README.privsep.
+*** Query: Should privilege separation be used? (yes/no) yes
+*** Info: Note that creating a new user requires that the current account have
+*** Info: Administrator privileges.  Should this script attempt to create a
+*** Query: new local account 'sshd'? (yes/no) yes
+*** Info: Updating /etc/sshd_config file
+
+*** Query: Do you want to install sshd as a service?
+*** Query: (Say "no" if it is already installed as a service) (yes/no) yes
+*** Query: Enter the value of CYGWIN for the daemon: [] ntsec
+*** Info: On Windows Server 2003, Windows Vista, and above, the
+*** Info: SYSTEM account cannot setuid to other users -- a capability
+*** Info: sshd requires.  You need to have or to create a privileged
+*** Info: account.  This script will help you do so.
+
+*** Info: You appear to be running Windows XP 64bit, Windows 2003 Server,
+*** Info: or later.  On these systems, it's not possible to use the LocalSystem
+*** Info: account for services that can change the user id without an
+*** Info: explicit password (such as passwordless logins [e.g. public key
+*** Info: authentication] via sshd).
+
+*** Info: If you want to enable that functionality, it's required to create
+*** Info: a new account with special privileges (unless a similar account
+*** Info: already exists). This account is then used to run these special
+*** Info: servers.
+
+*** Info: Note that creating a new user requires that the current account
+*** Info: have Administrator privileges itself.
+
+*** Info: No privileged account could be found.
+
+*** Info: This script plans to use 'cyg_server'.
+*** Info: 'cyg_server' will only be used by registered services.
+*** Query: Do you want to use a different name? (yes/no) no
+*** Query: Create new privileged user account 'cyg_server'? (yes/no) yes
+*** Info: Please enter a password for new user cyg_server.  Please be sure
+*** Info: that this password matches the password rules given on your system.
+*** Info: Entering no password will exit the configuration.
+*** Query: Please enter the password:
+*** Query: Reenter:
+
+*** Info: User 'cyg_server' has been created with password 'dynamic1'.
+*** Info: If you change the password, please remember also to change the
+*** Info: password for the installed services which use (or will soon use)
+*** Info: the 'cyg_server' account.
+
+*** Info: Also keep in mind that the user 'cyg_server' needs read permissions
+*** Info: on all users' relevant files for the services running as 'cyg_server'.
+*** Info: In particular, for the sshd server all users' .ssh/authorized_keys
+*** Info: files must have appropriate permissions to allow public key
+*** Info: authentication. (Re-)running ssh-user-config for each user will set
+*** Info: these permissions correctly. [Similar restrictions apply, for
+*** Info: instance, for .rhosts files if the rshd server is running, etc].
+
+
+*** Info: The sshd service has been installed under the 'cyg_server'
+*** Info: account.  To start the service now, call `net start sshd' or
+*** Info: `cygrunsrv -S sshd'.  Otherwise, it will start automatically
+*** Info: after the next reboot.
+
+*** Info: Host configuration finished. Have fun!
+</code></pre>
+
+<p>Ustawienie odpowiednich uprawnień:</p>
+
+<pre><code>/usr/bin/chmod 600 /etc/ssh*
+/usr/bin/chown cyg_server /etc/ssh*
+/usr/bin/chmod 600 /var/empty
+</code></pre>
+
+<p>Uruchominie serwera SSH <code>/usr/bin/cygrunsrv -S sshd</code> i oto jesteśmy:</p>
+
+<p><img src="/images/babun-ssh.png"></p>
+
+<p>Gdyby coś poszło nie tak można usunąć konfigurację, potem katalog Babuna i spróbować jeszcze raz.</p>
+
+<pre><code>cygrunsrv --remove sshd
+net user sshd /delete
+net user cyg_server /delete
+rm /etc/ssh_host* /etc/sshd_config
+</code></pre>
+
+<h3>Python, virtualenv i np. Tornado</h3>
+
+<p>W Babunie mamy zainstalowanego pythona w wersji 2.7.3. Instalacja pip-a i serwera Tornado przeszła bez żadnych kłopotów. Pip:</p>
+
+<pre><code>wget https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py
+python get-pip.py
+</code></pre>
+
+<p>Virtualenv:</p>
+
+<pre><code>pip install virtualenv
+</code></pre>
+
+<p>Tornado:</p>
+
+<pre><code>mkdir tornado-test
+cd tornado-test
+virtualenv venv
+source venv/bin/activate
+pip install tornado
+</code></pre>
+
+<p>Kod serwera ;)</p>
+
+<figure class='code'><figcaption><span>server.py</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">tornado.ioloop</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">tornado.web</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">MainHandler</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Hello from Babun&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">application</span> <span class="o">=</span> <span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">Application</span><span class="p">([</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">r&quot;/&quot;</span><span class="p">,</span> <span class="n">MainHandler</span><span class="p">),</span>
+</span><span class='line'><span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">application</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">tornado</span><span class="o">.</span><span class="n">ioloop</span><span class="o">.</span><span class="n">IOLoop</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Uruchomienie <code>python server.py</code>:</p>
+
+<p><img src="/images/babun-tronado.png"></p>
+
+<h3>Ruby&hellip; i Octopress</h3>
+
+<p>Zdecydowanie najwięcej kłopotów, ale to nie jest jakoś bardzo dziwne. Niemniej jednak udało mi sie uruchomić Octopress-aa, było to tak:</p>
+
+<p>Instalacja rbenv i ruby-build, zdecydowałem się nie korzystać z wersji oferowanej przez &ldquo;pact&rdquo;.</p>
+
+<pre><code>git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.zshrc
+echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.zshrc
+git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+</code></pre>
+
+<p>Aktywacja rbenv:</p>
+
+<pre><code>source ~/.zshrc
+</code></pre>
+
+<p>Instalacja wersji 1.9.3-p551 i ustawienie jej jako domyślnej.</p>
+
+<pre><code>rbenv install 1.9.3-p551
+rbenv global 1.9.3-p551
+</code></pre>
+
+<p>Tutaj zaczynają się schody, zaczynamy od stworzenia pliku z bibliotekami jakie zainstalowały się z ruby.</p>
+
+<pre><code>find /home/$USER/.rbenv -iname '*.so' &gt; /tmp/ruby.gems.local.so.lst
+</code></pre>
+
+<p>Zamykamy wszystkie sesje babuna i uruchamiamy <code>dash.exe</code> z katalogu <code>.babun\cygwin\bin</code>, tam wydajemy polecenie:</p>
+
+<pre><code>/usr/bin/rebaseall -v -T /tmp/ruby.gems.local.so.lst
+</code></pre>
+
+<p>Bez &ldquo;rebaseall&rdquo; podczas instalacji wymaganych bibliotek przez Octopress-a miałem takie problemy:</p>
+
+<pre><code>{ octopress } master » bundle install                                                
+Fetching gem metadata from https://rubygems.org/........
+Resolving dependencies...
+      0 [main] ruby 3412 child_info_fork::abort: address space needed by 'fcntl.so' (0x5F0000) is already occupied
+      1 [main] ruby 2692 child_info_fork::abort: address space needed by 'fcntl.so' (0x5F0000) is already occupied
+      0 [main] ruby 10092 child_info_fork::abort: address space needed by 'fcntl.so' (0x5F0000) is already occupied
+      0 [main] ruby 3188 child_info_fork::abort: address space needed by 'fcntl.so' (0x5F0000) is already occupied
+</code></pre>
+
+<p>Instalacja Octopress-a:</p>
+
+<pre><code>git clone git://github.com/imathis/octopress.git octopress
+cd octopress
+gem install bundler
+rbenv rehash
+bundle install
+</code></pre>
+
+<p>Po &ldquo;rebaseall&rdquo; wygląda to lepiej:</p>
+
+<pre><code>{ octopress } master » bundle install                                                
+Fetching gem metadata from https://rubygems.org/........
+Resolving dependencies...
+Installing rake 10.4.2
+Installing RedCloth 4.2.9
+Installing blankslate 2.1.2.4
+Installing hitimes 1.2.2
+Installing timers 4.0.1
+Installing celluloid 0.16.0
+...
+</code></pre>
+
+<p>Kolejny krok to zmiana w pliku <code>Rakefile</code> z:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="sr">/cygwin|mswin|mingw|bccwin|wince|emx/</span> <span class="o">=~</span> <span class="no">RUBY_PLATFORM</span><span class="p">)</span> <span class="o">!=</span> <span class="kp">nil</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s1">&#39;## Set the codepage to 65001 for Windows machines&#39;</span>
+</span><span class='line'>  <span class="sb">`chcp 65001`</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>na:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="sr">/cygwin|mswin|mingw|bccwin|wince|emx/</span> <span class="o">=~</span> <span class="no">RUBY_PLATFORM</span><span class="p">)</span> <span class="o">!=</span> <span class="kp">nil</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s1">&#39;## Set the codepage to 65001 for Windows machines&#39;</span>
+</span><span class='line'>  <span class="sb">`chcp.com 65001`</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Bez powyższego kroku miałem taki problem:</p>
+
+<pre><code>{ octopress } master » rake install                                                   
+rake aborted!
+Errno::ENOENT: No such file or directory - chcp 65001
+/home/itoutline/octopress/Rakefile:32:in ``'
+/home/itoutline/octopress/Rakefile:32:in `&lt;top (required)&gt;'
+(See full trace by running task with --trace)
+</code></pre>
+
+<p>Wykonujemy <code>rake install</code>:</p>
+
+<pre><code>{ octopress } master » rake install                                                   
+## Set the codepage to 65001 for Windows machines
+## Copying classic theme into ./source and ./sass
+mkdir -p source
+cp -r .themes/classic/source/. source
+mkdir -p sass
+cp -r .themes/classic/sass/. sass
+mkdir -p source/_posts
+mkdir -p public
+</code></pre>
+
+<p>Następnie <code>rake generate &amp;&amp; rake preview</code>:</p>
+
+<pre><code>{ octopress } master » rake generate &amp;&amp; rake preview                                  
+## Set the codepage to 65001 for Windows machines
+## Generating Site with Jekyll
+directory source/stylesheets
+    write source/stylesheets/screen.css
+Configuration file: /home/itoutline/octopress/_config.yml
+            Source: source
+       Destination: public
+      Generating...
+                    done.
+ Auto-regeneration: disabled. Use --watch to enable.
+## Set the codepage to 65001 for Windows machines
+Starting to watch source with Jekyll and Compass. Starting Rack on port 4000
+[2014-12-29 15:22:08] INFO  WEBrick 1.3.1
+[2014-12-29 15:22:08] INFO  ruby 1.9.3 (2014-11-13) [i386-cygwin]
+[2014-12-29 15:22:08] WARN  TCPServer Error: Bad file descriptor - listen(2)
+[2014-12-29 15:22:08] INFO  WEBrick::HTTPServer#start: pid=4924 port=4000
+&gt;&gt;&gt; Compass is watching for changes. Press Ctrl-C to Stop.
+Configuration file: /home/itoutline/octopress/_config.yml
+    write public/stylesheets/screen.css
+            Source: source
+       Destination: public
+      Generating...
+                    done.
+</code></pre>
+
+<p>Mamy bloga:</p>
+
+<p><img src="/images/babun-octopress.png"></p>
+
+<p>Ale to nie wszystko, próba umieszczenia takiego wpisu:</p>
+
+<p><img src="/images/babun-octopress-pb.png"></p>
+
+<p>na blogu, zakończy się tak:</p>
+
+<pre><code>{ octopress } master » rake generate &amp;&amp; rake preview                                  
+## Set the codepage to 65001 for Windows machines
+## Generating Site with Jekyll
+    write source/stylesheets/screen.css
+Configuration file: /home/itoutline/octopress/_config.yml
+            Source: source
+       Destination: public
+      Generating...
+  Liquid Exception: No such file or directory - C:\Windows\system32\cmd.exe in _posts/2014-12-29-nowy-post.markdown/#excerpt
+                    done.
+ Auto-regeneration: disabled. Use --watch to enable.
+## Set the codepage to 65001 for Windows machines
+Starting to watch source with Jekyll and Compass. Starting Rack on port 4000
+[2014-12-29 15:35:49] INFO  WEBrick 1.3.1
+[2014-12-29 15:35:49] INFO  ruby 1.9.3 (2014-11-13) [i386-cygwin]
+[2014-12-29 15:35:49] WARN  TCPServer Error: Bad file descriptor - listen(2)
+[2014-12-29 15:35:49] INFO  WEBrick::HTTPServer#start: pid=7540 port=4000
+</code></pre>
+
+<p>Rozwiązaniem jest ustawienie COMSPEC:</p>
+
+<pre><code>export COMSPEC=/cygdrive/c/Windows/System32/cmd.exe
+</code></pre>
+
+<p>najlepiej od razu dodać do ~/.zshrc:</p>
+
+<pre><code>echo "export COMSPEC=/cygdrive/c/Windows/System32/cmd.exe" &gt;&gt; ~/.zshrc
+</code></pre>
+
+<p>Ostatni drobny kłopot to narzekanie na brak &ldquo;python2&rdquo; podczas generowania bloga:</p>
+
+<pre><code>which: no python2 in (/home/itoutline/.rbenv/versions/1.9.3-p551/lib/ruby/gems/1.9.1/bin:/home/itoutline/.rbenv/versions/1.9.3-p551/bin:/home/itoutline/.rbenv/libexec:/home/itoutline/.rbenv/plugins/ruby-build/bin:/home/itoutline/.rbenv/shims:/home/itoutline/.rbenv/bin:/home/itoutline/bin:/usr/local/bin:/usr/bin:/cygdrive/c/ProgramData/Oracle/Java/javap~...
+</code></pre>
+
+<p>Wystarczy utworzenie linku symbolicznego:</p>
+
+<pre><code>cd /usr/bin
+ln -s python2.7.exe python2
+</code></pre>
+
+<p>&ldquo;Chyba&rdquo; wszystko działa:</p>
+
+<p><img src="/images/babun-octopress-ok.png"></p>
+
+<h3>Przed podsumowaniem</h3>
+
+<p>Czasami po uruchomieniu Babun-a może się pojawić coś takiego:</p>
+
+<pre><code>compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+{ ~ }  »
+</code></pre>
+
+<p><a href="https://github.com/babun/babun/issues/159">Nie jest tak</a>, że to tylko u mnie. Rozwiązanie w postaci:</p>
+
+<pre><code>compinit
+cp .zcompdump .zcompdump-$HOSTNAME-5.0.2
+</code></pre>
+
+<p>rzeczywiście działa.</p>
+
+<h3>Podsumowując</h3>
+
+<p>Fajnie, że jest Cygwin, że powstał Babun ale chyba zdecydowanie lepiej jest po prostu uruchomić wirtualną maszynę na Virtualboxie. Chyba, że mamy ograniczone zasoby sprzętowe, nie mamy uprawnień, lubimy &ldquo;grzebać&rdquo; albo potrzebujemy dostępu tylko do podstawowych narzędzi Linux/GNU. Jeśli chodzi o to ostatnie to Cygwin/Babun zdecydowanie wygrywa z wirtualną maszyną.</p>
+</div>
+
+
+
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">itoutline.me</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-12-29T08:53:51+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:53 am</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://itoutline.me/2014/12/29/babun/" data-via="" data-counturl="http://itoutline.me/2014/12/29/babun/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/12/22/rigol-1054z-i-dekodowanie-spi/" title="Previous Post: Rigol 1054Z i dekodowanie SPI">&laquo; Rigol 1054Z i dekodowanie SPI</a>
+      
+      
+        <a class="basic-alignment right" href="/2015/01/22/chrome-i-swipe/" title="Next Post: Chrome i swipe">Chrome i swipe &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2018/05/05/Ubuntu-18-04/">WSL - Ubuntu 18.04 - xfce4-terminal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/12/01/Unraid-part-1/">Home Cloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/09/27/the-cuttle/">The Cuttle - Boldport Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/05/27/picocom-na-cygwin-slash-windows10/">Picocom na Cygwin/Windows10</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/10/18/iptables-i-dynamiczne-ip/">Iptables i dynamiczne IP</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/android' style='font-size: 103.15789473684211%'>android</a> <a href='/blog/categories/arduino' style='font-size: 103.15789473684211%'>arduino</a> <a href='/blog/categories/curiosities' style='font-size: 103.15789473684211%'>curiosities</a> <a href='/blog/categories/electronics' style='font-size: 106.3157894736842%'>electronics</a> <a href='/blog/categories/linux' style='font-size: 122.10526315789474%'>linux</a> <a href='/blog/categories/mavericks' style='font-size: 103.15789473684211%'>mavericks</a> <a href='/blog/categories/mountain-lion' style='font-size: 141.05263157894737%'>mountain lion</a> <a href='/blog/categories/netflix' style='font-size: 103.15789473684211%'>netflix</a> <a href='/blog/categories/openwrt' style='font-size: 103.15789473684211%'>openwrt</a> <a href='/blog/categories/osx' style='font-size: 160.0%'>osx</a> <a href='/blog/categories/raspberry-pi' style='font-size: 109.47368421052632%'>raspberry pi</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal</a> <a href='/blog/categories/tips' style='font-size: 106.3157894736842%'>tips</a> <a href='/blog/categories/unraid' style='font-size: 103.15789473684211%'>unraid</a> <a href='/blog/categories/windows' style='font-size: 109.47368421052632%'>windows</a> <a href='/blog/categories/wsl' style='font-size: 103.15789473684211%'>wsl</a> <a href='/blog/categories/xbmc' style='font-size: 103.15789473684211%'>xbmc</a> <a href='/blog/categories/yosemite' style='font-size: 103.15789473684211%'>yosemite</a> </span>
+</section>
+
+<section>
+
+    <p></p>
+<span id="google_translate_element"></span>
+
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - itoutline.me -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'itoutlineme';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://itoutline.me/2014/12/29/babun/';
+        var disqus_url = 'http://itoutline.me/2014/12/29/babun/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+      _gaq.push(['_trackPageview']);
+
+        (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		       })();
+
+</script>
+
+
+</body>
+</html>

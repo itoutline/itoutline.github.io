@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: xbmc | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/xbmc/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Typy plików obsługiwane przez XBMC]]></title>
+    <link href="http://itoutline.me/2013/07/09/typy-plikow-obslugiwane-przez-xbmc/"/>
+    <updated>2013-07-09T08:00:05+00:00</updated>
+    <id>http://itoutline.me/2013/07/09/typy-plikow-obslugiwane-przez-xbmc</id>
+    <content type="html"><![CDATA[<p>Mam w swoim archiwum pliki z rozszerzeniem .f4v, niezbyt ich dużo dlatego problem z wyświetlaniem ich podczas przeglądania zakładki Video nie pojawiał się zbyt często.</p>
+
+<p>Okazuje się, że dodanie/usunięcie nowych rozszerzeń obsługiwanych przez XBMC jest bardzo proste (oczywiście format pliku musi być przede wszystkim &ldquo;zjadliwy&rdquo; dla XBMC). W pliku <code>advancedsettings.xml</code> (w przypadku ATV2 plik ten należy stworzyć w katalogu <code>/private/var/mobile/Library/Preferences/XBMC/userdata</code>) dodajemy następującą sekcję:</p>
+
+<pre><code class="xml">&lt;advancedsettings&gt;
+    &lt;videoextensions&gt;
+       &lt;add&gt;.f4v&lt;/add&gt;
+    &lt;/videoextensions&gt;
+&lt;/advancedsettings&gt;
+</code></pre>
+
+<p>W pliku <code>advancedsettings.xml</code> można spersonalizować o wiele więcej ustawień. Szczegóły: <a href="http://wiki.xbmc.org/index.php?title=Userdata/advancedsettings.xml">http://wiki.xbmc.org/index.php?title=Userdata/advancedsettings.xml</a></p>
+]]></content>
+  </entry>
+  
+</feed>

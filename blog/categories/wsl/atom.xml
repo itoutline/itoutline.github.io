@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: wsl | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/wsl/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[WSL - Ubuntu 18.04 - xfce4-terminal]]></title>
+    <link href="http://itoutline.me/2018/05/05/Ubuntu-18-04/"/>
+    <updated>2018-05-05T16:15:00+00:00</updated>
+    <id>http://itoutline.me/2018/05/05/Ubuntu-18-04</id>
+    <content type="html"><![CDATA[<p>Ubuntu 18.04 ma nowszą wersję xfce4-terminal 0.8.7.3 i jest w niej poprawiony pewien szczegół który mnie irytował, przypadkowe przechodzenie w tryb zaznaczania przy kliknięciu na okno xfce4. Bardzo łatwo było to zrobić i jeśli akurat miało się coś w schowku to trzeba było ponownie do niego kopiować. Teraz jest normalnie a na dodatek zaznaczenie blokowe w terminalu z wciśniętym <kbd>Shift</kbd> i <kbd>Ctrl</kbd> działa świetnie.</p>
+
+<p>Została też poprawiona obsługa zmiennej <code>TERM</code> i <code>COLORTERM</code>, teraz sam xfce4 ustawia je bez konieczności dosyć złej praktyki modyfikowania ich w <code>.bashrc</code> itp.:
+<code>
+TERM=xterm-256color
+COLORTERM=truecolor
+</code></p>
+
+<p>Testowałem różne rozwiązania terminalowe na Windows - mintty, putty (via server ssh), Hyper, cmder), chyba tylko xfce4-terminal jest teraz bardzo bliski tego czego bym oczekiwał po terminalu (nawet mimo tego, że trzeba go uruchamiać przez Server X). Jest prawie tak dobry jak iTerm2 na OSX ;)</p>
+
+<p>Dla odważnych <code>sudo do-release-upgrade -d</code> :)</p>
+
+<p> <img src="/images/xfce4-terminal-WSL.png"></p>
+]]></content>
+  </entry>
+  
+</feed>

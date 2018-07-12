@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: terminal | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/terminal/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Picocom na Cygwin/Windows10]]></title>
+    <link href="http://itoutline.me/2016/05/27/picocom-na-cygwin-slash-windows10/"/>
+    <updated>2016-05-27T20:11:00+00:00</updated>
+    <id>http://itoutline.me/2016/05/27/picocom-na-cygwin-slash-windows10</id>
+    <content type="html"><![CDATA[<p>Działa i instalacja poszła wyjątkowo łatwo:
+<code>
+git clone https://github.com/npat-efault/picocom; cd picocom &amp;&amp; make
+</code>
+<code>
+Cloning into 'picocom'...
+remote: Counting objects: 701, done.
+remote: Total 701 (delta 0), reused 0 (delta 0), pack-reused 701
+Receiving objects: 100% (701/701), 490.39 KiB | 493.00 KiB/s, done.
+Resolving deltas: 100% (445/445), done.
+cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o linenoise-1.0/linenoise.o -c linenoise-1.0/linenoise.c
+cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o picocom.o -c picocom.c
+cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o term.o -c term.c
+cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o fdio.o -c fdio.c
+cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o split.o -c split.c
+cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o termios2.o -c termios2.c
+cc -g -o picocom  linenoise-1.0/linenoise.o picocom.o term.o fdio.o split.o termios2.o
+</code>
+Gdyby nie było <code>make</code> to <code>apt-cyg install make</code>.</p>
+
+<p>Trzeba tylko pamiętać, że np. COM4 to /dev/ttyS3:</p>
+
+<pre><code>$ ./picocom.exe -b 115200 /dev/ttyS3
+picocom v2.3a
+
+port is        : /dev/ttyS3
+flowcontrol    : none
+baudrate is    : 115200
+parity is      : none
+databits are   : 8
+stopbits are   : 1
+escape is      : C-a
+local echo is  : no
+noinit is      : no
+noreset is     : no
+nolock is      : no
+send_cmd is    : sz -vv
+receive_cmd is : rz -vv -E
+imap is        :
+omap is        :
+emap is        : crcrlf,delbs,
+logfile is     : none
+
+Type [C-a] [C-h] to see available commands
+
+Terminal ready
+
+HiZ&gt;
+HiZ&gt;
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

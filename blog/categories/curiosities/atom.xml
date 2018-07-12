@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: curiosities | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/curiosities/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Co się stanie kiedy w przeglądarkę wpiszemy google.com i naciśniemy Enter]]></title>
+    <link href="http://itoutline.me/2015/01/22/co-sie-stanie-kiedy-w-przegladarke-wpiszemy-google-dot-com-i-nacisniemy-enter/"/>
+    <updated>2015-01-22T23:15:03+00:00</updated>
+    <id>http://itoutline.me/2015/01/22/co-sie-stanie-kiedy-w-przegladarke-wpiszemy-google-dot-com-i-nacisniemy-enter</id>
+    <content type="html"><![CDATA[<p>No dzieje się&hellip; Trzeba przyznać. Fajny dokument, ciekawe jak się rozwinie.</p>
+]]></content>
+  </entry>
+  
+</feed>

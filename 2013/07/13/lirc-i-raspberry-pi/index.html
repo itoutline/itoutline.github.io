@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Lirc i Raspberry Pi - itoutline.me</title>
+  <meta name="author" content="itoutline.me">
+
+  
+  <meta name="description" content="Po dłuższym okresie czasu postanowiłem odkurzyć Harmony 900, od kiedy przesiadłem się na ATV zostałem przy natywnym pilocie do tego urządzenia. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://itoutline.me/2013/07/13/lirc-i-raspberry-pi/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="itoutline.me" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/keys.css" rel="stylesheet" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">itoutline.me</a></h1>
+  
+    <h2>&nbsp;</h2>
+  
+  <meta name="google-translate-customization" content="e81cdd0ed4c87a5-36a8c112e17b44b8-g4197450913b80893-c"></meta>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'pl', multilanguagePage: true, autoDisplay: false}, 'google_translate_element');
+}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="itoutline.me">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+   
+	
+    <h1 class="entry-title">Lirc i Raspberry Pi</h1>
+	
+ 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-07-13T19:47:28+00:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>7:47 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Po dłuższym okresie czasu postanowiłem odkurzyć Harmony 900, od kiedy przesiadłem się na ATV zostałem przy natywnym pilocie do tego urządzenia. Trochę niesamowite jak fajny jest pilot do Apple Tv, jedyne czego mu brakuje to możliwość regulacji głośności. Przy okazji pomyślałem, że sprawdzę jak wygląda sytuacja z Lirc-em na RPi i okazuje się, że jest bardzo dobrze.</p>
+
+<h3>Podłączenie odbiornika IR</h3>
+
+<p>W swoim &ldquo;magazynku&rdquo; znalazłem czujnik TSOP34836 i przyznam, że wykorzystałem ten bo akurat taki miałem&hellip; Działa na zalecanym napięciu 3V (od 2,7 do 5,5V) i maksymalnie pobiera 3mA (w trakcie moich testów nie przekroczył 1,25mA), czyli nie powinien być żadnym problemem dla portu GPIO.</p>
+
+<p><img src="/images/rpi-lirc-tsop-ilustracja1.png"></p>
+
+<p>Podłączyłem go w następujący sposób:</p>
+
+<ul>
+<li>Pin 1 - Pin 16 (GPIO 23 RPi)</li>
+<li>Pin 2 - Pin 14 (GND RPi)</li>
+<li>Pin 3 - Pin 1 (3,3V RPi)</li>
+</ul>
+
+
+<!-- more -->
+
+
+<p><img src="/images/rpi-lirc-tsop34836.jpg"></p>
+
+<h3>Konfiguracja RPi</h3>
+
+<p>Instalacja Lirc-a:</p>
+
+<pre><code>sudo apt-get update
+sudo apt-get install lirc
+</code></pre>
+
+<p>Dodanie sterowników do <code>sudo vi /etc/modules</code>:</p>
+
+<pre><code>lirc_dev
+lirc_rpi gpio_in_pin=23 gpio_out_pin=22
+</code></pre>
+
+<p><code>gpio_in_pin=23</code> do pinu 23 podłączymy odbiornik podczerwieni a do 22 <code>gpio_out_pin=22</code> nadajnik. Po wydaniu polecenia <code>sudo modprobe lirc_rpi</code> sterowniki powinny się załadować. Można to sprawdzić za pomocą polecenia <code>lsmod | grep lirc</code>, powinniśmy zobaczyć coś takiego:</p>
+
+<pre><code>% lsmod | grep lirc
+lirc_rpi                7266  3
+lirc_dev               10156  1 lirc_rpi
+</code></pre>
+
+<p>Następnie w pliku <code>sudo vi /etc/lirc/hardware.conf</code> umieszczamy poniższą zawartość:</p>
+
+<figure class='code'><figcaption><span> (hardware.conf)</span> <a href='/downloads/code/hardware.conf'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">########################################################</span>
+</span><span class='line'><span class="c"># /etc/lirc/hardware.conf</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># Arguments which will be used when launching lircd</span>
+</span><span class='line'><span class="nv">LIRCD_ARGS</span><span class="o">=</span><span class="s2">&quot;--uinput&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Don&#39;t start lircmd even if there seems to be a good config file</span>
+</span><span class='line'><span class="c"># START_LIRCMD=false</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Don&#39;t start irexec, even if a good config file seems to exist.</span>
+</span><span class='line'><span class="c"># START_IREXEC=false</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Try to load appropriate kernel modules</span>
+</span><span class='line'><span class="nv">LOAD_MODULES</span><span class="o">=</span><span class="nb">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Run &quot;lircd --driver=help&quot; for a list of supported drivers.</span>
+</span><span class='line'><span class="nv">DRIVER</span><span class="o">=</span><span class="s2">&quot;default&quot;</span>
+</span><span class='line'><span class="c"># usually /dev/lirc0 is the correct setting for systems using udev</span>
+</span><span class='line'><span class="nv">DEVICE</span><span class="o">=</span><span class="s2">&quot;/dev/lirc0&quot;</span>
+</span><span class='line'><span class="nv">MODULES</span><span class="o">=</span><span class="s2">&quot;lirc_rpi&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Default configuration files for your hardware if any</span>
+</span><span class='line'><span class="nv">LIRCD_CONF</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nv">LIRCMD_CONF</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="c">########################################################</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>W kolejnym kroku musimy skonfigurować jakiegoś pilota w pliku <code>sudo vi /etc/lirc/lircd.conf</code>. Ja akurat znalazłem w &ldquo;szufladzie&rdquo; coś takiego (opisany jako Microsoft Model 1039):</p>
+
+<p><img src="/images/rpi-lirc-mce-1039.jpg"></p>
+
+<p>Pliki konfiguracyjne do naprawdę wielu różnych pilotów można pobrać z <a href="http://lirc.sourceforge.net/remotes/">http://lirc.sourceforge.net/remotes/</a>. Niestety są one różnej jakości, dlatego mimo wszystko postanowiłem przygotować swój za pomoca polecenia <code>sudo irrecord  -d /dev/lirc0 my_mce.conf</code> ;) Trzeba przyznać, że proces jest dosyć żmudny ale w rezultacie wygenerowałem plik oparty na protokole RC6 (bardzo nie lubię plików RAW, są mocno nieprecyzyjne i pilot może działać różnie. Chociaż czasami nie ma wyjścia jeśli producent użył jakiegoś abstrakcyjnego protokolu IR). Wygląda on tak:</p>
+
+<figure class='code'><figcaption><span> (my_mce.conf)</span> <a href='/downloads/code/my_mce.conf'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'># Please make this file available to others
+</span><span class='line'># by sending it to &lt;lirc@bartelmus.de&gt;
+</span><span class='line'>#
+</span><span class='line'># this config file was automatically generated
+</span><span class='line'># using lirc-0.9.0-pre1(default) on Thu Jul 11 13:36:11 2013
+</span><span class='line'>#
+</span><span class='line'># contributed by itoutline.me
+</span><span class='line'>#
+</span><span class='line'># brand:                      Harmony 900 (device profile MCE-1039)
+</span><span class='line'># model no. of remote control: fully compatible with OEM MCE 1039 (P/N X801143-102)
+</span><span class='line'># devices being controlled by this remote:
+</span><span class='line'>#
+</span><span class='line'># Tested on RPi with TSOP34836 connected to gpio_in_pin 23
+</span><span class='line'>
+</span><span class='line'>begin remote
+</span><span class='line'>
+</span><span class='line'>  name MCE
+</span><span class='line'>  bits           13
+</span><span class='line'>  flags RC6|CONST_LENGTH
+</span><span class='line'>  eps            30
+</span><span class='line'>  aeps          100
+</span><span class='line'>  header       2677   873
+</span><span class='line'>  one           466   419
+</span><span class='line'>  zero          466   419
+</span><span class='line'>  pre_data_bits   24
+</span><span class='line'>  pre_data       0x1BFF83
+</span><span class='line'>  gap          105884
+</span><span class='line'>  min_repeat      3
+</span><span class='line'>#  suppress_repeat 3
+</span><span class='line'>#  uncomment to suppress unwanted repeats
+</span><span class='line'>  toggle_bit_mask 0x8000
+</span><span class='line'>  rc6_mask    0x100000000
+</span><span class='line'>
+</span><span class='line'>      begin codes
+</span><span class='line'>          KEY_1                    0x1BFE
+</span><span class='line'>          KEY_2                    0x1BFD
+</span><span class='line'>          KEY_3                    0x1BFC
+</span><span class='line'>          KEY_4                    0x1BFB
+</span><span class='line'>          KEY_5                    0x1BFA
+</span><span class='line'>          KEY_6                    0x1BF9
+</span><span class='line'>          KEY_7                    0x1BF8
+</span><span class='line'>          KEY_8                    0x1BF7
+</span><span class='line'>          KEY_9                    0x1BF6
+</span><span class='line'>          KEY_0                    0x1BFF
+</span><span class='line'>          KEY_BLUE                 0x1BA1
+</span><span class='line'>          KEY_RED                  0x1BA4
+</span><span class='line'>          KEY_GREEN                0x1BA3
+</span><span class='line'>          KEY_YELLOW               0x1BA2
+</span><span class='line'>          KEY_MENU                 0x1BDB #&#39;Movies&#39; on Harmony 900 LCD and &#39;DVD Menu&#39; on MCE 1039 Remote
+</span><span class='line'>          KEY_INFO                 0x1BF0
+</span><span class='line'>          KEY_EXIT                 0x1BDC #&#39;Back&#39; on Harmony 900 LCD and MCE 1039 Remote
+</span><span class='line'>          KEY_UP                   0x1BE1
+</span><span class='line'>          KEY_DOWN                 0x1BE0
+</span><span class='line'>          KEY_LEFT                 0x1BDF
+</span><span class='line'>          KEY_RIGHT                0x1BDE
+</span><span class='line'>          KEY_OK                   0x1BDD
+</span><span class='line'>          KEY_VOLUMEDOWN           0x1BEE
+</span><span class='line'>          KEY_VOLUMEUP             0x1BEF
+</span><span class='line'>          KEY_MUTE                 0x1BF1
+</span><span class='line'>          KEY_START                0x1BF2
+</span><span class='line'>          KEY_CHANNELDOWN          0x1BEC
+</span><span class='line'>          KEY_CHANNELUP            0x1BED
+</span><span class='line'>          KEY_PLAY                 0x1BE9
+</span><span class='line'>          KEY_PAUSE                0x1BE7
+</span><span class='line'>          KEY_RECORD               0x1BE8
+</span><span class='line'>          KEY_STOP                 0x1BE6
+</span><span class='line'>          KEY_REWIND               0x1BEA
+</span><span class='line'>          KEY_FORWARD              0x1BEB
+</span><span class='line'>          KEY_PREVIOUS             0x1BE4
+</span><span class='line'>          KEY_NEXT                 0x1BE5
+</span><span class='line'>          KEY_ASCPECT              0x7BD8
+</span><span class='line'>          KEY_RECORDEDTV           0x1BB7
+</span><span class='line'>          KEY_LIVETV               0x1BDA
+</span><span class='line'>          KEY_MYRADIO              0x7BAF
+</span><span class='line'>          KEY_MYMUSIC              0x1BB8
+</span><span class='line'>          KEY_MYPICTURES           0x1BB6
+</span><span class='line'>          KEY_MYVIDEO              0x1BB5
+</span><span class='line'>          KEY_AUDIO                0x7BB3
+</span><span class='line'>          KEY_CLEAR                0x1BF5
+</span><span class='line'>          KEY_ENTER                0x1BF4
+</span><span class='line'>          KEY_NUMERIC_STAR         0x7BE2
+</span><span class='line'>          KEY_NUMERIC_POUND        0x7BE3
+</span><span class='line'>          KEY_AUDIO                0xEBB8
+</span><span class='line'>          KEY_POWER                0x7BF3
+</span><span class='line'>          KEY_OFF                  0x7BD5
+</span><span class='line'>          KEY_ON                   0x7BD6
+</span><span class='line'>          KEY_TELETEXT             0x1BA5
+</span><span class='line'>          KEY_SUBTITLE             0x7BB2
+</span><span class='line'>          KEY_GUIDE                0x7BD9
+</span><span class='line'>      end codes
+</span><span class='line'>end remote
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Jak widać jest tutaj trochę zamieszane a to dlatego, że powyższy plik w pełni obsługuje również profil &ldquo;MCE-1039&rdquo; zdefiniowany na Harmony 900:</p>
+
+<p><img src="/images/rpi-lirc-harmony-select-device.png"></p>
+
+<p>Czyli pilot ze zdjęcia powyżej działa prawidłowo jak i Harmony 900 ze zdefiniowanym urzadzeniem &ldquo;MCE-1039&rdquo;. W przypadku Harmony jest sporo dodatkowych przycisków, których nie ma na moim pilocie &ldquo;Microsoft Model 1039&rdquo;.</p>
+
+<p>Kopiujemy wygenerowany plik (lub pobrany z sieci do naszego pilota) w miejsce <code>/etc/lirc/lircd.conf</code> i można uruchamiać Lirc-a <code>sudo /etc/init.d/lirc start</code></p>
+
+<p><img src="/images/rpi-lirc-start.png"></p>
+
+<p>Za pomocą polecenia <code>irw</code> możemy sprawdzić czy rzeczywiście polcenia wysyłane przez pilota są odbierane przez Lirc-a:</p>
+
+<p><img src="/images/rpi-lirc-irw.png"></p>
+
+<p>U mnie dopiero po restarcie RPi zaczęło to działać.</p>
+
+<h3>Go deep</h3>
+
+<p>Z uwagi na to, że mam akurat pod ręką oscyloskop postanowiłem zobaczyć jak w rzeczywistości wygląda jakieś polecenie, trafiło na KEY_DOWN 0x1BE0 = 110111110000. Sondę podłączyłem bezpośrednio do wyjścia odbiornika IR.</p>
+
+<p>Przebieg wygląda następująco (RC6 używa &ldquo;Manchester Encoding&rdquo; do kodowania sygnału):</p>
+
+<p><img src="/images/key_down_mce_rc6.png"></p>
+
+<p>Ostatnie 13 bitów to kod polecenia (pokrywa się to z tym co mamy w lircd.conf), następnie są 24 &ldquo;pre_data_bits&rdquo; i po ich konwersji do hex otrzymujemy 0x1BFF83 czyli wartość &ldquo;pre_data&rdquo;.</p>
+
+<p>W sumie wszystko by się zgadzało :)</p>
+
+<h3>Problemy</h3>
+
+<ul>
+<li>Jeśli wygrzebaliśmy pilota z &ldquo;szuflady&rdquo; to zaczynamy od sprawdzenia czy generuje w ogóle jakiś sygnał. Potrzebne jest do tego tak specjalistyczne narzędzie jak telefon z aparatem ;) Naciskanie przycisków powinno powodować pojawienie się fioletowego światła na ekranie telefonu. Szanse na to, że pilot wysyła sygnał ale jest on nieprawidłowy są bliskie 0.</li>
+</ul>
+
+
+<p><img src="/images/rpi-lirc-phone1.jpg" width="400"></p>
+
+<ul>
+<li>Kolejnym krokiem jest sprawdzenie czy sterowniki są poprawnie zainstalowane, czyli <code>lsmod</code>. U mnie wygląda to tak:</li>
+</ul>
+
+
+<p><img src="/images/rpi-lirc-lsusb.png"></p>
+
+<ul>
+<li>Jeśli <code>irw</code> nic nie wyświetla warto sprawdzić czy coś w ogóle dociera do portu RPi za pomocą polecenia <code>mode2 -d /dev/lirc0</code>, wcześniej trzeba zatrzymać Lirc-a <code>sudo /etc/init.d/lirc stop</code>. Jeżeli zobaczymy tam jakieś dane to znaczy, że Lirc i konfiguracja pilota zdefiniowana w <code>/etc/lirc/lircd.conf</code> nie do końca chce współpracować z pilotem który mamy.</li>
+</ul>
+
+</div>
+
+
+
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">itoutline</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2013-07-13T19:47:28+00:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>7:47 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/raspberry-pi/'>raspberry pi</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://itoutline.me/2013/07/13/lirc-i-raspberry-pi/" data-via="" data-counturl="http://itoutline.me/2013/07/13/lirc-i-raspberry-pi/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/07/09/typy-plikow-obslugiwane-przez-xbmc/" title="Previous Post: Typy plików obsługiwane przez XBMC">&laquo; Typy plików obsługiwane przez XBMC</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/07/13/airplay-everywhere/" title="Next Post: Airplay Everywhere">Airplay Everywhere &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2018/05/05/Ubuntu-18-04/">WSL - Ubuntu 18.04 - xfce4-terminal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/12/01/Unraid-part-1/">Home Cloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/09/27/the-cuttle/">The Cuttle - Boldport Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/05/27/picocom-na-cygwin-slash-windows10/">Picocom na Cygwin/Windows10</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/10/18/iptables-i-dynamiczne-ip/">Iptables i dynamiczne IP</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/android' style='font-size: 103.15789473684211%'>android</a> <a href='/blog/categories/arduino' style='font-size: 103.15789473684211%'>arduino</a> <a href='/blog/categories/curiosities' style='font-size: 103.15789473684211%'>curiosities</a> <a href='/blog/categories/electronics' style='font-size: 106.3157894736842%'>electronics</a> <a href='/blog/categories/linux' style='font-size: 122.10526315789474%'>linux</a> <a href='/blog/categories/mavericks' style='font-size: 103.15789473684211%'>mavericks</a> <a href='/blog/categories/mountain-lion' style='font-size: 141.05263157894737%'>mountain lion</a> <a href='/blog/categories/netflix' style='font-size: 103.15789473684211%'>netflix</a> <a href='/blog/categories/openwrt' style='font-size: 103.15789473684211%'>openwrt</a> <a href='/blog/categories/osx' style='font-size: 160.0%'>osx</a> <a href='/blog/categories/raspberry-pi' style='font-size: 109.47368421052632%'>raspberry pi</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal</a> <a href='/blog/categories/tips' style='font-size: 106.3157894736842%'>tips</a> <a href='/blog/categories/unraid' style='font-size: 103.15789473684211%'>unraid</a> <a href='/blog/categories/windows' style='font-size: 109.47368421052632%'>windows</a> <a href='/blog/categories/wsl' style='font-size: 103.15789473684211%'>wsl</a> <a href='/blog/categories/xbmc' style='font-size: 103.15789473684211%'>xbmc</a> <a href='/blog/categories/yosemite' style='font-size: 103.15789473684211%'>yosemite</a> </span>
+</section>
+
+<section>
+
+    <p></p>
+<span id="google_translate_element"></span>
+
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - itoutline.me -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'itoutlineme';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://itoutline.me/2013/07/13/lirc-i-raspberry-pi/';
+        var disqus_url = 'http://itoutline.me/2013/07/13/lirc-i-raspberry-pi/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+      _gaq.push(['_trackPageview']);
+
+        (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		       })();
+
+</script>
+
+
+</body>
+</html>

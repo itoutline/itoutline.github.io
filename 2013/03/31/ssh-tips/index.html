@@ -1,0 +1,468 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SSH tips - itoutline.me</title>
+  <meta name="author" content="itoutline.me">
+
+  
+  <meta name="description" content="Kilka usprawnień i wskazówek ułatwiających korzystanie z SSH. Konfiguracja hostów zdalnych Korzystanie z pliku ~/.ssh/config ułatwia łączenie się ze &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://itoutline.me/2013/03/31/ssh-tips/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="itoutline.me" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/keys.css" rel="stylesheet" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">itoutline.me</a></h1>
+  
+    <h2>&nbsp;</h2>
+  
+  <meta name="google-translate-customization" content="e81cdd0ed4c87a5-36a8c112e17b44b8-g4197450913b80893-c"></meta>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'pl', multilanguagePage: true, autoDisplay: false}, 'google_translate_element');
+}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="itoutline.me">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+   
+	
+    <h1 class="entry-title">SSH tips</h1>
+	
+ 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-03-31T17:17:08+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>5:17 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img class="left" src="/images/OpenSSH_logo-e1365113790448.png"></p>
+
+<p>Kilka usprawnień i wskazówek ułatwiających korzystanie z SSH.</p>
+
+<h4>Konfiguracja hostów zdalnych</h4>
+
+<p>Korzystanie z pliku <code>~/.ssh/config</code> ułatwia łączenie się ze zdalnymi hostami. Wystarczy wpisać <code>ssh</code>, pierwszą literę hosta i wcisnąć klawisz  ⇥ tab. Nie trzeba pamiętać o porcie, użytkowniku, parametrach połączenia. <code>ForwardX11 yes</code> umożliwia uruchamianie aplikacji graficznych (oczywiście musimy mieć uruchomiony na kliencie serwer X-ów). Poniżej przykładowy plik:</p>
+
+<pre><code>Host centos-01
+HostName 192.168.1.190
+User itoutline
+ForwardX11 yes
+
+Host openwrt
+Hostname 192.168.1.1
+User root
+
+Host appletv
+Hostname 192.168.1.60
+User root
+
+Host workstation
+Hostname 192.168.1.1
+Port 8511
+User itoutline
+</code></pre>
+
+<h4>Automatyczne logowanie</h4>
+
+<p>Umieszczenie naszego klucza publicznego w pliku <code>~/.ssh/authorized_keys</code> na serwerze umożliwia zalogowanie się bez użycia hasła. Najpierw musimy wygenerować parę kluczy np.:</p>
+
+<pre><code>[itoutline@centos-01 ~]$ ssh-keygen -t rsa -C "itoutline@centos-01"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/itoutline/.ssh/id_rsa):
+Created directory '/home/itoutline/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/itoutline/.ssh/id_rsa.
+Your public key has been saved in /home/itoutline/.ssh/id_rsa.pub.
+The key fingerprint is:
+81:c4:99:69:cd:c5:39:d8:01:26:f7:bd:05:3a:bd:df itoutline@centos-01
+The key's randomart image is:
++--[ RSA 2048]----+
+|     .o*+*oo.    |
+|     .*=+.=+ .   |
+|     .. . +.o .  |
+|         . . +   |
+|        S   o    |
+|             . . |
+|              . E|
+|                 |
+|                 |
++-----------------+
+</code></pre>
+
+<p>Niepodanie &ldquo;passphrase&rdquo; podczas generowania kluczy spowoduje, że zawsze będziemy mogli zalogować się na zdalnego hosta. Ma to jednak zasadniczy minus, ktoś kto zdobędzie nasz klucz prywatny zapisany w pliku <code>/home/itoutline/.ssh/id_rsa</code> zaloguje się bezproblemowo wszędzie tam gdzie dodaliśmy nasz klucz publiczny do <code>~/.ssh/authorized_keys</code>. Trochę jak zapisanie hasła w pliku tekstowym&hellip;</p>
+
+<p>Pozostaje skopiowanie klucza publiczngo na zdalny serwer, można to zrobić np. za pomocą <code>ssh-copy-id</code>:</p>
+
+<pre><code>[itoutline@centos-01 ~]$ ssh-copy-id centos-03
+The authenticity of host 'centos-03 (192.168.1.200)' can't be established.
+RSA key fingerprint is 5b:85:ee:ee:d5:12:a3:f1:fe:10:5f:4d:66:f5:e5:7a.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'centos-03' (RSA) to the list of known hosts.
+itoutline@centos-03's password:
+Now try logging into the machine, with "ssh 'centos-03'", and check in:
+
+  .ssh/authorized_keys
+
+to make sure we haven't added extra keys that you weren't expecting.
+</code></pre>
+
+<p>W przypadku kiedy ssh nasłuchuje na porcie innym niż standardowy można użyć polecenia</p>
+
+<p><code>ssh-copy-id -i ~/.ssh/id_rsa.pub "-p 2222 itoutline@centos-03"</code></p>
+
+<p>Jeśli mamy więcej niż jeden klucz publiczny w katalogu <code>~/.ssh</code> warto podać jego nazwę (jak w ostatnim przykładzie) ponieważ <code>ssh-copy-id</code> kopiuje wszystkie jakie znajdzie.</p>
+
+<p>Jeśli na kliencie polecenie <code>ssh-copy-id</code> jest niedostępne, można wykorzystać poniższego one-linera:</p>
+
+<p> <code>cat ~/.ssh/id_rsa.pub | ssh itoutline@centos-03 “mkdir ~/.ssh; cat &gt;&gt; ~/.ssh/authorized_keys”</code></p>
+
+<p>Jeśli zdecydujemy się na używanie &ldquo;passphrase&rdquo; z pomocą przyjdzie nam <code>ssh-agent</code>, umożliwia on zapamiętanie naszego klucza prywatnego poświadczonego &ldquo;passphrase&rdquo; do czasu np. restartu hosta.</p>
+
+<p>Przykładowy kod dodany do <code>.bash_profile</code> lub <code>.bashrc</code> załatwiający obsługę <code>ssh-agent</code>.</p>
+
+<figure class='code'><figcaption><span>Obsluga ssh-agent w .bash_profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">SSH_ENV</span><span class="o">=</span><span class="nv">$HOME</span>/.ssh/environment
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> start_agent <span class="o">{</span>
+</span><span class='line'>     <span class="nb">echo</span> <span class="s2">&quot;Initialising new SSH agent...&quot;</span>
+</span><span class='line'>     /usr/bin/ssh-agent <span class="p">|</span> sed <span class="s1">&#39;s/^echo/#echo/&#39;</span> &gt; <span class="k">${</span><span class="nv">SSH_ENV</span><span class="k">}</span>
+</span><span class='line'>     <span class="nb">echo </span>succeeded
+</span><span class='line'>     chmod <span class="m">600</span> <span class="k">${</span><span class="nv">SSH_ENV</span><span class="k">}</span>
+</span><span class='line'>     . <span class="k">${</span><span class="nv">SSH_ENV</span><span class="k">}</span> &gt; /dev/null
+</span><span class='line'>     /usr/bin/ssh-add<span class="p">;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Source SSH settings, if applicable</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -f <span class="s2">&quot;${SSH_ENV}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>     . <span class="k">${</span><span class="nv">SSH_ENV</span><span class="k">}</span> &gt; /dev/null
+</span><span class='line'>     <span class="c">#ps ${SSH_AGENT_PID} doesn&#39;t work under cywgin</span>
+</span><span class='line'>     ps -ef <span class="p">|</span> grep <span class="k">${</span><span class="nv">SSH_AGENT_PID</span><span class="k">}</span> <span class="p">|</span> grep ssh-agent<span class="nv">$ </span>&gt; /dev/null <span class="o">||</span> <span class="o">{</span>
+</span><span class='line'>         start_agent<span class="p">;</span>
+</span><span class='line'>     <span class="o">}</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>     start_agent<span class="p">;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Teraz kiedy po raz pierwszy zalogujemy się na centos-01, zobaczymy coś takiego:</p>
+
+<pre><code>[itoutline.sputnik: itoutline]$ ssh centos-01
+Last login: Sun Mar 31 11:17:17 2013 from sputnik.local
+Initialising new SSH agent...
+succeeded
+Enter passphrase for /home/itoutline/.ssh/id_rsa:
+Identity added: /home/itoutline/.ssh/id_rsa (/home/itoutline/.ssh/id_rsa)
+</code></pre>
+
+<p>Wejście na centos-03 odbędzie się już bez podawania żadnych poświadczeń:</p>
+
+<pre><code>[itoutline@centos-01 ~]$ ssh centos-03
+Last login: Sun Mar 31 11:20:40 2013 from centos-01.local
+[itoutline@centos-03 ~]$
+</code></pre>
+
+<h4>Modyfikacja &ldquo;passphrase&rdquo;</h4>
+
+<p>Następujące polecenie umożliwia dodanie, usunięcie lub zmianę &ldquo;passphrase&rdquo; w przypadku istniejących kluczy:</p>
+
+<p><code>ssh-keygen -p -f $HOME/.ssh/id_rsa</code></p>
+
+<pre><code>[itoutline@centos-01 ~]$ ssh-keygen -p -f $HOME/.ssh/id_rsa
+Enter old passphrase:
+Key has comment '/home/itoutline/.ssh/id_rsa'
+Enter new passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved with the new passphrase.
+</code></pre>
+
+<h4>Uruchamianie aplikacji graficznych przez SSH</h4>
+
+<p>Na maszynach wirtualnych instaluję z reguły minimalną wersję systemu plus to co akurat chce sprawdzić. Rzadko kiedy pojawia się konieczność skorzystania z grafiki a jeśli już to wystarczy doinstalować tylko środowisko X. Dzięki czemu wirtualna maszyna jest &ldquo;lżejsza&rdquo;.</p>
+
+<p>Nawiązanie sesji SSH ze wsparciem dla X-ów <code>ssh -X centos-03</code></p>
+
+<p>Po stronie serwera w konfiguracji <code>/etc/ssh/sshd_config</code> musi znaleźć się linia <code>X11Forwarding yes</code></p>
+
+<p>Uruchomienie linuxowego kalkulatora na pulpicie OSX (XQuartz musi być zainstalowany i uruchomiony):</p>
+
+<pre><code>[itoutline.sputnik: itoutline]$ ssh -X centos-01
+Last login: Sun Mar 31 15:08:49 2013 from sputnik.local
+[itoutline@centos-01 ~]$ gcalctool &amp;
+</code></pre>
+
+<p><img src="/images/Calculator.png"></p>
+
+<p>Jeśli pojawia się poniższy problem:</p>
+
+<pre><code>(gcalctool:3141): Gtk-WARNING **: cannot open display:
+</code></pre>
+
+<p>Może oznaczać, że zmienna <code>DISPLAY</code> na kliencie nie jest ustawiona, można to naprawić dodając poniższą linię do <code>.bash_profile</code> lub <code>.bashrc</code></p>
+
+<pre><code>export DISPLAY=:0
+</code></pre>
+</div>
+
+
+
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">itoutline</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2013-03-31T17:17:08+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>5:17 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://itoutline.me/2013/03/31/ssh-tips/" data-via="" data-counturl="http://itoutline.me/2013/03/31/ssh-tips/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/11/03/unblock-us-i-openwrt/" title="Previous Post: Unblock-us i Openwrt">&laquo; Unblock-us i Openwrt</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/04/08/xfreerdp-na-szybko/" title="Next Post: Xfreerdp na szybko">Xfreerdp na szybko &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2018/05/05/Ubuntu-18-04/">WSL - Ubuntu 18.04 - xfce4-terminal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/12/01/Unraid-part-1/">Home Cloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/09/27/the-cuttle/">The Cuttle - Boldport Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/05/27/picocom-na-cygwin-slash-windows10/">Picocom na Cygwin/Windows10</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/10/18/iptables-i-dynamiczne-ip/">Iptables i dynamiczne IP</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/android' style='font-size: 103.15789473684211%'>android</a> <a href='/blog/categories/arduino' style='font-size: 103.15789473684211%'>arduino</a> <a href='/blog/categories/curiosities' style='font-size: 103.15789473684211%'>curiosities</a> <a href='/blog/categories/electronics' style='font-size: 106.3157894736842%'>electronics</a> <a href='/blog/categories/linux' style='font-size: 122.10526315789474%'>linux</a> <a href='/blog/categories/mavericks' style='font-size: 103.15789473684211%'>mavericks</a> <a href='/blog/categories/mountain-lion' style='font-size: 141.05263157894737%'>mountain lion</a> <a href='/blog/categories/netflix' style='font-size: 103.15789473684211%'>netflix</a> <a href='/blog/categories/openwrt' style='font-size: 103.15789473684211%'>openwrt</a> <a href='/blog/categories/osx' style='font-size: 160.0%'>osx</a> <a href='/blog/categories/raspberry-pi' style='font-size: 109.47368421052632%'>raspberry pi</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal</a> <a href='/blog/categories/tips' style='font-size: 106.3157894736842%'>tips</a> <a href='/blog/categories/unraid' style='font-size: 103.15789473684211%'>unraid</a> <a href='/blog/categories/windows' style='font-size: 109.47368421052632%'>windows</a> <a href='/blog/categories/wsl' style='font-size: 103.15789473684211%'>wsl</a> <a href='/blog/categories/xbmc' style='font-size: 103.15789473684211%'>xbmc</a> <a href='/blog/categories/yosemite' style='font-size: 103.15789473684211%'>yosemite</a> </span>
+</section>
+
+<section>
+
+    <p></p>
+<span id="google_translate_element"></span>
+
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - itoutline.me -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'itoutlineme';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://itoutline.me/2013/03/31/ssh-tips/';
+        var disqus_url = 'http://itoutline.me/2013/03/31/ssh-tips/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+      _gaq.push(['_trackPageview']);
+
+        (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		       })();
+
+</script>
+
+
+</body>
+</html>

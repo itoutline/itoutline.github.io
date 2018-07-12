@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Parallels Desktop tips - itoutline.me</title>
+  <meta name="author" content="itoutline.me">
+
+  
+  <meta name="description" content="Kilka użytecznych poleceń usprawniających prace z Parallels Desktop Wylistowanie wszystkich wirtualnych maszyn: prlctl list -a UUID STATUS IP_ADDR &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://itoutline.me/2012/10/14/parallels-desktop-tips/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="itoutline.me" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/keys.css" rel="stylesheet" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">itoutline.me</a></h1>
+  
+    <h2>&nbsp;</h2>
+  
+  <meta name="google-translate-customization" content="e81cdd0ed4c87a5-36a8c112e17b44b8-g4197450913b80893-c"></meta>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'pl', multilanguagePage: true, autoDisplay: false}, 'google_translate_element');
+}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="itoutline.me">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+   
+	
+    <h1 class="entry-title">Parallels Desktop tips</h1>
+	
+ 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-10-14T16:27:20+00:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>4:27 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Kilka użytecznych poleceń usprawniających prace z Parallels Desktop</p>
+
+<p>Wylistowanie wszystkich wirtualnych maszyn:</p>
+
+<p><code>prlctl list -a</code></p>
+
+<pre><code>UUID                                    STATUS       IP_ADDR         NAME
+{8XXX3dd4-9f0b-406b-a5bc-XXXXXXXXXXXX}  stopped      -               CentOS-01
+{8XXXa248-def7-4f3e-8405-XXXXXXXXXXXX}  stopped      -               CentOS-03
+{eXXX4b67-f98b-4bc9-a9a8-XXXXXXXXXXXX}  stopped      -               Mac OS X
+{5XXXe2ef-786b-4873-a5aa-XXXXXXXXXXXX}  suspended    -               Windows 8
+{4XXX3137-7fb3-4ec9-a7fa-XXXXXXXXXXXX}  suspended    -               Windows XP
+</code></pre>
+
+<p>Wylistowanie parametrów konkretnej maszyny:</p>
+
+<p><code>prlctl list -i CentOS-01</code></p>
+
+<p>Uruchomienie wirtualnej maszyny:</p>
+
+<p><code>prlctl start CentOS-01</code></p>
+
+<p>Wyłączenie wirtualnej maszyny:</p>
+
+<p><code>prlctl stop CentOS-01</code></p>
+
+<p>Użycie przełącznika <code>--kill</code> wymusi zamknięcie maszyny, która nie odpowiada.</p>
+
+<p>Restart:</p>
+
+<p><code>prlctl reset CentOS-01</code></p>
+
+<p>Przejście w stan uśpienia:</p>
+
+<p><code>prlctl suspend CentOS-01</code></p>
+
+<pre><code>Suspending the VM...
+The VM has been successfully suspended.
+</code></pre>
+
+<p>Wyjście ze stanu uśpienia:</p>
+
+<p><code>prlctl resume CentOS-01</code></p>
+
+<p>Wykonanie szablonu wirtualnej maszyny:</p>
+
+<p><code>prlctl clone CentOS-01 --name CentOS --template</code></p>
+
+<pre><code>Clone the CentOS-01 VM to VM template CentOS...
+Operation progress 88%
+The VM has been successfully cloned.
+</code></pre>
+
+<p>Utworzenie nowej wirtualnej maszyny z wcześniej przygotowanego szablonu:</p>
+
+<p><code>prlctl create CentOS-05 --ostemplate CentOS</code></p>
+
+<pre><code>Creating the VM on the basis of the CentOS template...
+Clone the CentOS VM to VM CentOS-05...
+Operation progress 88%
+The VM has been successfully cloned.
+</code></pre>
+
+<p>Klonowanie, czyli stworzenie kopii istniejącej maszyny:</p>
+
+<p><code>prlctl clone CentOS-10 --name CentOS-10-clon</code></p>
+
+<pre><code>Clone the CentOS-10 VM to VM CentOS-10-clon...
+Operation progress 88%
+The VM has been successfully cloned.
+</code></pre>
+
+<p>Jak już wspominałem, wykorzystując <code>prlctl start VM_NAME</code> maszyna uruchomi się w tle bez GUI Parallels. Czasami jednak chcemy coś do niej podłączyć, można to zrobić również z konsoli. Wylistowanie dostępnych urządzeń USB:</p>
+
+<p><code>prlsrvctl usb list</code></p>
+
+<pre><code>Apple FaceTime HD Camera (Built-in)      '1a110000|05ac|8510|high|--|XXXXXX8M1XXXC8C0'
+Apple Internal Memory Card Reader        '1d183000|05ac|8404|high|--|0000000XXXXX'
+Apple Internal Keyboard / Trackpad       '1d182000|05ac|024c|full|KM|Empty'
+Apple Bluetooth USB Host Controller      '1d181300|05ac|821f|full|--|Empty'
+Patriot Memory                           '1a120000|13fe|3100|high|--|07XX6XXXXX'
+StoreJet Transcend                       '14a10000|174c|5106|super|--|S2SXXXXXX209'
+Flash Disk                               '1a120000|090c|1000|high|--|FBXXXXXXXX000141'
+Logitech Illuminated Keyboard            '14200000|046d|c318|full|KM|Empty'
+JTAGICE mkII                             '14200000|03eb|2103|full|PR|00B000XXXXXXX'
+FT232R USB UART                          '14100000|0403|6001|full|PR|AXXXXX'
+USB Flash Memory                         '1d110000|0930|6544|high|--|001422XXXXXXXXXX'
+Apple - Composite                        '1d181100|05ac|820a|full|--|Empty'
+</code></pre>
+
+<p>Podłączenie czytnika kart SD do wirtualnej maszyny:</p>
+
+<p><code>prlctl set CentOS-01 --device-connect "Apple Internal Memory Card Reader"</code></p>
+
+<p>Odłączenie:</p>
+
+<p><code>prlctl set CentOS-01 --device-disconnect "Apple Internal Memory Card Reader"</code></p>
+
+<p>Podłączenie/odłączenie adaptera sieciowego:</p>
+
+<p><code>prlctl set "CentOS-01" --device-connect "Apple USB Ethernet Adapter"</code>
+<code>prlctl set "CentOS-01" --device-disconnect "Apple USB Ethernet Adapter"</code></p>
+
+<p>Jeśli nasza maszyna korzysta z DHCP i interfejs sieciowy ma skonfigurowany w trybie bridge to niekoniecznie musimy wiedzieć jaki dostała adres kiedy korzystamy z &ldquo;obcej&rdquo; sieci. Oczywiście można uruchomić Parallels Desktop, dostać się do konsoli i podejrzeć. Można też wykonać polecenie na wirtualnej maszynie bez uruchamiania GUI.</p>
+
+<p><code>prlctl exec "CentOS-01" ifconfig</code></p>
+
+<p>W ten sposób możemy wykonywać dowolne polecenia. Innym ciekawym sposobem jest po prostu bezpośredni dostęp do konsoli:</p>
+
+<p><code>prlctl enter Windows\ XP</code></p>
+
+<pre><code>Microsoft Windows XP [Version 5.1.2600]
+(C) Copyright 1985-2001 Microsoft Corp.
+
+C:\&gt;dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 08BC-EDC8
+
+ Directory of C:\
+
+10/05/2012  02:43 PM                 0 AUTOEXEC.BAT
+10/05/2012  02:43 PM                 0 CONFIG.SYS
+10/05/2012  01:43 PM    &lt;DIR&gt;          Documents and Settings
+10/05/2012  02:45 PM    &lt;DIR&gt;          Program Files
+10/05/2012  02:49 PM    &lt;DIR&gt;          WINDOWS
+               2 File(s)              0 bytes
+               3 Dir(s)  103,939,588,096 bytes free
+
+C:\&gt;
+</code></pre>
+
+<p><code>prlctl enter CentOS-01</code></p>
+
+<pre><code>-bash-4.1# uname -a
+Linux centos-01.local 2.6.32-279.5.2.el6.x86_64 #1 SMP Fri Aug 24 01:07:11 UTC 2012 x86_64 x86_64 x86_64 GNU/Linux
+-bash-4.1#
+</code></pre>
+
+<p>Wykonania zrzutu ekranu z wirtualnej maszyny:</p>
+
+<p><code>prlctl capture CentOS-01 --file login_screen.png</code></p>
+
+<p>Konwersja dysku wirtualnego do typu &ldquo;plain&rdquo; (zostanie wykorzystana cała przestrzeń na dysku fizycznym zadeklarowana na dysk wirtualny) z podziałem na 2GB części. Przyznam, że raczej to mało pożyteczne polecenie, może tylko ma sens kiedy nie chcemy się zaskoczyć nagłym brakiem miejsca na dysku fizycznym w związku z rozrostem dysków wirtualnych. Możliwe, że ma też wpływ na wydajność maszyn wirtualnych&hellip; być może na produkcyjnych maszynach warto ustawiać ten tryb</p>
+
+<p><code>prl_disk_tool convert --plain --split --hdd /Users/norbert/Documents/Parallels/CentOS-01.pvm/CentOS-01-0.hdd</code></p>
+
+<p>Np. tak wyglądał katalog dysku przed powyższą operacją, dysk był ustawiony na 100GB w trybie &ldquo;expandable&rdquo;, bez podziału na 2GB części</p>
+
+<pre><code>[norbert.macair: CentOS-01-0.hdd]$ ll
+total 3.8G
+-rw------- 1 norbert staff    0 Sep 21 01:21 CentOS-01-0.hdd
+-rw------- 1 norbert staff 2.8G Sep 21 02:01 CentOS-01-0.hdd.0.{39a46e95-08c5-414c-bc03-6581f77b6dda}.hds
+-rw------- 1 norbert staff 988M Oct 14 14:11 CentOS-01-0.hdd.0.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw------- 1 norbert staff  14K Oct 14 13:09 CentOS-01-0.hdd.drh
+-rw------- 1 norbert staff 1.9K Sep 21 02:01 DiskDescriptor.xml
+-rw------- 1 norbert staff 1.5K Sep 21 01:47 DiskDescriptor.xml.Backup
+</code></pre>
+
+<p>Po zabiegu, zajmujemy niepotrzebnie ponad 95GB</p>
+
+<pre><code>[norbert.macair: CentOS-01-0.hdd]$ ll
+total 101G
+-rw-r--r-- 1 norbert staff    0 Oct 14 14:29 CentOS-01-0.hdd
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:25 CentOS-01-0.hdd.copy.0.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:25 CentOS-01-0.hdd.copy.1.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.10.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.11.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.12.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.13.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.14.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.15.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.16.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.17.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.18.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.19.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:25 CentOS-01-0.hdd.copy.2.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.20.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.21.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.22.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.23.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.24.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.25.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.26.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.27.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:27 CentOS-01-0.hdd.copy.28.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.29.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.3.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.30.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.31.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.32.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.33.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.34.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.35.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.36.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.37.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.38.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.39.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.4.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.40.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:28 CentOS-01-0.hdd.copy.41.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:29 CentOS-01-0.hdd.copy.42.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:29 CentOS-01-0.hdd.copy.43.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:29 CentOS-01-0.hdd.copy.44.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:29 CentOS-01-0.hdd.copy.45.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:29 CentOS-01-0.hdd.copy.46.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:29 CentOS-01-0.hdd.copy.47.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:29 CentOS-01-0.hdd.copy.48.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:29 CentOS-01-0.hdd.copy.49.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.5.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:29 CentOS-01-0.hdd.copy.50.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:29 CentOS-01-0.hdd.copy.51.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 1.1G Oct 14 14:29 CentOS-01-0.hdd.copy.52.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.6.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.7.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.8.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-r--r-- 1 norbert staff 2.0G Oct 14 14:26 CentOS-01-0.hdd.copy.9.{5fbaabe3-6958-40ff-92a7-860e329aab41}.hds
+-rw-rw-rw- 1 norbert staff    0 Oct 14 14:20 CentOS-01-0.hdd.copy.hdd
+-rw-r--r-- 1 norbert staff  21K Oct 14 14:25 DiskDescriptor.xml
+-rw-r--r-- 1 norbert staff  21K Oct 14 14:25 DiskDescriptor.xml.Backup
+</code></pre>
+
+<p>Powrót do dysku w trybie &ldquo;expandable&rdquo;:</p>
+
+<p><code>prl_disk_tool convert --expanding --split --hdd /Users/norbert/Documents/Parallels/CentOS-01.pvm/CentOS-01-0.hdd</code></p>
+
+<p>Mała uwaga, u mnie zabawa w konwersje zakończyła się komunikatem:</p>
+
+<p><code>Not enough free space on the physical disk to complete the operation.</code></p>
+
+<p>Dlatego warto się upewnić, że kiedy dysk nam &ldquo;spuchnie&rdquo; to będziemy mieć drugie tyle miejsca na jego odchudzanie albo pod ręką jakiś w miarę szybki dysk na którym będzie można tą operację wykonać</p>
+
+<p>Rozszerzenie wirtualnego dysku:</p>
+
+<p><code>prl_disk_tool resize --size 105G --split --hdd /Users/norbert/Documents/Parallels/CentOS-01.pvm/CentOS-01-0.hdd</code></p>
+
+<p>Powyższe polecenie nie zawsze zwiększy od razu przestrzeń dostępną w wirtualnej maszynie, w zależności od systemu jaki na niej jest może być konieczne użycie narzędzi dyskowych systemu gościa. Dlatego najlepiej od razu definiować całkiem duży dysk w trybie &ldquo;expandable&rdquo; z podziałem dysku wirtualnego na 2GB części.</p>
+</div>
+
+
+
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">itoutline</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2012-10-14T16:27:20+00:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>4:27 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mountain-lion/'>mountain lion</a>, <a class='category' href='/blog/categories/osx/'>osx</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://itoutline.me/2012/10/14/parallels-desktop-tips/" data-via="" data-counturl="http://itoutline.me/2012/10/14/parallels-desktop-tips/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/09/16/centos-na-parallels/" title="Previous Post: CentOS na Parallels">&laquo; CentOS na Parallels</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/10/14/archlinux-na-raspberry-pi/" title="Next Post: Archlinux na Raspberry Pi">Archlinux na Raspberry Pi &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2018/05/05/Ubuntu-18-04/">WSL - Ubuntu 18.04 - xfce4-terminal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/12/01/Unraid-part-1/">Home Cloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/09/27/the-cuttle/">The Cuttle - Boldport Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/05/27/picocom-na-cygwin-slash-windows10/">Picocom na Cygwin/Windows10</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/10/18/iptables-i-dynamiczne-ip/">Iptables i dynamiczne IP</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/android' style='font-size: 103.15789473684211%'>android</a> <a href='/blog/categories/arduino' style='font-size: 103.15789473684211%'>arduino</a> <a href='/blog/categories/curiosities' style='font-size: 103.15789473684211%'>curiosities</a> <a href='/blog/categories/electronics' style='font-size: 106.3157894736842%'>electronics</a> <a href='/blog/categories/linux' style='font-size: 122.10526315789474%'>linux</a> <a href='/blog/categories/mavericks' style='font-size: 103.15789473684211%'>mavericks</a> <a href='/blog/categories/mountain-lion' style='font-size: 141.05263157894737%'>mountain lion</a> <a href='/blog/categories/netflix' style='font-size: 103.15789473684211%'>netflix</a> <a href='/blog/categories/openwrt' style='font-size: 103.15789473684211%'>openwrt</a> <a href='/blog/categories/osx' style='font-size: 160.0%'>osx</a> <a href='/blog/categories/raspberry-pi' style='font-size: 109.47368421052632%'>raspberry pi</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal</a> <a href='/blog/categories/tips' style='font-size: 106.3157894736842%'>tips</a> <a href='/blog/categories/unraid' style='font-size: 103.15789473684211%'>unraid</a> <a href='/blog/categories/windows' style='font-size: 109.47368421052632%'>windows</a> <a href='/blog/categories/wsl' style='font-size: 103.15789473684211%'>wsl</a> <a href='/blog/categories/xbmc' style='font-size: 103.15789473684211%'>xbmc</a> <a href='/blog/categories/yosemite' style='font-size: 103.15789473684211%'>yosemite</a> </span>
+</section>
+
+<section>
+
+    <p></p>
+<span id="google_translate_element"></span>
+
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - itoutline.me -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'itoutlineme';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://itoutline.me/2012/10/14/parallels-desktop-tips/';
+        var disqus_url = 'http://itoutline.me/2012/10/14/parallels-desktop-tips/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+      _gaq.push(['_trackPageview']);
+
+        (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		       })();
+
+</script>
+
+
+</body>
+</html>

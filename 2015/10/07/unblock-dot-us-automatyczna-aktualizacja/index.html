@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Unblock.us automatyczna aktualizacja - itoutline.me</title>
+  <meta name="author" content="itoutline.me">
+
+  
+  <meta name="description" content="Wchodzenie na stronę unblock.us i aktualizowanie bieżącego adresu IP zaczęło mnie naprawdę męczyć. Na szczęście można tego uniknąć dosyć prosto. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://itoutline.me/2015/10/07/unblock-dot-us-automatyczna-aktualizacja/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="itoutline.me" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/keys.css" rel="stylesheet" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">itoutline.me</a></h1>
+  
+    <h2>&nbsp;</h2>
+  
+  <meta name="google-translate-customization" content="e81cdd0ed4c87a5-36a8c112e17b44b8-g4197450913b80893-c"></meta>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'pl', multilanguagePage: true, autoDisplay: false}, 'google_translate_element');
+}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="itoutline.me">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+   
+	
+    <h1 class="entry-title">Unblock.us automatyczna aktualizacja</h1>
+	
+ 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-07T23:17:18+00:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:17 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Wchodzenie na stronę unblock.us i aktualizowanie bieżącego adresu IP zaczęło mnie naprawdę męczyć. Na szczęście można tego uniknąć dosyć prosto. Wystarczy prosty skrypt na routerze (czy dowolnym serwerze linuxowym jaki mamy w domu, chyba każdy ma coś na poziomie minimum rpi w dzisiejszych czasach ;), który będzie sprawdzał co jakiś czas adres zewnętrzny i aktualizował go w unblock.us.</p>
+
+<figure class='code'><figcaption><span>update_unblock.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'><span class="c"># --==itoutline.me==--</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">SCRIPT_NAME</span><span class="o">=</span><span class="s2">&quot;$(basename $0)&quot;</span>
+</span><span class='line'><span class="nv">IP_ADDR</span><span class="o">=</span>/tmp/active_ip_addr
+</span><span class='line'><span class="nv">IP_STATUS</span><span class="o">=</span>/tmp/ip_update_status
+</span><span class='line'>
+</span><span class='line'><span class="nv">CURRENT_IP</span><span class="o">=</span><span class="k">$(</span>dig +short myip.opendns.com @resolver1.opendns.com<span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> update_ip <span class="o">{</span>
+</span><span class='line'>    curl -s -o <span class="nv">$IP_STATUS</span> <span class="s2">&quot;https://api.unblock-us.com/login?adres_email:hasło&quot;</span>
+</span><span class='line'>    logger <span class="s2">&quot;[$SCRIPT_NAME]: IP updated: $CURRENT_IP; Response: $(cat $IP_STATUS)&quot;</span>
+</span><span class='line'>    <span class="nb">echo</span> <span class="nv">$CURRENT_IP</span> &gt; <span class="nv">$IP_ADDR</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;$CURRENT_IP&quot;</span> <span class="o">=</span>~ ^<span class="o">[</span>0-9<span class="o">]{</span>2,3<span class="o">}</span><span class="se">\.</span><span class="o">[</span>0-9<span class="o">]{</span>1,3<span class="o">}</span><span class="se">\.</span><span class="o">[</span>0-9<span class="o">]{</span>1,3<span class="o">}</span><span class="se">\.</span><span class="o">[</span>0-9<span class="o">]{</span>1,3<span class="o">}</span><span class="nv">$ </span><span class="o">]]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> ! -f <span class="nv">$IP_ADDR</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>        update_ip
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>        <span class="nv">OLD_IP</span><span class="o">=</span><span class="k">$(</span>cat <span class="nv">$IP_ADDR</span><span class="k">)</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;$CURRENT_IP&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$OLD_IP&quot;</span> <span class="o">]]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>            update_ip
+</span><span class='line'>        <span class="k">fi</span>
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>    logger <span class="s2">&quot;[$SCRIPT_NAME]: Network error or incorrect answer from the IP provider&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>W miejscach <code>adres_email</code> i <code>hasło</code> trzeba podać swoje dane oraz dorzucić skrypt do crona.</p>
+
+<pre><code>*/2 * * * * /root/update_unblock.sh  2&gt;&amp;1 |logger
+</code></pre>
+
+<p>Skrypt będzie się wykonywał co dwie minuty.</p>
+
+<p>Skrypt można również wykorzystać do innych serwisów, w przypadku darmowego <a href="http://tvunblock.com">tvunblock.com</a> polecenie <code>curl</code> z funkcji <code>update_ip</code> należałoby zastąpić:</p>
+
+<pre><code>curl -s -o $IP_STATUS "https://activate.tvunblock.com/"
+</code></pre>
+
+<h3>Zastąpienie odpytywania zewnętrznego serwisu o publiczny adres IP</h3>
+
+<p>Serwisów dostarczających za pomocą jakiegoś web api zewnętrzny adres ip jest dużo ale nie zawsze trzeba z nich korzystać. Jeśli router/modem pozwala na pobieranie z niego informacji o adresie WAN, dlaczego tego nie użyć? W przypadku Liveboxa/Funboxa zmienną <code>CURRENT_IP</code> można ustawić w ten sposób:</p>
+
+<pre><code>CURRENT_IP=$(curl -silent -A "application/x-sah-ws-4-call+json" "http://192.168.1.1/sysbus/NMC:getWANStatus" -d"{\"parameters\":{}}" | sed -n -e 's/^.*\(IPAddress":"\)\([0-9]*.[0-9]*.[0-9]*.[0-9]*\)\(.*\)$/\2/p')
+</code></pre>
+
+<p>W praktyce (jak widać nie tylko adres ip portu WAN można podejrzeć):</p>
+
+<p><img src="/images/unblock_skrypt.png"></p>
+
+<h3>Crontab tuning</h3>
+
+<p>Rozwiązania, które opierają się na crontabie i czesto są uruchamiane zaśmiecają sysloga:</p>
+
+<pre><code>Nov  8 16:49:01 bananapi /USR/SBIN/CRON[27209]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:51:01 bananapi /USR/SBIN/CRON[27221]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:53:01 bananapi /USR/SBIN/CRON[27233]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:55:01 bananapi /USR/SBIN/CRON[27244]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:57:01 bananapi /USR/SBIN/CRON[27255]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:59:01 bananapi /USR/SBIN/CRON[27266]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+</code></pre>
+
+<p>Dlatego kiedy już wiadomo, że skrypt działa poprawnie można pokusić się o wyłączenie logowania crona. Na Debianie to modyfikacja pliku <code>/etc/rsyslog.conf</code>:</p>
+
+<figure class='code'><figcaption><span>rsyslog.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">###############</span>
+</span><span class='line'><span class="c">#### RULES ####</span>
+</span><span class='line'><span class="c">###############</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># First some standard log files.  Log by facility.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'>auth,authpriv.*         -/var/log/auth.log
+</span><span class='line'>*.*<span class="p">;</span>auth,authpriv.none,cron.none        -/var/log/syslog
+</span><span class='line'><span class="c">#cron.*             -/var/log/cron.log</span>
+</span><span class='line'>daemon.*            -/var/log/daemon.log
+</span><span class='line'>kern.*              -/var/log/kern.log
+</span><span class='line'>lpr.*               -/var/log/lpr.log
+</span><span class='line'>mail.*              -/var/log/mail.log
+</span><span class='line'>user.*              -/var/log/user.log
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Dorzucenie <code>cron.none</code> i restart usługi <code>sudo /etc/init.d/rsyslog restart</code> wyciszy crontaba. Można również przekierować logi do osobnego pliku <code>cron.log</code> ale szkoda karty SD. Od tej pory syslog nie jest floodowany z powodu skryptu i mamy tylko informacje kiedy faktcznie skrypt wykona jakąś pracę:</p>
+
+<pre><code>Nov  8 20:16:02 bananapi logger: [update_unblock.sh]: IP updated: 178.42.100.100; Response: active
+</code></pre>
+</div>
+
+
+
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">itoutline.me</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-10-07T23:17:18+00:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:17 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/netflix/'>netflix</a>, <a class='category' href='/blog/categories/tips/'>tips</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://itoutline.me/2015/10/07/unblock-dot-us-automatyczna-aktualizacja/" data-via="" data-counturl="http://itoutline.me/2015/10/07/unblock-dot-us-automatyczna-aktualizacja/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2015/01/27/zmienne-systemowe-w-osx/" title="Previous Post: Zmienne systemowe w OSX">&laquo; Zmienne systemowe w OSX</a>
+      
+      
+        <a class="basic-alignment right" href="/2015/10/18/iptables-i-dynamiczne-ip/" title="Next Post: Iptables i dynamiczne IP">Iptables i dynamiczne IP &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2018/05/05/Ubuntu-18-04/">WSL - Ubuntu 18.04 - xfce4-terminal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/12/01/Unraid-part-1/">Home Cloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/09/27/the-cuttle/">The Cuttle - Boldport Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/05/27/picocom-na-cygwin-slash-windows10/">Picocom na Cygwin/Windows10</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/10/18/iptables-i-dynamiczne-ip/">Iptables i dynamiczne IP</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/android' style='font-size: 103.15789473684211%'>android</a> <a href='/blog/categories/arduino' style='font-size: 103.15789473684211%'>arduino</a> <a href='/blog/categories/curiosities' style='font-size: 103.15789473684211%'>curiosities</a> <a href='/blog/categories/electronics' style='font-size: 106.3157894736842%'>electronics</a> <a href='/blog/categories/linux' style='font-size: 122.10526315789474%'>linux</a> <a href='/blog/categories/mavericks' style='font-size: 103.15789473684211%'>mavericks</a> <a href='/blog/categories/mountain-lion' style='font-size: 141.05263157894737%'>mountain lion</a> <a href='/blog/categories/netflix' style='font-size: 103.15789473684211%'>netflix</a> <a href='/blog/categories/openwrt' style='font-size: 103.15789473684211%'>openwrt</a> <a href='/blog/categories/osx' style='font-size: 160.0%'>osx</a> <a href='/blog/categories/raspberry-pi' style='font-size: 109.47368421052632%'>raspberry pi</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal</a> <a href='/blog/categories/tips' style='font-size: 106.3157894736842%'>tips</a> <a href='/blog/categories/unraid' style='font-size: 103.15789473684211%'>unraid</a> <a href='/blog/categories/windows' style='font-size: 109.47368421052632%'>windows</a> <a href='/blog/categories/wsl' style='font-size: 103.15789473684211%'>wsl</a> <a href='/blog/categories/xbmc' style='font-size: 103.15789473684211%'>xbmc</a> <a href='/blog/categories/yosemite' style='font-size: 103.15789473684211%'>yosemite</a> </span>
+</section>
+
+<section>
+
+    <p></p>
+<span id="google_translate_element"></span>
+
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - itoutline.me -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'itoutlineme';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://itoutline.me/2015/10/07/unblock-dot-us-automatyczna-aktualizacja/';
+        var disqus_url = 'http://itoutline.me/2015/10/07/unblock-dot-us-automatyczna-aktualizacja/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+      _gaq.push(['_trackPageview']);
+
+        (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		       })();
+
+</script>
+
+
+</body>
+</html>

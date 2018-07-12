@@ -1,0 +1,953 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>itoutline.me</title>
+  <meta name="author" content="itoutline.me">
+
+  
+  <meta name="description" content="Klawisze Home i End w OSX przemieszczają kursor na początek albo koniec strony, inaczej niż w windows, gdzie przechodzimy na początek albo koniec &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://itoutline.me/posts/4/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="itoutline.me" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/keys.css" rel="stylesheet" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">itoutline.me</a></h1>
+  
+    <h2>&nbsp;</h2>
+  
+  <meta name="google-translate-customization" content="e81cdd0ed4c87a5-36a8c112e17b44b8-g4197450913b80893-c"></meta>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'pl', multilanguagePage: true, autoDisplay: false}, 'google_translate_element');
+}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="itoutline.me">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2012/09/09/home-end/">Home & End</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-09-09T15:08:40+00:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>3:08 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Klawisze Home i End w OSX przemieszczają kursor na początek albo koniec strony, inaczej niż w windows, gdzie przechodzimy na początek albo koniec linii. Ostatnio podłączyłem klawiaturę z takimi klawiszami i okazało się, że moje palce mają świadomość okien, ponieważ co chwilę niepotrzebnie w nie stukały. Ja sam wiedziałem, że to bezcelowe i wyrzuci mnie do niechcianego miejsca w dokumencie. Na szczęście udało mi się zsynchronizować. Wystarczy dopisać do <code>~/Library/KeyBindings/DefaultKeyBinding.dict</code> poniższe linie:</p>
+
+<pre><code>{
+"UF729"  = "moveToBeginningOfLine:";
+"UF72B"  = "moveToEndOfLine:";
+"$UF729" = "moveToBeginningOfLineAndModifySelection:";
+"$UF72B" = "moveToEndOfLineAndModifySelection:";
+}
+</code></pre>
+
+<p>Po instalacji ML, katalog <code>KeyBindings</code> nie jest obecny. Trzeba go założyć i stworzyć plik <code>DefaultKeyBinding.dict</code></p>
+
+<p>Sprawę można załatwić tym one-linerem o ile oczywiście nie mamy już jakichś własnych ustawień w <code>DefaultKeyBinding.dict</code> ponieważ zostaną one <strong>nadpisane</strong>.</p>
+
+<pre><code>mkdir ~/Library/KeyBindings/; echo -e "{\n\"UF729\" = \"moveToBeginningOfLine:\";\n\"UF72B\" = \"moveToEndOfLine:\";\n\"\$UF729\" = \"moveToBeginningOfLineAndModifySelection:\";\n\"\$UF72B\" = \"moveToEndOfLineAndModifySelection:\";\n}" &gt; ~/Library/KeyBindings/DefaultKeyBinding.dict
+</code></pre>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2012/09/09/make-life-easier/">Make life easier</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-09-09T13:02:15+00:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>1:02 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Czasami łatwość z jaką można sobie podnieść komfort pracy jest zaskakująca. Zawsze przy testowaniu jakichś skryptów, najpierw tworzyłem katalog, przechodziłem do niego, potem otwierałem vi, potem zmieniałem uprawnienia i uruchamiałem skrypt. Za pomocą funkcji btouch dodanej do <code>.bash_profile</code> cztery czynności złożą się w jedną po wpisaniu takiej linii:</p>
+
+<p><code>btouch ~/SampleDir/DirBelow/SampleScript.sh</code></p>
+
+<p>Oczywiście można to zrobić też tak:</p>
+
+<p><code>mkdir -p ~/SampleDir/DirBelow/ &amp;&amp; cd ~/SampleDir/DirBelow/ &amp;&amp; touch SampleScript.sh &amp;&amp; chmod u+x SampleScript.sh &amp;&amp; vi SampleScript.sh</code></p>
+
+<p>Ale jak widać pisania jest znacznie więcej. Funkcja <code>btouch</code>:</p>
+
+<pre><code>btouch()
+
+{
+
+FULLPATH=$1
+FILENAME=${FULLPATH##*/}
+FILEEXTENSION=${FILENAME##*.}
+BASEDIRECTORY=${FULLPATH%$FILENAME}
+
+[ ! -d $BASEDIRECTORY ] &amp;&amp; mkdir -p $BASEDIRECTORY
+[ ! -f $FILENAME ] &amp;&amp; touch $BASEDIRECTORY/$FILENAME
+if [ $FILEEXTENSION = "sh" ] || [ $FILEEXTENSION = "py" ] || [ $FILEEXTENSION = "pl" ]; then
+   chmod u+x $BASEDIRECTORY/$FILENAME
+fi
+cd $BASEDIRECTORY
+sub . $FILENAME
+
+}
+</code></pre>
+
+<p>W ostatniej linii <code>sub . $FILENAME</code>, nie uruchamiam już vi, powoli przesiadam się na <a href="http://www.sublimetext.com">Sublime Text</a>, który ma ogromne możliwości personalizacji.</p>
+
+<p>Żeby polecenie btouch działało poprawnie trzeba jeszcze dodać poniższy alias do <code>.bash_profile</code>:</p>
+
+<p><code>alias sub="/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl"</code></p>
+
+<p>Dzięki czemu Sublime Text będzie mógł być uruchamiany za pomocą polecenia <code>sub</code> np.</p>
+
+<p><code>sub .</code> - otwiera program w trybie przeglądania obecnego folderu</p>
+
+<p><img src="/images/btouch_01.png"></p>
+
+<p><code>sub . SampleScript.sh</code> - tak samo jak powyżej, dodatkowo otwiera plik do edycji</p>
+
+<p><img src="/images/btouch_02.png"></p>
+
+<p>Po dodaniu funkcji i aliasu do <code>.bash_profile</code> należy go ponownie zaczytać np.</p>
+
+<p><code>cd ~;. .bash_profile</code></p>
+
+<p>albo uruchomić nowe okno terminala.</p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2012/09/09/no-power-no-bluetooth/">No power, no bluetooth</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-09-09T02:14:33+00:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>2:14 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="/images/bluetooth_symbol_128.png"></p>
+
+<p>W sumie nigdy nie podłączałem Air-a do większego ekranu tak, żeby na nim pracować. Aż sam się dziwie, spokojnie wystarczało mi 13&#8221;. W końcu wpadłem na pomysł korzystania z niego jak ze stacjonarnego kompa. Zakupiłem cały zestaw klawiatura, mysz, gładzik i pracuje się naprawdę świetnie na 24&#8221; (oczywiście teraz chodzi mi po głowie Cinema Display). Nigdy nie miałem zaufania do bluetooth i obsługi przez niego urządzeń wskazujących, okazuje się, że nie ma z tym problemu. Oczywiście trochę męczy konieczność podłączenia dwóch kabelków ale te minusy nie przesłaniają plusów.</p>
+
+<p>Tak naprawdę bluetooth jest mi potrzebny tylko kiedy jestem przy biurku, kiedy od niego odchodzę jest zbędny i tylko niepotrzebnie zużywa baterię. Można go wyłączać ręcznie ale udało mi się znaleźć lepszy sposób. Byłaby to chyba całkiem fajna opcja w systemie. Chodzi o wyłączenie bluetooth w momencie odłączenia kabla zasilacza. Naturalnie musi być możliwość włączenia ręcznego również na baterii. Okazuje się, że tym prostym skryptem coś takiego można załatwić:</p>
+
+<figure class='code'><figcaption><span>bluetooth_mon.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="nv">PREVIOUS_SOURCE</span><span class="o">=</span><span class="k">$(</span>pmset -g ps <span class="p">|</span> perl -ne <span class="s2">&quot;/(w+) Power/ &amp;&amp; print $1&quot;</span><span class="k">)</span><span class="p">;</span>
+</span><span class='line'><span class="k">while</span> <span class="o">[</span> <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nv">CURRENT_SOURCE</span><span class="o">=</span><span class="k">$(</span>pmset -g ps <span class="p">|</span> perl -ne <span class="s2">&quot;/(w+) Power/ &amp;&amp; print $1&quot;</span><span class="k">)</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="nv">$CURRENT_SOURCE</span> !<span class="o">=</span> <span class="nv">$PREVIOUS_SOURCE</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="nv">PREVIOUS_SOURCE</span><span class="o">=</span><span class="nv">$CURRENT_SOURCE</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> <span class="nv">$CURRENT_SOURCE</span> <span class="o">=</span> <span class="s2">&quot;AC&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>      /usr/local/bin/blueutil power 1
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      /usr/local/bin/blueutil power 0
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'>sleep 5
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Potrzebny jest tylko blueutil, który można zainstalować z repozytoriów Homebrew. Pozwala na podejrzenie i zmianę stanu bluetooth, włączone/wyłączone/tryb wykrywania. Działa bardzo sprawnie.</p>
+
+<p><code>brew install blueutil</code></p>
+
+<p>Dodatkowo dobrze by było gdyby skrypt działał cały czas w tle od uruchomienia komputera. Znalazłem bardzo fajny skrót na coś takiego bez zabawy z launchd. Wystarczy do crontab-a dodać taką linię:</p>
+
+<p><code>@reboot /Users/norbert/Scripts/blue_pow_sav.sh</code></p>
+
+<p>Jak widać skrypt nazywa się blue_pow_sav.sh i jest umieszczony w katalogu <code>/Users/norbert/Scripts/</code></p>
+
+<p>Edycja crontab-a to <code>crontab -e</code>, wylistowanie zadań <code>crontab -l</code>. Usunięcie crontab-a użytkownika <code>crontab -r</code>. Mam wrażenie, że trochę za blisko jest klawisz edycji od tego który powoduje usunięcie crontab-a bez pytania.</p>
+
+<p>Dodanie jakiegoś zadania z poziomu shell-a, dotychczasowe jeśli były są zachowywane:</p>
+
+<p><code>crontab -l | { cat; echo "@reboot /Users/norbert/Scripts/blue_pow_sav.sh"; } | crontab -</code></p>
+
+<p>Można też inaczej, zapisanie obecnych zadań do tmp_cron:</p>
+
+<p><code>crontab -l &gt; tmp_cron</code></p>
+
+<p>Dodanie nowego:</p>
+
+<p><code>echo "@reboot /Users/norbert/Scripts/blue_pow_sav.sh" &gt;&gt; tmp_cron</code></p>
+
+<p>Instalacja:</p>
+
+<p><code>crontab tmp_cron</code></p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2012/09/07/qemu/">Qemu</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-09-07T11:51:37+00:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>11:51 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Dzięki quemu możemy uruchamiać na x86 obrazy systemów które do tej architektury nie należą. Można szybko coś sprawdzić bez konieczności instalacji systemu na docelowym urządzeniu. Minusem qemu jest to, że nie jest zbyt wydajne w swojej natywnej postaci ale do niezbyt &ldquo;grubych&rdquo; dystrybucji sprawdza się doskonale.</p>
+
+<h3>Instalacja qemu</h3>
+
+<p>Tylko z tą wersją gcc udało się uniknąć &ldquo;białego ekranu&rdquo; po uruchomieniu qemu:</p>
+
+<p><code>brew install https://raw.github.com/Homebrew/homebrew-dupes/master/apple-gcc42.rb</code></p>
+
+<p>Instalacja pakietow potrzebnych do poprawnej pracy qemu:</p>
+
+<p><code>brew install jpeg gnutls glib</code></p>
+
+<p>Chwilowa podmiana wersji gcc zainstalowanej przez Xcode 4.4.1 na tą zainstalowaną przez brew:</p>
+
+<p><code>sudo mv /usr/bin/gcc /usr/bin/gcc_orig</code>
+<code>sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/gcc-4.2 /usr/bin/gcc</code></p>
+
+<p>Instalacja qemu:</p>
+
+<p><code>brew install qemu --use-gcc</code></p>
+
+<p><img src="/images/qemu_03.png"></p>
+
+<p>Powrót do oryginalnej konfiguracji systemu:</p>
+
+<p><code>sudo mv /usr/bin/gcc_orig /usr/bin/gcc</code></p>
+
+<p>Jeśli <code>gcc -v</code> wyświetla w ostatniej linii taką wersję:</p>
+
+<p><code>gcc version 4.2.1 (Based on Apple Inc. build 5658) (LLVM build 2336.11.00)</code></p>
+
+<p>Tzn. że gcc instalowany przez Xcode 4.4.1 został przywrócony.</p>
+
+<h3>Centos</h3>
+
+<p>Zaczynamy od przygotowanie dysku który będzie wykorzystywany przez system:</p>
+
+<p><code>qemu-img create -f qcow2 centos_hdd.img 10G</code></p>
+
+<p>Na szczęście nie jest tworzony od razu plik 10GB, miejsce jest sukcesywnie dobierane w miarę potrzeb.</p>
+
+<p>Uruchomienie:</p>
+
+<p><code>qemu-system-x86_64 -m 1G -localtime centos_hdd.img -cdrom CentOS-6.2-x86_64-LiveDVD.iso</code></p>
+
+<p><img src="/images/qemu_01.png"></p>
+
+<h3>Openwrt</h3>
+
+<p>Pobieramy Openwrt:</p>
+
+<p><code>curl -O http://downloads.openwrt.org/backfire/10.03/x86/openwrt-x86-ext2.image.gz</code></p>
+
+<p>Otwieramy archiwum:</p>
+
+<p><code>gunzip openwrt-x86-ext2.image.gz</code></p>
+
+<p>Uruchomienie:</p>
+
+<p><code>qemu-system-x86_64 -hda openwrt-x86-ext2.image</code></p>
+
+<p><img src="/images/qemu_05.png"></p>
+
+<h3>Debian Squeeze</h3>
+
+<p>Tym razem wersja przeznaczona pod architekture ARM.</p>
+
+<p>Pobieramy pliki:</p>
+
+<p><code>curl -O http://people.debian.org/~aurel32/qemu/armel/vmlinuz-2.6.32-5-versatile</code>
+<code>curl -O http://people.debian.org/~aurel32/qemu/armel/initrd.img-2.6.32-5-versatile</code>
+<code>curl -O http://people.debian.org/~aurel32/qemu/armel/debian_squeeze_armel_standard.qcow2</code></p>
+
+<p>Uruchomienie:</p>
+
+<p><code>qemu-system-arm -M versatilepb -kernel vmlinuz-2.6.32-5-versatile -initrd initrd.img-2.6.32-5-versatile -hda debian_squeeze_armel_standard.qcow2 -append "root=/dev/sda1"</code></p>
+
+<p><img src="/images/qemu_02.png"></p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2012/08/23/onenote-na-osx-remoteapp/">OneNote na OSX - RemoteApp</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-08-23T14:52:23+00:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2012</span></span> <span class='time'>2:52 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rozszerzenie funkcjonalności RDP o RemoteApp jest bardzo fajnym pomysłem. Nie potrzebuje całego pulpitu Windowsa a tylko dostępu do maksymalnie kilku aplikacji, których nie ma na osx. Jedną z takich aplikacji MS jest OneNote, powoli tracę nadzieję, że kiedykolwiek się pojawi wersja osx. Testowałem różne rozwiązania EverNote, Springpad, Google Notebook (już zamknięty) i jednak OneNote najbardziej mi odpowiada. W sumie gdyby MS aktualizował swojego klienta RDP to już niczego więcej od tej firmy bym nie oczekiwał jeśli chodzi o osx. Mam dostęp do serwera MS, który działa sobie 24h na nim zainstalował bym to czego mi brakuje i voilà.</p>
+
+<p>Póki co trzeba sobie radzić inaczej. Dzięki <a href="http://www.freerdp.com">freerdp</a> można już korzystać z RemoteApp na osx. Oczywiście nie jest tak kolorowo jakbym chciał ponieważ freerdp korzysta z X11 i &ldquo;wszystkich jego dobrodziejstw&rdquo; ale widoki są.</p>
+
+<h3>Instalacja freerdp</h3>
+
+<p><code>brew install freerdp</code></p>
+
+<p>Wydaje mi się, że jest mały bug w tej recepturze ponieważ o ile freerdp się instaluje to nie działało mapowanie dysków:</p>
+
+<p><img src="/images/freerdp01.png"></p>
+
+<p><code>freerdp_load_library_symbol: failed to open /usr/local/Cellar/freerdp/1.0.1/lib/freerdp/rdpdr: dlopen(/usr/local/Cellar/freerdp/1.0.1/lib/freerdp/rdpdr, 5): image not found</code></p>
+
+<p>Problem rozwiązałem tworząc linki symboliczne w katalogu <code>/usr/local/Cellar/freerdp/1.0.1/lib/freerdp/</code>.</p>
+
+<p><code>cd /usr/local/Cellar/freerdp/1.0.1/lib/freerdp/  
+for i in *; do ln -s $i "${i%.*}"; done</code></p>
+
+<p><img src="/images/freerdp02.png"></p>
+
+<p>Po tej operacji nie było już kłopotu z tym poleceniem:</p>
+
+<p><code>xfreerdp -u norbert -g 1440x800 --plugin cliprdr --plugin rdpdr --data disk:HDD:$HOME -- 192.168.1.1:9800</code></p>
+
+<p>Kilka słów wyjaśnienia odnośnie tych niekoniecznie oczywistych parametrów xfreerdp:</p>
+
+<p><code>--plugin cliprdr</code> - powoduje, że działa funkcjonalność schowka<br/>
+<code>--plugin rdpdr --data disk:HDD:$HOME</code> - odpowiada za przekierowanie lokalnego dysku, HDD to nazwa dysku/partycji który chcemy przekierowywać (u mnie np. partycja z osx nazywa się HDD), $HOME to katalog który chcemy przekierować, jeśli cały filesystem to można użyć /`</p>
+
+<p>Na razie to tylko uruchomienie zwykłego klienta rdp który wyświetli cały pulpit zdalnej maszyny. Działa całkiem przyzwoicie, CoRD np. ostatnio ma problem z gubieniem wskaźnika myszy po wprowadzeniu tekstu co jest nieco uciążliwe.</p>
+
+<h3>RemoteAPP</h3>
+
+<p>Funkcjonalność ta zadziała na XP, Vista, 7 Ultimate i Enterprise, 2008. Windows 2008 ma natywne narzędzia do wystawiania aplikacji w trybie RemoteApp. W przypadku pozostałych systemów można skorzystać z prostego narzędzia do modyfikacji rejestru</p>
+
+<p><a href="https://sites.google.com/site/kimknight/remoteapptool">https://sites.google.com/site/kimknight/remoteapptool</a></p>
+
+<p><img src="/images/freerdp03.png"></p>
+
+<p>albo zaimportować poniższy plik onenote.reg, który jest poprawny dla standardowej instalacji OneNote 2010:</p>
+
+<pre><code>Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINESOFTWAREMicrosoftWindows NTCurrentVersionTerminal ServerTSAppAllowList]
+"fDisabledAllowList"=dword:00000001
+
+[HKEY_LOCAL_MACHINESOFTWAREMicrosoftWindows NTCurrentVersionTerminal ServerTSAppAllowListApplicationsONENOTE]
+"CommandLineSetting"=dword:00000000
+"RequiredCommandLine"=""
+"IconIndex"=dword:00000000
+"IconPath"="%SYSTEMDRIVE%\Program Files (x86)\Microsoft Office\Office14\ONENOTE.EXE"
+"Path"="C:\Program Files (x86)\Microsoft Office\Office14\ONENOTE.EXE"
+"ShortPath"="C:\PROGRA~2\MICROS~1\Office14\ONENOTE.EXE"
+"VPath"="%SYSTEMDRIVE%\Program Files (x86)\Microsoft Office\Office14\ONENOTE.EXE"
+"ShowInTSWA"=dword:00000001
+"Name"="Microsoft OneNote 2010"
+"SecurityDescriptor"=""
+</code></pre>
+
+<p>Podłączenie do OneNote w trybie RemoteApp wygląda tak:</p>
+
+<p><code>xfreerdp -u norbert -g 800x800  --app --plugin rail --data "||onenote" -- 192.168.1.1:9800</code></p>
+
+<p><img src="/images/freerdp04.png"></p>
+
+<p>Idealnie nie jest, nie działa schowek (mam nadzieje, że na razie, w trybie pulpitu nie ma z nim problemu) czyli coś podstawowego przy robieniu notatek. Zwinięcie okna spowoduje, że rozwinie się już tylko białe okienko bez śladu OneNote. Mam jednak nadzieje, że freerdp będzie rozwijane bo widać potencjał w RDP.</p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2012/08/21/cowsay-fortune/">Cowsay fortune</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-08-21T18:54:38+00:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2012</span></span> <span class='time'>6:54 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Skoro mamy Homebrew i coreutils można pokusić się o instalację tak kluczowych elementów systemu jak cowsay i fortune. Wydajemy polecenie:</p>
+
+<p><code>brew install cowsay fortune</code></p>
+
+<p><img src="/images/cowsay_01.png"></p>
+
+<p>Następnie dodajemy do <code>.bash_profile</code> linijkę:</p>
+
+<p><code>cowsay -f "$(ls /usr/local/Cellar/cowsay/3.03/share/cows | gsort -R | head -1)" "$(fortune -s)"</code></p>
+
+<p>Dzięki czemu przy każdym uruchomieniu terminala zostaniemy mile powitani albo dowiemy się czegoś ciekawego.</p>
+
+<p><img src="/images/cowsay_02.png">
+<img src="/images/cowsay_03.png">
+<img src="/images/cowsay_04.png"></p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2012/08/21/homebrew/">Homebrew</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-08-21T18:01:35+00:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2012</span></span> <span class='time'>6:01 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Homebrew ułatwia instalacje open source&#8217;owych narzędzi, aplikacji itd. Znam trzy tego typu rozwiązania <a href="http://www.macports.org">MacPorts</a>, <a href="http://www.finkproject.org">Fink</a> i <a href="http://mxcl.github.com/homebrew/">Homebrew</a>. Jakoś najbardziej polubiłem Homebrew :)</p>
+
+<p>Ponieważ prawie wszystkie paczki są dostępne jako kod źródłowy, Homebrew wymaga zainstalowania Xcode, Xcode Command Line Tools. Ewentualnie X11 i Javy (jeśli wiemy, że któryś z pakietów będzie tego potrzebował).</p>
+
+<p>Xcode instaluje się z App Store, następnie w preferencjach, zakładka Downloads pobieramy Xcode Command Line Tools. Od wersji 10.8 X11 nie jest już częścią systemu i trzeba je pobrać z <a href="http://xquartz.macosforge.org/landing/">http://xquartz.macosforge.org/landing/</a>. Jave można zainstalować klikając na ikonkę &ldquo;Java Preferences&rdquo; w /Applications/Utilities.</p>
+
+<p>Instalacja samego Homebrew jest dosyć trywialna, wydajemy tylko polecenie:</p>
+
+<p><code>ruby &lt;(curl -fsSkL raw.github.com/mxcl/homebrew/go)</code></p>
+
+<p><img src="/images/homebrew_01.png"></p>
+
+<p>Kilka przydatnych poleceń:</p>
+
+<p>Weryfikacja czy wszystko jest ok z Homebrew</p>
+
+<p><code>brew doctor</code></p>
+
+<p><img src="/images/homebrew_02.png"></p>
+
+<p>Insalacja pakietu <a href="http://www.gnu.org/software/coreutils/">coreutils</a> (w tej paczce dostepny jest ls w wersji GNU, czyli będzie działać <code>gls --color</code>)</p>
+
+<p><code>brew install coreutils</code></p>
+
+<p><img src="/images/homebrew_03.png"></p>
+
+<p>Lista poleceń, które są instalowane przez coreutils (Jak widać większość ma prefix g, chodzi o to, że duża część z nich jest natywnie dostępna w osx ale w wersji BSD i często dosyć starych przez co czasmi brakuje możliwości użycia jakichś fajnych parametrów które pojawiły się kolejnych wersjach GNU danego polecenia. Prefix załatwia problem, jeśli chcemy skorzystać z polecenia GNU wpisujemy <code>gls</code>, <code>gcat</code>, <code>gsort</code> itd. System nie jest w żaden sposób naruszony):</p>
+
+<p><img src="/images/homebrew_04.png"></p>
+
+<p>Usunięcie <a href="http://www.gnu.org/software/coreutils/">coreutils</a></p>
+
+<p><code>brew uninstall coreutils</code></p>
+
+<p>Wyświetlnie zainstalowanych pakietów</p>
+
+<p><code>brew list</code></p>
+
+<p>Sprawdzenie czy pakiet o nazwie xyz jest dostepny</p>
+
+<p><code>brew search xyz</code></p>
+
+<p>Wyświetlenie możliwych parametrów dla instalacji danego pakietu (warto to sprawdzać ponieważ np. zainstalowanie wiresharka bez parametru <code>--with-x</code> spowoduje, że nie będzie GUI)</p>
+
+<p><code>brew options xyz</code></p>
+
+<p><img src="/images/homebrew_05.png"></p>
+
+<p>Aktualizacja dostępnych receptur (to również należy wykonywać przed każdą instalacją)</p>
+
+<p><code>brew update</code></p>
+
+<p>Sprawdzenie, które z zainstalowanych pakietów są w nie aktualnych wersjach</p>
+
+<p><code>brew outdated</code></p>
+
+<p>Aktualizacja zainstalowanych pakietów</p>
+
+<p><code>brew upgrade</code></p>
+
+<p>Warto dodać <code>source</code>brew &ndash;prefix<code>/Library/Contributions/brew_bash_completion.sh</code> do <code>.bash_profile</code> dzięki czemu będzie działać autouzupełnianie klawiszem ⇥ tab poleceń brew-a.</p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2012/08/19/mountain-lion/">Mountain Lion</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-08-19T14:48:56+00:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>2:48 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ponad dwa lata temu przesiadłem się na osx z trzech powodów, po pierwsze wydawało mi się, że łączy dwa światy bardzo naturalnie tj. terminal i przyjemne dla oka stabilne GUI. Drugim była ciekawość, a trzecim macbook air.</p>
+
+<p>Nie jest to niezbędne, ale każdy nowy osx instaluję od 0. Ma to ten plus, że definitywnie czyszczę dysk z wszystkich zbierających się tam &ldquo;śmieci&rdquo;, które za takowe podczas instalacji owych programów nie uważałem. Zasadniczym minusem jest to, że odtworzenie całego środowiska trochę czasu jednak zajmuje.</p>
+
+<p>Właśnie zbliżam się do końca kastomizacji, czas zatem na notatki :)</p>
+
+<h3>Programy</h3>
+
+<ul>
+<li><p>iTerm <a href="http://www.iterm2.com">http://www.iterm2.com</a> - jestem orędownikiem używania natywnych narzędzi systemowych, jednak iTerm jest lepszy od Terminala</p></li>
+<li><p>The Unarchiver <a href="http://unarchiver.c3.cx">http://unarchiver.c3.cx</a> - chyba najlepszy archiwizator</p></li>
+<li><p>Caffeine <a href="http://lightheadsw.com/caffeine/">http://lightheadsw.com/caffeine/</a> - nie pozwala macowi przysypiać</p></li>
+<li><p>AppCleaner <a href="http://www.freemacsoft.net/appcleaner/">http://www.freemacsoft.net/appcleaner/</a> - nie miałem z nim nigdy problemów</p></li>
+<li><p>Disk Inventory X <a href="http://www.derlien.com">http://www.derlien.com</a> - inwentaryzacja dysku</p></li>
+<li><p>CoRD <a href="http://cord.sourceforge.net">http://cord.sourceforge.net</a> - przyjemny klient RDP</p></li>
+<li><p>Homebrew <a href="http://mxcl.github.com/homebrew/">http://mxcl.github.com/homebrew/</a> - rewelacyjny sposób na dodawanie tych narzędzi, których brakuje w osx</p></li>
+<li><p><a href="http://itunes.apple.com/app/palua/id431494195">Palua</a> (płatny 1$) - lepiej rozwiazać problemu klawiszy funkcyjnych chyba się nie da</p></li>
+<li><p>CHM View <a href="http://www.enolsoft.com/chm-view-for-mac.html#">http://www.enolsoft.com/chm-view-for-mac.html#</a> - przeglądarka plików pomocy MS .chm</p></li>
+<li><p>BetterTouchTool <a href="http://blog.boastr.net">http://blog.boastr.net</a> - ogromne możliwości kastomizacji multidotyku, przy okazji dostajemy funkcję inteligentnego rozmieszczania okien</p></li>
+<li><p>KeyboardCleanTool - <a href="http://blog.boastr.net">http://blog.boastr.net</a> - czasami trzeba to zrobić</p></li>
+<li><p>CheatSheet <a href="http://www.grandtotal.biz/CheatSheet/">http://www.grandtotal.biz/CheatSheet/</a> - fajny pomysł, przytrzymanie command powoduje wyświetlenie dostępnych skrótów dla danej aplikacji</p></li>
+<li><p>KeePassX <a href="http://www.keepassx.org/dev/projects/keepassx/files">http://www.keepassx.org/dev/projects/keepassx/files</a> - menadżer haseł, gdzieś je trzeba trzymać</p></li>
+<li><p>VLC <a href="http://www.videolan.org/vlc/index.html">http://www.videolan.org/</a> - wiadomo</p></li>
+<li><p>Teamviewer - <a href="http://www.teamviewer.com/en/index.aspx">http://www.teamviewer.com/</a> -  zdalny dostęp</p></li>
+<li><p>Parallels <a href="http://www.parallels.com">http://www.parallels.com</a> (płatny 95$) - w mojej ocenie najlepszy sposób na wirtualizację, testowałem Fusion, Virtualboxa, qemu i jednak zostałem przy Parallels</p></li>
+<li><p>Pixelminator <a href="http://www.pixelmator.com">http://www.pixelmator.com</a> (płatny 15$) - obróbka grafiki</p></li>
+<li><p>Skitch <a href="http://skitch.com">http://skitch.com</a> - zrzuty ekranu</p></li>
+<li><p>TotalFinder <a href="http://totalfinder.binaryage.com">http://totalfinder.binaryage.com</a> (płatny 18$) - Finder nie jest najgorszy, ale jednak ma pewne braki. Nie jestem jeszcze przekonany do TotalFindera ale na razie działa ok i w końcu na pulpicie nie wyświetla się duet &ldquo;.DS_Store .localized&rdquo;</p></li>
+</ul>
+
+
+<h3>Środowisko</h3>
+
+<h4>.bash_profile</h4>
+
+<figure class='code'><figcaption><span>.bash_profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">alias </span><span class="nv">helpik</span><span class="o">=</span><span class="s1">&#39;cat ~/helpfile.txt&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># wymaga gls</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">l</span><span class="o">=</span><span class="s1">&#39;gls --color&#39;</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">ll</span><span class="o">=</span><span class="s1">&#39;gls --color -lh&#39;</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">lll</span><span class="o">=</span><span class="s1">&#39;gls --color -alh&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">export </span><span class="nv">LC_CTYPE</span><span class="o">=</span>en_US.UTF-8
+</span><span class='line'>
+</span><span class='line'><span class="c"># vim jako domyslny edytor</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">EDITOR</span><span class="o">=</span><span class="s2">&quot;vim&quot;</span>
+</span><span class='line'><span class="c"># po wyjsciu z man page zostanie on na terminalu</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">MANPAGER</span><span class="o">=</span><span class="s2">&quot;less -X&quot;</span>
+</span><span class='line'><span class="c"># kluczowe slowa w man page zostana wyswietlone na pomaranczowo</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">LESS_TERMCAP_md</span><span class="o">=</span><span class="s2">&quot;$ORANGE&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># zwiekszamy historie polecen</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">HISTSIZE</span><span class="o">=</span>32768
+</span><span class='line'><span class="nb">export </span><span class="nv">HISTFILESIZE</span><span class="o">=</span><span class="nv">$HISTSIZE</span>
+</span><span class='line'><span class="c"># nie zapisujemy duplikatow i kilku standardowych polecen</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">HISTCONTROL</span><span class="o">=</span>erasedups
+</span><span class='line'><span class="nb">export </span><span class="nv">HISTIGNORE</span><span class="o">=</span><span class="s2">&quot;ls:cd:cd -:pwd:exit:date:* --help&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># ustawienie wiersza polecen</span>
+</span><span class='line'><span class="nv">PROMPT_COMMAND</span><span class="o">=</span><span class="s1">&#39;PS1=&quot;[33[0;33m][!]`if [[ $? = &quot;0&quot; ]]; then echo &quot;\[33[32m\]&quot;; else echo &quot;\[33[31m\]&quot;; fi`[u.h: `if [[ `pwd|wc -c|tr -d &quot; &quot;` &gt; 18 ]]; then echo &quot;\W&quot;; else echo &quot;\w&quot;; fi`]$[33[0m] &quot;; echo -ne &quot;33]0;`hostname -s`:`pwd`07&quot;&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ustawiamy parę aliasów, historię i fajnego prompta, który wyświetla numer polecenia i zmienia kolor w zależności od tego czy wykonało się poprawnie, działa to tak:</p>
+
+<p><img src="/images/mountain_lion_012.png"></p>
+
+<p>Wyświetlenie zawartości katalogu w kolorze można też osiągnąć bez instalacji ls w wersji GNU. Wystarczy zamienić linie 4,5,6 na np.:</p>
+
+<pre><code>export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+alias l='ls'
+alias ll='ls -lh'
+alias lll='ls -alh'
+</code></pre>
+
+<p>albo</p>
+
+<pre><code>alias l='ls -G'
+alias ll='ls -Glh'
+alias lll='ls -Galh'
+</code></pre>
+
+<h3>Defaults</h3>
+
+<p>Korzystam z następującyh:</p>
+
+<pre><code># wylaczenie przezroczystosci paska menu
+defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
+# wylaczenie pytania o potwierdze uruchomienia aplikacji pobranej z sieci
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+# wylaczenie "naturalnego" przewijania
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+# przyspiesznie powtarzania danego klawisza
+defaults write NSGlobalDomain KeyRepeat -int 0
+# pozwala na zamkniecie Findera
+defaults write com.apple.finder QuitMenuItem -bool true
+# wyswietla ukryte plki
+defaults write com.apple.Finder AppleShowAllFiles -bool true
+# wyswietla rozszerzenia plikow
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+# wyswietla pasek statusu
+defaults write com.apple.finder ShowStatusBar -bool true
+# nie zapisuje .DS_Store na dyskach sieciowych
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# nie weryfikuje plikow obrazow dysku
+defaults write com.apple.frameworks.diskimages skip-verify -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+</code></pre>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/3">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2018/05/05/Ubuntu-18-04/">WSL - Ubuntu 18.04 - xfce4-terminal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/12/01/Unraid-part-1/">Home Cloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/09/27/the-cuttle/">The Cuttle - Boldport Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/05/27/picocom-na-cygwin-slash-windows10/">Picocom na Cygwin/Windows10</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/10/18/iptables-i-dynamiczne-ip/">Iptables i dynamiczne IP</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/android' style='font-size: 103.15789473684211%'>android</a> <a href='/blog/categories/arduino' style='font-size: 103.15789473684211%'>arduino</a> <a href='/blog/categories/curiosities' style='font-size: 103.15789473684211%'>curiosities</a> <a href='/blog/categories/electronics' style='font-size: 106.3157894736842%'>electronics</a> <a href='/blog/categories/linux' style='font-size: 122.10526315789474%'>linux</a> <a href='/blog/categories/mavericks' style='font-size: 103.15789473684211%'>mavericks</a> <a href='/blog/categories/mountain-lion' style='font-size: 141.05263157894737%'>mountain lion</a> <a href='/blog/categories/netflix' style='font-size: 103.15789473684211%'>netflix</a> <a href='/blog/categories/openwrt' style='font-size: 103.15789473684211%'>openwrt</a> <a href='/blog/categories/osx' style='font-size: 160.0%'>osx</a> <a href='/blog/categories/raspberry-pi' style='font-size: 109.47368421052632%'>raspberry pi</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal</a> <a href='/blog/categories/tips' style='font-size: 106.3157894736842%'>tips</a> <a href='/blog/categories/unraid' style='font-size: 103.15789473684211%'>unraid</a> <a href='/blog/categories/windows' style='font-size: 109.47368421052632%'>windows</a> <a href='/blog/categories/wsl' style='font-size: 103.15789473684211%'>wsl</a> <a href='/blog/categories/xbmc' style='font-size: 103.15789473684211%'>xbmc</a> <a href='/blog/categories/yosemite' style='font-size: 103.15789473684211%'>yosemite</a> </span>
+</section>
+
+<section>
+
+    <p></p>
+<span id="google_translate_element"></span>
+
+</section>
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - itoutline.me -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'itoutlineme';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+      _gaq.push(['_trackPageview']);
+
+        (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		       })();
+
+</script>
+
+
+</body>
+</html>

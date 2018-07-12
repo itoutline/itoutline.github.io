@@ -1,0 +1,519 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Vim - intro - itoutline.me</title>
+  <meta name="author" content="itoutline.me">
+
+  
+  <meta name="description" content="Wszystko wskazuje na to, że przerzucę się zupełnie na vim-a. Od tylu lat szukam edytora &ldquo;idealnego&rdquo; a on cały czas czaił się w tle. Chyba &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://itoutline.me/2014/08/20/vim-intro/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="itoutline.me" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/keys.css" rel="stylesheet" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">itoutline.me</a></h1>
+  
+    <h2>&nbsp;</h2>
+  
+  <meta name="google-translate-customization" content="e81cdd0ed4c87a5-36a8c112e17b44b8-g4197450913b80893-c"></meta>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'pl', multilanguagePage: true, autoDisplay: false}, 'google_translate_element');
+}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="itoutline.me">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+   
+	
+    <h1 class="entry-title">Vim - intro</h1>
+	
+ 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-08-20T07:21:36+00:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:21 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Wszystko wskazuje na to, że przerzucę się zupełnie na vim-a. Od tylu lat szukam edytora &ldquo;idealnego&rdquo; a on cały czas czaił się w tle. Chyba największy problem jeśli chodzi o jego popularność to &ldquo;krzywa uczenia się&rdquo;, niestety lekko nie jest ale kiedy już człowiek zacznie się wciągać to szybko zorientuje się jak potężnym i wygodnym narzędziem jest vim. Oceniam moją znajomość tego edytora na jakieś 15%. Mam plan dojścia do 50% ;).</p>
+
+<h2>Tryby</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert Mode</td>
+<td>W tym trybie edytujemy dokument przechodzimy do niego za pomocą klawisza <kbd>i</kbd>, wychodzimy do trybu &ldquo;Normal Mode&rdquo; - <kbd>Esc</kbd></td>
+</tr>
+<tr>
+<td>Normal Mode</td>
+<td>W tym trybie wciskane klawisze są traktowane jako polecenia. Powinien to być domyślny tryb pracy z vim-em</td>
+</tr>
+<tr>
+<td>Visual Mode</td>
+<td>Tryb w którym dokonujemy zaznaczania tekstu</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Poruszanie</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Góra, dół, lewo, prawo</td>
+<td><kbd>k</kbd>, <kbd>j</kbd>, <kbd>h</kbd>, <kbd>l</kbd></td>
+</tr>
+<tr>
+<td>Początek linii</td>
+<td><kbd>0</kbd></td>
+</tr>
+<tr>
+<td>Koniec linii</td>
+<td><kbd>$</kbd></td>
+</tr>
+<tr>
+<td>Wyraz do przodu</td>
+<td><kbd>w</kbd></td>
+</tr>
+<tr>
+<td>Wyraz wstecz</td>
+<td><kbd>b</kbd></td>
+</tr>
+<tr>
+<td>Dół</td>
+<td>W przypadku pojedyczej linii, zajmującej kilka linii ekranu <kbd>g</kbd><kbd>j</kbd></td>
+</tr>
+<tr>
+<td>Góra</td>
+<td>W przypadku pojedynczej linii, zajmującej kilka linii ekranu <kbd>g</kbd><kbd>k</kbd></td>
+</tr>
+<tr>
+<td>Początek pliku</td>
+<td><kbd>:</kbd><kbd>0</kbd> lub <kbd>g</kbd><kbd>g</kbd></td>
+</tr>
+<tr>
+<td>Koniec pliku</td>
+<td><kbd>:</kbd><kbd>$</kbd> lub <kbd>G</kbd></td>
+</tr>
+<tr>
+<td>Przejście do miejsca ostatniej edycji</td>
+<td><kbd>g</kbd><kbd>i</kbd></td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Wprowadzanie tekstu</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Połączenie dwóch linii tekstu</td>
+<td><kbd>J</kbd></td>
+</tr>
+<tr>
+<td>Copy/Cut/Paste</td>
+<td>Przechodzimy do trybu &ldquo;visual&rdquo; <kbd>v</kbd> lub <kbd>V</kbd> jeśli chcemy od razu zaznaczać całe linie i zaznaczamy interesujący nas tekst, <kbd>y</kbd> (skopiowanie) <kbd>d</kbd> (wycięcie), przechodzimy do miejsca w którym ma się pojawić skopiowany/wycięty tekst,<kbd>p</kbd> wklejenie za kursorem <kbd>P</kbd> wklejenie od miejsca w którym jest kursor</td>
+</tr>
+<tr>
+<td>Wcięcia</td>
+<td>Wyłącznie automatycznych wcięć przy wklejaniu <code>:set paste</code>, włączenie <code>:set nopaste</code></td>
+</tr>
+<tr>
+<td>Dodanie linii</td>
+<td>Poniżej kursora <kbd>o</kbd>, powyżej <kbd>O</kbd></td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Usuwanie</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pojedynczego znaku pod kursorem</td>
+<td><kbd>x</kbd>. W trybie edycji działają również <kbd>Delete</kbd>, <kbd>Backspace</kbd></td>
+</tr>
+<tr>
+<td>Cała linia</td>
+<td><kbd>d</kbd><kbd>d</kbd></td>
+</tr>
+<tr>
+<td>Od miejsca w którym jest kursor do początku linii</td>
+<td><kbd>d</kbd><kbd>0</kbd></td>
+</tr>
+<tr>
+<td>Od miejsca w którym jest kursor do końca linii</td>
+<td><kbd>d</kbd><kbd>$</kbd></td>
+</tr>
+<tr>
+<td>Od miejsca w którym jest kursor do początku pliku</td>
+<td><kbd>d</kbd><kbd>g</kbd><kbd>g</kbd></td>
+</tr>
+<tr>
+<td>Od miejsca w którym jest kursor do końca pliku</td>
+<td><kbd>d</kbd><kbd>G</kbd></td>
+</tr>
+<tr>
+<td>Usunięcie fragmentu tekstu</td>
+<td>Zaznaczamy od którego miejsca ma być usunięty tekst <kbd>m</kbd><kbd>a</kbd>, przechodzimy kursorem do końca fragmentu który chcemy usunąć i wpisujemy <kbd>d</kbd><kbd>&lsquo;</kbd><kbd>a</kbd></td>
+</tr>
+<tr>
+<td>Usuwanie w trybie blokowym</td>
+<td>Tryb edycji blokowej jest przydatny kiedy np. w akapicie na początku linii są niepotrzebne odstępy. Można je usunąć za jednym razem, przechodząc do trybu blokowego <kbd>Ctrl</kbd><kbd>v</kbd> i zaznaczyć kursorem kolejne linie, następnie <kbd>d</kbd> lub <kbd>x</kbd></td>
+</tr>
+<tr>
+<td>Usuwanie w trybie liniowym</td>
+<td>Włączamy tryb zaznaczania liniowego <kbd>Shift</kbd><kbd>v</kbd>, kursorem zaznaczamy linie do usunięcia a następnie usuwamy <kbd>d</kbd> lub <kbd>x</kbd></td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Wyszukiwanie</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><kbd> * </kbd></td>
+<td>Wyszukanie kolejnego wyrazu znajdującego się w miejscu kursora</td>
+</tr>
+<tr>
+<td><kbd>#</kbd></td>
+<td>Wyszukanie poprzedniego wyrazu znajdującego się w miejscu kursora</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Zamiana</h2>
+
+<h2>Zakładki</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Otwarcie nowej zakładki</td>
+<td><code>:tabnew</code></td>
+</tr>
+<tr>
+<td>Poruszanie się pomiedzy zakładkami</td>
+<td><kbd>g</kbd><kbd>t</kbd></td>
+</tr>
+<tr>
+<td>Przywrócenie przypadkowo zamkniętej zakładki</td>
+<td><code>:ls</code> - wyświetlnie bufora a następnie <code>:tabnew +Xbuf</code> gdzie X to numer pod którym plik jest w buforze</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Tips&amp;Tricks</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mini Kalkulator</td>
+<td>W trybie &ldquo;insert&rdquo;, <kbd>Ctrl</kbd><kbd>r</kbd><kbd>=</kbd>, wpisujemy równanie po wciśnięciu <kbd>Enter</kbd> wynik pojawi się w miejscu kursora</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>.vimrc</h2>
+
+<table>
+<thead>
+<tr>
+<th>Wpis</th>
+<th>Opis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/downloads/code/vim_autoindent_switch.txt">paste mode</a></td>
+<td>Umożliwi włączanie/wyłączanie automatycznego ustawiania odstępów za pomocą klawisza F2. Zamiast zabawy z <code>:set paste</code> i <code>:set nopaste</code></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+
+
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">itoutline.me</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-08-20T07:21:36+00:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:21 am</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://itoutline.me/2014/08/20/vim-intro/" data-via="" data-counturl="http://itoutline.me/2014/08/20/vim-intro/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/12/15/jump-desktop-i-centos/" title="Previous Post: Jump Desktop i Centos">&laquo; Jump Desktop i Centos</a>
+      
+      
+        <a class="basic-alignment right" href="/2014/08/24/octopress-pierwsze-wrazenia/" title="Next Post: Octopress - pierwsze wrażenia">Octopress - pierwsze wrażenia &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2018/05/05/Ubuntu-18-04/">WSL - Ubuntu 18.04 - xfce4-terminal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/12/01/Unraid-part-1/">Home Cloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/09/27/the-cuttle/">The Cuttle - Boldport Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/05/27/picocom-na-cygwin-slash-windows10/">Picocom na Cygwin/Windows10</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/10/18/iptables-i-dynamiczne-ip/">Iptables i dynamiczne IP</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/android' style='font-size: 103.15789473684211%'>android</a> <a href='/blog/categories/arduino' style='font-size: 103.15789473684211%'>arduino</a> <a href='/blog/categories/curiosities' style='font-size: 103.15789473684211%'>curiosities</a> <a href='/blog/categories/electronics' style='font-size: 106.3157894736842%'>electronics</a> <a href='/blog/categories/linux' style='font-size: 122.10526315789474%'>linux</a> <a href='/blog/categories/mavericks' style='font-size: 103.15789473684211%'>mavericks</a> <a href='/blog/categories/mountain-lion' style='font-size: 141.05263157894737%'>mountain lion</a> <a href='/blog/categories/netflix' style='font-size: 103.15789473684211%'>netflix</a> <a href='/blog/categories/openwrt' style='font-size: 103.15789473684211%'>openwrt</a> <a href='/blog/categories/osx' style='font-size: 160.0%'>osx</a> <a href='/blog/categories/raspberry-pi' style='font-size: 109.47368421052632%'>raspberry pi</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal</a> <a href='/blog/categories/tips' style='font-size: 106.3157894736842%'>tips</a> <a href='/blog/categories/unraid' style='font-size: 103.15789473684211%'>unraid</a> <a href='/blog/categories/windows' style='font-size: 109.47368421052632%'>windows</a> <a href='/blog/categories/wsl' style='font-size: 103.15789473684211%'>wsl</a> <a href='/blog/categories/xbmc' style='font-size: 103.15789473684211%'>xbmc</a> <a href='/blog/categories/yosemite' style='font-size: 103.15789473684211%'>yosemite</a> </span>
+</section>
+
+<section>
+
+    <p></p>
+<span id="google_translate_element"></span>
+
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - itoutline.me -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'itoutlineme';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://itoutline.me/2014/08/20/vim-intro/';
+        var disqus_url = 'http://itoutline.me/2014/08/20/vim-intro/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+      _gaq.push(['_trackPageview']);
+
+        (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		       })();
+
+</script>
+
+
+</body>
+</html>

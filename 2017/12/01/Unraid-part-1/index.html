@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Home Cloud - itoutline.me</title>
+  <meta name="author" content="itoutline.me">
+
+  
+  <meta name="description" content="Kilka lat temu pozbyłem się z domu &ldquo;blaszaka&rdquo;. Nie gram, w związku z czym w miarę wydajny laptop miał mi spokojnie wystarczyć. No i w &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://itoutline.me/2017/12/01/Unraid-part-1/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="itoutline.me" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/keys.css" rel="stylesheet" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">itoutline.me</a></h1>
+  
+    <h2>&nbsp;</h2>
+  
+  <meta name="google-translate-customization" content="e81cdd0ed4c87a5-36a8c112e17b44b8-g4197450913b80893-c"></meta>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'pl', multilanguagePage: true, autoDisplay: false}, 'google_translate_element');
+}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="itoutline.me">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+   
+	
+    <h1 class="entry-title">Home Cloud</h1>
+	
+ 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-12-01T16:10:00+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2017</span></span> <span class='time'>4:10 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Kilka lat temu pozbyłem się z domu &ldquo;blaszaka&rdquo;. Nie gram, w związku z czym w miarę wydajny laptop miał mi spokojnie wystarczyć. No i w sumie tak było, brakowało mi tylko jednej rzeczy, jakiegoś wspólnego domowego zasobu sieciowego. Nie było to jakoś krytyczne, podejmowałem próby z BananaPi wyposażonym w port sata (bardzo słabo), podpinałem dysk do posiadanych routerów po USB3 (niewiele lepiej) a na dodatek ciągle miałem w głowie, że jeśli mi ten dysk padnie to tracę wszystko w związku z czym jakichś krytycznych rzeczy tam nie trzymałem. </br></br>
+W końcu zdecydowałem się jakoś docelowo rozwiązać problem i wybór padł na NAS Asus 6202T. Rozwiązanie sprawdzało się całkiem dobrze ale pojawiła się potrzeba &ldquo;upchnięcia&rdquo; trochę większej ilości wirtualnych maszyn, wersja Docker-a była nie tą, której potrzebowałem, brak wsparcia dla osobnych dysków SSD (w tamtym czasie) i jakieś inne drobne rzeczy skłoniły mnie do poszukania czegoś innego.
+</br></br>
+No i trafiłem na Unraid-a. Jest to dedykowany pod storage OS oparty na Linuxie. Podstawowe zalety w mojej ocenie:</p>
+
+<ul>
+<li>Wsparcie dla wirtualizacji/dokeryzacji.</li>
+<li>Obsługa SSD przez tzw. &ldquo;cache pool&rdquo;.</li>
+<li>Bardzo łatwe dodawanie nowych docker-ów.</li>
+<li>Niezależność od dostawcy sprzętu, to chyba największy plus, kupuje komponenty dokładnie take jakich potrzebuje. (Ludzie preferujący rozwiązania &ldquo;półkowe&rdquo; niekoniecznie uznają to za zaletę).</li>
+<li>Możliwość &ldquo;podpięcia&rdquo; karty graficznej bezpośrednio do VM, dzięki czemu nie ma różnicy pomiędzy pracą na maszynie fizycznej a VM.</li>
+<li>Całość ruchu sieciowego pomiędzy wszystkimi hostami odbywa się w obrębie jednej fizycznej maszyny:</li>
+</ul>
+
+
+<p> <img src="/images/unraid_hdd_speed.PNG"></p>
+
+<ul>
+<li>Duża frajda z posiadania własnej chmury, Plex + NextCloud + Collabora + draw.io (Collabora - pakiet biurowy, może odstaje nieco jakością od rozwiązań gigantów ale już z draw.io korzysta mi się lepiej niż z Visio).</li>
+<li>Wszytko jest na dyskach w RAID (co nie zwalnia z backup-ów ale zdecydowanie jest raźniej ;)</li>
+</ul>
+
+
+<p>Wady:</p>
+
+<ul>
+<li>Większe zużycie energii 50W, w przypadku Asus-a 10W (wartości mocno uśrednione). Coś za coś, I7 8700 vs Celeron</li>
+<li>Rozwiązanie nie jest darmowe.</li>
+<li>Nadal mam problem z podłączeniem zintegrowanej grafiki do VM Linuxowej (grubsza sprawa, musi dojść do przełączenia systemu obsługującego IGD z unRAID na VM).</li>
+</ul>
+
+
+<p>Całość wygląda tak:</p>
+
+<p> <img src="/images/unraid_schema.PNG"></p>
+
+<p>Historia zatoczyła koło, teraz potrzebuje byle jakiego laptopa i mogę pracować na VM zdalnie (w czym na pewno pomaga 50Mb upstream-u od dostawcy Internetu). Co najważniejsze, całość działa zaskakująco stabilnie. Niesamowite jak wiele funkcji może spełniać dzisiaj PC w domu (cztery ostatnie to VM) a wszystko to dzięki wirtualizacji i konteneryzacji.</p>
+
+<p> <img src="/images/unraid_list.PNG"></p>
+
+<p>Obciążenie CPU w tym czasie (żadna z maszyn nie robiła nic szczególnego, na Windows 10, Firefox z 20+ zakładkami i kilka pomniejszych programów):</p>
+
+<p> <img src="/images/unraid_cpu.PNG"></p>
+
+<p>Kiedyś bardzo optowałem za stawianiem drobnych rzeczy jak np. Home Assistant na RPI czy podobnych ale teraz wydaje mi się, że takie &ldquo;pudło&rdquo; jest zdecydowanie lepszym rozwiązaniem, ogarnia wszystko :)</p>
+
+<p> <img src="/images/unraid_hal.png"></p>
+</div>
+
+
+
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">itoutline.me</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2017-12-01T16:10:00+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2017</span></span> <span class='time'>4:10 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/unraid/'>unraid</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://itoutline.me/2017/12/01/Unraid-part-1/" data-via="" data-counturl="http://itoutline.me/2017/12/01/Unraid-part-1/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2016/09/27/the-cuttle/" title="Previous Post: The Cuttle - Boldport Club">&laquo; The Cuttle - Boldport Club</a>
+      
+      
+        <a class="basic-alignment right" href="/2018/05/05/Ubuntu-18-04/" title="Next Post: WSL - Ubuntu 18.04 - xfce4-terminal">WSL - Ubuntu 18.04 - xfce4-terminal &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2018/05/05/Ubuntu-18-04/">WSL - Ubuntu 18.04 - xfce4-terminal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/12/01/Unraid-part-1/">Home Cloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/09/27/the-cuttle/">The Cuttle - Boldport Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/05/27/picocom-na-cygwin-slash-windows10/">Picocom na Cygwin/Windows10</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/10/18/iptables-i-dynamiczne-ip/">Iptables i dynamiczne IP</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/android' style='font-size: 103.15789473684211%'>android</a> <a href='/blog/categories/arduino' style='font-size: 103.15789473684211%'>arduino</a> <a href='/blog/categories/curiosities' style='font-size: 103.15789473684211%'>curiosities</a> <a href='/blog/categories/electronics' style='font-size: 106.3157894736842%'>electronics</a> <a href='/blog/categories/linux' style='font-size: 122.10526315789474%'>linux</a> <a href='/blog/categories/mavericks' style='font-size: 103.15789473684211%'>mavericks</a> <a href='/blog/categories/mountain-lion' style='font-size: 141.05263157894737%'>mountain lion</a> <a href='/blog/categories/netflix' style='font-size: 103.15789473684211%'>netflix</a> <a href='/blog/categories/openwrt' style='font-size: 103.15789473684211%'>openwrt</a> <a href='/blog/categories/osx' style='font-size: 160.0%'>osx</a> <a href='/blog/categories/raspberry-pi' style='font-size: 109.47368421052632%'>raspberry pi</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal</a> <a href='/blog/categories/tips' style='font-size: 106.3157894736842%'>tips</a> <a href='/blog/categories/unraid' style='font-size: 103.15789473684211%'>unraid</a> <a href='/blog/categories/windows' style='font-size: 109.47368421052632%'>windows</a> <a href='/blog/categories/wsl' style='font-size: 103.15789473684211%'>wsl</a> <a href='/blog/categories/xbmc' style='font-size: 103.15789473684211%'>xbmc</a> <a href='/blog/categories/yosemite' style='font-size: 103.15789473684211%'>yosemite</a> </span>
+</section>
+
+<section>
+
+    <p></p>
+<span id="google_translate_element"></span>
+
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - itoutline.me -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'itoutlineme';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://itoutline.me/2017/12/01/Unraid-part-1/';
+        var disqus_url = 'http://itoutline.me/2017/12/01/Unraid-part-1/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+      _gaq.push(['_trackPageview']);
+
+        (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		       })();
+
+</script>
+
+
+</body>
+</html>

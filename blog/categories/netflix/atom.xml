@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: netflix | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/netflix/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Unblock.us automatyczna aktualizacja]]></title>
+    <link href="http://itoutline.me/2015/10/07/unblock-dot-us-automatyczna-aktualizacja/"/>
+    <updated>2015-10-07T23:17:18+00:00</updated>
+    <id>http://itoutline.me/2015/10/07/unblock-dot-us-automatyczna-aktualizacja</id>
+    <content type="html"><![CDATA[<p>Wchodzenie na stronę unblock.us i aktualizowanie bieżącego adresu IP zaczęło mnie naprawdę męczyć. Na szczęście można tego uniknąć dosyć prosto. Wystarczy prosty skrypt na routerze (czy dowolnym serwerze linuxowym jaki mamy w domu, chyba każdy ma coś na poziomie minimum rpi w dzisiejszych czasach ;), który będzie sprawdzał co jakiś czas adres zewnętrzny i aktualizował go w unblock.us.</p>
+
+<pre><code class="bash update_unblock.sh">#!/usr/bin/env bash
+# --==itoutline.me==--
+
+SCRIPT_NAME="$(basename $0)"
+IP_ADDR=/tmp/active_ip_addr
+IP_STATUS=/tmp/ip_update_status
+
+CURRENT_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+
+function update_ip {
+    curl -s -o $IP_STATUS "https://api.unblock-us.com/login?adres_email:hasło"
+    logger "[$SCRIPT_NAME]: IP updated: $CURRENT_IP; Response: $(cat $IP_STATUS)"
+    echo $CURRENT_IP &gt; $IP_ADDR
+}
+
+if [[ "$CURRENT_IP" =~ ^[0-9]{2,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]] ; then
+    if [ ! -f $IP_ADDR ] ; then
+        update_ip
+    else
+        OLD_IP=$(cat $IP_ADDR)
+        if [[ "$CURRENT_IP" != "$OLD_IP" ]] ; then
+            update_ip
+        fi
+    fi
+else
+    logger "[$SCRIPT_NAME]: Network error or incorrect answer from the IP provider"
+fi
+</code></pre>
+
+<p>W miejscach <code>adres_email</code> i <code>hasło</code> trzeba podać swoje dane oraz dorzucić skrypt do crona.</p>
+
+<pre><code>*/2 * * * * /root/update_unblock.sh  2&gt;&amp;1 |logger
+</code></pre>
+
+<p>Skrypt będzie się wykonywał co dwie minuty.</p>
+
+<p>Skrypt można również wykorzystać do innych serwisów, w przypadku darmowego <a href="http://tvunblock.com">tvunblock.com</a> polecenie <code>curl</code> z funkcji <code>update_ip</code> należałoby zastąpić:</p>
+
+<pre><code>curl -s -o $IP_STATUS "https://activate.tvunblock.com/"
+</code></pre>
+
+<h3>Zastąpienie odpytywania zewnętrznego serwisu o publiczny adres IP</h3>
+
+<p>Serwisów dostarczających za pomocą jakiegoś web api zewnętrzny adres ip jest dużo ale nie zawsze trzeba z nich korzystać. Jeśli router/modem pozwala na pobieranie z niego informacji o adresie WAN, dlaczego tego nie użyć? W przypadku Liveboxa/Funboxa zmienną <code>CURRENT_IP</code> można ustawić w ten sposób:</p>
+
+<pre><code>CURRENT_IP=$(curl -silent -A "application/x-sah-ws-4-call+json" "http://192.168.1.1/sysbus/NMC:getWANStatus" -d"{\"parameters\":{}}" | sed -n -e 's/^.*\(IPAddress":"\)\([0-9]*.[0-9]*.[0-9]*.[0-9]*\)\(.*\)$/\2/p')
+</code></pre>
+
+<p>W praktyce (jak widać nie tylko adres ip portu WAN można podejrzeć):</p>
+
+<p><img src="/images/unblock_skrypt.png"></p>
+
+<h3>Crontab tuning</h3>
+
+<p>Rozwiązania, które opierają się na crontabie i czesto są uruchamiane zaśmiecają sysloga:</p>
+
+<pre><code>Nov  8 16:49:01 bananapi /USR/SBIN/CRON[27209]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:51:01 bananapi /USR/SBIN/CRON[27221]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:53:01 bananapi /USR/SBIN/CRON[27233]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:55:01 bananapi /USR/SBIN/CRON[27244]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:57:01 bananapi /USR/SBIN/CRON[27255]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:59:01 bananapi /USR/SBIN/CRON[27266]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+</code></pre>
+
+<p>Dlatego kiedy już wiadomo, że skrypt działa poprawnie można pokusić się o wyłączenie logowania crona. Na Debianie to modyfikacja pliku <code>/etc/rsyslog.conf</code>:</p>
+
+<pre><code class="bash rsyslog.conf">###############
+#### RULES ####
+###############
+
+#
+# First some standard log files.  Log by facility.
+#
+auth,authpriv.*         -/var/log/auth.log
+*.*;auth,authpriv.none,cron.none        -/var/log/syslog
+#cron.*             -/var/log/cron.log
+daemon.*            -/var/log/daemon.log
+kern.*              -/var/log/kern.log
+lpr.*               -/var/log/lpr.log
+mail.*              -/var/log/mail.log
+user.*              -/var/log/user.log
+</code></pre>
+
+<p>Dorzucenie <code>cron.none</code> i restart usługi <code>sudo /etc/init.d/rsyslog restart</code> wyciszy crontaba. Można również przekierować logi do osobnego pliku <code>cron.log</code> ale szkoda karty SD. Od tej pory syslog nie jest floodowany z powodu skryptu i mamy tylko informacje kiedy faktcznie skrypt wykona jakąś pracę:</p>
+
+<pre><code>Nov  8 20:16:02 bananapi logger: [update_unblock.sh]: IP updated: 178.42.100.100; Response: active
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

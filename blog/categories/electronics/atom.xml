@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: electronics | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/electronics/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Cuttle - Boldport Club]]></title>
+    <link href="http://itoutline.me/2016/09/27/the-cuttle/"/>
+    <updated>2016-09-27T20:15:00+00:00</updated>
+    <id>http://itoutline.me/2016/09/27/the-cuttle</id>
+    <content type="html"><![CDATA[<p>Świetne projekty elektroniczne DIY - <a href="http://www.boldport.club/">Boldport Club</a>, zapisałem się i zacząłem od klona Arduino <a href="http://www.boldport.club/shop/product/390973459">The Cuttle</a>. Nie był to cały kit tylko sama płytka i trochę nieudana, bo od spodu jest miejscami farba na padach do lutowania. Mimo wszystko działa :)</p>
+
+<p> <img src="/images/the_cuttle.JPG"></p>
+
+<p>W sumie pierwszy raz wgrywałem bootloader i tutaj bardzo pomocna okazała się stronka <a href="http://www.gammon.com.au/bootloader">http://www.gammon.com.au/bootloader</a> i sketch <a href="https://github.com/nickgammon/arduino_sketches">Atmega_Board_Programmer</a></p>
+
+<p> <img src="/images/the_cuttle_programming.JPG"></p>
+
+<p>Cały proces wyglądał tak:</p>
+
+<pre><code>Type 'C' when ready to continue with another chip ...
+Attempting to enter ICSP programming mode ...
+Entered programming mode OK.
+Signature = 0x1E 0x95 0x14
+Processor = ATmega328
+Flash memory size = 32768 bytes.
+LFuse = 0xFF
+HFuse = 0xD9
+EFuse = 0xFF
+Lock byte = 0xFF
+Clock calibration = 0xA9
+Type 'L' to use Lilypad (8 MHz) loader, or 'U' for Uno (16 MHz) loader ...
+Using Uno Optiboot 16 MHz loader.
+Bootloader address = 0x7E00
+Bootloader length = 512 bytes.
+Type 'Q' to quit, 'V' to verify, or 'G' to program the chip with the bootloader ...
+Erasing chip ...
+Writing bootloader ...
+Committing page starting at 0x7E00
+Committing page starting at 0x7E80
+Committing page starting at 0x7F00
+Committing page starting at 0x7F80
+Written.
+Verifying ...
+No errors found.
+Writing fuses ...
+LFuse = 0xFF
+HFuse = 0xDE
+EFuse = 0xFD
+Lock byte = 0xEF
+Clock calibration = 0xA9
+Done.
+Programming mode off.
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rigol 1054Z i dekodowanie SPI]]></title>
+    <link href="http://itoutline.me/2014/12/22/rigol-1054z-i-dekodowanie-spi/"/>
+    <updated>2014-12-22T22:40:45+00:00</updated>
+    <id>http://itoutline.me/2014/12/22/rigol-1054z-i-dekodowanie-spi</id>
+    <content type="html"><![CDATA[<p>Ciągnie mnie do &ldquo;podsłuchiwania&rdquo;, tym razem padło na protokół <a href="http://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus">SPI</a>. W moim wypadku jest tak, że podejrzenie pakietów czy przebiegu prądu w czasie i zobaczenie jak to wygląda od środka daje olbrzymią satysfakcję. A skoro oscyloskop, który umożliwia to drugie kosztuje ok. 1500 zł nie było na co czekać.</p>
+
+<h3>Źródło sygnału SPI</h3>
+
+<p>Źródłem sygnału jest Arduino UNO, bez podłączonego żadnego odbiornika SPI. Wyjścia MOSI i MISO są po prostu ze sobą połączone co tworzy lokalną pętlę (loopback).</p>
+
+<p>Program, który będzie generował ciąg znaków &ldquo;itoutline.me&rdquo;:</p>
+
+<pre><code class="c spi_test.ino">#include &lt;SPI.h&gt;
+
+char outByte [13] = "itoutline.me";
+int i = 0;
+const int slaveSelectPin = 10;
+
+void setup()
+{
+  pinMode (slaveSelectPin, OUTPUT);
+  SPI.begin();
+  delay(100);
+}
+
+void loop()
+{
+  digitalWrite(slaveSelectPin,LOW);
+  for(i = 0; outByte [i] != '\0'; i ++)
+  {
+    SPI.transfer(outByte [i]);
+  }
+  digitalWrite(slaveSelectPin,HIGH);
+  delay(1000);
+}
+</code></pre>
+
+<p>Nazewnictwo portów w SPI zbyt mocno regulowane nie jest (jak podaje Wikipedia):</p>
+
+<table>
+<thead>
+<tr>
+<th>&ldquo;Oficjalnie&rdquo;</th>
+<th>Można spotkać</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SCLK</td>
+<td>SCK, CLK</td>
+</tr>
+<tr>
+<td>MOSI</td>
+<td>SIMO, SDO (for master devices), SDI(for slave devices), DO, DOUT, SI, MTSR</td>
+</tr>
+<tr>
+<td>MISO</td>
+<td>SOMI, SDO (for slave devices ), SDI(for master devices), DI, DIN, SO, MRST</td>
+</tr>
+<tr>
+<td>SS</td>
+<td>nCS, CS, CSB, CSN, nSS, STE, SYNC</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br/>
+Konfiguracja pinów jest następująca:</p>
+
+<ul>
+<li>pin 10 - SS (Slave Select) - CH2 (CS) niebieski</li>
+<li>pin 11 (MOSI) i 12 (MISO) są ze sobą połączone - CH1 (DATA) żółty</li>
+<li>pin 13 - SCK (Serial Clock) - CH3 (CLK) różowy</li>
+</ul>
+
+
+<p>Podłączone sondy do Arduino:</p>
+
+<p><img src="/images/Rigol_SPI_Arduino_connection.jpg"></p>
+
+<h3>Jak to widać ?</h3>
+
+<p>Piękny oscylogram, ze zdekodowanym SPI. Widać cykle zegara, dane które są wysyłane tylko w cyklach i zmianę stanu SS/CS podczas transmisji:</p>
+
+<p><img src="/images/Rigol_SPI_all_characters.png"></p>
+
+<p>Widok &ldquo;EventTable&rdquo;:</p>
+
+<p><img src="/images/Rigol_SPI_chars_ok_table.png"></p>
+
+<p>&ldquo;EventTable&rdquo; niestety wyświetla tylko to co jest widoczne na ekranie. Jeśli mamy dużo danych w pojedynczym komunikacie to niekoniecznie rozciągniemy go na ekranie tak, żeby zadziałał dekoder SPI (potrzebna jest do tego zmiana stanu SS/CS widoczna na ekranie). Np. wysyłając 25 bajtów (&ldquo;itoutline.me_itoutline.me&rdquo;).</p>
+
+<p><img src="/images/Rigol_SPI_25_bajtow.png"></p>
+
+<p>Zobaczymy za mało miejsca, żeby wyświetlić na zielonej linii dekodera dane. Niestety tabela raczej nie podaje ich do końca poprawnie bo widać, że w trzecim bajcie mamy &ldquo;.&rdquo; zamiast &ldquo;o&rdquo;.</p>
+
+<p>Wracając do tego, że jest potrzebna widoczna zmiana SS/CS na ekranie w celu zdekodowania SPI. Mamy długi komunikat, widać tylko jego 15 bajtów i zmianę SS/CS:</p>
+
+<p><img src="/images/Rigol_SPI_15_bajtow_SS_OK.png"></p>
+
+<p>Gdybyśmy chcieli zobaczyć co jest dalej i przesunęli przebieg w lewo, tracąc jednocześnie zmianę SS/CS z pola widzenia:</p>
+
+<p><img src="/images/Rigol_SPI_15_bajtow_SS_NOK.png"></p>
+
+<p>Jest problem.</p>
+
+<p>Na poniższym zrzucie zamieściłem wszystkie ustawienia dekodera SPI jakie zastosowałem do jego wykonania:</p>
+
+<p><img src="/images/Rigol_SPI_Param.png"></p>
+
+<p>No i najważniejsze rozłożenie pojedynczego bajtu na bity :) 0b01101001 = 0x69 = &ldquo;i&rdquo; ASCII</p>
+
+<p><img src="/images/Rigol_SPI_bits.png"></p>
+
+<p>Ostateczna kontrola ołówkiem:</p>
+
+<p><img src="/images/Rigol_SPI_bits_exp.png"></p>
+
+<p>Wykorzystuje oscyloskop bardzo mocno amatorsko ale potencjał tego urządzenia jest naprawdę imponujący. Oczywiście zakup oscyloskopu tylko dla dekodowania SPI to bardzo średni pomysł zważywszy na obecność analizatorów logicznych za 30 zł, no ale to dopiero początek :)</p>
+]]></content>
+  </entry>
+  
+</feed>

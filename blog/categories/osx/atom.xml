@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: osx | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/osx/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Zmienne systemowe w OSX]]></title>
+    <link href="http://itoutline.me/2015/01/27/zmienne-systemowe-w-osx/"/>
+    <updated>2015-01-27T15:29:59+00:00</updated>
+    <id>http://itoutline.me/2015/01/27/zmienne-systemowe-w-osx</id>
+    <content type="html"><![CDATA[<p>Definiowanie zmiennych systemowych w OSX jest takie sobie&hellip; Nie mówię tutaj o zmiennych, które można ustawić w plikach inicjalizacyjnych powłoki shellowej (bash, zsh, fish czy co komu odpowiada). Tam akurat wszystko jest całkiem prosto ale o ustawieniu zmiennej bez uruchamiania terminala po starcie systemu. Natrafiłem na potrzebę zdefiniowania takiej zmiennej przy zabawie z Android Studio. Po zainstalowaniu Javy i wspomnianego oprogramowania, próba jego uruchomienia kończyła się tak:</p>
+
+<p><img src="/images/Java_JDK_pb.png"></p>
+
+<p>Problemem okazał się brak zmiennej <code>STUDIO_JDK</code>. Można ten problem obejść np. tak:</p>
+
+<pre><code>launchctl setenv STUDIO_JDK /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+open /Applications/Android\ Studio.app
+</code></pre>
+
+<p>Tylko, że jakoś konieczność uruchomienia terminala po to, żeby pracować w aplikacji graficznej do mnie nie przemawia. Udało mi się znaleźć ciekawe rozwiązanie problemu <a href="http://stackoverflow.com/questions/25385934/setting-environment-variables-via-launchd-conf-no-longer-works-in-os-x-yosemite">tutaj</a>.</p>
+
+<h2>Zmienne systemowe</h2>
+
+<p>Zmienne mogą być ustawione na poziomie użytkownika (ustawienie wywoływane przez <code>/Library/LaunchAgents/environment.user.plist</code>) lub root-a (<code>/Library/LaunchDaemons/environment.plist</code>). Rozwiązanie zakłada jeden plik w którym będą definiowane zmienne <code>/etc/environment</code>, co jest bardzo ok bo nie przypominam sobie, żebym kiedyś potrzebował różnych. Kolejnym plusem jest fakt, że modyfikacja <code>/etc/environment</code> czyli dodanie jakiejś zmiennej automatycznie jest zaczytywane i dostajemy wzrokową informację w postaci chwilowego zniknięcia Dock-a.</p>
+
+<p>Jedyny minus ale to jest raczej nie do obejścia to fakt, że już działająca aplikacja nie pobierze informacji o nowej zmiennej, musi być ponownie otworzona.</p>
+
+<h2>Zmienna PATH</h2>
+
+<p>To rozwiązanie jest jeszcze lepsze i dopóki będzie działało na OSX to będę z niego korzystał a mianowicie zmiany dokonujemy w pliku <code>/etc/paths</code>. To zwykły plik tekstowy w którym możemy dodawać kolejne linijki z wymaganymi przez nas ścieżkami. Po ponownym uruchomieniu terminala dopisana przez nas ścieżka znajdzie się w zmiennej <code>PATH</code>.</p>
+
+<h2>Ostatecznie</h2>
+
+<p>Przygotowałem skrypt bashowy, który tworze niezbędne pliki i ustawia ich parametry.</p>
+
+<p><figure class='code'><figcaption><span> (set_env_var.sh)</span> <a href='/downloads/code/set_env_var.sh'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'>
+</span><span class='line'>sudo -v
+</span><span class='line'>
+</span><span class='line'>cat <span class="s">&lt;&lt; EOF | sudo tee /etc/environment &gt; /dev/null</span>
+</span><span class='line'><span class="s">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">set -e</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">syslog -s -l warn &quot;Set environment variables with /etc/environment $(whoami) - start&quot;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="s">### Set your variable here:</span>
+</span><span class='line'><span class="s">#launchctl setenv JAVA_HOME      /usr/local/jdk1.7</span>
+</span><span class='line'><span class="s">launchctl setenv MAVEN_HOME     /opt/local/share/java/maven3</span>
+</span><span class='line'><span class="s">launchctl setenv STUDIO_JDK     /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk</span>
+</span><span class='line'><span class="s">############################</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">if [ -x /usr/libexec/path_helper ]; then</span>
+</span><span class='line'><span class="s">        export PATH=&quot;&quot;</span>
+</span><span class='line'><span class="s">            eval `/usr/libexec/path_helper -s`</span>
+</span><span class='line'><span class="s">                launchctl setenv PATH $PATH</span>
+</span><span class='line'><span class="s">            fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">            osascript -e &#39;tell app &quot;Dock&quot; to quit&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">            syslog -s -l warn &quot;Set environment variables with /etc/environment $(whoami) - complete&quot;</span>
+</span><span class='line'><span class="s">EOF</span>
+</span><span class='line'>
+</span><span class='line'>cat <span class="s">&lt;&lt; EOF | sudo tee /Library/LaunchAgents/environment.user.plist &gt; /dev/null</span>
+</span><span class='line'><span class="s">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="s">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span>
+</span><span class='line'><span class="s">&lt;plist version=&quot;1.0&quot;&gt;</span>
+</span><span class='line'><span class="s">&lt;dict&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;Label&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;string&gt;environment.user&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;ProgramArguments&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;array&gt;</span>
+</span><span class='line'><span class="s">            &lt;string&gt;/etc/environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;/array&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;KeepAlive&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;false/&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;RunAtLoad&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;true/&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;WatchPaths&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;array&gt;</span>
+</span><span class='line'><span class="s">        &lt;string&gt;/etc/environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;/array&gt;</span>
+</span><span class='line'><span class="s">&lt;/dict&gt;</span>
+</span><span class='line'><span class="s">&lt;/plist&gt;</span>
+</span><span class='line'><span class="s">EOF</span>
+</span><span class='line'>
+</span><span class='line'>cat <span class="s">&lt;&lt; EOF | sudo tee /Library/LaunchDaemons/environment.plist &gt; /dev/null</span>
+</span><span class='line'><span class="s">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="s">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span>
+</span><span class='line'><span class="s">&lt;plist version=&quot;1.0&quot;&gt;</span>
+</span><span class='line'><span class="s">&lt;dict&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;Label&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;string&gt;environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;ProgramArguments&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;array&gt;</span>
+</span><span class='line'><span class="s">            &lt;string&gt;/etc/environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;/array&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;KeepAlive&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;false/&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;RunAtLoad&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;true/&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;WatchPaths&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;array&gt;</span>
+</span><span class='line'><span class="s">        &lt;string&gt;/etc/environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;/array&gt;</span>
+</span><span class='line'><span class="s">&lt;/dict&gt;</span>
+</span><span class='line'><span class="s">&lt;/plist&gt;</span>
+</span><span class='line'><span class="s">EOF</span>
+</span><span class='line'>
+</span><span class='line'>sudo chmod <span class="m">555</span> /etc/environment
+</span><span class='line'>sudo chmod <span class="m">600</span> /Library/LaunchAgents/environment.user.plist /Library/LaunchDaemons/environment.plist
+</span><span class='line'>sudo chown root:wheel /etc/environment /Library/LaunchAgents/environment.user.plist /Library/LaunchDaemons/environment.plist
+</span><span class='line'>
+</span><span class='line'>launchctl load -w /Library/LaunchAgents/environment.user.plist
+</span><span class='line'>sudo launchctl load -w /Library/LaunchDaemons/environment.plist
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Zastosowanie rozwiązania:</p>
+
+<pre><code>wget http://itoutline.me/code/set_env_var.sh
+chmod +x set_env_var.sh
+./set_env_var.sh
+</code></pre>
+
+<p>Od tej pory zdefiniowanie jakiejkolwiek zmiennej, która będzie zawsze i wszędzie widoczna to umieszczenie jej w <code>/etc/environment</code>.</p>
+
+<h2>Pożyteczne komendy</h2>
+
+<p>Ustawienie zmiennej z poziomu terminala (będzie od razu widoczne w systemie ale na liście zmiennych wyświetlanej np. za pomocą <code>env</code> czy <code>echo $STUDIO_JDK</code> pojawi się dopiero po restarcie terminala:</p>
+
+<pre><code>launchctl setenv STUDIO_JDK /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+</code></pre>
+
+<p>Sprawdzenie zmiennej w systemie:</p>
+
+<pre><code>launchctl getenv STUDIO_JDK /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+</code></pre>
+
+<p>Sprawdzenie czy zmienna jest już widoczna w sesji terminala:</p>
+
+<pre><code>echo $STUDIO_JDK
+</code></pre>
+
+<p>Wyświetlenie wszystkich zmiennych widocznych z poziomu terminala:</p>
+
+<pre><code>env
+</code></pre>
+
+<p>Ustawienie zmiennej tylko na poziomie terminala:</p>
+
+<pre><code>export STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Chrome i swipe]]></title>
+    <link href="http://itoutline.me/2015/01/22/chrome-i-swipe/"/>
+    <updated>2015-01-22T21:47:49+00:00</updated>
+    <id>http://itoutline.me/2015/01/22/chrome-i-swipe</id>
+    <content type="html"><![CDATA[<p>W końcu wróciłem na stare śmieci, działam na OSX Yosemite. Przyznam, że zaskakują mnie oceny tej wersji OSX na AppStore ponieważ póki co jedyny kłopot jakiego ja doświadczyłem to ten z tytułu wpisu. Ponad tydzień spędzony na konfigurowaniu, instalowaniu, modyfikowaniu nie przyniósł jakichś większych zgrzytów, no ale pożyjemy zobaczymy. Zdecydowanie za wcześnie na wyciąganie wniosków.</p>
+
+<p>Na pewno beznadziejnie działa przewijanie za pomocą dwóch palców w Chromie, bardzo często zdarzało mi się podczas przewijania strony w górę/dół lądować na poprzednio przeglądanej. Wydaje mi się, że to bardziej wina przeglądarki niż systemu&hellip;</p>
+
+<p>Rozwiązanie problemu to wyłączenie przewijania w Chromie:</p>
+
+<pre><code>defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+</code></pre>
+
+<p>Jeśli chcemy można w konfiguracji Touchpad-a zastosować poniższe ustawienia, dzięki czemu przechodzenie pomiędzy stronami przestanie być losowe. Jedyny minus to, że musimy użyć trzech palców.</p>
+
+<p><img src="/images/chrome_i_swipe.png"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Jump Desktop i Centos]]></title>
+    <link href="http://itoutline.me/2013/12/15/jump-desktop-i-centos/"/>
+    <updated>2013-12-15T23:17:00+00:00</updated>
+    <id>http://itoutline.me/2013/12/15/jump-desktop-i-centos</id>
+    <content type="html"><![CDATA[<p>Jump Desktop to naprawdę przyjemny klient RDP i VNC na OSX, IOS i Androida. Zaczynamy od sprawdzenia czy server VNC jest zainstalowany:</p>
+
+<pre><code>rpm -qa \*vnc\*
+</code></pre>
+
+<p>Jeśli nie będzie pakietu <code>tigervnc-server</code>, instalujemy go:</p>
+
+<pre><code>yum install tigervnc-server
+</code></pre>
+
+<p>Konfiguracje serwera VNC na Centos 6.5 rozpoczynamy od edycji pliku <code>sudo vi /etc/sysconfig/vncservers</code>:</p>
+
+<pre><code>VNCSERVERS="1:itoutline"
+VNCSERVERARGS[1]="-geometry 1280x900 -localhost"
+</code></pre>
+
+<p>W zmiennej <code>VNCSERVERS</code> podajemy identyfikator ekranu i nazwę użytkownika a w <code>VNCSERVERARGS</code> parametry połączenia. <code>-localhost</code> powoduje, że możliwe będzie tylko nawiązywanie połaczeń lokalnych (z wykorzytaniem tunelu SSH). W sumie zdalny dostęp za pomocą &ldquo;czystego&rdquo; VNC jest mało rozsądny.</p>
+
+<!-- more -->
+
+
+<p>Ustawienie hasła VNC dla użytkownika (bez tego server VNC nie chce się uruchomić):</p>
+
+<pre><code>su - itoutline
+vncpasswd
+</code></pre>
+
+<p>Włączenie uruchamiania serwera VNC po każdym restarcie i uruchomienie go:</p>
+
+<pre><code>chkconfig vncserver on
+service vncserver start
+</code></pre>
+
+<p>Konfiguarcję połączenia w Jump Desktop rozpoczynamy od zdefiniowania połączenia SSH w ustawieniach globalnych (jak widać użyłem niestandardowego portu 2001):</p>
+
+<p><img src="/images/jump-ssh-servers.png"></p>
+
+<p>W konfiguracji serwera podajemy utworzony tunel SSH:</p>
+
+<p><img src="/images/jump-server-config-ssh.png"></p>
+
+<p>Na końcu podajemy adres naszego serwera, tutaj oczywiście wprowadzamy localhost ponieważ łączymy się za pomocą zestawionego wcześniej tunelu.</p>
+
+<p><img src="/images/jump-server-config.png"></p>
+
+<p>Port na którym będziemy się łaczyć to 5901 ponieważ użytkownik zdefiniowany w <code>/etc/sysconfig/vncservers</code> miał identyfikator 1. VNC standardowo pracuje na porcie 5900 ale wykorzystujac wspomniany plik i identyfikatory ekranów  przypisujemy im kolejne porty po 5900.</p>
+
+<p>Gdyby ktoś chciał zmienić standardowy port na którym pracuje VNC, można go zmodyfikować w pliku <code>/usr/bin/vncserver</code></p>
+
+<pre><code>$vncPort = 5900 + $displayNumber;
+</code></pre>
+
+<p>Ustawnie portu na np. 5905 spowoduje, że użytkownik o identyfikatorze ekranu 2, będzie się łączył na port 5907.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Połączenie konsolowe Rasberry Pi]]></title>
+    <link href="http://itoutline.me/2013/06/25/polaczenie-konsolowe-rasberry-pi/"/>
+    <updated>2013-06-25T21:49:16+00:00</updated>
+    <id>http://itoutline.me/2013/06/25/polaczenie-konsolowe-rasberry-pi</id>
+    <content type="html"><![CDATA[<p>Ostatnio zakupiłem kabelek USB => RS TTL, pracujący na napięciu 3.3V. Wygląda on tak:</p>
+
+<p><img src="/images/rpi_serial_kabelek.jpg"></p>
+
+<p>Dzięki niemu możemy podłączyć się do Rpi za pomocą konsoli. Ma to ten plus, że nie potrzebujemy monitora, klawiatury, sieci a i tak wiadomo co się dzieje od samego początku czyli podłączenia zasilania do Rpi.</p>
+
+<p>Kabelek podłączamy w taki sposób:</p>
+
+<p><img src="/images/rpi_serial_2.jpg"></p>
+
+<p>Oczywiście musimy mieć zainstalowe sterowniki do chipsetu PL2303 (<a href="http://www.itoutline.me/pl2303-z-osx">jak to zrobić na OSX</a>). Następnie wydając polecenie:</p>
+
+<pre><code>picocom -b 115200 /dev/cu.PL2303-00001014
+</code></pre>
+
+<p>podłączamy się do konsoli Rpi. Konsola jest skonfigurowana w dystrybucji Raspbian “wheezy” (Ostatnia linia w <code>/etc/inittab</code>). W Arch Linux, trzeba ją ustawić (btw odpuściłem Arch-a na razie;)</p>
+
+<p>To wszystko, jesteśmy zalogowani przez ttyAMA0:</p>
+
+<p><img src="/images/rpi_serial_login_2_retina_gotowy.png"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Wyłączenie Dashboard-a na OSX]]></title>
+    <link href="http://itoutline.me/2013/06/09/wylaczenie-dashboard-a-na-osx/"/>
+    <updated>2013-06-09T22:26:46+00:00</updated>
+    <id>http://itoutline.me/2013/06/09/wylaczenie-dashboard-a-na-osx</id>
+    <content type="html"><![CDATA[<p><img src="/images/dashboard.jpg"></p>
+
+<p>Chyba nie przekonam się nigdy do tego rozwiązania. W każdym bądź razie wyłączam je permanentnie:</p>
+
+<pre><code>defaults write com.apple.dashboard mcx-disabled -boolean YES
+killall Dock
+</code></pre>
+
+<p>Gdybym jednak kiedyś zmienił zdanie:</p>
+
+<pre><code>defaults write com.apple.dashboard mcx-disabled -boolean NO
+killall Dock
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,1218 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>itoutline.me</title>
+  <meta name="author" content="itoutline.me">
+
+  
+  <meta name="description" content="Ciągnie mnie do &ldquo;podsłuchiwania&rdquo;, tym razem padło na protokół SPI. W moim wypadku jest tak, że podejrzenie pakietów czy przebiegu prądu w &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://itoutline.me/posts/2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="itoutline.me" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/keys.css" rel="stylesheet" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">itoutline.me</a></h1>
+  
+    <h2>&nbsp;</h2>
+  
+  <meta name="google-translate-customization" content="e81cdd0ed4c87a5-36a8c112e17b44b8-g4197450913b80893-c"></meta>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'pl', multilanguagePage: true, autoDisplay: false}, 'google_translate_element');
+}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="itoutline.me">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2014/12/22/rigol-1054z-i-dekodowanie-spi/">Rigol 1054Z i dekodowanie SPI</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-22T22:40:45+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>10:40 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ciągnie mnie do &ldquo;podsłuchiwania&rdquo;, tym razem padło na protokół <a href="http://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus">SPI</a>. W moim wypadku jest tak, że podejrzenie pakietów czy przebiegu prądu w czasie i zobaczenie jak to wygląda od środka daje olbrzymią satysfakcję. A skoro oscyloskop, który umożliwia to drugie kosztuje ok. 1500 zł nie było na co czekać.</p>
+
+<h3>Źródło sygnału SPI</h3>
+
+<p>Źródłem sygnału jest Arduino UNO, bez podłączonego żadnego odbiornika SPI. Wyjścia MOSI i MISO są po prostu ze sobą połączone co tworzy lokalną pętlę (loopback).</p>
+
+<p>Program, który będzie generował ciąg znaków &ldquo;itoutline.me&rdquo;:</p>
+
+<figure class='code'><figcaption><span>spi_test.ino</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;SPI.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">char</span> <span class="n">outByte</span> <span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;itoutline.me&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="k">const</span> <span class="kt">int</span> <span class="n">slaveSelectPin</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">pinMode</span> <span class="p">(</span><span class="n">slaveSelectPin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">SPI</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">slaveSelectPin</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">outByte</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="n">SPI</span><span class="p">.</span><span class="n">transfer</span><span class="p">(</span><span class="n">outByte</span> <span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">slaveSelectPin</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nazewnictwo portów w SPI zbyt mocno regulowane nie jest (jak podaje Wikipedia):</p>
+
+<table>
+<thead>
+<tr>
+<th>&ldquo;Oficjalnie&rdquo;</th>
+<th>Można spotkać</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SCLK</td>
+<td>SCK, CLK</td>
+</tr>
+<tr>
+<td>MOSI</td>
+<td>SIMO, SDO (for master devices), SDI(for slave devices), DO, DOUT, SI, MTSR</td>
+</tr>
+<tr>
+<td>MISO</td>
+<td>SOMI, SDO (for slave devices ), SDI(for master devices), DI, DIN, SO, MRST</td>
+</tr>
+<tr>
+<td>SS</td>
+<td>nCS, CS, CSB, CSN, nSS, STE, SYNC</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br/>
+Konfiguracja pinów jest następująca:</p>
+
+<ul>
+<li>pin 10 - SS (Slave Select) - CH2 (CS) niebieski</li>
+<li>pin 11 (MOSI) i 12 (MISO) są ze sobą połączone - CH1 (DATA) żółty</li>
+<li>pin 13 - SCK (Serial Clock) - CH3 (CLK) różowy</li>
+</ul>
+
+
+<p>Podłączone sondy do Arduino:</p>
+
+<p><img src="/images/Rigol_SPI_Arduino_connection.jpg"></p>
+
+<h3>Jak to widać ?</h3>
+
+<p>Piękny oscylogram, ze zdekodowanym SPI. Widać cykle zegara, dane które są wysyłane tylko w cyklach i zmianę stanu SS/CS podczas transmisji:</p>
+
+<p><img src="/images/Rigol_SPI_all_characters.png"></p>
+
+<p>Widok &ldquo;EventTable&rdquo;:</p>
+
+<p><img src="/images/Rigol_SPI_chars_ok_table.png"></p>
+
+<p>&ldquo;EventTable&rdquo; niestety wyświetla tylko to co jest widoczne na ekranie. Jeśli mamy dużo danych w pojedynczym komunikacie to niekoniecznie rozciągniemy go na ekranie tak, żeby zadziałał dekoder SPI (potrzebna jest do tego zmiana stanu SS/CS widoczna na ekranie). Np. wysyłając 25 bajtów (&ldquo;itoutline.me_itoutline.me&rdquo;).</p>
+
+<p><img src="/images/Rigol_SPI_25_bajtow.png"></p>
+
+<p>Zobaczymy za mało miejsca, żeby wyświetlić na zielonej linii dekodera dane. Niestety tabela raczej nie podaje ich do końca poprawnie bo widać, że w trzecim bajcie mamy &ldquo;.&rdquo; zamiast &ldquo;o&rdquo;.</p>
+
+<p>Wracając do tego, że jest potrzebna widoczna zmiana SS/CS na ekranie w celu zdekodowania SPI. Mamy długi komunikat, widać tylko jego 15 bajtów i zmianę SS/CS:</p>
+
+<p><img src="/images/Rigol_SPI_15_bajtow_SS_OK.png"></p>
+
+<p>Gdybyśmy chcieli zobaczyć co jest dalej i przesunęli przebieg w lewo, tracąc jednocześnie zmianę SS/CS z pola widzenia:</p>
+
+<p><img src="/images/Rigol_SPI_15_bajtow_SS_NOK.png"></p>
+
+<p>Jest problem.</p>
+
+<p>Na poniższym zrzucie zamieściłem wszystkie ustawienia dekodera SPI jakie zastosowałem do jego wykonania:</p>
+
+<p><img src="/images/Rigol_SPI_Param.png"></p>
+
+<p>No i najważniejsze rozłożenie pojedynczego bajtu na bity :) 0b01101001 = 0x69 = &ldquo;i&rdquo; ASCII</p>
+
+<p><img src="/images/Rigol_SPI_bits.png"></p>
+
+<p>Ostateczna kontrola ołówkiem:</p>
+
+<p><img src="/images/Rigol_SPI_bits_exp.png"></p>
+
+<p>Wykorzystuje oscyloskop bardzo mocno amatorsko ale potencjał tego urządzenia jest naprawdę imponujący. Oczywiście zakup oscyloskopu tylko dla dekodowania SPI to bardzo średni pomysł zważywszy na obecność analizatorów logicznych za 30 zł, no ale to dopiero początek :)</p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2014/09/11/raspberry-pi-i-podsluchiwanie-ruchu/">Raspberry Pi i podsłuchiwanie ruchu</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-11T19:42:10+00:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:42 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Czasami zdarza się, że istnieje potrzeba sprawdzenia co się dzieje w dłuższym okresie czasu na danym urządzeniu jeśli chodzi o ruch sieciowy jaki przez nie przechodzi. Rpi nadaje się do tego całkiem nieźle. Do podsłuchania i zapisania ruchu wystarczyłby w zupełności <code>tcpdump</code> lub <code>tshark</code>ale zdecydowałem, że uruchomię wiresharka na Rpi i będę co jakiś czas podglądał pakiety. Stąd też instalacja serwera VNC w postaci <code>tightvncserver</code>.</p>
+
+<h2>Architektura</h2>
+
+<p>W moim wypadku wyglądało to tak, że modem DSL (który nie przydzielał adresów IP) miał być podłączony przez router do badanego urządzenia - Device-A. Pech chciał, że nie miałem pod ręka wolnego routera a testy trzeba było zacząć już. W związku z czym Rpi pełniło jednocześnie funkcje serwera DHCP, routera, sniffera i sieciowej konsoli ponieważ Device-A miał port szeregowy. Dodatkowo dla wygody, Rpi było podłączone do sieci Wifi z której mogłem sobie podglądać co tam się &ldquo;wyrabia&rdquo; ;)</p>
+
+<p><img src="/images/rpi_sniffing.png"></p>
+
+<h2>Oprogramowanie</h2>
+
+<pre><code>sudo apt-get update
+sudo apt-get install dnsmasq wireshark picocom tightvncserver
+</code></pre>
+
+<ul>
+<li>dnsmasq - serwer DHCP/TFTP i DNS proxy</li>
+<li>wireshark - podsłuchiwanie ruchu</li>
+<li>picocom - konsola do połączeń szergowych</li>
+<li>tightvncserver - serwer VNC</li>
+</ul>
+
+
+<h2>Konfiguracja Rpi</h2>
+
+<ul>
+<li>Konfiguracja <code>/etc/network/interfaces</code></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>auto lo
+</span><span class='line'>iface lo inet loopback
+</span><span class='line'>
+</span><span class='line'>#Interfejs WAN
+</span><span class='line'>auto eth0
+</span><span class='line'>iface eth0 inet static
+</span><span class='line'>      address xxx.xxx.xxx.xxx
+</span><span class='line'>      netmask 255.255.255.0
+</span><span class='line'>      gateway xxx.xxx.xxx.xxx
+</span><span class='line'>
+</span><span class='line'>#Interfejs LAN
+</span><span class='line'>auto eth1
+</span><span class='line'>iface eth1 inet static
+</span><span class='line'>      address 192.168.11.1
+</span><span class='line'>      network 255.255.255.0
+</span><span class='line'>      gateway 192.168.11.1
+</span><span class='line'>
+</span><span class='line'>allow-hotplug wlan0
+</span><span class='line'>auto wlan0
+</span><span class='line'>iface wlan0 inet dhcp
+</span><span class='line'>        wpa-ssid "SID_WIFI"
+</span><span class='line'>        wpa-psk "Haslo_WIFI"
+</span><span class='line'>
+</span><span class='line'>iface default inet dhcp</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>Włączenie przekazywania ruchu IPV4 pomiędzy interfejsami sieciowymi</p>
+
+<pre><code>  sysctl -w net.ipv4.ip_forward=1`
+</code></pre></li>
+<li><p>Włączenie &ldquo;maskarady&rdquo;</p>
+
+<pre><code>  sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+  sudo iptables -A FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+  sudo iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
+</code></pre></li>
+</ul>
+
+
+<p>Gdybyśmy chcieli, żeby zmiana przetrwała restart Rpi, zapisujemy tablice</p>
+
+<pre><code>    sudo bash -c 'iptables-save &gt; /etc/network/iptables'
+</code></pre>
+
+<p>Dodanie do <code>/etc/network/interfaces</code> linijki zaczytującej tablice</p>
+
+<pre><code>    sudo bash -c 'echo "pre-up iptables-restore &lt; /etc/network/iptables" &gt;&gt; /etc/network/interfaces'
+</code></pre>
+
+<ul>
+<li><p>Konfiguracja tightvncserver</p>
+
+<ul>
+<li><p>Konfiguracja hasła do VNC</p>
+
+<pre><code>  tightvncserver
+</code></pre></li>
+<li><p>Uruchomienie serwera VNC</p>
+
+<pre><code>  vncserver :0 -geometry 1200x800 -depth 16
+</code></pre></li>
+</ul>
+</li>
+<li><p>Konfiguracja wireshark</p>
+
+<ul>
+<li><p>Nadanie użytkownikowi &ldquo;pi&rdquo; uprawnień do przechwytywania ruchu (oczywiście można uruchomić wiresharka na koncie root ale wyrabianie dobrych nawyków zawsze w cenie)</p>
+
+<pre><code>  sudo dpkg-reconfigure wireshark-common
+</code></pre>
+
+<p>  W oknie, które się pojawi wybieramy &ldquo;Yes&rdquo; a następnie dodajemy &ldquo;pi&rdquo; do grupy &ldquo;wireshark&rdquo;</p>
+
+<pre><code>  sudo usermod -a -G wireshark pi
+</code></pre>
+
+<p>  Żeby powyższa operacja stała się aktywna konieczne jest ponowne zalogowanie się (ewentualnie restart Rpi)</p></li>
+</ul>
+</li>
+<li><p>Konfiguracja dnsmasq <code>/etc/dnsmasq.conf</code></p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>interface=eth1
+</span><span class='line'>dhcp-range=192.168.11.140,192.168.11.150,255.255.255.0,12h
+</span><span class='line'>log-queries
+</span><span class='line'>log-dhcp</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>dnsmasq</code> jest naprawdę ok, w sumie dwie pierwsze linijki wystarczają do skonfigurowania go jako serwer DHCP. <code>interface=eth1</code> to interfejs na którym nasłuchuje serwer DHCP. <code>log-queries</code> i <code>log-dhcp</code> spowodują, że w <code>/var/log/syslog</code> pojawią się zapytania DNS i DHCP wysyłane przez klientów. Może to być przydatne gdyby były jakieś kłopoty.</p>
+
+<h2>Podsumowując</h2>
+
+<ul>
+<li><p>Należy uważać na ilość zbieranych danych, jeśli wiadomo, że interesuje nas ruch tylko z udziałem konkretnego adresu IP można dodać filtr na wejściu (Capture Filter): <code>host 192.168.0.1</code>. Specyficznego portu: <code>port 80</code>. Kombinacja: <code>host 192.168.0.1 and port 80</code>.</p></li>
+<li><p>Instalacja wiresharka i tightvncserver może być czasami nadmiarowa i spokojnie wystarczy <code>tcpdump</code> (Instalacja <code>sudo apt-get install tcpdump</code>). Przechwytywanie całych pakietów na interfejsie <code>eth0</code> do pliku zrzut.pcap o maksymalnym rozmiarze 100MB, powstanie 10 takich plików i będą po kolei nadpisywane po przekroczeniu 1GB w sumie:</p>
+
+<pre><code>  sudo tcpdump -i eth0 -C100M -W10 -s0 -w /home/pi/zrzut.pcap &amp;
+</code></pre></li>
+</ul>
+
+
+<p>Trzeba pamiętać o uruchomieniu <code>tcpdump</code> w tle <code>&amp;</code> dzięki temu rozłaczenie sesji ssh nie zakończy działania programu. Po ponownym zalogowaniu, kończymy działanie programu:</p>
+
+<pre><code>    killall tcpdump
+</code></pre>
+
+<ul>
+<li><p>Nic gorszego niż &ldquo;zawieszenie się&rdquo; Rpi podczas sesji trwającej kilka dni. Żeby nie było &ldquo;jak krew w piach&rdquo;, dla bezpieczeństwa można co jakiś czas pobierać przechwytywany ruch za pomocą np. <code>scp</code>. Wireshark zapisuje tymczasowe pliki w katalogu <code>/tmp</code> pod nazwą w takim formacie <code>wireshark_eth1_20140911192644_X8aumU</code>. Bez problemu można je pobrać i analizować w innym miejscu.</p>
+
+<pre><code>  scp pi@raspberrypi:/tmp/wireshark_eth1_20140911192644_X8aumU zrzut.pcap
+</code></pre></li>
+</ul>
+
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- This defines how Octopress will use posts with external-url. -->
+		<h1 class="entry-title"><a href="http://octopress.org">Octopress - pierwsze wrażenia&nbsp;&rArr;</a></h1>
+	 	
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-08-24T21:44:22+00:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:44 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Zmieniłem platformę blogową na Octopress-a i muszę przyznać, że jak na razie jest bardzo ok. Nie to żebym miał coś do Wordpress-a, po prostu nie potrzebuje takiego &ldquo;kombajna&rdquo;. Podstawowe zalety Octopress-a wg. mnie:</p>
+
+<ul>
+<li>Generuje statyczne pliki html.</li>
+<li>Obsługuje bezproblemowo Markdown-a, pisanie tekstu w html-u to męczarnia a pisząc w edytorze wizualnym zawsze miałem wrażenie utraty kontroli nad tym co się ostatecznie pojawi w html-u.</li>
+<li>Obrazki wrzucam do jednego katalogu i to wszytko.</li>
+<li>Natywnie bardzo fajnie obsługuje wklejanie fragmentów kodu.</li>
+</ul>
+
+
+<p>Oczywiście są też pewne minusy:</p>
+
+<ul>
+<li>Jest mało kustomizowalny, oczywiście można sobie zmienić w nim wszystko no ale to już wieksza ingerencja w kod.</li>
+<li>Skoro to statyczne strony to brak systemu do komentarzy (to mozna obejść wykorzystując np. Disqus).</li>
+<li>Nie działa natywnie funkcjonalność &ldquo;linked list&rdquo; a niby powinna.</li>
+</ul>
+
+
+<p>Zapewne jednych i drugich jest znacznie więcej ale to już wyjdzie w trakcie &ldquo;prania&rdquo;. &ldquo;Linked list&rdquo; już sobie naprawiłem ;)</p>
+
+<!-- comment -->
+
+</div>
+  
+  
+
+
+
+	<div class="entry-content"></div>
+	<footer><a rel="full-article" href="/2014/08/24/octopress-pierwsze-wrazenia/">Permalink</a></footer>
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2014/08/20/vim-intro/">Vim - intro</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-08-20T07:21:36+00:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:21 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Wszystko wskazuje na to, że przerzucę się zupełnie na vim-a. Od tylu lat szukam edytora &ldquo;idealnego&rdquo; a on cały czas czaił się w tle. Chyba największy problem jeśli chodzi o jego popularność to &ldquo;krzywa uczenia się&rdquo;, niestety lekko nie jest ale kiedy już człowiek zacznie się wciągać to szybko zorientuje się jak potężnym i wygodnym narzędziem jest vim. Oceniam moją znajomość tego edytora na jakieś 15%. Mam plan dojścia do 50% ;).</p>
+
+<h2>Tryby</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert Mode</td>
+<td>W tym trybie edytujemy dokument przechodzimy do niego za pomocą klawisza <kbd>i</kbd>, wychodzimy do trybu &ldquo;Normal Mode&rdquo; - <kbd>Esc</kbd></td>
+</tr>
+<tr>
+<td>Normal Mode</td>
+<td>W tym trybie wciskane klawisze są traktowane jako polecenia. Powinien to być domyślny tryb pracy z vim-em</td>
+</tr>
+<tr>
+<td>Visual Mode</td>
+<td>Tryb w którym dokonujemy zaznaczania tekstu</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Poruszanie</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Góra, dół, lewo, prawo</td>
+<td><kbd>k</kbd>, <kbd>j</kbd>, <kbd>h</kbd>, <kbd>l</kbd></td>
+</tr>
+<tr>
+<td>Początek linii</td>
+<td><kbd>0</kbd></td>
+</tr>
+<tr>
+<td>Koniec linii</td>
+<td><kbd>$</kbd></td>
+</tr>
+<tr>
+<td>Wyraz do przodu</td>
+<td><kbd>w</kbd></td>
+</tr>
+<tr>
+<td>Wyraz wstecz</td>
+<td><kbd>b</kbd></td>
+</tr>
+<tr>
+<td>Dół</td>
+<td>W przypadku pojedyczej linii, zajmującej kilka linii ekranu <kbd>g</kbd><kbd>j</kbd></td>
+</tr>
+<tr>
+<td>Góra</td>
+<td>W przypadku pojedynczej linii, zajmującej kilka linii ekranu <kbd>g</kbd><kbd>k</kbd></td>
+</tr>
+<tr>
+<td>Początek pliku</td>
+<td><kbd>:</kbd><kbd>0</kbd> lub <kbd>g</kbd><kbd>g</kbd></td>
+</tr>
+<tr>
+<td>Koniec pliku</td>
+<td><kbd>:</kbd><kbd>$</kbd> lub <kbd>G</kbd></td>
+</tr>
+<tr>
+<td>Przejście do miejsca ostatniej edycji</td>
+<td><kbd>g</kbd><kbd>i</kbd></td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Wprowadzanie tekstu</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Połączenie dwóch linii tekstu</td>
+<td><kbd>J</kbd></td>
+</tr>
+<tr>
+<td>Copy/Cut/Paste</td>
+<td>Przechodzimy do trybu &ldquo;visual&rdquo; <kbd>v</kbd> lub <kbd>V</kbd> jeśli chcemy od razu zaznaczać całe linie i zaznaczamy interesujący nas tekst, <kbd>y</kbd> (skopiowanie) <kbd>d</kbd> (wycięcie), przechodzimy do miejsca w którym ma się pojawić skopiowany/wycięty tekst,<kbd>p</kbd> wklejenie za kursorem <kbd>P</kbd> wklejenie od miejsca w którym jest kursor</td>
+</tr>
+<tr>
+<td>Wcięcia</td>
+<td>Wyłącznie automatycznych wcięć przy wklejaniu <code>:set paste</code>, włączenie <code>:set nopaste</code></td>
+</tr>
+<tr>
+<td>Dodanie linii</td>
+<td>Poniżej kursora <kbd>o</kbd>, powyżej <kbd>O</kbd></td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Usuwanie</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pojedynczego znaku pod kursorem</td>
+<td><kbd>x</kbd>. W trybie edycji działają również <kbd>Delete</kbd>, <kbd>Backspace</kbd></td>
+</tr>
+<tr>
+<td>Cała linia</td>
+<td><kbd>d</kbd><kbd>d</kbd></td>
+</tr>
+<tr>
+<td>Od miejsca w którym jest kursor do początku linii</td>
+<td><kbd>d</kbd><kbd>0</kbd></td>
+</tr>
+<tr>
+<td>Od miejsca w którym jest kursor do końca linii</td>
+<td><kbd>d</kbd><kbd>$</kbd></td>
+</tr>
+<tr>
+<td>Od miejsca w którym jest kursor do początku pliku</td>
+<td><kbd>d</kbd><kbd>g</kbd><kbd>g</kbd></td>
+</tr>
+<tr>
+<td>Od miejsca w którym jest kursor do końca pliku</td>
+<td><kbd>d</kbd><kbd>G</kbd></td>
+</tr>
+<tr>
+<td>Usunięcie fragmentu tekstu</td>
+<td>Zaznaczamy od którego miejsca ma być usunięty tekst <kbd>m</kbd><kbd>a</kbd>, przechodzimy kursorem do końca fragmentu który chcemy usunąć i wpisujemy <kbd>d</kbd><kbd>&lsquo;</kbd><kbd>a</kbd></td>
+</tr>
+<tr>
+<td>Usuwanie w trybie blokowym</td>
+<td>Tryb edycji blokowej jest przydatny kiedy np. w akapicie na początku linii są niepotrzebne odstępy. Można je usunąć za jednym razem, przechodząc do trybu blokowego <kbd>Ctrl</kbd><kbd>v</kbd> i zaznaczyć kursorem kolejne linie, następnie <kbd>d</kbd> lub <kbd>x</kbd></td>
+</tr>
+<tr>
+<td>Usuwanie w trybie liniowym</td>
+<td>Włączamy tryb zaznaczania liniowego <kbd>Shift</kbd><kbd>v</kbd>, kursorem zaznaczamy linie do usunięcia a następnie usuwamy <kbd>d</kbd> lub <kbd>x</kbd></td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Wyszukiwanie</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><kbd> * </kbd></td>
+<td>Wyszukanie kolejnego wyrazu znajdującego się w miejscu kursora</td>
+</tr>
+<tr>
+<td><kbd>#</kbd></td>
+<td>Wyszukanie poprzedniego wyrazu znajdującego się w miejscu kursora</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Zamiana</h2>
+
+<h2>Zakładki</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Otwarcie nowej zakładki</td>
+<td><code>:tabnew</code></td>
+</tr>
+<tr>
+<td>Poruszanie się pomiedzy zakładkami</td>
+<td><kbd>g</kbd><kbd>t</kbd></td>
+</tr>
+<tr>
+<td>Przywrócenie przypadkowo zamkniętej zakładki</td>
+<td><code>:ls</code> - wyświetlnie bufora a następnie <code>:tabnew +Xbuf</code> gdzie X to numer pod którym plik jest w buforze</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Tips&amp;Tricks</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mini Kalkulator</td>
+<td>W trybie &ldquo;insert&rdquo;, <kbd>Ctrl</kbd><kbd>r</kbd><kbd>=</kbd>, wpisujemy równanie po wciśnięciu <kbd>Enter</kbd> wynik pojawi się w miejscu kursora</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>.vimrc</h2>
+
+<table>
+<thead>
+<tr>
+<th>Wpis</th>
+<th>Opis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/downloads/code/vim_autoindent_switch.txt">paste mode</a></td>
+<td>Umożliwi włączanie/wyłączanie automatycznego ustawiania odstępów za pomocą klawisza F2. Zamiast zabawy z <code>:set paste</code> i <code>:set nopaste</code></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2013/12/15/jump-desktop-i-centos/">Jump Desktop i Centos</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-15T23:17:00+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>11:17 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Jump Desktop to naprawdę przyjemny klient RDP i VNC na OSX, IOS i Androida. Zaczynamy od sprawdzenia czy server VNC jest zainstalowany:</p>
+
+<pre><code>rpm -qa \*vnc\*
+</code></pre>
+
+<p>Jeśli nie będzie pakietu <code>tigervnc-server</code>, instalujemy go:</p>
+
+<pre><code>yum install tigervnc-server
+</code></pre>
+
+<p>Konfiguracje serwera VNC na Centos 6.5 rozpoczynamy od edycji pliku <code>sudo vi /etc/sysconfig/vncservers</code>:</p>
+
+<pre><code>VNCSERVERS="1:itoutline"
+VNCSERVERARGS[1]="-geometry 1280x900 -localhost"
+</code></pre>
+
+<p>W zmiennej <code>VNCSERVERS</code> podajemy identyfikator ekranu i nazwę użytkownika a w <code>VNCSERVERARGS</code> parametry połączenia. <code>-localhost</code> powoduje, że możliwe będzie tylko nawiązywanie połaczeń lokalnych (z wykorzytaniem tunelu SSH). W sumie zdalny dostęp za pomocą &ldquo;czystego&rdquo; VNC jest mało rozsądny.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/12/15/jump-desktop-i-centos/">Read on &rarr;</a>
+    </footer>
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2013/07/13/airplay-everywhere/">Airplay Everywhere</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-07-13T21:09:36+00:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>9:09 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="/images/Airplay_on_Android_AOA_Service.png"></p>
+
+<p>Doczekałem się. W końcu znalazłem/jest aplikacja na Androida, która poprawnie strumieniuje dźwięk w trybie Airplay zarówno do RPi jak i AppleTv. Mowa o <a href="https://play.google.com/store/apps/details?id=com.nav.aoaservice&amp;hl=en">Airplay on Android AOA Service</a> Założę się, że nie na każdej wersji Androida powyżej 4.0 i telefonu będzie działać ale na moich obu urządzeniach (Sony Acro S - Cyanogenmod 10 i Nexus 7 - Cyanogenmod 10.1) w końcu nie ma z nią problemu. Na telefonie zaczeła działać poprawnie dopiero po ostatniej aktualizacji, wcześniej była straszna &ldquo;sieczka&rdquo;.</p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2013/07/13/lirc-i-raspberry-pi/">Lirc i Raspberry Pi</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-07-13T19:47:28+00:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>7:47 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Po dłuższym okresie czasu postanowiłem odkurzyć Harmony 900, od kiedy przesiadłem się na ATV zostałem przy natywnym pilocie do tego urządzenia. Trochę niesamowite jak fajny jest pilot do Apple Tv, jedyne czego mu brakuje to możliwość regulacji głośności. Przy okazji pomyślałem, że sprawdzę jak wygląda sytuacja z Lirc-em na RPi i okazuje się, że jest bardzo dobrze.</p>
+
+<h3>Podłączenie odbiornika IR</h3>
+
+<p>W swoim &ldquo;magazynku&rdquo; znalazłem czujnik TSOP34836 i przyznam, że wykorzystałem ten bo akurat taki miałem&hellip; Działa na zalecanym napięciu 3V (od 2,7 do 5,5V) i maksymalnie pobiera 3mA (w trakcie moich testów nie przekroczył 1,25mA), czyli nie powinien być żadnym problemem dla portu GPIO.</p>
+
+<p><img src="/images/rpi-lirc-tsop-ilustracja1.png"></p>
+
+<p>Podłączyłem go w następujący sposób:</p>
+
+<ul>
+<li>Pin 1 - Pin 16 (GPIO 23 RPi)</li>
+<li>Pin 2 - Pin 14 (GND RPi)</li>
+<li>Pin 3 - Pin 1 (3,3V RPi)</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/07/13/lirc-i-raspberry-pi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2013/07/09/typy-plikow-obslugiwane-przez-xbmc/">Typy plików obsługiwane przez XBMC</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-07-09T08:00:05+00:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>8:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Mam w swoim archiwum pliki z rozszerzeniem .f4v, niezbyt ich dużo dlatego problem z wyświetlaniem ich podczas przeglądania zakładki Video nie pojawiał się zbyt często.</p>
+
+<p>Okazuje się, że dodanie/usunięcie nowych rozszerzeń obsługiwanych przez XBMC jest bardzo proste (oczywiście format pliku musi być przede wszystkim &ldquo;zjadliwy&rdquo; dla XBMC). W pliku <code>advancedsettings.xml</code> (w przypadku ATV2 plik ten należy stworzyć w katalogu <code>/private/var/mobile/Library/Preferences/XBMC/userdata</code>) dodajemy następującą sekcję:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;advancedsettings&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;videoextensions&gt;</span>
+</span><span class='line'>       <span class="nt">&lt;add&gt;</span>.f4v<span class="nt">&lt;/add&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/videoextensions&gt;</span>
+</span><span class='line'><span class="nt">&lt;/advancedsettings&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>W pliku <code>advancedsettings.xml</code> można spersonalizować o wiele więcej ustawień. Szczegóły: <a href="http://wiki.xbmc.org/index.php?title=Userdata/advancedsettings.xml">http://wiki.xbmc.org/index.php?title=Userdata/advancedsettings.xml</a></p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2013/06/25/polaczenie-konsolowe-rasberry-pi/">Połączenie konsolowe Rasberry Pi</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-06-25T21:49:16+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>9:49 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ostatnio zakupiłem kabelek USB => RS TTL, pracujący na napięciu 3.3V. Wygląda on tak:</p>
+
+<p><img src="/images/rpi_serial_kabelek.jpg"></p>
+
+<p>Dzięki niemu możemy podłączyć się do Rpi za pomocą konsoli. Ma to ten plus, że nie potrzebujemy monitora, klawiatury, sieci a i tak wiadomo co się dzieje od samego początku czyli podłączenia zasilania do Rpi.</p>
+
+<p>Kabelek podłączamy w taki sposób:</p>
+
+<p><img src="/images/rpi_serial_2.jpg"></p>
+
+<p>Oczywiście musimy mieć zainstalowe sterowniki do chipsetu PL2303 (<a href="http://www.itoutline.me/pl2303-z-osx">jak to zrobić na OSX</a>). Następnie wydając polecenie:</p>
+
+<pre><code>picocom -b 115200 /dev/cu.PL2303-00001014
+</code></pre>
+
+<p>podłączamy się do konsoli Rpi. Konsola jest skonfigurowana w dystrybucji Raspbian “wheezy” (Ostatnia linia w <code>/etc/inittab</code>). W Arch Linux, trzeba ją ustawić (btw odpuściłem Arch-a na razie;)</p>
+
+<p>To wszystko, jesteśmy zalogowani przez ttyAMA0:</p>
+
+<p><img src="/images/rpi_serial_login_2_retina_gotowy.png"></p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2013/06/09/wylaczenie-dashboard-a-na-osx/">Wyłączenie Dashboard-a na OSX</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-06-09T22:26:46+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>10:26 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/dashboard.jpg"></p>
+
+<p>Chyba nie przekonam się nigdy do tego rozwiązania. W każdym bądź razie wyłączam je permanentnie:</p>
+
+<pre><code>defaults write com.apple.dashboard mcx-disabled -boolean YES
+killall Dock
+</code></pre>
+
+<p>Gdybym jednak kiedyś zmienił zdanie:</p>
+
+<pre><code>defaults write com.apple.dashboard mcx-disabled -boolean NO
+killall Dock
+</code></pre>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/3">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/index.html">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2018/05/05/Ubuntu-18-04/">WSL - Ubuntu 18.04 - xfce4-terminal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/12/01/Unraid-part-1/">Home Cloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/09/27/the-cuttle/">The Cuttle - Boldport Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/05/27/picocom-na-cygwin-slash-windows10/">Picocom na Cygwin/Windows10</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/10/18/iptables-i-dynamiczne-ip/">Iptables i dynamiczne IP</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/android' style='font-size: 103.15789473684211%'>android</a> <a href='/blog/categories/arduino' style='font-size: 103.15789473684211%'>arduino</a> <a href='/blog/categories/curiosities' style='font-size: 103.15789473684211%'>curiosities</a> <a href='/blog/categories/electronics' style='font-size: 106.3157894736842%'>electronics</a> <a href='/blog/categories/linux' style='font-size: 122.10526315789474%'>linux</a> <a href='/blog/categories/mavericks' style='font-size: 103.15789473684211%'>mavericks</a> <a href='/blog/categories/mountain-lion' style='font-size: 141.05263157894737%'>mountain lion</a> <a href='/blog/categories/netflix' style='font-size: 103.15789473684211%'>netflix</a> <a href='/blog/categories/openwrt' style='font-size: 103.15789473684211%'>openwrt</a> <a href='/blog/categories/osx' style='font-size: 160.0%'>osx</a> <a href='/blog/categories/raspberry-pi' style='font-size: 109.47368421052632%'>raspberry pi</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal</a> <a href='/blog/categories/tips' style='font-size: 106.3157894736842%'>tips</a> <a href='/blog/categories/unraid' style='font-size: 103.15789473684211%'>unraid</a> <a href='/blog/categories/windows' style='font-size: 109.47368421052632%'>windows</a> <a href='/blog/categories/wsl' style='font-size: 103.15789473684211%'>wsl</a> <a href='/blog/categories/xbmc' style='font-size: 103.15789473684211%'>xbmc</a> <a href='/blog/categories/yosemite' style='font-size: 103.15789473684211%'>yosemite</a> </span>
+</section>
+
+<section>
+
+    <p></p>
+<span id="google_translate_element"></span>
+
+</section>
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - itoutline.me -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'itoutlineme';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+      _gaq.push(['_trackPageview']);
+
+        (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		       })();
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,1608 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>itoutline.me</title>
+  <meta name="author" content="itoutline.me">
+
+  
+  <meta name="description" content="Ubuntu 18.04 ma nowszą wersję xfce4-terminal 0.8.7.3 i jest w niej poprawiony pewien szczegół który mnie irytował, przypadkowe przechodzenie w tryb &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://itoutline.me/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="itoutline.me" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/keys.css" rel="stylesheet" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">itoutline.me</a></h1>
+  
+    <h2>&nbsp;</h2>
+  
+  <meta name="google-translate-customization" content="e81cdd0ed4c87a5-36a8c112e17b44b8-g4197450913b80893-c"></meta>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'pl', multilanguagePage: true, autoDisplay: false}, 'google_translate_element');
+}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="itoutline.me">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2018/05/05/Ubuntu-18-04/">WSL - Ubuntu 18.04 - xfce4-terminal</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2018-05-05T16:15:00+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>4:15 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ubuntu 18.04 ma nowszą wersję xfce4-terminal 0.8.7.3 i jest w niej poprawiony pewien szczegół który mnie irytował, przypadkowe przechodzenie w tryb zaznaczania przy kliknięciu na okno xfce4. Bardzo łatwo było to zrobić i jeśli akurat miało się coś w schowku to trzeba było ponownie do niego kopiować. Teraz jest normalnie a na dodatek zaznaczenie blokowe w terminalu z wciśniętym <kbd>Shift</kbd> i <kbd>Ctrl</kbd> działa świetnie.</p>
+
+<p>Została też poprawiona obsługa zmiennej <code>TERM</code> i <code>COLORTERM</code>, teraz sam xfce4 ustawia je bez konieczności dosyć złej praktyki modyfikowania ich w <code>.bashrc</code> itp.:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>TERM=xterm-256color
+</span><span class='line'>COLORTERM=truecolor</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Testowałem różne rozwiązania terminalowe na Windows - mintty, putty (via server ssh), Hyper, cmder), chyba tylko xfce4-terminal jest teraz bardzo bliski tego czego bym oczekiwał po terminalu (nawet mimo tego, że trzeba go uruchamiać przez Server X). Jest prawie tak dobry jak iTerm2 na OSX ;)</p>
+
+<p>Dla odważnych <code>sudo do-release-upgrade -d</code> :)</p>
+
+<p> <img src="/images/xfce4-terminal-WSL.png"></p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2017/12/01/Unraid-part-1/">Home Cloud</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-12-01T16:10:00+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2017</span></span> <span class='time'>4:10 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Kilka lat temu pozbyłem się z domu &ldquo;blaszaka&rdquo;. Nie gram, w związku z czym w miarę wydajny laptop miał mi spokojnie wystarczyć. No i w sumie tak było, brakowało mi tylko jednej rzeczy, jakiegoś wspólnego domowego zasobu sieciowego. Nie było to jakoś krytyczne, podejmowałem próby z BananaPi wyposażonym w port sata (bardzo słabo), podpinałem dysk do posiadanych routerów po USB3 (niewiele lepiej) a na dodatek ciągle miałem w głowie, że jeśli mi ten dysk padnie to tracę wszystko w związku z czym jakichś krytycznych rzeczy tam nie trzymałem. </br></br>
+W końcu zdecydowałem się jakoś docelowo rozwiązać problem i wybór padł na NAS Asus 6202T. Rozwiązanie sprawdzało się całkiem dobrze ale pojawiła się potrzeba &ldquo;upchnięcia&rdquo; trochę większej ilości wirtualnych maszyn, wersja Docker-a była nie tą, której potrzebowałem, brak wsparcia dla osobnych dysków SSD (w tamtym czasie) i jakieś inne drobne rzeczy skłoniły mnie do poszukania czegoś innego.
+</br></br>
+No i trafiłem na Unraid-a. Jest to dedykowany pod storage OS oparty na Linuxie. Podstawowe zalety w mojej ocenie:</p>
+
+<ul>
+<li>Wsparcie dla wirtualizacji/dokeryzacji.</li>
+<li>Obsługa SSD przez tzw. &ldquo;cache pool&rdquo;.</li>
+<li>Bardzo łatwe dodawanie nowych docker-ów.</li>
+<li>Niezależność od dostawcy sprzętu, to chyba największy plus, kupuje komponenty dokładnie take jakich potrzebuje. (Ludzie preferujący rozwiązania &ldquo;półkowe&rdquo; niekoniecznie uznają to za zaletę).</li>
+<li>Możliwość &ldquo;podpięcia&rdquo; karty graficznej bezpośrednio do VM, dzięki czemu nie ma różnicy pomiędzy pracą na maszynie fizycznej a VM.</li>
+<li>Całość ruchu sieciowego pomiędzy wszystkimi hostami odbywa się w obrębie jednej fizycznej maszyny:</li>
+</ul>
+
+
+<p> <img src="/images/unraid_hdd_speed.PNG"></p>
+
+<ul>
+<li>Duża frajda z posiadania własnej chmury, Plex + NextCloud + Collabora + draw.io (Collabora - pakiet biurowy, może odstaje nieco jakością od rozwiązań gigantów ale już z draw.io korzysta mi się lepiej niż z Visio).</li>
+<li>Wszytko jest na dyskach w RAID (co nie zwalnia z backup-ów ale zdecydowanie jest raźniej ;)</li>
+</ul>
+
+
+<p>Wady:</p>
+
+<ul>
+<li>Większe zużycie energii 50W, w przypadku Asus-a 10W (wartości mocno uśrednione). Coś za coś, I7 8700 vs Celeron</li>
+<li>Rozwiązanie nie jest darmowe.</li>
+<li>Nadal mam problem z podłączeniem zintegrowanej grafiki do VM Linuxowej (grubsza sprawa, musi dojść do przełączenia systemu obsługującego IGD z unRAID na VM).</li>
+</ul>
+
+
+<p>Całość wygląda tak:</p>
+
+<p> <img src="/images/unraid_schema.PNG"></p>
+
+<p>Historia zatoczyła koło, teraz potrzebuje byle jakiego laptopa i mogę pracować na VM zdalnie (w czym na pewno pomaga 50Mb upstream-u od dostawcy Internetu). Co najważniejsze, całość działa zaskakująco stabilnie. Niesamowite jak wiele funkcji może spełniać dzisiaj PC w domu (cztery ostatnie to VM) a wszystko to dzięki wirtualizacji i konteneryzacji.</p>
+
+<p> <img src="/images/unraid_list.PNG"></p>
+
+<p>Obciążenie CPU w tym czasie (żadna z maszyn nie robiła nic szczególnego, na Windows 10, Firefox z 20+ zakładkami i kilka pomniejszych programów):</p>
+
+<p> <img src="/images/unraid_cpu.PNG"></p>
+
+<p>Kiedyś bardzo optowałem za stawianiem drobnych rzeczy jak np. Home Assistant na RPI czy podobnych ale teraz wydaje mi się, że takie &ldquo;pudło&rdquo; jest zdecydowanie lepszym rozwiązaniem, ogarnia wszystko :)</p>
+
+<p> <img src="/images/unraid_hal.png"></p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2016/09/27/the-cuttle/">The Cuttle - Boldport Club</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-09-27T20:15:00+00:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:15 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Świetne projekty elektroniczne DIY - <a href="http://www.boldport.club/">Boldport Club</a>, zapisałem się i zacząłem od klona Arduino <a href="http://www.boldport.club/shop/product/390973459">The Cuttle</a>. Nie był to cały kit tylko sama płytka i trochę nieudana, bo od spodu jest miejscami farba na padach do lutowania. Mimo wszystko działa :)</p>
+
+<p> <img src="/images/the_cuttle.JPG"></p>
+
+<p>W sumie pierwszy raz wgrywałem bootloader i tutaj bardzo pomocna okazała się stronka <a href="http://www.gammon.com.au/bootloader">http://www.gammon.com.au/bootloader</a> i sketch <a href="https://github.com/nickgammon/arduino_sketches">Atmega_Board_Programmer</a></p>
+
+<p> <img src="/images/the_cuttle_programming.JPG"></p>
+
+<p>Cały proces wyglądał tak:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Type 'C' when ready to continue with another chip ...
+</span><span class='line'>Attempting to enter ICSP programming mode ...
+</span><span class='line'>Entered programming mode OK.
+</span><span class='line'>Signature = 0x1E 0x95 0x14
+</span><span class='line'>Processor = ATmega328
+</span><span class='line'>Flash memory size = 32768 bytes.
+</span><span class='line'>LFuse = 0xFF
+</span><span class='line'>HFuse = 0xD9
+</span><span class='line'>EFuse = 0xFF
+</span><span class='line'>Lock byte = 0xFF
+</span><span class='line'>Clock calibration = 0xA9
+</span><span class='line'>Type 'L' to use Lilypad (8 MHz) loader, or 'U' for Uno (16 MHz) loader ...
+</span><span class='line'>Using Uno Optiboot 16 MHz loader.
+</span><span class='line'>Bootloader address = 0x7E00
+</span><span class='line'>Bootloader length = 512 bytes.
+</span><span class='line'>Type 'Q' to quit, 'V' to verify, or 'G' to program the chip with the bootloader ...
+</span><span class='line'>Erasing chip ...
+</span><span class='line'>Writing bootloader ...
+</span><span class='line'>Committing page starting at 0x7E00
+</span><span class='line'>Committing page starting at 0x7E80
+</span><span class='line'>Committing page starting at 0x7F00
+</span><span class='line'>Committing page starting at 0x7F80
+</span><span class='line'>Written.
+</span><span class='line'>Verifying ...
+</span><span class='line'>No errors found.
+</span><span class='line'>Writing fuses ...
+</span><span class='line'>LFuse = 0xFF
+</span><span class='line'>HFuse = 0xDE
+</span><span class='line'>EFuse = 0xFD
+</span><span class='line'>Lock byte = 0xEF
+</span><span class='line'>Clock calibration = 0xA9
+</span><span class='line'>Done.
+</span><span class='line'>Programming mode off.</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2016/05/27/picocom-na-cygwin-slash-windows10/">Picocom na Cygwin/Windows10</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-05-27T20:11:00+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:11 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Działa i instalacja poszła wyjątkowo łatwo:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/npat-efault/picocom; cd picocom && make</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Cloning into 'picocom'...
+</span><span class='line'>remote: Counting objects: 701, done.
+</span><span class='line'>remote: Total 701 (delta 0), reused 0 (delta 0), pack-reused 701
+</span><span class='line'>Receiving objects: 100% (701/701), 490.39 KiB | 493.00 KiB/s, done.
+</span><span class='line'>Resolving deltas: 100% (445/445), done.
+</span><span class='line'>cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o linenoise-1.0/linenoise.o -c linenoise-1.0/linenoise.c
+</span><span class='line'>cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o picocom.o -c picocom.c
+</span><span class='line'>cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o term.o -c term.c
+</span><span class='line'>cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o fdio.o -c fdio.c
+</span><span class='line'>cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o split.o -c split.c
+</span><span class='line'>cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o termios2.o -c termios2.c
+</span><span class='line'>cc -g -o picocom  linenoise-1.0/linenoise.o picocom.o term.o fdio.o split.o termios2.o</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gdyby nie było <code>make</code> to <code>apt-cyg install make</code>.</p>
+
+<p>Trzeba tylko pamiętać, że np. COM4 to /dev/ttyS3:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./picocom.exe -b 115200 /dev/ttyS3
+</span><span class='line'>picocom v2.3a
+</span><span class='line'>
+</span><span class='line'>port is        : /dev/ttyS3
+</span><span class='line'>flowcontrol    : none
+</span><span class='line'>baudrate is    : 115200
+</span><span class='line'>parity is      : none
+</span><span class='line'>databits are   : 8
+</span><span class='line'>stopbits are   : 1
+</span><span class='line'>escape is      : C-a
+</span><span class='line'>local echo is  : no
+</span><span class='line'>noinit is      : no
+</span><span class='line'>noreset is     : no
+</span><span class='line'>nolock is      : no
+</span><span class='line'>send_cmd is    : sz -vv
+</span><span class='line'>receive_cmd is : rz -vv -E
+</span><span class='line'>imap is        :
+</span><span class='line'>omap is        :
+</span><span class='line'>emap is        : crcrlf,delbs,
+</span><span class='line'>logfile is     : none
+</span><span class='line'>
+</span><span class='line'>Type [C-a] [C-h] to see available commands
+</span><span class='line'>
+</span><span class='line'>Terminal ready
+</span><span class='line'>
+</span><span class='line'>HiZ&gt;
+</span><span class='line'>HiZ&gt;</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2015/10/18/iptables-i-dynamiczne-ip/">Iptables i dynamiczne IP</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-18T21:29:23+00:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:29 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>W przypadku posiadania serwera w sieci Internet zawsze najlepiej jest ograniczać do niego dostęp tylko do tego co rzeczywiście chcemy, żeby było na nim dostępne. Dodatkowo ograniczenie do konkretnych klas czy adresów w przypadku dostępu do interfejsów umożliwiających większą kontrolę nad serwerem jest także dobrą praktyką (jeszcze lepszą jest nie eksponowanie ich w Internecie w ogóle;)</p>
+
+<p>Ostatnio prowadziłem testy na takim serwerze i naturalnym było np. ograniczenie dostępu do SSH dla konkretnych adresów. Problem polega na tym, że o ile w firmie miałem statyczny adres to w domu już nie. Mogłem ustawić regułę na obecny domowy adres ale za kilka godzin mogła być już nieaktualna. Wyjściem z sytuacji okazał się, jak bardzo często się zdarza, prosty skrypt i dyndns.</p>
+
+<figure class='code'><figcaption><span>iptables_update.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="c"># --==itoutline.me==--</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">HOSTALLOWED</span><span class="o">=</span><span class="s2">&quot;/home/itoutline/update_iptables/allowed_host.txt&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">while</span> <span class="nb">read </span>line
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">HOSTNAME</span><span class="o">=</span><span class="nv">$line</span>
+</span><span class='line'>  <span class="nv">LOGFILE</span><span class="o">=</span>/home/itoutline/update_iptables/<span class="s2">&quot;$line&quot;</span>.log
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">Current_IP</span><span class="o">=</span><span class="k">$(</span>host <span class="nv">$HOSTNAME</span> <span class="p">|</span> cut -f4 -d<span class="s1">&#39; &#39;</span><span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="nv">$LOGFILE</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    iptables -I INPUT -s <span class="nv">$Current_IP</span> -j ACCEPT
+</span><span class='line'>    <span class="nb">echo</span> <span class="nv">$Current_IP</span> &gt; <span class="nv">$LOGFILE</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">Old_IP</span><span class="o">=</span><span class="k">$(</span>cat <span class="nv">$LOGFILE</span><span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$Current_IP&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$Old_IP&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>      iptables -D INPUT -s <span class="nv">$Old_IP</span> -j ACCEPT
+</span><span class='line'>      iptables -I INPUT -s <span class="nv">$Current_IP</span> -j ACCEPT
+</span><span class='line'>      /etc/init.d/iptables save
+</span><span class='line'>      <span class="nb">echo</span> <span class="nv">$Current_IP</span> &gt; <span class="nv">$LOGFILE</span>
+</span><span class='line'>      <span class="nb">echo </span>iptables have been updated
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'><span class="k">done</span> &lt; <span class="s2">&quot;$HOSTALLOWED&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>W <code>allowed_host.txt</code> umieszczamy w kolejnych liniach nazwy domenowe hostów.</p>
+
+<p>A do cron-a dodajemy linijkę:</p>
+
+<figure class='code'><figcaption><span>iptables_update.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>*/1 * * * * /home/itoutline/update_iptables/update_iptables.sh  2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span>logger
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2015/10/07/unblock-dot-us-automatyczna-aktualizacja/">Unblock.us automatyczna aktualizacja</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-07T23:17:18+00:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:17 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Wchodzenie na stronę unblock.us i aktualizowanie bieżącego adresu IP zaczęło mnie naprawdę męczyć. Na szczęście można tego uniknąć dosyć prosto. Wystarczy prosty skrypt na routerze (czy dowolnym serwerze linuxowym jaki mamy w domu, chyba każdy ma coś na poziomie minimum rpi w dzisiejszych czasach ;), który będzie sprawdzał co jakiś czas adres zewnętrzny i aktualizował go w unblock.us.</p>
+
+<figure class='code'><figcaption><span>update_unblock.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'><span class="c"># --==itoutline.me==--</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">SCRIPT_NAME</span><span class="o">=</span><span class="s2">&quot;$(basename $0)&quot;</span>
+</span><span class='line'><span class="nv">IP_ADDR</span><span class="o">=</span>/tmp/active_ip_addr
+</span><span class='line'><span class="nv">IP_STATUS</span><span class="o">=</span>/tmp/ip_update_status
+</span><span class='line'>
+</span><span class='line'><span class="nv">CURRENT_IP</span><span class="o">=</span><span class="k">$(</span>dig +short myip.opendns.com @resolver1.opendns.com<span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> update_ip <span class="o">{</span>
+</span><span class='line'>    curl -s -o <span class="nv">$IP_STATUS</span> <span class="s2">&quot;https://api.unblock-us.com/login?adres_email:hasło&quot;</span>
+</span><span class='line'>    logger <span class="s2">&quot;[$SCRIPT_NAME]: IP updated: $CURRENT_IP; Response: $(cat $IP_STATUS)&quot;</span>
+</span><span class='line'>    <span class="nb">echo</span> <span class="nv">$CURRENT_IP</span> &gt; <span class="nv">$IP_ADDR</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;$CURRENT_IP&quot;</span> <span class="o">=</span>~ ^<span class="o">[</span>0-9<span class="o">]{</span>2,3<span class="o">}</span><span class="se">\.</span><span class="o">[</span>0-9<span class="o">]{</span>1,3<span class="o">}</span><span class="se">\.</span><span class="o">[</span>0-9<span class="o">]{</span>1,3<span class="o">}</span><span class="se">\.</span><span class="o">[</span>0-9<span class="o">]{</span>1,3<span class="o">}</span><span class="nv">$ </span><span class="o">]]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> ! -f <span class="nv">$IP_ADDR</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>        update_ip
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>        <span class="nv">OLD_IP</span><span class="o">=</span><span class="k">$(</span>cat <span class="nv">$IP_ADDR</span><span class="k">)</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;$CURRENT_IP&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$OLD_IP&quot;</span> <span class="o">]]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>            update_ip
+</span><span class='line'>        <span class="k">fi</span>
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>    logger <span class="s2">&quot;[$SCRIPT_NAME]: Network error or incorrect answer from the IP provider&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>W miejscach <code>adres_email</code> i <code>hasło</code> trzeba podać swoje dane oraz dorzucić skrypt do crona.</p>
+
+<pre><code>*/2 * * * * /root/update_unblock.sh  2&gt;&amp;1 |logger
+</code></pre>
+
+<p>Skrypt będzie się wykonywał co dwie minuty.</p>
+
+<p>Skrypt można również wykorzystać do innych serwisów, w przypadku darmowego <a href="http://tvunblock.com">tvunblock.com</a> polecenie <code>curl</code> z funkcji <code>update_ip</code> należałoby zastąpić:</p>
+
+<pre><code>curl -s -o $IP_STATUS "https://activate.tvunblock.com/"
+</code></pre>
+
+<h3>Zastąpienie odpytywania zewnętrznego serwisu o publiczny adres IP</h3>
+
+<p>Serwisów dostarczających za pomocą jakiegoś web api zewnętrzny adres ip jest dużo ale nie zawsze trzeba z nich korzystać. Jeśli router/modem pozwala na pobieranie z niego informacji o adresie WAN, dlaczego tego nie użyć? W przypadku Liveboxa/Funboxa zmienną <code>CURRENT_IP</code> można ustawić w ten sposób:</p>
+
+<pre><code>CURRENT_IP=$(curl -silent -A "application/x-sah-ws-4-call+json" "http://192.168.1.1/sysbus/NMC:getWANStatus" -d"{\"parameters\":{}}" | sed -n -e 's/^.*\(IPAddress":"\)\([0-9]*.[0-9]*.[0-9]*.[0-9]*\)\(.*\)$/\2/p')
+</code></pre>
+
+<p>W praktyce (jak widać nie tylko adres ip portu WAN można podejrzeć):</p>
+
+<p><img src="/images/unblock_skrypt.png"></p>
+
+<h3>Crontab tuning</h3>
+
+<p>Rozwiązania, które opierają się na crontabie i czesto są uruchamiane zaśmiecają sysloga:</p>
+
+<pre><code>Nov  8 16:49:01 bananapi /USR/SBIN/CRON[27209]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:51:01 bananapi /USR/SBIN/CRON[27221]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:53:01 bananapi /USR/SBIN/CRON[27233]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:55:01 bananapi /USR/SBIN/CRON[27244]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:57:01 bananapi /USR/SBIN/CRON[27255]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:59:01 bananapi /USR/SBIN/CRON[27266]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+</code></pre>
+
+<p>Dlatego kiedy już wiadomo, że skrypt działa poprawnie można pokusić się o wyłączenie logowania crona. Na Debianie to modyfikacja pliku <code>/etc/rsyslog.conf</code>:</p>
+
+<figure class='code'><figcaption><span>rsyslog.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">###############</span>
+</span><span class='line'><span class="c">#### RULES ####</span>
+</span><span class='line'><span class="c">###############</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># First some standard log files.  Log by facility.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'>auth,authpriv.*         -/var/log/auth.log
+</span><span class='line'>*.*<span class="p">;</span>auth,authpriv.none,cron.none        -/var/log/syslog
+</span><span class='line'><span class="c">#cron.*             -/var/log/cron.log</span>
+</span><span class='line'>daemon.*            -/var/log/daemon.log
+</span><span class='line'>kern.*              -/var/log/kern.log
+</span><span class='line'>lpr.*               -/var/log/lpr.log
+</span><span class='line'>mail.*              -/var/log/mail.log
+</span><span class='line'>user.*              -/var/log/user.log
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Dorzucenie <code>cron.none</code> i restart usługi <code>sudo /etc/init.d/rsyslog restart</code> wyciszy crontaba. Można również przekierować logi do osobnego pliku <code>cron.log</code> ale szkoda karty SD. Od tej pory syslog nie jest floodowany z powodu skryptu i mamy tylko informacje kiedy faktcznie skrypt wykona jakąś pracę:</p>
+
+<pre><code>Nov  8 20:16:02 bananapi logger: [update_unblock.sh]: IP updated: 178.42.100.100; Response: active
+</code></pre>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2015/01/27/zmienne-systemowe-w-osx/">Zmienne systemowe w OSX</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-27T15:29:59+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:29 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Definiowanie zmiennych systemowych w OSX jest takie sobie&hellip; Nie mówię tutaj o zmiennych, które można ustawić w plikach inicjalizacyjnych powłoki shellowej (bash, zsh, fish czy co komu odpowiada). Tam akurat wszystko jest całkiem prosto ale o ustawieniu zmiennej bez uruchamiania terminala po starcie systemu. Natrafiłem na potrzebę zdefiniowania takiej zmiennej przy zabawie z Android Studio. Po zainstalowaniu Javy i wspomnianego oprogramowania, próba jego uruchomienia kończyła się tak:</p>
+
+<p><img src="/images/Java_JDK_pb.png"></p>
+
+<p>Problemem okazał się brak zmiennej <code>STUDIO_JDK</code>. Można ten problem obejść np. tak:</p>
+
+<pre><code>launchctl setenv STUDIO_JDK /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+open /Applications/Android\ Studio.app
+</code></pre>
+
+<p>Tylko, że jakoś konieczność uruchomienia terminala po to, żeby pracować w aplikacji graficznej do mnie nie przemawia. Udało mi się znaleźć ciekawe rozwiązanie problemu <a href="http://stackoverflow.com/questions/25385934/setting-environment-variables-via-launchd-conf-no-longer-works-in-os-x-yosemite">tutaj</a>.</p>
+
+<h2>Zmienne systemowe</h2>
+
+<p>Zmienne mogą być ustawione na poziomie użytkownika (ustawienie wywoływane przez <code>/Library/LaunchAgents/environment.user.plist</code>) lub root-a (<code>/Library/LaunchDaemons/environment.plist</code>). Rozwiązanie zakłada jeden plik w którym będą definiowane zmienne <code>/etc/environment</code>, co jest bardzo ok bo nie przypominam sobie, żebym kiedyś potrzebował różnych. Kolejnym plusem jest fakt, że modyfikacja <code>/etc/environment</code> czyli dodanie jakiejś zmiennej automatycznie jest zaczytywane i dostajemy wzrokową informację w postaci chwilowego zniknięcia Dock-a.</p>
+
+<p>Jedyny minus ale to jest raczej nie do obejścia to fakt, że już działająca aplikacja nie pobierze informacji o nowej zmiennej, musi być ponownie otworzona.</p>
+
+<h2>Zmienna PATH</h2>
+
+<p>To rozwiązanie jest jeszcze lepsze i dopóki będzie działało na OSX to będę z niego korzystał a mianowicie zmiany dokonujemy w pliku <code>/etc/paths</code>. To zwykły plik tekstowy w którym możemy dodawać kolejne linijki z wymaganymi przez nas ścieżkami. Po ponownym uruchomieniu terminala dopisana przez nas ścieżka znajdzie się w zmiennej <code>PATH</code>.</p>
+
+<h2>Ostatecznie</h2>
+
+<p>Przygotowałem skrypt bashowy, który tworze niezbędne pliki i ustawia ich parametry.</p>
+
+<figure class='code'><figcaption><span> (set_env_var.sh)</span> <a href='/downloads/code/set_env_var.sh'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'>
+</span><span class='line'>sudo -v
+</span><span class='line'>
+</span><span class='line'>cat <span class="s">&lt;&lt; EOF | sudo tee /etc/environment &gt; /dev/null</span>
+</span><span class='line'><span class="s">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">set -e</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">syslog -s -l warn &quot;Set environment variables with /etc/environment $(whoami) - start&quot;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="s">### Set your variable here:</span>
+</span><span class='line'><span class="s">#launchctl setenv JAVA_HOME      /usr/local/jdk1.7</span>
+</span><span class='line'><span class="s">launchctl setenv MAVEN_HOME     /opt/local/share/java/maven3</span>
+</span><span class='line'><span class="s">launchctl setenv STUDIO_JDK     /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk</span>
+</span><span class='line'><span class="s">############################</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">if [ -x /usr/libexec/path_helper ]; then</span>
+</span><span class='line'><span class="s">        export PATH=&quot;&quot;</span>
+</span><span class='line'><span class="s">            eval `/usr/libexec/path_helper -s`</span>
+</span><span class='line'><span class="s">                launchctl setenv PATH $PATH</span>
+</span><span class='line'><span class="s">            fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">            osascript -e &#39;tell app &quot;Dock&quot; to quit&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">            syslog -s -l warn &quot;Set environment variables with /etc/environment $(whoami) - complete&quot;</span>
+</span><span class='line'><span class="s">EOF</span>
+</span><span class='line'>
+</span><span class='line'>cat <span class="s">&lt;&lt; EOF | sudo tee /Library/LaunchAgents/environment.user.plist &gt; /dev/null</span>
+</span><span class='line'><span class="s">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="s">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span>
+</span><span class='line'><span class="s">&lt;plist version=&quot;1.0&quot;&gt;</span>
+</span><span class='line'><span class="s">&lt;dict&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;Label&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;string&gt;environment.user&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;ProgramArguments&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;array&gt;</span>
+</span><span class='line'><span class="s">            &lt;string&gt;/etc/environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;/array&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;KeepAlive&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;false/&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;RunAtLoad&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;true/&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;WatchPaths&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;array&gt;</span>
+</span><span class='line'><span class="s">        &lt;string&gt;/etc/environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;/array&gt;</span>
+</span><span class='line'><span class="s">&lt;/dict&gt;</span>
+</span><span class='line'><span class="s">&lt;/plist&gt;</span>
+</span><span class='line'><span class="s">EOF</span>
+</span><span class='line'>
+</span><span class='line'>cat <span class="s">&lt;&lt; EOF | sudo tee /Library/LaunchDaemons/environment.plist &gt; /dev/null</span>
+</span><span class='line'><span class="s">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="s">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span>
+</span><span class='line'><span class="s">&lt;plist version=&quot;1.0&quot;&gt;</span>
+</span><span class='line'><span class="s">&lt;dict&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;Label&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;string&gt;environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;ProgramArguments&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;array&gt;</span>
+</span><span class='line'><span class="s">            &lt;string&gt;/etc/environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;/array&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;KeepAlive&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;false/&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;RunAtLoad&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;true/&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;WatchPaths&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;array&gt;</span>
+</span><span class='line'><span class="s">        &lt;string&gt;/etc/environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;/array&gt;</span>
+</span><span class='line'><span class="s">&lt;/dict&gt;</span>
+</span><span class='line'><span class="s">&lt;/plist&gt;</span>
+</span><span class='line'><span class="s">EOF</span>
+</span><span class='line'>
+</span><span class='line'>sudo chmod <span class="m">555</span> /etc/environment
+</span><span class='line'>sudo chmod <span class="m">600</span> /Library/LaunchAgents/environment.user.plist /Library/LaunchDaemons/environment.plist
+</span><span class='line'>sudo chown root:wheel /etc/environment /Library/LaunchAgents/environment.user.plist /Library/LaunchDaemons/environment.plist
+</span><span class='line'>
+</span><span class='line'>launchctl load -w /Library/LaunchAgents/environment.user.plist
+</span><span class='line'>sudo launchctl load -w /Library/LaunchDaemons/environment.plist
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Zastosowanie rozwiązania:</p>
+
+<pre><code>wget http://itoutline.me/code/set_env_var.sh
+chmod +x set_env_var.sh
+./set_env_var.sh
+</code></pre>
+
+<p>Od tej pory zdefiniowanie jakiejkolwiek zmiennej, która będzie zawsze i wszędzie widoczna to umieszczenie jej w <code>/etc/environment</code>.</p>
+
+<h2>Pożyteczne komendy</h2>
+
+<p>Ustawienie zmiennej z poziomu terminala (będzie od razu widoczne w systemie ale na liście zmiennych wyświetlanej np. za pomocą <code>env</code> czy <code>echo $STUDIO_JDK</code> pojawi się dopiero po restarcie terminala:</p>
+
+<pre><code>launchctl setenv STUDIO_JDK /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+</code></pre>
+
+<p>Sprawdzenie zmiennej w systemie:</p>
+
+<pre><code>launchctl getenv STUDIO_JDK /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+</code></pre>
+
+<p>Sprawdzenie czy zmienna jest już widoczna w sesji terminala:</p>
+
+<pre><code>echo $STUDIO_JDK
+</code></pre>
+
+<p>Wyświetlenie wszystkich zmiennych widocznych z poziomu terminala:</p>
+
+<pre><code>env
+</code></pre>
+
+<p>Ustawienie zmiennej tylko na poziomie terminala:</p>
+
+<pre><code>export STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+</code></pre>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- This defines how Octopress will use posts with external-url. -->
+		<h1 class="entry-title"><a href="https://github.com/alex/what-happens-when">Co się stanie kiedy w przeglądarkę wpiszemy google.com i naciśniemy Enter&nbsp;&rArr;</a></h1>
+	 	
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-22T23:15:03+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:15 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No dzieje się&hellip; Trzeba przyznać. Fajny dokument, ciekawe jak się rozwinie.</p>
+</div>
+  
+  
+
+
+
+	<div class="entry-content"></div>
+	<footer><a rel="full-article" href="/2015/01/22/co-sie-stanie-kiedy-w-przegladarke-wpiszemy-google-dot-com-i-nacisniemy-enter/">Permalink</a></footer>
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2015/01/22/chrome-i-swipe/">Chrome i swipe</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-22T21:47:49+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>9:47 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>W końcu wróciłem na stare śmieci, działam na OSX Yosemite. Przyznam, że zaskakują mnie oceny tej wersji OSX na AppStore ponieważ póki co jedyny kłopot jakiego ja doświadczyłem to ten z tytułu wpisu. Ponad tydzień spędzony na konfigurowaniu, instalowaniu, modyfikowaniu nie przyniósł jakichś większych zgrzytów, no ale pożyjemy zobaczymy. Zdecydowanie za wcześnie na wyciąganie wniosków.</p>
+
+<p>Na pewno beznadziejnie działa przewijanie za pomocą dwóch palców w Chromie, bardzo często zdarzało mi się podczas przewijania strony w górę/dół lądować na poprzednio przeglądanej. Wydaje mi się, że to bardziej wina przeglądarki niż systemu&hellip;</p>
+
+<p>Rozwiązanie problemu to wyłączenie przewijania w Chromie:</p>
+
+<pre><code>defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+</code></pre>
+
+<p>Jeśli chcemy można w konfiguracji Touchpad-a zastosować poniższe ustawienia, dzięki czemu przechodzenie pomiędzy stronami przestanie być losowe. Jedyny minus to, że musimy użyć trzech palców.</p>
+
+<p><img src="/images/chrome_i_swipe.png"></p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+   
+	<!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+	 	<h1 class="entry-title"><a href="/2014/12/29/babun/">Babun</a></h1>
+		
+  	 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-29T08:53:51+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:53 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Tak się nieszczęśliwie poukładało w moim życiu, że na jakiś czas wylądowałem z windowsowym laptopem. Zawsze kiedy musiałem korzystać z systemu MS instalowałem od razu <a href="https://www.cygwin.com">Cygwina</a>. Niestety czasami nie była to &ldquo;bułka z masłem&rdquo;, często coś tam nie do końca działało albo były problemy z samą instalacją. Zdarzało się, że trochę pracy było potrzebne ale i tak świetnie, że komuś się chciało i Cygwin w ogóle powstał. Teraz jest jeszcze lepiej bo powstało coś dającego Cygwina w bardzo fajnym opakowaniu. Mowa o <a href="https://github.com/babun/babun">Babun</a>.</p>
+
+<h3>Instalacja</h3>
+
+<p>Sprowadza się do pobrania archiwum, rozpakowania i uruchomieniu skryptu. Standardowo instaluje się w katalogu domowym jako <code>.babun</code>.</p>
+
+<h3>Pierwsze wrażenia</h3>
+
+<p>Na pulpicie tworzy się skrót, który uruchamia terminal mintty a tam od razu mamy skonfigurowane zsh i jest git. Instalacja/deinstalacja pakietów za pomocą <code>pact install</code> oraz <code>pact remove</code> jest dużym plusem. Usunięcie Babun-a to skasowania jego katalogu, uwielbiam tego typu programy :)</p>
+
+<h3>Serwer SSH</h3>
+
+<p>Serwer SSH na Windowsie to chyba nigdy nie było proste. Tutaj też nie działa bez drobnych modyfikacji ale nie jest najgorzej. No i trzeba przyznać, że w Windows 8.1 dodawanie i usuwanie serwisów nawet z poziomu Babuna/Cygwina nie wymaga restartu. Miłe zaskoczenie.</p>
+
+<p>Zaczynamy od uruchomienia Babuna jako Administrator i wydajemy następujące komendy:</p>
+
+<pre><code>/usr/bin/chmod +r /etc/passwd
+/usr/bin/chmod +r /etc/group
+/usr/bin/chmod +x /var
+/usr/bin/ssh-host-config
+</code></pre>
+
+<p>Proces instalacji wyglądał u mnie tak:</p>
+
+<pre><code>ssh-keygen: generating new host keys: RSA1 RSA DSA ECDSA ED25519
+*** Info: Creating default /etc/ssh_config file
+*** Info: Creating default /etc/sshd_config file
+*** Info: Privilege separation is set to yes by default since OpenSSH 3.3.
+*** Info: However, this requires a non-privileged account called 'sshd'.
+*** Info: For more info on privilege separation read /usr/share/doc/openssh/README.privsep.
+*** Query: Should privilege separation be used? (yes/no) yes
+*** Info: Note that creating a new user requires that the current account have
+*** Info: Administrator privileges.  Should this script attempt to create a
+*** Query: new local account 'sshd'? (yes/no) yes
+*** Info: Updating /etc/sshd_config file
+
+*** Query: Do you want to install sshd as a service?
+*** Query: (Say "no" if it is already installed as a service) (yes/no) yes
+*** Query: Enter the value of CYGWIN for the daemon: [] ntsec
+*** Info: On Windows Server 2003, Windows Vista, and above, the
+*** Info: SYSTEM account cannot setuid to other users -- a capability
+*** Info: sshd requires.  You need to have or to create a privileged
+*** Info: account.  This script will help you do so.
+
+*** Info: You appear to be running Windows XP 64bit, Windows 2003 Server,
+*** Info: or later.  On these systems, it's not possible to use the LocalSystem
+*** Info: account for services that can change the user id without an
+*** Info: explicit password (such as passwordless logins [e.g. public key
+*** Info: authentication] via sshd).
+
+*** Info: If you want to enable that functionality, it's required to create
+*** Info: a new account with special privileges (unless a similar account
+*** Info: already exists). This account is then used to run these special
+*** Info: servers.
+
+*** Info: Note that creating a new user requires that the current account
+*** Info: have Administrator privileges itself.
+
+*** Info: No privileged account could be found.
+
+*** Info: This script plans to use 'cyg_server'.
+*** Info: 'cyg_server' will only be used by registered services.
+*** Query: Do you want to use a different name? (yes/no) no
+*** Query: Create new privileged user account 'cyg_server'? (yes/no) yes
+*** Info: Please enter a password for new user cyg_server.  Please be sure
+*** Info: that this password matches the password rules given on your system.
+*** Info: Entering no password will exit the configuration.
+*** Query: Please enter the password:
+*** Query: Reenter:
+
+*** Info: User 'cyg_server' has been created with password 'dynamic1'.
+*** Info: If you change the password, please remember also to change the
+*** Info: password for the installed services which use (or will soon use)
+*** Info: the 'cyg_server' account.
+
+*** Info: Also keep in mind that the user 'cyg_server' needs read permissions
+*** Info: on all users' relevant files for the services running as 'cyg_server'.
+*** Info: In particular, for the sshd server all users' .ssh/authorized_keys
+*** Info: files must have appropriate permissions to allow public key
+*** Info: authentication. (Re-)running ssh-user-config for each user will set
+*** Info: these permissions correctly. [Similar restrictions apply, for
+*** Info: instance, for .rhosts files if the rshd server is running, etc].
+
+
+*** Info: The sshd service has been installed under the 'cyg_server'
+*** Info: account.  To start the service now, call `net start sshd' or
+*** Info: `cygrunsrv -S sshd'.  Otherwise, it will start automatically
+*** Info: after the next reboot.
+
+*** Info: Host configuration finished. Have fun!
+</code></pre>
+
+<p>Ustawienie odpowiednich uprawnień:</p>
+
+<pre><code>/usr/bin/chmod 600 /etc/ssh*
+/usr/bin/chown cyg_server /etc/ssh*
+/usr/bin/chmod 600 /var/empty
+</code></pre>
+
+<p>Uruchominie serwera SSH <code>/usr/bin/cygrunsrv -S sshd</code> i oto jesteśmy:</p>
+
+<p><img src="/images/babun-ssh.png"></p>
+
+<p>Gdyby coś poszło nie tak można usunąć konfigurację, potem katalog Babuna i spróbować jeszcze raz.</p>
+
+<pre><code>cygrunsrv --remove sshd
+net user sshd /delete
+net user cyg_server /delete
+rm /etc/ssh_host* /etc/sshd_config
+</code></pre>
+
+<h3>Python, virtualenv i np. Tornado</h3>
+
+<p>W Babunie mamy zainstalowanego pythona w wersji 2.7.3. Instalacja pip-a i serwera Tornado przeszła bez żadnych kłopotów. Pip:</p>
+
+<pre><code>wget https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py
+python get-pip.py
+</code></pre>
+
+<p>Virtualenv:</p>
+
+<pre><code>pip install virtualenv
+</code></pre>
+
+<p>Tornado:</p>
+
+<pre><code>mkdir tornado-test
+cd tornado-test
+virtualenv venv
+source venv/bin/activate
+pip install tornado
+</code></pre>
+
+<p>Kod serwera ;)</p>
+
+<figure class='code'><figcaption><span>server.py</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">tornado.ioloop</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">tornado.web</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">MainHandler</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Hello from Babun&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">application</span> <span class="o">=</span> <span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">Application</span><span class="p">([</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">r&quot;/&quot;</span><span class="p">,</span> <span class="n">MainHandler</span><span class="p">),</span>
+</span><span class='line'><span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">application</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">tornado</span><span class="o">.</span><span class="n">ioloop</span><span class="o">.</span><span class="n">IOLoop</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Uruchomienie <code>python server.py</code>:</p>
+
+<p><img src="/images/babun-tronado.png"></p>
+
+<h3>Ruby&hellip; i Octopress</h3>
+
+<p>Zdecydowanie najwięcej kłopotów, ale to nie jest jakoś bardzo dziwne. Niemniej jednak udało mi sie uruchomić Octopress-aa, było to tak:</p>
+
+<p>Instalacja rbenv i ruby-build, zdecydowałem się nie korzystać z wersji oferowanej przez &ldquo;pact&rdquo;.</p>
+
+<pre><code>git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.zshrc
+echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.zshrc
+git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+</code></pre>
+
+<p>Aktywacja rbenv:</p>
+
+<pre><code>source ~/.zshrc
+</code></pre>
+
+<p>Instalacja wersji 1.9.3-p551 i ustawienie jej jako domyślnej.</p>
+
+<pre><code>rbenv install 1.9.3-p551
+rbenv global 1.9.3-p551
+</code></pre>
+
+<p>Tutaj zaczynają się schody, zaczynamy od stworzenia pliku z bibliotekami jakie zainstalowały się z ruby.</p>
+
+<pre><code>find /home/$USER/.rbenv -iname '*.so' &gt; /tmp/ruby.gems.local.so.lst
+</code></pre>
+
+<p>Zamykamy wszystkie sesje babuna i uruchamiamy <code>dash.exe</code> z katalogu <code>.babun\cygwin\bin</code>, tam wydajemy polecenie:</p>
+
+<pre><code>/usr/bin/rebaseall -v -T /tmp/ruby.gems.local.so.lst
+</code></pre>
+
+<p>Bez &ldquo;rebaseall&rdquo; podczas instalacji wymaganych bibliotek przez Octopress-a miałem takie problemy:</p>
+
+<pre><code>{ octopress } master » bundle install                                                
+Fetching gem metadata from https://rubygems.org/........
+Resolving dependencies...
+      0 [main] ruby 3412 child_info_fork::abort: address space needed by 'fcntl.so' (0x5F0000) is already occupied
+      1 [main] ruby 2692 child_info_fork::abort: address space needed by 'fcntl.so' (0x5F0000) is already occupied
+      0 [main] ruby 10092 child_info_fork::abort: address space needed by 'fcntl.so' (0x5F0000) is already occupied
+      0 [main] ruby 3188 child_info_fork::abort: address space needed by 'fcntl.so' (0x5F0000) is already occupied
+</code></pre>
+
+<p>Instalacja Octopress-a:</p>
+
+<pre><code>git clone git://github.com/imathis/octopress.git octopress
+cd octopress
+gem install bundler
+rbenv rehash
+bundle install
+</code></pre>
+
+<p>Po &ldquo;rebaseall&rdquo; wygląda to lepiej:</p>
+
+<pre><code>{ octopress } master » bundle install                                                
+Fetching gem metadata from https://rubygems.org/........
+Resolving dependencies...
+Installing rake 10.4.2
+Installing RedCloth 4.2.9
+Installing blankslate 2.1.2.4
+Installing hitimes 1.2.2
+Installing timers 4.0.1
+Installing celluloid 0.16.0
+...
+</code></pre>
+
+<p>Kolejny krok to zmiana w pliku <code>Rakefile</code> z:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="sr">/cygwin|mswin|mingw|bccwin|wince|emx/</span> <span class="o">=~</span> <span class="no">RUBY_PLATFORM</span><span class="p">)</span> <span class="o">!=</span> <span class="kp">nil</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s1">&#39;## Set the codepage to 65001 for Windows machines&#39;</span>
+</span><span class='line'>  <span class="sb">`chcp 65001`</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>na:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="sr">/cygwin|mswin|mingw|bccwin|wince|emx/</span> <span class="o">=~</span> <span class="no">RUBY_PLATFORM</span><span class="p">)</span> <span class="o">!=</span> <span class="kp">nil</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s1">&#39;## Set the codepage to 65001 for Windows machines&#39;</span>
+</span><span class='line'>  <span class="sb">`chcp.com 65001`</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Bez powyższego kroku miałem taki problem:</p>
+
+<pre><code>{ octopress } master » rake install                                                   
+rake aborted!
+Errno::ENOENT: No such file or directory - chcp 65001
+/home/itoutline/octopress/Rakefile:32:in ``'
+/home/itoutline/octopress/Rakefile:32:in `&lt;top (required)&gt;'
+(See full trace by running task with --trace)
+</code></pre>
+
+<p>Wykonujemy <code>rake install</code>:</p>
+
+<pre><code>{ octopress } master » rake install                                                   
+## Set the codepage to 65001 for Windows machines
+## Copying classic theme into ./source and ./sass
+mkdir -p source
+cp -r .themes/classic/source/. source
+mkdir -p sass
+cp -r .themes/classic/sass/. sass
+mkdir -p source/_posts
+mkdir -p public
+</code></pre>
+
+<p>Następnie <code>rake generate &amp;&amp; rake preview</code>:</p>
+
+<pre><code>{ octopress } master » rake generate &amp;&amp; rake preview                                  
+## Set the codepage to 65001 for Windows machines
+## Generating Site with Jekyll
+directory source/stylesheets
+    write source/stylesheets/screen.css
+Configuration file: /home/itoutline/octopress/_config.yml
+            Source: source
+       Destination: public
+      Generating...
+                    done.
+ Auto-regeneration: disabled. Use --watch to enable.
+## Set the codepage to 65001 for Windows machines
+Starting to watch source with Jekyll and Compass. Starting Rack on port 4000
+[2014-12-29 15:22:08] INFO  WEBrick 1.3.1
+[2014-12-29 15:22:08] INFO  ruby 1.9.3 (2014-11-13) [i386-cygwin]
+[2014-12-29 15:22:08] WARN  TCPServer Error: Bad file descriptor - listen(2)
+[2014-12-29 15:22:08] INFO  WEBrick::HTTPServer#start: pid=4924 port=4000
+&gt;&gt;&gt; Compass is watching for changes. Press Ctrl-C to Stop.
+Configuration file: /home/itoutline/octopress/_config.yml
+    write public/stylesheets/screen.css
+            Source: source
+       Destination: public
+      Generating...
+                    done.
+</code></pre>
+
+<p>Mamy bloga:</p>
+
+<p><img src="/images/babun-octopress.png"></p>
+
+<p>Ale to nie wszystko, próba umieszczenia takiego wpisu:</p>
+
+<p><img src="/images/babun-octopress-pb.png"></p>
+
+<p>na blogu, zakończy się tak:</p>
+
+<pre><code>{ octopress } master » rake generate &amp;&amp; rake preview                                  
+## Set the codepage to 65001 for Windows machines
+## Generating Site with Jekyll
+    write source/stylesheets/screen.css
+Configuration file: /home/itoutline/octopress/_config.yml
+            Source: source
+       Destination: public
+      Generating...
+  Liquid Exception: No such file or directory - C:\Windows\system32\cmd.exe in _posts/2014-12-29-nowy-post.markdown/#excerpt
+                    done.
+ Auto-regeneration: disabled. Use --watch to enable.
+## Set the codepage to 65001 for Windows machines
+Starting to watch source with Jekyll and Compass. Starting Rack on port 4000
+[2014-12-29 15:35:49] INFO  WEBrick 1.3.1
+[2014-12-29 15:35:49] INFO  ruby 1.9.3 (2014-11-13) [i386-cygwin]
+[2014-12-29 15:35:49] WARN  TCPServer Error: Bad file descriptor - listen(2)
+[2014-12-29 15:35:49] INFO  WEBrick::HTTPServer#start: pid=7540 port=4000
+</code></pre>
+
+<p>Rozwiązaniem jest ustawienie COMSPEC:</p>
+
+<pre><code>export COMSPEC=/cygdrive/c/Windows/System32/cmd.exe
+</code></pre>
+
+<p>najlepiej od razu dodać do ~/.zshrc:</p>
+
+<pre><code>echo "export COMSPEC=/cygdrive/c/Windows/System32/cmd.exe" &gt;&gt; ~/.zshrc
+</code></pre>
+
+<p>Ostatni drobny kłopot to narzekanie na brak &ldquo;python2&rdquo; podczas generowania bloga:</p>
+
+<pre><code>which: no python2 in (/home/itoutline/.rbenv/versions/1.9.3-p551/lib/ruby/gems/1.9.1/bin:/home/itoutline/.rbenv/versions/1.9.3-p551/bin:/home/itoutline/.rbenv/libexec:/home/itoutline/.rbenv/plugins/ruby-build/bin:/home/itoutline/.rbenv/shims:/home/itoutline/.rbenv/bin:/home/itoutline/bin:/usr/local/bin:/usr/bin:/cygdrive/c/ProgramData/Oracle/Java/javap~...
+</code></pre>
+
+<p>Wystarczy utworzenie linku symbolicznego:</p>
+
+<pre><code>cd /usr/bin
+ln -s python2.7.exe python2
+</code></pre>
+
+<p>&ldquo;Chyba&rdquo; wszystko działa:</p>
+
+<p><img src="/images/babun-octopress-ok.png"></p>
+
+<h3>Przed podsumowaniem</h3>
+
+<p>Czasami po uruchomieniu Babun-a może się pojawić coś takiego:</p>
+
+<pre><code>compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+{ ~ }  »
+</code></pre>
+
+<p><a href="https://github.com/babun/babun/issues/159">Nie jest tak</a>, że to tylko u mnie. Rozwiązanie w postaci:</p>
+
+<pre><code>compinit
+cp .zcompdump .zcompdump-$HOSTNAME-5.0.2
+</code></pre>
+
+<p>rzeczywiście działa.</p>
+
+<h3>Podsumowując</h3>
+
+<p>Fajnie, że jest Cygwin, że powstał Babun ale chyba zdecydowanie lepiej jest po prostu uruchomić wirtualną maszynę na Virtualboxie. Chyba, że mamy ograniczone zasoby sprzętowe, nie mamy uprawnień, lubimy &ldquo;grzebać&rdquo; albo potrzebujemy dostępu tylko do podstawowych narzędzi Linux/GNU. Jeśli chodzi o to ostatnie to Cygwin/Babun zdecydowanie wygrywa z wirtualną maszyną.</p>
+</div>
+  
+  
+
+
+
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/2">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2018/05/05/Ubuntu-18-04/">WSL - Ubuntu 18.04 - xfce4-terminal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/12/01/Unraid-part-1/">Home Cloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/09/27/the-cuttle/">The Cuttle - Boldport Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/05/27/picocom-na-cygwin-slash-windows10/">Picocom na Cygwin/Windows10</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/10/18/iptables-i-dynamiczne-ip/">Iptables i dynamiczne IP</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/android' style='font-size: 103.15789473684211%'>android</a> <a href='/blog/categories/arduino' style='font-size: 103.15789473684211%'>arduino</a> <a href='/blog/categories/curiosities' style='font-size: 103.15789473684211%'>curiosities</a> <a href='/blog/categories/electronics' style='font-size: 106.3157894736842%'>electronics</a> <a href='/blog/categories/linux' style='font-size: 122.10526315789474%'>linux</a> <a href='/blog/categories/mavericks' style='font-size: 103.15789473684211%'>mavericks</a> <a href='/blog/categories/mountain-lion' style='font-size: 141.05263157894737%'>mountain lion</a> <a href='/blog/categories/netflix' style='font-size: 103.15789473684211%'>netflix</a> <a href='/blog/categories/openwrt' style='font-size: 103.15789473684211%'>openwrt</a> <a href='/blog/categories/osx' style='font-size: 160.0%'>osx</a> <a href='/blog/categories/raspberry-pi' style='font-size: 109.47368421052632%'>raspberry pi</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal</a> <a href='/blog/categories/tips' style='font-size: 106.3157894736842%'>tips</a> <a href='/blog/categories/unraid' style='font-size: 103.15789473684211%'>unraid</a> <a href='/blog/categories/windows' style='font-size: 109.47368421052632%'>windows</a> <a href='/blog/categories/wsl' style='font-size: 103.15789473684211%'>wsl</a> <a href='/blog/categories/xbmc' style='font-size: 103.15789473684211%'>xbmc</a> <a href='/blog/categories/yosemite' style='font-size: 103.15789473684211%'>yosemite</a> </span>
+</section>
+
+<section>
+
+    <p></p>
+<span id="google_translate_element"></span>
+
+</section>
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - itoutline.me -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'itoutlineme';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+      _gaq.push(['_trackPageview']);
+
+        (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		       })();
+
+</script>
+
+
+</body>
+</html>

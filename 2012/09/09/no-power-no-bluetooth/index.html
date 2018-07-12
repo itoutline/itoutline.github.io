@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>No power, no bluetooth - itoutline.me</title>
+  <meta name="author" content="itoutline.me">
+
+  
+  <meta name="description" content="W sumie nigdy nie podłączałem Air-a do większego ekranu tak, żeby na nim pracować. Aż sam się dziwie, spokojnie wystarczało mi 13". W końcu wpadłem &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://itoutline.me/2012/09/09/no-power-no-bluetooth/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="itoutline.me" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!-- Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/keys.css" rel="stylesheet" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">itoutline.me</a></h1>
+  
+    <h2>&nbsp;</h2>
+  
+  <meta name="google-translate-customization" content="e81cdd0ed4c87a5-36a8c112e17b44b8-g4197450913b80893-c"></meta>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'pl', multilanguagePage: true, autoDisplay: false}, 'google_translate_element');
+}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="itoutline.me">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+   
+	
+    <h1 class="entry-title">No power, no bluetooth</h1>
+	
+ 
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-09-09T02:14:33+00:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>2:14 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img class="left" src="/images/bluetooth_symbol_128.png"></p>
+
+<p>W sumie nigdy nie podłączałem Air-a do większego ekranu tak, żeby na nim pracować. Aż sam się dziwie, spokojnie wystarczało mi 13&#8221;. W końcu wpadłem na pomysł korzystania z niego jak ze stacjonarnego kompa. Zakupiłem cały zestaw klawiatura, mysz, gładzik i pracuje się naprawdę świetnie na 24&#8221; (oczywiście teraz chodzi mi po głowie Cinema Display). Nigdy nie miałem zaufania do bluetooth i obsługi przez niego urządzeń wskazujących, okazuje się, że nie ma z tym problemu. Oczywiście trochę męczy konieczność podłączenia dwóch kabelków ale te minusy nie przesłaniają plusów.</p>
+
+<p>Tak naprawdę bluetooth jest mi potrzebny tylko kiedy jestem przy biurku, kiedy od niego odchodzę jest zbędny i tylko niepotrzebnie zużywa baterię. Można go wyłączać ręcznie ale udało mi się znaleźć lepszy sposób. Byłaby to chyba całkiem fajna opcja w systemie. Chodzi o wyłączenie bluetooth w momencie odłączenia kabla zasilacza. Naturalnie musi być możliwość włączenia ręcznego również na baterii. Okazuje się, że tym prostym skryptem coś takiego można załatwić:</p>
+
+<figure class='code'><figcaption><span>bluetooth_mon.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="nv">PREVIOUS_SOURCE</span><span class="o">=</span><span class="k">$(</span>pmset -g ps <span class="p">|</span> perl -ne <span class="s2">&quot;/(w+) Power/ &amp;&amp; print $1&quot;</span><span class="k">)</span><span class="p">;</span>
+</span><span class='line'><span class="k">while</span> <span class="o">[</span> <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nv">CURRENT_SOURCE</span><span class="o">=</span><span class="k">$(</span>pmset -g ps <span class="p">|</span> perl -ne <span class="s2">&quot;/(w+) Power/ &amp;&amp; print $1&quot;</span><span class="k">)</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="nv">$CURRENT_SOURCE</span> !<span class="o">=</span> <span class="nv">$PREVIOUS_SOURCE</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="nv">PREVIOUS_SOURCE</span><span class="o">=</span><span class="nv">$CURRENT_SOURCE</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> <span class="nv">$CURRENT_SOURCE</span> <span class="o">=</span> <span class="s2">&quot;AC&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>      /usr/local/bin/blueutil power 1
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      /usr/local/bin/blueutil power 0
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'>sleep 5
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Potrzebny jest tylko blueutil, który można zainstalować z repozytoriów Homebrew. Pozwala na podejrzenie i zmianę stanu bluetooth, włączone/wyłączone/tryb wykrywania. Działa bardzo sprawnie.</p>
+
+<p><code>brew install blueutil</code></p>
+
+<p>Dodatkowo dobrze by było gdyby skrypt działał cały czas w tle od uruchomienia komputera. Znalazłem bardzo fajny skrót na coś takiego bez zabawy z launchd. Wystarczy do crontab-a dodać taką linię:</p>
+
+<p><code>@reboot /Users/norbert/Scripts/blue_pow_sav.sh</code></p>
+
+<p>Jak widać skrypt nazywa się blue_pow_sav.sh i jest umieszczony w katalogu <code>/Users/norbert/Scripts/</code></p>
+
+<p>Edycja crontab-a to <code>crontab -e</code>, wylistowanie zadań <code>crontab -l</code>. Usunięcie crontab-a użytkownika <code>crontab -r</code>. Mam wrażenie, że trochę za blisko jest klawisz edycji od tego który powoduje usunięcie crontab-a bez pytania.</p>
+
+<p>Dodanie jakiegoś zadania z poziomu shell-a, dotychczasowe jeśli były są zachowywane:</p>
+
+<p><code>crontab -l | { cat; echo "@reboot /Users/norbert/Scripts/blue_pow_sav.sh"; } | crontab -</code></p>
+
+<p>Można też inaczej, zapisanie obecnych zadań do tmp_cron:</p>
+
+<p><code>crontab -l &gt; tmp_cron</code></p>
+
+<p>Dodanie nowego:</p>
+
+<p><code>echo "@reboot /Users/norbert/Scripts/blue_pow_sav.sh" &gt;&gt; tmp_cron</code></p>
+
+<p>Instalacja:</p>
+
+<p><code>crontab tmp_cron</code></p>
+</div>
+
+
+
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">itoutline</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2012-09-09T02:14:33+00:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>2:14 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mountain-lion/'>mountain lion</a>, <a class='category' href='/blog/categories/osx/'>osx</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://itoutline.me/2012/09/09/no-power-no-bluetooth/" data-via="" data-counturl="http://itoutline.me/2012/09/09/no-power-no-bluetooth/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/09/07/qemu/" title="Previous Post: Qemu">&laquo; Qemu</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/09/09/make-life-easier/" title="Next Post: Make life easier">Make life easier &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2018/05/05/Ubuntu-18-04/">WSL - Ubuntu 18.04 - xfce4-terminal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/12/01/Unraid-part-1/">Home Cloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/09/27/the-cuttle/">The Cuttle - Boldport Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2016/05/27/picocom-na-cygwin-slash-windows10/">Picocom na Cygwin/Windows10</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/10/18/iptables-i-dynamiczne-ip/">Iptables i dynamiczne IP</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/android' style='font-size: 103.15789473684211%'>android</a> <a href='/blog/categories/arduino' style='font-size: 103.15789473684211%'>arduino</a> <a href='/blog/categories/curiosities' style='font-size: 103.15789473684211%'>curiosities</a> <a href='/blog/categories/electronics' style='font-size: 106.3157894736842%'>electronics</a> <a href='/blog/categories/linux' style='font-size: 122.10526315789474%'>linux</a> <a href='/blog/categories/mavericks' style='font-size: 103.15789473684211%'>mavericks</a> <a href='/blog/categories/mountain-lion' style='font-size: 141.05263157894737%'>mountain lion</a> <a href='/blog/categories/netflix' style='font-size: 103.15789473684211%'>netflix</a> <a href='/blog/categories/openwrt' style='font-size: 103.15789473684211%'>openwrt</a> <a href='/blog/categories/osx' style='font-size: 160.0%'>osx</a> <a href='/blog/categories/raspberry-pi' style='font-size: 109.47368421052632%'>raspberry pi</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal</a> <a href='/blog/categories/tips' style='font-size: 106.3157894736842%'>tips</a> <a href='/blog/categories/unraid' style='font-size: 103.15789473684211%'>unraid</a> <a href='/blog/categories/windows' style='font-size: 109.47368421052632%'>windows</a> <a href='/blog/categories/wsl' style='font-size: 103.15789473684211%'>wsl</a> <a href='/blog/categories/xbmc' style='font-size: 103.15789473684211%'>xbmc</a> <a href='/blog/categories/yosemite' style='font-size: 103.15789473684211%'>yosemite</a> </span>
+</section>
+
+<section>
+
+    <p></p>
+<span id="google_translate_element"></span>
+
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - itoutline.me -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'itoutlineme';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://itoutline.me/2012/09/09/no-power-no-bluetooth/';
+        var disqus_url = 'http://itoutline.me/2012/09/09/no-power-no-bluetooth/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34734923-1']);
+      _gaq.push(['_trackPageview']);
+
+        (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		       })();
+
+</script>
+
+
+</body>
+</html>

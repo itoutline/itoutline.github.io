@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: android | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/android/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Airplay Everywhere]]></title>
+    <link href="http://itoutline.me/2013/07/13/airplay-everywhere/"/>
+    <updated>2013-07-13T21:09:36+00:00</updated>
+    <id>http://itoutline.me/2013/07/13/airplay-everywhere</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/Airplay_on_Android_AOA_Service.png"></p>
+
+<p>Doczekałem się. W końcu znalazłem/jest aplikacja na Androida, która poprawnie strumieniuje dźwięk w trybie Airplay zarówno do RPi jak i AppleTv. Mowa o <a href="https://play.google.com/store/apps/details?id=com.nav.aoaservice&amp;hl=en">Airplay on Android AOA Service</a> Założę się, że nie na każdej wersji Androida powyżej 4.0 i telefonu będzie działać ale na moich obu urządzeniach (Sony Acro S - Cyanogenmod 10 i Nexus 7 - Cyanogenmod 10.1) w końcu nie ma z nią problemu. Na telefonie zaczeła działać poprawnie dopiero po ostatniej aktualizacji, wcześniej była straszna &ldquo;sieczka&rdquo;.</p>
+]]></content>
+  </entry>
+  
+</feed>

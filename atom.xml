@@ -1,0 +1,2275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[itoutline.me]]></title>
+  <link href="http://itoutline.me/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[WSL - Ubuntu 18.04 - xfce4-terminal]]></title>
+    <link href="http://itoutline.me/2018/05/05/Ubuntu-18-04/"/>
+    <updated>2018-05-05T16:15:00+00:00</updated>
+    <id>http://itoutline.me/2018/05/05/Ubuntu-18-04</id>
+    <content type="html"><![CDATA[<p>Ubuntu 18.04 ma nowszą wersję xfce4-terminal 0.8.7.3 i jest w niej poprawiony pewien szczegół który mnie irytował, przypadkowe przechodzenie w tryb zaznaczania przy kliknięciu na okno xfce4. Bardzo łatwo było to zrobić i jeśli akurat miało się coś w schowku to trzeba było ponownie do niego kopiować. Teraz jest normalnie a na dodatek zaznaczenie blokowe w terminalu z wciśniętym <kbd>Shift</kbd> i <kbd>Ctrl</kbd> działa świetnie.</p>
+
+<p>Została też poprawiona obsługa zmiennej <code>TERM</code> i <code>COLORTERM</code>, teraz sam xfce4 ustawia je bez konieczności dosyć złej praktyki modyfikowania ich w <code>.bashrc</code> itp.:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>TERM=xterm-256color
+</span><span class='line'>COLORTERM=truecolor</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Testowałem różne rozwiązania terminalowe na Windows - mintty, putty (via server ssh), Hyper, cmder), chyba tylko xfce4-terminal jest teraz bardzo bliski tego czego bym oczekiwał po terminalu (nawet mimo tego, że trzeba go uruchamiać przez Server X). Jest prawie tak dobry jak iTerm2 na OSX ;)</p>
+
+<p>Dla odważnych <code>sudo do-release-upgrade -d</code> :)</p>
+
+<p> <img src="http://itoutline.me/images/xfce4-terminal-WSL.png"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Home Cloud]]></title>
+    <link href="http://itoutline.me/2017/12/01/Unraid-part-1/"/>
+    <updated>2017-12-01T16:10:00+00:00</updated>
+    <id>http://itoutline.me/2017/12/01/Unraid-part-1</id>
+    <content type="html"><![CDATA[<p>Kilka lat temu pozbyłem się z domu &ldquo;blaszaka&rdquo;. Nie gram, w związku z czym w miarę wydajny laptop miał mi spokojnie wystarczyć. No i w sumie tak było, brakowało mi tylko jednej rzeczy, jakiegoś wspólnego domowego zasobu sieciowego. Nie było to jakoś krytyczne, podejmowałem próby z BananaPi wyposażonym w port sata (bardzo słabo), podpinałem dysk do posiadanych routerów po USB3 (niewiele lepiej) a na dodatek ciągle miałem w głowie, że jeśli mi ten dysk padnie to tracę wszystko w związku z czym jakichś krytycznych rzeczy tam nie trzymałem. </br></br>
+W końcu zdecydowałem się jakoś docelowo rozwiązać problem i wybór padł na NAS Asus 6202T. Rozwiązanie sprawdzało się całkiem dobrze ale pojawiła się potrzeba &ldquo;upchnięcia&rdquo; trochę większej ilości wirtualnych maszyn, wersja Docker-a była nie tą, której potrzebowałem, brak wsparcia dla osobnych dysków SSD (w tamtym czasie) i jakieś inne drobne rzeczy skłoniły mnie do poszukania czegoś innego.
+</br></br>
+No i trafiłem na Unraid-a. Jest to dedykowany pod storage OS oparty na Linuxie. Podstawowe zalety w mojej ocenie:</p>
+
+<ul>
+<li>Wsparcie dla wirtualizacji/dokeryzacji.</li>
+<li>Obsługa SSD przez tzw. &ldquo;cache pool&rdquo;.</li>
+<li>Bardzo łatwe dodawanie nowych docker-ów.</li>
+<li>Niezależność od dostawcy sprzętu, to chyba największy plus, kupuje komponenty dokładnie take jakich potrzebuje. (Ludzie preferujący rozwiązania &ldquo;półkowe&rdquo; niekoniecznie uznają to za zaletę).</li>
+<li>Możliwość &ldquo;podpięcia&rdquo; karty graficznej bezpośrednio do VM, dzięki czemu nie ma różnicy pomiędzy pracą na maszynie fizycznej a VM.</li>
+<li>Całość ruchu sieciowego pomiędzy wszystkimi hostami odbywa się w obrębie jednej fizycznej maszyny:</li>
+</ul>
+
+
+<p> <img src="http://itoutline.me/images/unraid_hdd_speed.PNG"></p>
+
+<ul>
+<li>Duża frajda z posiadania własnej chmury, Plex + NextCloud + Collabora + draw.io (Collabora - pakiet biurowy, może odstaje nieco jakością od rozwiązań gigantów ale już z draw.io korzysta mi się lepiej niż z Visio).</li>
+<li>Wszytko jest na dyskach w RAID (co nie zwalnia z backup-ów ale zdecydowanie jest raźniej ;)</li>
+</ul>
+
+
+<p>Wady:</p>
+
+<ul>
+<li>Większe zużycie energii 50W, w przypadku Asus-a 10W (wartości mocno uśrednione). Coś za coś, I7 8700 vs Celeron</li>
+<li>Rozwiązanie nie jest darmowe.</li>
+<li>Nadal mam problem z podłączeniem zintegrowanej grafiki do VM Linuxowej (grubsza sprawa, musi dojść do przełączenia systemu obsługującego IGD z unRAID na VM).</li>
+</ul>
+
+
+<p>Całość wygląda tak:</p>
+
+<p> <img src="http://itoutline.me/images/unraid_schema.PNG"></p>
+
+<p>Historia zatoczyła koło, teraz potrzebuje byle jakiego laptopa i mogę pracować na VM zdalnie (w czym na pewno pomaga 50Mb upstream-u od dostawcy Internetu). Co najważniejsze, całość działa zaskakująco stabilnie. Niesamowite jak wiele funkcji może spełniać dzisiaj PC w domu (cztery ostatnie to VM) a wszystko to dzięki wirtualizacji i konteneryzacji.</p>
+
+<p> <img src="http://itoutline.me/images/unraid_list.PNG"></p>
+
+<p>Obciążenie CPU w tym czasie (żadna z maszyn nie robiła nic szczególnego, na Windows 10, Firefox z 20+ zakładkami i kilka pomniejszych programów):</p>
+
+<p> <img src="http://itoutline.me/images/unraid_cpu.PNG"></p>
+
+<p>Kiedyś bardzo optowałem za stawianiem drobnych rzeczy jak np. Home Assistant na RPI czy podobnych ale teraz wydaje mi się, że takie &ldquo;pudło&rdquo; jest zdecydowanie lepszym rozwiązaniem, ogarnia wszystko :)</p>
+
+<p> <img src="http://itoutline.me/images/unraid_hal.png"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Cuttle - Boldport Club]]></title>
+    <link href="http://itoutline.me/2016/09/27/the-cuttle/"/>
+    <updated>2016-09-27T20:15:00+00:00</updated>
+    <id>http://itoutline.me/2016/09/27/the-cuttle</id>
+    <content type="html"><![CDATA[<p>Świetne projekty elektroniczne DIY - <a href="http://www.boldport.club/">Boldport Club</a>, zapisałem się i zacząłem od klona Arduino <a href="http://www.boldport.club/shop/product/390973459">The Cuttle</a>. Nie był to cały kit tylko sama płytka i trochę nieudana, bo od spodu jest miejscami farba na padach do lutowania. Mimo wszystko działa :)</p>
+
+<p> <img src="http://itoutline.me/images/the_cuttle.JPG"></p>
+
+<p>W sumie pierwszy raz wgrywałem bootloader i tutaj bardzo pomocna okazała się stronka <a href="http://www.gammon.com.au/bootloader">http://www.gammon.com.au/bootloader</a> i sketch <a href="https://github.com/nickgammon/arduino_sketches">Atmega_Board_Programmer</a></p>
+
+<p> <img src="http://itoutline.me/images/the_cuttle_programming.JPG"></p>
+
+<p>Cały proces wyglądał tak:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Type 'C' when ready to continue with another chip ...
+</span><span class='line'>Attempting to enter ICSP programming mode ...
+</span><span class='line'>Entered programming mode OK.
+</span><span class='line'>Signature = 0x1E 0x95 0x14
+</span><span class='line'>Processor = ATmega328
+</span><span class='line'>Flash memory size = 32768 bytes.
+</span><span class='line'>LFuse = 0xFF
+</span><span class='line'>HFuse = 0xD9
+</span><span class='line'>EFuse = 0xFF
+</span><span class='line'>Lock byte = 0xFF
+</span><span class='line'>Clock calibration = 0xA9
+</span><span class='line'>Type 'L' to use Lilypad (8 MHz) loader, or 'U' for Uno (16 MHz) loader ...
+</span><span class='line'>Using Uno Optiboot 16 MHz loader.
+</span><span class='line'>Bootloader address = 0x7E00
+</span><span class='line'>Bootloader length = 512 bytes.
+</span><span class='line'>Type 'Q' to quit, 'V' to verify, or 'G' to program the chip with the bootloader ...
+</span><span class='line'>Erasing chip ...
+</span><span class='line'>Writing bootloader ...
+</span><span class='line'>Committing page starting at 0x7E00
+</span><span class='line'>Committing page starting at 0x7E80
+</span><span class='line'>Committing page starting at 0x7F00
+</span><span class='line'>Committing page starting at 0x7F80
+</span><span class='line'>Written.
+</span><span class='line'>Verifying ...
+</span><span class='line'>No errors found.
+</span><span class='line'>Writing fuses ...
+</span><span class='line'>LFuse = 0xFF
+</span><span class='line'>HFuse = 0xDE
+</span><span class='line'>EFuse = 0xFD
+</span><span class='line'>Lock byte = 0xEF
+</span><span class='line'>Clock calibration = 0xA9
+</span><span class='line'>Done.
+</span><span class='line'>Programming mode off.</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Picocom na Cygwin/Windows10]]></title>
+    <link href="http://itoutline.me/2016/05/27/picocom-na-cygwin-slash-windows10/"/>
+    <updated>2016-05-27T20:11:00+00:00</updated>
+    <id>http://itoutline.me/2016/05/27/picocom-na-cygwin-slash-windows10</id>
+    <content type="html"><![CDATA[<p>Działa i instalacja poszła wyjątkowo łatwo:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/npat-efault/picocom; cd picocom && make</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Cloning into 'picocom'...
+</span><span class='line'>remote: Counting objects: 701, done.
+</span><span class='line'>remote: Total 701 (delta 0), reused 0 (delta 0), pack-reused 701
+</span><span class='line'>Receiving objects: 100% (701/701), 490.39 KiB | 493.00 KiB/s, done.
+</span><span class='line'>Resolving deltas: 100% (445/445), done.
+</span><span class='line'>cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o linenoise-1.0/linenoise.o -c linenoise-1.0/linenoise.c
+</span><span class='line'>cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o picocom.o -c picocom.c
+</span><span class='line'>cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o term.o -c term.c
+</span><span class='line'>cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o fdio.o -c fdio.c
+</span><span class='line'>cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o split.o -c split.c
+</span><span class='line'>cc -Wall -g -DVERSION_STR=\"2.3a\" -DTTY_Q_SZ=32768 -DHIGH_BAUD -DUSE_FLOCK -DHISTFILE=\".picocom_history\" -DLINENOISE -o termios2.o -c termios2.c
+</span><span class='line'>cc -g -o picocom  linenoise-1.0/linenoise.o picocom.o term.o fdio.o split.o termios2.o</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gdyby nie było <code>make</code> to <code>apt-cyg install make</code>.</p>
+
+<p>Trzeba tylko pamiętać, że np. COM4 to /dev/ttyS3:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./picocom.exe -b 115200 /dev/ttyS3
+</span><span class='line'>picocom v2.3a
+</span><span class='line'>
+</span><span class='line'>port is        : /dev/ttyS3
+</span><span class='line'>flowcontrol    : none
+</span><span class='line'>baudrate is    : 115200
+</span><span class='line'>parity is      : none
+</span><span class='line'>databits are   : 8
+</span><span class='line'>stopbits are   : 1
+</span><span class='line'>escape is      : C-a
+</span><span class='line'>local echo is  : no
+</span><span class='line'>noinit is      : no
+</span><span class='line'>noreset is     : no
+</span><span class='line'>nolock is      : no
+</span><span class='line'>send_cmd is    : sz -vv
+</span><span class='line'>receive_cmd is : rz -vv -E
+</span><span class='line'>imap is        :
+</span><span class='line'>omap is        :
+</span><span class='line'>emap is        : crcrlf,delbs,
+</span><span class='line'>logfile is     : none
+</span><span class='line'>
+</span><span class='line'>Type [C-a] [C-h] to see available commands
+</span><span class='line'>
+</span><span class='line'>Terminal ready
+</span><span class='line'>
+</span><span class='line'>HiZ&gt;
+</span><span class='line'>HiZ&gt;</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Iptables i dynamiczne IP]]></title>
+    <link href="http://itoutline.me/2015/10/18/iptables-i-dynamiczne-ip/"/>
+    <updated>2015-10-18T21:29:23+00:00</updated>
+    <id>http://itoutline.me/2015/10/18/iptables-i-dynamiczne-ip</id>
+    <content type="html"><![CDATA[<p>W przypadku posiadania serwera w sieci Internet zawsze najlepiej jest ograniczać do niego dostęp tylko do tego co rzeczywiście chcemy, żeby było na nim dostępne. Dodatkowo ograniczenie do konkretnych klas czy adresów w przypadku dostępu do interfejsów umożliwiających większą kontrolę nad serwerem jest także dobrą praktyką (jeszcze lepszą jest nie eksponowanie ich w Internecie w ogóle;)</p>
+
+<p>Ostatnio prowadziłem testy na takim serwerze i naturalnym było np. ograniczenie dostępu do SSH dla konkretnych adresów. Problem polega na tym, że o ile w firmie miałem statyczny adres to w domu już nie. Mogłem ustawić regułę na obecny domowy adres ale za kilka godzin mogła być już nieaktualna. Wyjściem z sytuacji okazał się, jak bardzo często się zdarza, prosty skrypt i dyndns.</p>
+
+<figure class='code'><figcaption><span>iptables_update.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="c"># --==itoutline.me==--</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">HOSTALLOWED</span><span class="o">=</span><span class="s2">&quot;/home/itoutline/update_iptables/allowed_host.txt&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">while</span> <span class="nb">read </span>line
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">HOSTNAME</span><span class="o">=</span><span class="nv">$line</span>
+</span><span class='line'>  <span class="nv">LOGFILE</span><span class="o">=</span>/home/itoutline/update_iptables/<span class="s2">&quot;$line&quot;</span>.log
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">Current_IP</span><span class="o">=</span><span class="k">$(</span>host <span class="nv">$HOSTNAME</span> <span class="p">|</span> cut -f4 -d<span class="s1">&#39; &#39;</span><span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="nv">$LOGFILE</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    iptables -I INPUT -s <span class="nv">$Current_IP</span> -j ACCEPT
+</span><span class='line'>    <span class="nb">echo</span> <span class="nv">$Current_IP</span> &gt; <span class="nv">$LOGFILE</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">Old_IP</span><span class="o">=</span><span class="k">$(</span>cat <span class="nv">$LOGFILE</span><span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$Current_IP&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$Old_IP&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>      iptables -D INPUT -s <span class="nv">$Old_IP</span> -j ACCEPT
+</span><span class='line'>      iptables -I INPUT -s <span class="nv">$Current_IP</span> -j ACCEPT
+</span><span class='line'>      /etc/init.d/iptables save
+</span><span class='line'>      <span class="nb">echo</span> <span class="nv">$Current_IP</span> &gt; <span class="nv">$LOGFILE</span>
+</span><span class='line'>      <span class="nb">echo </span>iptables have been updated
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'><span class="k">done</span> &lt; <span class="s2">&quot;$HOSTALLOWED&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>W <code>allowed_host.txt</code> umieszczamy w kolejnych liniach nazwy domenowe hostów.</p>
+
+<p>A do cron-a dodajemy linijkę:</p>
+
+<figure class='code'><figcaption><span>iptables_update.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>*/1 * * * * /home/itoutline/update_iptables/update_iptables.sh  2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span>logger
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Unblock.us automatyczna aktualizacja]]></title>
+    <link href="http://itoutline.me/2015/10/07/unblock-dot-us-automatyczna-aktualizacja/"/>
+    <updated>2015-10-07T23:17:18+00:00</updated>
+    <id>http://itoutline.me/2015/10/07/unblock-dot-us-automatyczna-aktualizacja</id>
+    <content type="html"><![CDATA[<p>Wchodzenie na stronę unblock.us i aktualizowanie bieżącego adresu IP zaczęło mnie naprawdę męczyć. Na szczęście można tego uniknąć dosyć prosto. Wystarczy prosty skrypt na routerze (czy dowolnym serwerze linuxowym jaki mamy w domu, chyba każdy ma coś na poziomie minimum rpi w dzisiejszych czasach ;), który będzie sprawdzał co jakiś czas adres zewnętrzny i aktualizował go w unblock.us.</p>
+
+<figure class='code'><figcaption><span>update_unblock.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'><span class="c"># --==itoutline.me==--</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">SCRIPT_NAME</span><span class="o">=</span><span class="s2">&quot;$(basename $0)&quot;</span>
+</span><span class='line'><span class="nv">IP_ADDR</span><span class="o">=</span>/tmp/active_ip_addr
+</span><span class='line'><span class="nv">IP_STATUS</span><span class="o">=</span>/tmp/ip_update_status
+</span><span class='line'>
+</span><span class='line'><span class="nv">CURRENT_IP</span><span class="o">=</span><span class="k">$(</span>dig +short myip.opendns.com @resolver1.opendns.com<span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> update_ip <span class="o">{</span>
+</span><span class='line'>    curl -s -o <span class="nv">$IP_STATUS</span> <span class="s2">&quot;https://api.unblock-us.com/login?adres_email:hasło&quot;</span>
+</span><span class='line'>    logger <span class="s2">&quot;[$SCRIPT_NAME]: IP updated: $CURRENT_IP; Response: $(cat $IP_STATUS)&quot;</span>
+</span><span class='line'>    <span class="nb">echo</span> <span class="nv">$CURRENT_IP</span> &gt; <span class="nv">$IP_ADDR</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;$CURRENT_IP&quot;</span> <span class="o">=</span>~ ^<span class="o">[</span>0-9<span class="o">]{</span>2,3<span class="o">}</span><span class="se">\.</span><span class="o">[</span>0-9<span class="o">]{</span>1,3<span class="o">}</span><span class="se">\.</span><span class="o">[</span>0-9<span class="o">]{</span>1,3<span class="o">}</span><span class="se">\.</span><span class="o">[</span>0-9<span class="o">]{</span>1,3<span class="o">}</span><span class="nv">$ </span><span class="o">]]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> ! -f <span class="nv">$IP_ADDR</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>        update_ip
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>        <span class="nv">OLD_IP</span><span class="o">=</span><span class="k">$(</span>cat <span class="nv">$IP_ADDR</span><span class="k">)</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;$CURRENT_IP&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$OLD_IP&quot;</span> <span class="o">]]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>            update_ip
+</span><span class='line'>        <span class="k">fi</span>
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>    logger <span class="s2">&quot;[$SCRIPT_NAME]: Network error or incorrect answer from the IP provider&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>W miejscach <code>adres_email</code> i <code>hasło</code> trzeba podać swoje dane oraz dorzucić skrypt do crona.</p>
+
+<pre><code>*/2 * * * * /root/update_unblock.sh  2&gt;&amp;1 |logger
+</code></pre>
+
+<p>Skrypt będzie się wykonywał co dwie minuty.</p>
+
+<p>Skrypt można również wykorzystać do innych serwisów, w przypadku darmowego <a href="http://tvunblock.com">tvunblock.com</a> polecenie <code>curl</code> z funkcji <code>update_ip</code> należałoby zastąpić:</p>
+
+<pre><code>curl -s -o $IP_STATUS "https://activate.tvunblock.com/"
+</code></pre>
+
+<h3>Zastąpienie odpytywania zewnętrznego serwisu o publiczny adres IP</h3>
+
+<p>Serwisów dostarczających za pomocą jakiegoś web api zewnętrzny adres ip jest dużo ale nie zawsze trzeba z nich korzystać. Jeśli router/modem pozwala na pobieranie z niego informacji o adresie WAN, dlaczego tego nie użyć? W przypadku Liveboxa/Funboxa zmienną <code>CURRENT_IP</code> można ustawić w ten sposób:</p>
+
+<pre><code>CURRENT_IP=$(curl -silent -A "application/x-sah-ws-4-call+json" "http://192.168.1.1/sysbus/NMC:getWANStatus" -d"{\"parameters\":{}}" | sed -n -e 's/^.*\(IPAddress":"\)\([0-9]*.[0-9]*.[0-9]*.[0-9]*\)\(.*\)$/\2/p')
+</code></pre>
+
+<p>W praktyce (jak widać nie tylko adres ip portu WAN można podejrzeć):</p>
+
+<p><img src="http://itoutline.me/images/unblock_skrypt.png"></p>
+
+<h3>Crontab tuning</h3>
+
+<p>Rozwiązania, które opierają się na crontabie i czesto są uruchamiane zaśmiecają sysloga:</p>
+
+<pre><code>Nov  8 16:49:01 bananapi /USR/SBIN/CRON[27209]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:51:01 bananapi /USR/SBIN/CRON[27221]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:53:01 bananapi /USR/SBIN/CRON[27233]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:55:01 bananapi /USR/SBIN/CRON[27244]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:57:01 bananapi /USR/SBIN/CRON[27255]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+Nov  8 16:59:01 bananapi /USR/SBIN/CRON[27266]: (root) CMD (/root/update_unblock.sh  2&gt;&amp;1 |logger)
+</code></pre>
+
+<p>Dlatego kiedy już wiadomo, że skrypt działa poprawnie można pokusić się o wyłączenie logowania crona. Na Debianie to modyfikacja pliku <code>/etc/rsyslog.conf</code>:</p>
+
+<figure class='code'><figcaption><span>rsyslog.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">###############</span>
+</span><span class='line'><span class="c">#### RULES ####</span>
+</span><span class='line'><span class="c">###############</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># First some standard log files.  Log by facility.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'>auth,authpriv.*         -/var/log/auth.log
+</span><span class='line'>*.*<span class="p">;</span>auth,authpriv.none,cron.none        -/var/log/syslog
+</span><span class='line'><span class="c">#cron.*             -/var/log/cron.log</span>
+</span><span class='line'>daemon.*            -/var/log/daemon.log
+</span><span class='line'>kern.*              -/var/log/kern.log
+</span><span class='line'>lpr.*               -/var/log/lpr.log
+</span><span class='line'>mail.*              -/var/log/mail.log
+</span><span class='line'>user.*              -/var/log/user.log
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Dorzucenie <code>cron.none</code> i restart usługi <code>sudo /etc/init.d/rsyslog restart</code> wyciszy crontaba. Można również przekierować logi do osobnego pliku <code>cron.log</code> ale szkoda karty SD. Od tej pory syslog nie jest floodowany z powodu skryptu i mamy tylko informacje kiedy faktcznie skrypt wykona jakąś pracę:</p>
+
+<pre><code>Nov  8 20:16:02 bananapi logger: [update_unblock.sh]: IP updated: 178.42.100.100; Response: active
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Zmienne systemowe w OSX]]></title>
+    <link href="http://itoutline.me/2015/01/27/zmienne-systemowe-w-osx/"/>
+    <updated>2015-01-27T15:29:59+00:00</updated>
+    <id>http://itoutline.me/2015/01/27/zmienne-systemowe-w-osx</id>
+    <content type="html"><![CDATA[<p>Definiowanie zmiennych systemowych w OSX jest takie sobie&hellip; Nie mówię tutaj o zmiennych, które można ustawić w plikach inicjalizacyjnych powłoki shellowej (bash, zsh, fish czy co komu odpowiada). Tam akurat wszystko jest całkiem prosto ale o ustawieniu zmiennej bez uruchamiania terminala po starcie systemu. Natrafiłem na potrzebę zdefiniowania takiej zmiennej przy zabawie z Android Studio. Po zainstalowaniu Javy i wspomnianego oprogramowania, próba jego uruchomienia kończyła się tak:</p>
+
+<p><img src="http://itoutline.me/images/Java_JDK_pb.png"></p>
+
+<p>Problemem okazał się brak zmiennej <code>STUDIO_JDK</code>. Można ten problem obejść np. tak:</p>
+
+<pre><code>launchctl setenv STUDIO_JDK /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+open /Applications/Android\ Studio.app
+</code></pre>
+
+<p>Tylko, że jakoś konieczność uruchomienia terminala po to, żeby pracować w aplikacji graficznej do mnie nie przemawia. Udało mi się znaleźć ciekawe rozwiązanie problemu <a href="http://stackoverflow.com/questions/25385934/setting-environment-variables-via-launchd-conf-no-longer-works-in-os-x-yosemite">tutaj</a>.</p>
+
+<h2>Zmienne systemowe</h2>
+
+<p>Zmienne mogą być ustawione na poziomie użytkownika (ustawienie wywoływane przez <code>/Library/LaunchAgents/environment.user.plist</code>) lub root-a (<code>/Library/LaunchDaemons/environment.plist</code>). Rozwiązanie zakłada jeden plik w którym będą definiowane zmienne <code>/etc/environment</code>, co jest bardzo ok bo nie przypominam sobie, żebym kiedyś potrzebował różnych. Kolejnym plusem jest fakt, że modyfikacja <code>/etc/environment</code> czyli dodanie jakiejś zmiennej automatycznie jest zaczytywane i dostajemy wzrokową informację w postaci chwilowego zniknięcia Dock-a.</p>
+
+<p>Jedyny minus ale to jest raczej nie do obejścia to fakt, że już działająca aplikacja nie pobierze informacji o nowej zmiennej, musi być ponownie otworzona.</p>
+
+<h2>Zmienna PATH</h2>
+
+<p>To rozwiązanie jest jeszcze lepsze i dopóki będzie działało na OSX to będę z niego korzystał a mianowicie zmiany dokonujemy w pliku <code>/etc/paths</code>. To zwykły plik tekstowy w którym możemy dodawać kolejne linijki z wymaganymi przez nas ścieżkami. Po ponownym uruchomieniu terminala dopisana przez nas ścieżka znajdzie się w zmiennej <code>PATH</code>.</p>
+
+<h2>Ostatecznie</h2>
+
+<p>Przygotowałem skrypt bashowy, który tworze niezbędne pliki i ustawia ich parametry.</p>
+
+<figure class='code'><figcaption><span> (set_env_var.sh)</span> <a href='http://itoutline.me/downloads/code/set_env_var.sh'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'>
+</span><span class='line'>sudo -v
+</span><span class='line'>
+</span><span class='line'>cat <span class="s">&lt;&lt; EOF | sudo tee /etc/environment &gt; /dev/null</span>
+</span><span class='line'><span class="s">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">set -e</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">syslog -s -l warn &quot;Set environment variables with /etc/environment $(whoami) - start&quot;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="s">### Set your variable here:</span>
+</span><span class='line'><span class="s">#launchctl setenv JAVA_HOME      /usr/local/jdk1.7</span>
+</span><span class='line'><span class="s">launchctl setenv MAVEN_HOME     /opt/local/share/java/maven3</span>
+</span><span class='line'><span class="s">launchctl setenv STUDIO_JDK     /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk</span>
+</span><span class='line'><span class="s">############################</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">if [ -x /usr/libexec/path_helper ]; then</span>
+</span><span class='line'><span class="s">        export PATH=&quot;&quot;</span>
+</span><span class='line'><span class="s">            eval `/usr/libexec/path_helper -s`</span>
+</span><span class='line'><span class="s">                launchctl setenv PATH $PATH</span>
+</span><span class='line'><span class="s">            fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">            osascript -e &#39;tell app &quot;Dock&quot; to quit&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">            syslog -s -l warn &quot;Set environment variables with /etc/environment $(whoami) - complete&quot;</span>
+</span><span class='line'><span class="s">EOF</span>
+</span><span class='line'>
+</span><span class='line'>cat <span class="s">&lt;&lt; EOF | sudo tee /Library/LaunchAgents/environment.user.plist &gt; /dev/null</span>
+</span><span class='line'><span class="s">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="s">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span>
+</span><span class='line'><span class="s">&lt;plist version=&quot;1.0&quot;&gt;</span>
+</span><span class='line'><span class="s">&lt;dict&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;Label&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;string&gt;environment.user&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;ProgramArguments&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;array&gt;</span>
+</span><span class='line'><span class="s">            &lt;string&gt;/etc/environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;/array&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;KeepAlive&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;false/&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;RunAtLoad&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;true/&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;WatchPaths&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;array&gt;</span>
+</span><span class='line'><span class="s">        &lt;string&gt;/etc/environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;/array&gt;</span>
+</span><span class='line'><span class="s">&lt;/dict&gt;</span>
+</span><span class='line'><span class="s">&lt;/plist&gt;</span>
+</span><span class='line'><span class="s">EOF</span>
+</span><span class='line'>
+</span><span class='line'>cat <span class="s">&lt;&lt; EOF | sudo tee /Library/LaunchDaemons/environment.plist &gt; /dev/null</span>
+</span><span class='line'><span class="s">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="s">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span>
+</span><span class='line'><span class="s">&lt;plist version=&quot;1.0&quot;&gt;</span>
+</span><span class='line'><span class="s">&lt;dict&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;Label&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;string&gt;environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;ProgramArguments&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;array&gt;</span>
+</span><span class='line'><span class="s">            &lt;string&gt;/etc/environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;/array&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;KeepAlive&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;false/&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;RunAtLoad&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;true/&gt;</span>
+</span><span class='line'><span class="s">    &lt;key&gt;WatchPaths&lt;/key&gt;</span>
+</span><span class='line'><span class="s">    &lt;array&gt;</span>
+</span><span class='line'><span class="s">        &lt;string&gt;/etc/environment&lt;/string&gt;</span>
+</span><span class='line'><span class="s">    &lt;/array&gt;</span>
+</span><span class='line'><span class="s">&lt;/dict&gt;</span>
+</span><span class='line'><span class="s">&lt;/plist&gt;</span>
+</span><span class='line'><span class="s">EOF</span>
+</span><span class='line'>
+</span><span class='line'>sudo chmod <span class="m">555</span> /etc/environment
+</span><span class='line'>sudo chmod <span class="m">600</span> /Library/LaunchAgents/environment.user.plist /Library/LaunchDaemons/environment.plist
+</span><span class='line'>sudo chown root:wheel /etc/environment /Library/LaunchAgents/environment.user.plist /Library/LaunchDaemons/environment.plist
+</span><span class='line'>
+</span><span class='line'>launchctl load -w /Library/LaunchAgents/environment.user.plist
+</span><span class='line'>sudo launchctl load -w /Library/LaunchDaemons/environment.plist
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Zastosowanie rozwiązania:</p>
+
+<pre><code>wget http://itoutline.me/code/set_env_var.sh
+chmod +x set_env_var.sh
+./set_env_var.sh
+</code></pre>
+
+<p>Od tej pory zdefiniowanie jakiejkolwiek zmiennej, która będzie zawsze i wszędzie widoczna to umieszczenie jej w <code>/etc/environment</code>.</p>
+
+<h2>Pożyteczne komendy</h2>
+
+<p>Ustawienie zmiennej z poziomu terminala (będzie od razu widoczne w systemie ale na liście zmiennych wyświetlanej np. za pomocą <code>env</code> czy <code>echo $STUDIO_JDK</code> pojawi się dopiero po restarcie terminala:</p>
+
+<pre><code>launchctl setenv STUDIO_JDK /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+</code></pre>
+
+<p>Sprawdzenie zmiennej w systemie:</p>
+
+<pre><code>launchctl getenv STUDIO_JDK /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+</code></pre>
+
+<p>Sprawdzenie czy zmienna jest już widoczna w sesji terminala:</p>
+
+<pre><code>echo $STUDIO_JDK
+</code></pre>
+
+<p>Wyświetlenie wszystkich zmiennych widocznych z poziomu terminala:</p>
+
+<pre><code>env
+</code></pre>
+
+<p>Ustawienie zmiennej tylko na poziomie terminala:</p>
+
+<pre><code>export STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Co się stanie kiedy w przeglądarkę wpiszemy google.com i naciśniemy Enter]]></title>
+    <link href="http://itoutline.me/2015/01/22/co-sie-stanie-kiedy-w-przegladarke-wpiszemy-google-dot-com-i-nacisniemy-enter/"/>
+    <updated>2015-01-22T23:15:03+00:00</updated>
+    <id>http://itoutline.me/2015/01/22/co-sie-stanie-kiedy-w-przegladarke-wpiszemy-google-dot-com-i-nacisniemy-enter</id>
+    <content type="html"><![CDATA[<p>No dzieje się&hellip; Trzeba przyznać. Fajny dokument, ciekawe jak się rozwinie.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Chrome i swipe]]></title>
+    <link href="http://itoutline.me/2015/01/22/chrome-i-swipe/"/>
+    <updated>2015-01-22T21:47:49+00:00</updated>
+    <id>http://itoutline.me/2015/01/22/chrome-i-swipe</id>
+    <content type="html"><![CDATA[<p>W końcu wróciłem na stare śmieci, działam na OSX Yosemite. Przyznam, że zaskakują mnie oceny tej wersji OSX na AppStore ponieważ póki co jedyny kłopot jakiego ja doświadczyłem to ten z tytułu wpisu. Ponad tydzień spędzony na konfigurowaniu, instalowaniu, modyfikowaniu nie przyniósł jakichś większych zgrzytów, no ale pożyjemy zobaczymy. Zdecydowanie za wcześnie na wyciąganie wniosków.</p>
+
+<p>Na pewno beznadziejnie działa przewijanie za pomocą dwóch palców w Chromie, bardzo często zdarzało mi się podczas przewijania strony w górę/dół lądować na poprzednio przeglądanej. Wydaje mi się, że to bardziej wina przeglądarki niż systemu&hellip;</p>
+
+<p>Rozwiązanie problemu to wyłączenie przewijania w Chromie:</p>
+
+<pre><code>defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+</code></pre>
+
+<p>Jeśli chcemy można w konfiguracji Touchpad-a zastosować poniższe ustawienia, dzięki czemu przechodzenie pomiędzy stronami przestanie być losowe. Jedyny minus to, że musimy użyć trzech palców.</p>
+
+<p><img src="http://itoutline.me/images/chrome_i_swipe.png"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Babun]]></title>
+    <link href="http://itoutline.me/2014/12/29/babun/"/>
+    <updated>2014-12-29T08:53:51+00:00</updated>
+    <id>http://itoutline.me/2014/12/29/babun</id>
+    <content type="html"><![CDATA[<p>Tak się nieszczęśliwie poukładało w moim życiu, że na jakiś czas wylądowałem z windowsowym laptopem. Zawsze kiedy musiałem korzystać z systemu MS instalowałem od razu <a href="https://www.cygwin.com">Cygwina</a>. Niestety czasami nie była to &ldquo;bułka z masłem&rdquo;, często coś tam nie do końca działało albo były problemy z samą instalacją. Zdarzało się, że trochę pracy było potrzebne ale i tak świetnie, że komuś się chciało i Cygwin w ogóle powstał. Teraz jest jeszcze lepiej bo powstało coś dającego Cygwina w bardzo fajnym opakowaniu. Mowa o <a href="https://github.com/babun/babun">Babun</a>.</p>
+
+<h3>Instalacja</h3>
+
+<p>Sprowadza się do pobrania archiwum, rozpakowania i uruchomieniu skryptu. Standardowo instaluje się w katalogu domowym jako <code>.babun</code>.</p>
+
+<h3>Pierwsze wrażenia</h3>
+
+<p>Na pulpicie tworzy się skrót, który uruchamia terminal mintty a tam od razu mamy skonfigurowane zsh i jest git. Instalacja/deinstalacja pakietów za pomocą <code>pact install</code> oraz <code>pact remove</code> jest dużym plusem. Usunięcie Babun-a to skasowania jego katalogu, uwielbiam tego typu programy :)</p>
+
+<h3>Serwer SSH</h3>
+
+<p>Serwer SSH na Windowsie to chyba nigdy nie było proste. Tutaj też nie działa bez drobnych modyfikacji ale nie jest najgorzej. No i trzeba przyznać, że w Windows 8.1 dodawanie i usuwanie serwisów nawet z poziomu Babuna/Cygwina nie wymaga restartu. Miłe zaskoczenie.</p>
+
+<p>Zaczynamy od uruchomienia Babuna jako Administrator i wydajemy następujące komendy:</p>
+
+<pre><code>/usr/bin/chmod +r /etc/passwd
+/usr/bin/chmod +r /etc/group
+/usr/bin/chmod +x /var
+/usr/bin/ssh-host-config
+</code></pre>
+
+<p>Proces instalacji wyglądał u mnie tak:</p>
+
+<pre><code>ssh-keygen: generating new host keys: RSA1 RSA DSA ECDSA ED25519
+*** Info: Creating default /etc/ssh_config file
+*** Info: Creating default /etc/sshd_config file
+*** Info: Privilege separation is set to yes by default since OpenSSH 3.3.
+*** Info: However, this requires a non-privileged account called 'sshd'.
+*** Info: For more info on privilege separation read /usr/share/doc/openssh/README.privsep.
+*** Query: Should privilege separation be used? (yes/no) yes
+*** Info: Note that creating a new user requires that the current account have
+*** Info: Administrator privileges.  Should this script attempt to create a
+*** Query: new local account 'sshd'? (yes/no) yes
+*** Info: Updating /etc/sshd_config file
+
+*** Query: Do you want to install sshd as a service?
+*** Query: (Say "no" if it is already installed as a service) (yes/no) yes
+*** Query: Enter the value of CYGWIN for the daemon: [] ntsec
+*** Info: On Windows Server 2003, Windows Vista, and above, the
+*** Info: SYSTEM account cannot setuid to other users -- a capability
+*** Info: sshd requires.  You need to have or to create a privileged
+*** Info: account.  This script will help you do so.
+
+*** Info: You appear to be running Windows XP 64bit, Windows 2003 Server,
+*** Info: or later.  On these systems, it's not possible to use the LocalSystem
+*** Info: account for services that can change the user id without an
+*** Info: explicit password (such as passwordless logins [e.g. public key
+*** Info: authentication] via sshd).
+
+*** Info: If you want to enable that functionality, it's required to create
+*** Info: a new account with special privileges (unless a similar account
+*** Info: already exists). This account is then used to run these special
+*** Info: servers.
+
+*** Info: Note that creating a new user requires that the current account
+*** Info: have Administrator privileges itself.
+
+*** Info: No privileged account could be found.
+
+*** Info: This script plans to use 'cyg_server'.
+*** Info: 'cyg_server' will only be used by registered services.
+*** Query: Do you want to use a different name? (yes/no) no
+*** Query: Create new privileged user account 'cyg_server'? (yes/no) yes
+*** Info: Please enter a password for new user cyg_server.  Please be sure
+*** Info: that this password matches the password rules given on your system.
+*** Info: Entering no password will exit the configuration.
+*** Query: Please enter the password:
+*** Query: Reenter:
+
+*** Info: User 'cyg_server' has been created with password 'dynamic1'.
+*** Info: If you change the password, please remember also to change the
+*** Info: password for the installed services which use (or will soon use)
+*** Info: the 'cyg_server' account.
+
+*** Info: Also keep in mind that the user 'cyg_server' needs read permissions
+*** Info: on all users' relevant files for the services running as 'cyg_server'.
+*** Info: In particular, for the sshd server all users' .ssh/authorized_keys
+*** Info: files must have appropriate permissions to allow public key
+*** Info: authentication. (Re-)running ssh-user-config for each user will set
+*** Info: these permissions correctly. [Similar restrictions apply, for
+*** Info: instance, for .rhosts files if the rshd server is running, etc].
+
+
+*** Info: The sshd service has been installed under the 'cyg_server'
+*** Info: account.  To start the service now, call `net start sshd' or
+*** Info: `cygrunsrv -S sshd'.  Otherwise, it will start automatically
+*** Info: after the next reboot.
+
+*** Info: Host configuration finished. Have fun!
+</code></pre>
+
+<p>Ustawienie odpowiednich uprawnień:</p>
+
+<pre><code>/usr/bin/chmod 600 /etc/ssh*
+/usr/bin/chown cyg_server /etc/ssh*
+/usr/bin/chmod 600 /var/empty
+</code></pre>
+
+<p>Uruchominie serwera SSH <code>/usr/bin/cygrunsrv -S sshd</code> i oto jesteśmy:</p>
+
+<p><img src="http://itoutline.me/images/babun-ssh.png"></p>
+
+<p>Gdyby coś poszło nie tak można usunąć konfigurację, potem katalog Babuna i spróbować jeszcze raz.</p>
+
+<pre><code>cygrunsrv --remove sshd
+net user sshd /delete
+net user cyg_server /delete
+rm /etc/ssh_host* /etc/sshd_config
+</code></pre>
+
+<h3>Python, virtualenv i np. Tornado</h3>
+
+<p>W Babunie mamy zainstalowanego pythona w wersji 2.7.3. Instalacja pip-a i serwera Tornado przeszła bez żadnych kłopotów. Pip:</p>
+
+<pre><code>wget https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py
+python get-pip.py
+</code></pre>
+
+<p>Virtualenv:</p>
+
+<pre><code>pip install virtualenv
+</code></pre>
+
+<p>Tornado:</p>
+
+<pre><code>mkdir tornado-test
+cd tornado-test
+virtualenv venv
+source venv/bin/activate
+pip install tornado
+</code></pre>
+
+<p>Kod serwera ;)</p>
+
+<figure class='code'><figcaption><span>server.py</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">tornado.ioloop</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">tornado.web</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">MainHandler</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Hello from Babun&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">application</span> <span class="o">=</span> <span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">Application</span><span class="p">([</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">r&quot;/&quot;</span><span class="p">,</span> <span class="n">MainHandler</span><span class="p">),</span>
+</span><span class='line'><span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">application</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">tornado</span><span class="o">.</span><span class="n">ioloop</span><span class="o">.</span><span class="n">IOLoop</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Uruchomienie <code>python server.py</code>:</p>
+
+<p><img src="http://itoutline.me/images/babun-tronado.png"></p>
+
+<h3>Ruby&hellip; i Octopress</h3>
+
+<p>Zdecydowanie najwięcej kłopotów, ale to nie jest jakoś bardzo dziwne. Niemniej jednak udało mi sie uruchomić Octopress-aa, było to tak:</p>
+
+<p>Instalacja rbenv i ruby-build, zdecydowałem się nie korzystać z wersji oferowanej przez &ldquo;pact&rdquo;.</p>
+
+<pre><code>git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.zshrc
+echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.zshrc
+git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+</code></pre>
+
+<p>Aktywacja rbenv:</p>
+
+<pre><code>source ~/.zshrc
+</code></pre>
+
+<p>Instalacja wersji 1.9.3-p551 i ustawienie jej jako domyślnej.</p>
+
+<pre><code>rbenv install 1.9.3-p551
+rbenv global 1.9.3-p551
+</code></pre>
+
+<p>Tutaj zaczynają się schody, zaczynamy od stworzenia pliku z bibliotekami jakie zainstalowały się z ruby.</p>
+
+<pre><code>find /home/$USER/.rbenv -iname '*.so' &gt; /tmp/ruby.gems.local.so.lst
+</code></pre>
+
+<p>Zamykamy wszystkie sesje babuna i uruchamiamy <code>dash.exe</code> z katalogu <code>.babun\cygwin\bin</code>, tam wydajemy polecenie:</p>
+
+<pre><code>/usr/bin/rebaseall -v -T /tmp/ruby.gems.local.so.lst
+</code></pre>
+
+<p>Bez &ldquo;rebaseall&rdquo; podczas instalacji wymaganych bibliotek przez Octopress-a miałem takie problemy:</p>
+
+<pre><code>{ octopress } master » bundle install                                                
+Fetching gem metadata from https://rubygems.org/........
+Resolving dependencies...
+      0 [main] ruby 3412 child_info_fork::abort: address space needed by 'fcntl.so' (0x5F0000) is already occupied
+      1 [main] ruby 2692 child_info_fork::abort: address space needed by 'fcntl.so' (0x5F0000) is already occupied
+      0 [main] ruby 10092 child_info_fork::abort: address space needed by 'fcntl.so' (0x5F0000) is already occupied
+      0 [main] ruby 3188 child_info_fork::abort: address space needed by 'fcntl.so' (0x5F0000) is already occupied
+</code></pre>
+
+<p>Instalacja Octopress-a:</p>
+
+<pre><code>git clone git://github.com/imathis/octopress.git octopress
+cd octopress
+gem install bundler
+rbenv rehash
+bundle install
+</code></pre>
+
+<p>Po &ldquo;rebaseall&rdquo; wygląda to lepiej:</p>
+
+<pre><code>{ octopress } master » bundle install                                                
+Fetching gem metadata from https://rubygems.org/........
+Resolving dependencies...
+Installing rake 10.4.2
+Installing RedCloth 4.2.9
+Installing blankslate 2.1.2.4
+Installing hitimes 1.2.2
+Installing timers 4.0.1
+Installing celluloid 0.16.0
+...
+</code></pre>
+
+<p>Kolejny krok to zmiana w pliku <code>Rakefile</code> z:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="sr">/cygwin|mswin|mingw|bccwin|wince|emx/</span> <span class="o">=~</span> <span class="no">RUBY_PLATFORM</span><span class="p">)</span> <span class="o">!=</span> <span class="kp">nil</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s1">&#39;## Set the codepage to 65001 for Windows machines&#39;</span>
+</span><span class='line'>  <span class="sb">`chcp 65001`</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>na:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="sr">/cygwin|mswin|mingw|bccwin|wince|emx/</span> <span class="o">=~</span> <span class="no">RUBY_PLATFORM</span><span class="p">)</span> <span class="o">!=</span> <span class="kp">nil</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s1">&#39;## Set the codepage to 65001 for Windows machines&#39;</span>
+</span><span class='line'>  <span class="sb">`chcp.com 65001`</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Bez powyższego kroku miałem taki problem:</p>
+
+<pre><code>{ octopress } master » rake install                                                   
+rake aborted!
+Errno::ENOENT: No such file or directory - chcp 65001
+/home/itoutline/octopress/Rakefile:32:in ``'
+/home/itoutline/octopress/Rakefile:32:in `&lt;top (required)&gt;'
+(See full trace by running task with --trace)
+</code></pre>
+
+<p>Wykonujemy <code>rake install</code>:</p>
+
+<pre><code>{ octopress } master » rake install                                                   
+## Set the codepage to 65001 for Windows machines
+## Copying classic theme into ./source and ./sass
+mkdir -p source
+cp -r .themes/classic/source/. source
+mkdir -p sass
+cp -r .themes/classic/sass/. sass
+mkdir -p source/_posts
+mkdir -p public
+</code></pre>
+
+<p>Następnie <code>rake generate &amp;&amp; rake preview</code>:</p>
+
+<pre><code>{ octopress } master » rake generate &amp;&amp; rake preview                                  
+## Set the codepage to 65001 for Windows machines
+## Generating Site with Jekyll
+directory source/stylesheets
+    write source/stylesheets/screen.css
+Configuration file: /home/itoutline/octopress/_config.yml
+            Source: source
+       Destination: public
+      Generating...
+                    done.
+ Auto-regeneration: disabled. Use --watch to enable.
+## Set the codepage to 65001 for Windows machines
+Starting to watch source with Jekyll and Compass. Starting Rack on port 4000
+[2014-12-29 15:22:08] INFO  WEBrick 1.3.1
+[2014-12-29 15:22:08] INFO  ruby 1.9.3 (2014-11-13) [i386-cygwin]
+[2014-12-29 15:22:08] WARN  TCPServer Error: Bad file descriptor - listen(2)
+[2014-12-29 15:22:08] INFO  WEBrick::HTTPServer#start: pid=4924 port=4000
+&gt;&gt;&gt; Compass is watching for changes. Press Ctrl-C to Stop.
+Configuration file: /home/itoutline/octopress/_config.yml
+    write public/stylesheets/screen.css
+            Source: source
+       Destination: public
+      Generating...
+                    done.
+</code></pre>
+
+<p>Mamy bloga:</p>
+
+<p><img src="http://itoutline.me/images/babun-octopress.png"></p>
+
+<p>Ale to nie wszystko, próba umieszczenia takiego wpisu:</p>
+
+<p><img src="http://itoutline.me/images/babun-octopress-pb.png"></p>
+
+<p>na blogu, zakończy się tak:</p>
+
+<pre><code>{ octopress } master » rake generate &amp;&amp; rake preview                                  
+## Set the codepage to 65001 for Windows machines
+## Generating Site with Jekyll
+    write source/stylesheets/screen.css
+Configuration file: /home/itoutline/octopress/_config.yml
+            Source: source
+       Destination: public
+      Generating...
+  Liquid Exception: No such file or directory - C:\Windows\system32\cmd.exe in _posts/2014-12-29-nowy-post.markdown/#excerpt
+                    done.
+ Auto-regeneration: disabled. Use --watch to enable.
+## Set the codepage to 65001 for Windows machines
+Starting to watch source with Jekyll and Compass. Starting Rack on port 4000
+[2014-12-29 15:35:49] INFO  WEBrick 1.3.1
+[2014-12-29 15:35:49] INFO  ruby 1.9.3 (2014-11-13) [i386-cygwin]
+[2014-12-29 15:35:49] WARN  TCPServer Error: Bad file descriptor - listen(2)
+[2014-12-29 15:35:49] INFO  WEBrick::HTTPServer#start: pid=7540 port=4000
+</code></pre>
+
+<p>Rozwiązaniem jest ustawienie COMSPEC:</p>
+
+<pre><code>export COMSPEC=/cygdrive/c/Windows/System32/cmd.exe
+</code></pre>
+
+<p>najlepiej od razu dodać do ~/.zshrc:</p>
+
+<pre><code>echo "export COMSPEC=/cygdrive/c/Windows/System32/cmd.exe" &gt;&gt; ~/.zshrc
+</code></pre>
+
+<p>Ostatni drobny kłopot to narzekanie na brak &ldquo;python2&rdquo; podczas generowania bloga:</p>
+
+<pre><code>which: no python2 in (/home/itoutline/.rbenv/versions/1.9.3-p551/lib/ruby/gems/1.9.1/bin:/home/itoutline/.rbenv/versions/1.9.3-p551/bin:/home/itoutline/.rbenv/libexec:/home/itoutline/.rbenv/plugins/ruby-build/bin:/home/itoutline/.rbenv/shims:/home/itoutline/.rbenv/bin:/home/itoutline/bin:/usr/local/bin:/usr/bin:/cygdrive/c/ProgramData/Oracle/Java/javap~...
+</code></pre>
+
+<p>Wystarczy utworzenie linku symbolicznego:</p>
+
+<pre><code>cd /usr/bin
+ln -s python2.7.exe python2
+</code></pre>
+
+<p>&ldquo;Chyba&rdquo; wszystko działa:</p>
+
+<p><img src="http://itoutline.me/images/babun-octopress-ok.png"></p>
+
+<h3>Przed podsumowaniem</h3>
+
+<p>Czasami po uruchomieniu Babun-a może się pojawić coś takiego:</p>
+
+<pre><code>compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+compdef: unknown command or service: git
+{ ~ }  »
+</code></pre>
+
+<p><a href="https://github.com/babun/babun/issues/159">Nie jest tak</a>, że to tylko u mnie. Rozwiązanie w postaci:</p>
+
+<pre><code>compinit
+cp .zcompdump .zcompdump-$HOSTNAME-5.0.2
+</code></pre>
+
+<p>rzeczywiście działa.</p>
+
+<h3>Podsumowując</h3>
+
+<p>Fajnie, że jest Cygwin, że powstał Babun ale chyba zdecydowanie lepiej jest po prostu uruchomić wirtualną maszynę na Virtualboxie. Chyba, że mamy ograniczone zasoby sprzętowe, nie mamy uprawnień, lubimy &ldquo;grzebać&rdquo; albo potrzebujemy dostępu tylko do podstawowych narzędzi Linux/GNU. Jeśli chodzi o to ostatnie to Cygwin/Babun zdecydowanie wygrywa z wirtualną maszyną.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rigol 1054Z i dekodowanie SPI]]></title>
+    <link href="http://itoutline.me/2014/12/22/rigol-1054z-i-dekodowanie-spi/"/>
+    <updated>2014-12-22T22:40:45+00:00</updated>
+    <id>http://itoutline.me/2014/12/22/rigol-1054z-i-dekodowanie-spi</id>
+    <content type="html"><![CDATA[<p>Ciągnie mnie do &ldquo;podsłuchiwania&rdquo;, tym razem padło na protokół <a href="http://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus">SPI</a>. W moim wypadku jest tak, że podejrzenie pakietów czy przebiegu prądu w czasie i zobaczenie jak to wygląda od środka daje olbrzymią satysfakcję. A skoro oscyloskop, który umożliwia to drugie kosztuje ok. 1500 zł nie było na co czekać.</p>
+
+<h3>Źródło sygnału SPI</h3>
+
+<p>Źródłem sygnału jest Arduino UNO, bez podłączonego żadnego odbiornika SPI. Wyjścia MOSI i MISO są po prostu ze sobą połączone co tworzy lokalną pętlę (loopback).</p>
+
+<p>Program, który będzie generował ciąg znaków &ldquo;itoutline.me&rdquo;:</p>
+
+<figure class='code'><figcaption><span>spi_test.ino</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;SPI.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">char</span> <span class="n">outByte</span> <span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;itoutline.me&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="k">const</span> <span class="kt">int</span> <span class="n">slaveSelectPin</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">pinMode</span> <span class="p">(</span><span class="n">slaveSelectPin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">SPI</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">slaveSelectPin</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">outByte</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="n">SPI</span><span class="p">.</span><span class="n">transfer</span><span class="p">(</span><span class="n">outByte</span> <span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">slaveSelectPin</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nazewnictwo portów w SPI zbyt mocno regulowane nie jest (jak podaje Wikipedia):</p>
+
+<table>
+<thead>
+<tr>
+<th>&ldquo;Oficjalnie&rdquo;</th>
+<th>Można spotkać</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SCLK</td>
+<td>SCK, CLK</td>
+</tr>
+<tr>
+<td>MOSI</td>
+<td>SIMO, SDO (for master devices), SDI(for slave devices), DO, DOUT, SI, MTSR</td>
+</tr>
+<tr>
+<td>MISO</td>
+<td>SOMI, SDO (for slave devices ), SDI(for master devices), DI, DIN, SO, MRST</td>
+</tr>
+<tr>
+<td>SS</td>
+<td>nCS, CS, CSB, CSN, nSS, STE, SYNC</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br/>
+Konfiguracja pinów jest następująca:</p>
+
+<ul>
+<li>pin 10 - SS (Slave Select) - CH2 (CS) niebieski</li>
+<li>pin 11 (MOSI) i 12 (MISO) są ze sobą połączone - CH1 (DATA) żółty</li>
+<li>pin 13 - SCK (Serial Clock) - CH3 (CLK) różowy</li>
+</ul>
+
+
+<p>Podłączone sondy do Arduino:</p>
+
+<p><img src="http://itoutline.me/images/Rigol_SPI_Arduino_connection.jpg"></p>
+
+<h3>Jak to widać ?</h3>
+
+<p>Piękny oscylogram, ze zdekodowanym SPI. Widać cykle zegara, dane które są wysyłane tylko w cyklach i zmianę stanu SS/CS podczas transmisji:</p>
+
+<p><img src="http://itoutline.me/images/Rigol_SPI_all_characters.png"></p>
+
+<p>Widok &ldquo;EventTable&rdquo;:</p>
+
+<p><img src="http://itoutline.me/images/Rigol_SPI_chars_ok_table.png"></p>
+
+<p>&ldquo;EventTable&rdquo; niestety wyświetla tylko to co jest widoczne na ekranie. Jeśli mamy dużo danych w pojedynczym komunikacie to niekoniecznie rozciągniemy go na ekranie tak, żeby zadziałał dekoder SPI (potrzebna jest do tego zmiana stanu SS/CS widoczna na ekranie). Np. wysyłając 25 bajtów (&ldquo;itoutline.me_itoutline.me&rdquo;).</p>
+
+<p><img src="http://itoutline.me/images/Rigol_SPI_25_bajtow.png"></p>
+
+<p>Zobaczymy za mało miejsca, żeby wyświetlić na zielonej linii dekodera dane. Niestety tabela raczej nie podaje ich do końca poprawnie bo widać, że w trzecim bajcie mamy &ldquo;.&rdquo; zamiast &ldquo;o&rdquo;.</p>
+
+<p>Wracając do tego, że jest potrzebna widoczna zmiana SS/CS na ekranie w celu zdekodowania SPI. Mamy długi komunikat, widać tylko jego 15 bajtów i zmianę SS/CS:</p>
+
+<p><img src="http://itoutline.me/images/Rigol_SPI_15_bajtow_SS_OK.png"></p>
+
+<p>Gdybyśmy chcieli zobaczyć co jest dalej i przesunęli przebieg w lewo, tracąc jednocześnie zmianę SS/CS z pola widzenia:</p>
+
+<p><img src="http://itoutline.me/images/Rigol_SPI_15_bajtow_SS_NOK.png"></p>
+
+<p>Jest problem.</p>
+
+<p>Na poniższym zrzucie zamieściłem wszystkie ustawienia dekodera SPI jakie zastosowałem do jego wykonania:</p>
+
+<p><img src="http://itoutline.me/images/Rigol_SPI_Param.png"></p>
+
+<p>No i najważniejsze rozłożenie pojedynczego bajtu na bity :) 0b01101001 = 0x69 = &ldquo;i&rdquo; ASCII</p>
+
+<p><img src="http://itoutline.me/images/Rigol_SPI_bits.png"></p>
+
+<p>Ostateczna kontrola ołówkiem:</p>
+
+<p><img src="http://itoutline.me/images/Rigol_SPI_bits_exp.png"></p>
+
+<p>Wykorzystuje oscyloskop bardzo mocno amatorsko ale potencjał tego urządzenia jest naprawdę imponujący. Oczywiście zakup oscyloskopu tylko dla dekodowania SPI to bardzo średni pomysł zważywszy na obecność analizatorów logicznych za 30 zł, no ale to dopiero początek :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi i podsłuchiwanie ruchu]]></title>
+    <link href="http://itoutline.me/2014/09/11/raspberry-pi-i-podsluchiwanie-ruchu/"/>
+    <updated>2014-09-11T19:42:10+00:00</updated>
+    <id>http://itoutline.me/2014/09/11/raspberry-pi-i-podsluchiwanie-ruchu</id>
+    <content type="html"><![CDATA[<p>Czasami zdarza się, że istnieje potrzeba sprawdzenia co się dzieje w dłuższym okresie czasu na danym urządzeniu jeśli chodzi o ruch sieciowy jaki przez nie przechodzi. Rpi nadaje się do tego całkiem nieźle. Do podsłuchania i zapisania ruchu wystarczyłby w zupełności <code>tcpdump</code> lub <code>tshark</code>ale zdecydowałem, że uruchomię wiresharka na Rpi i będę co jakiś czas podglądał pakiety. Stąd też instalacja serwera VNC w postaci <code>tightvncserver</code>.</p>
+
+<h2>Architektura</h2>
+
+<p>W moim wypadku wyglądało to tak, że modem DSL (który nie przydzielał adresów IP) miał być podłączony przez router do badanego urządzenia - Device-A. Pech chciał, że nie miałem pod ręka wolnego routera a testy trzeba było zacząć już. W związku z czym Rpi pełniło jednocześnie funkcje serwera DHCP, routera, sniffera i sieciowej konsoli ponieważ Device-A miał port szeregowy. Dodatkowo dla wygody, Rpi było podłączone do sieci Wifi z której mogłem sobie podglądać co tam się &ldquo;wyrabia&rdquo; ;)</p>
+
+<p><img src="http://itoutline.me/images/rpi_sniffing.png"></p>
+
+<h2>Oprogramowanie</h2>
+
+<pre><code>sudo apt-get update
+sudo apt-get install dnsmasq wireshark picocom tightvncserver
+</code></pre>
+
+<ul>
+<li>dnsmasq - serwer DHCP/TFTP i DNS proxy</li>
+<li>wireshark - podsłuchiwanie ruchu</li>
+<li>picocom - konsola do połączeń szergowych</li>
+<li>tightvncserver - serwer VNC</li>
+</ul>
+
+
+<h2>Konfiguracja Rpi</h2>
+
+<ul>
+<li>Konfiguracja <code>/etc/network/interfaces</code></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>auto lo
+</span><span class='line'>iface lo inet loopback
+</span><span class='line'>
+</span><span class='line'>#Interfejs WAN
+</span><span class='line'>auto eth0
+</span><span class='line'>iface eth0 inet static
+</span><span class='line'>      address xxx.xxx.xxx.xxx
+</span><span class='line'>      netmask 255.255.255.0
+</span><span class='line'>      gateway xxx.xxx.xxx.xxx
+</span><span class='line'>
+</span><span class='line'>#Interfejs LAN
+</span><span class='line'>auto eth1
+</span><span class='line'>iface eth1 inet static
+</span><span class='line'>      address 192.168.11.1
+</span><span class='line'>      network 255.255.255.0
+</span><span class='line'>      gateway 192.168.11.1
+</span><span class='line'>
+</span><span class='line'>allow-hotplug wlan0
+</span><span class='line'>auto wlan0
+</span><span class='line'>iface wlan0 inet dhcp
+</span><span class='line'>        wpa-ssid "SID_WIFI"
+</span><span class='line'>        wpa-psk "Haslo_WIFI"
+</span><span class='line'>
+</span><span class='line'>iface default inet dhcp</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>Włączenie przekazywania ruchu IPV4 pomiędzy interfejsami sieciowymi</p>
+
+<pre><code>  sysctl -w net.ipv4.ip_forward=1`
+</code></pre></li>
+<li><p>Włączenie &ldquo;maskarady&rdquo;</p>
+
+<pre><code>  sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+  sudo iptables -A FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+  sudo iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
+</code></pre></li>
+</ul>
+
+
+<p>Gdybyśmy chcieli, żeby zmiana przetrwała restart Rpi, zapisujemy tablice</p>
+
+<pre><code>    sudo bash -c 'iptables-save &gt; /etc/network/iptables'
+</code></pre>
+
+<p>Dodanie do <code>/etc/network/interfaces</code> linijki zaczytującej tablice</p>
+
+<pre><code>    sudo bash -c 'echo "pre-up iptables-restore &lt; /etc/network/iptables" &gt;&gt; /etc/network/interfaces'
+</code></pre>
+
+<ul>
+<li><p>Konfiguracja tightvncserver</p>
+
+<ul>
+<li><p>Konfiguracja hasła do VNC</p>
+
+<pre><code>  tightvncserver
+</code></pre></li>
+<li><p>Uruchomienie serwera VNC</p>
+
+<pre><code>  vncserver :0 -geometry 1200x800 -depth 16
+</code></pre></li>
+</ul>
+</li>
+<li><p>Konfiguracja wireshark</p>
+
+<ul>
+<li><p>Nadanie użytkownikowi &ldquo;pi&rdquo; uprawnień do przechwytywania ruchu (oczywiście można uruchomić wiresharka na koncie root ale wyrabianie dobrych nawyków zawsze w cenie)</p>
+
+<pre><code>  sudo dpkg-reconfigure wireshark-common
+</code></pre>
+
+<p>  W oknie, które się pojawi wybieramy &ldquo;Yes&rdquo; a następnie dodajemy &ldquo;pi&rdquo; do grupy &ldquo;wireshark&rdquo;</p>
+
+<pre><code>  sudo usermod -a -G wireshark pi
+</code></pre>
+
+<p>  Żeby powyższa operacja stała się aktywna konieczne jest ponowne zalogowanie się (ewentualnie restart Rpi)</p></li>
+</ul>
+</li>
+<li><p>Konfiguracja dnsmasq <code>/etc/dnsmasq.conf</code></p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>interface=eth1
+</span><span class='line'>dhcp-range=192.168.11.140,192.168.11.150,255.255.255.0,12h
+</span><span class='line'>log-queries
+</span><span class='line'>log-dhcp</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>dnsmasq</code> jest naprawdę ok, w sumie dwie pierwsze linijki wystarczają do skonfigurowania go jako serwer DHCP. <code>interface=eth1</code> to interfejs na którym nasłuchuje serwer DHCP. <code>log-queries</code> i <code>log-dhcp</code> spowodują, że w <code>/var/log/syslog</code> pojawią się zapytania DNS i DHCP wysyłane przez klientów. Może to być przydatne gdyby były jakieś kłopoty.</p>
+
+<h2>Podsumowując</h2>
+
+<ul>
+<li><p>Należy uważać na ilość zbieranych danych, jeśli wiadomo, że interesuje nas ruch tylko z udziałem konkretnego adresu IP można dodać filtr na wejściu (Capture Filter): <code>host 192.168.0.1</code>. Specyficznego portu: <code>port 80</code>. Kombinacja: <code>host 192.168.0.1 and port 80</code>.</p></li>
+<li><p>Instalacja wiresharka i tightvncserver może być czasami nadmiarowa i spokojnie wystarczy <code>tcpdump</code> (Instalacja <code>sudo apt-get install tcpdump</code>). Przechwytywanie całych pakietów na interfejsie <code>eth0</code> do pliku zrzut.pcap o maksymalnym rozmiarze 100MB, powstanie 10 takich plików i będą po kolei nadpisywane po przekroczeniu 1GB w sumie:</p>
+
+<pre><code>  sudo tcpdump -i eth0 -C100M -W10 -s0 -w /home/pi/zrzut.pcap &amp;
+</code></pre></li>
+</ul>
+
+
+<p>Trzeba pamiętać o uruchomieniu <code>tcpdump</code> w tle <code>&amp;</code> dzięki temu rozłaczenie sesji ssh nie zakończy działania programu. Po ponownym zalogowaniu, kończymy działanie programu:</p>
+
+<pre><code>    killall tcpdump
+</code></pre>
+
+<ul>
+<li><p>Nic gorszego niż &ldquo;zawieszenie się&rdquo; Rpi podczas sesji trwającej kilka dni. Żeby nie było &ldquo;jak krew w piach&rdquo;, dla bezpieczeństwa można co jakiś czas pobierać przechwytywany ruch za pomocą np. <code>scp</code>. Wireshark zapisuje tymczasowe pliki w katalogu <code>/tmp</code> pod nazwą w takim formacie <code>wireshark_eth1_20140911192644_X8aumU</code>. Bez problemu można je pobrać i analizować w innym miejscu.</p>
+
+<pre><code>  scp pi@raspberrypi:/tmp/wireshark_eth1_20140911192644_X8aumU zrzut.pcap
+</code></pre></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress - pierwsze wrażenia]]></title>
+    <link href="http://itoutline.me/2014/08/24/octopress-pierwsze-wrazenia/"/>
+    <updated>2014-08-24T21:44:22+00:00</updated>
+    <id>http://itoutline.me/2014/08/24/octopress-pierwsze-wrazenia</id>
+    <content type="html"><![CDATA[<p>Zmieniłem platformę blogową na Octopress-a i muszę przyznać, że jak na razie jest bardzo ok. Nie to żebym miał coś do Wordpress-a, po prostu nie potrzebuje takiego &ldquo;kombajna&rdquo;. Podstawowe zalety Octopress-a wg. mnie:</p>
+
+<ul>
+<li>Generuje statyczne pliki html.</li>
+<li>Obsługuje bezproblemowo Markdown-a, pisanie tekstu w html-u to męczarnia a pisząc w edytorze wizualnym zawsze miałem wrażenie utraty kontroli nad tym co się ostatecznie pojawi w html-u.</li>
+<li>Obrazki wrzucam do jednego katalogu i to wszytko.</li>
+<li>Natywnie bardzo fajnie obsługuje wklejanie fragmentów kodu.</li>
+</ul>
+
+
+<p>Oczywiście są też pewne minusy:</p>
+
+<ul>
+<li>Jest mało kustomizowalny, oczywiście można sobie zmienić w nim wszystko no ale to już wieksza ingerencja w kod.</li>
+<li>Skoro to statyczne strony to brak systemu do komentarzy (to mozna obejść wykorzystując np. Disqus).</li>
+<li>Nie działa natywnie funkcjonalność &ldquo;linked list&rdquo; a niby powinna.</li>
+</ul>
+
+
+<p>Zapewne jednych i drugich jest znacznie więcej ale to już wyjdzie w trakcie &ldquo;prania&rdquo;. &ldquo;Linked list&rdquo; już sobie naprawiłem ;)</p>
+
+<!-- comment -->
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vim - intro]]></title>
+    <link href="http://itoutline.me/2014/08/20/vim-intro/"/>
+    <updated>2014-08-20T07:21:36+00:00</updated>
+    <id>http://itoutline.me/2014/08/20/vim-intro</id>
+    <content type="html"><![CDATA[<p>Wszystko wskazuje na to, że przerzucę się zupełnie na vim-a. Od tylu lat szukam edytora &ldquo;idealnego&rdquo; a on cały czas czaił się w tle. Chyba największy problem jeśli chodzi o jego popularność to &ldquo;krzywa uczenia się&rdquo;, niestety lekko nie jest ale kiedy już człowiek zacznie się wciągać to szybko zorientuje się jak potężnym i wygodnym narzędziem jest vim. Oceniam moją znajomość tego edytora na jakieś 15%. Mam plan dojścia do 50% ;).</p>
+
+<h2>Tryby</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert Mode</td>
+<td>W tym trybie edytujemy dokument przechodzimy do niego za pomocą klawisza <kbd>i</kbd>, wychodzimy do trybu &ldquo;Normal Mode&rdquo; - <kbd>Esc</kbd></td>
+</tr>
+<tr>
+<td>Normal Mode</td>
+<td>W tym trybie wciskane klawisze są traktowane jako polecenia. Powinien to być domyślny tryb pracy z vim-em</td>
+</tr>
+<tr>
+<td>Visual Mode</td>
+<td>Tryb w którym dokonujemy zaznaczania tekstu</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Poruszanie</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Góra, dół, lewo, prawo</td>
+<td><kbd>k</kbd>, <kbd>j</kbd>, <kbd>h</kbd>, <kbd>l</kbd></td>
+</tr>
+<tr>
+<td>Początek linii</td>
+<td><kbd>0</kbd></td>
+</tr>
+<tr>
+<td>Koniec linii</td>
+<td><kbd>$</kbd></td>
+</tr>
+<tr>
+<td>Wyraz do przodu</td>
+<td><kbd>w</kbd></td>
+</tr>
+<tr>
+<td>Wyraz wstecz</td>
+<td><kbd>b</kbd></td>
+</tr>
+<tr>
+<td>Dół</td>
+<td>W przypadku pojedyczej linii, zajmującej kilka linii ekranu <kbd>g</kbd><kbd>j</kbd></td>
+</tr>
+<tr>
+<td>Góra</td>
+<td>W przypadku pojedynczej linii, zajmującej kilka linii ekranu <kbd>g</kbd><kbd>k</kbd></td>
+</tr>
+<tr>
+<td>Początek pliku</td>
+<td><kbd>:</kbd><kbd>0</kbd> lub <kbd>g</kbd><kbd>g</kbd></td>
+</tr>
+<tr>
+<td>Koniec pliku</td>
+<td><kbd>:</kbd><kbd>$</kbd> lub <kbd>G</kbd></td>
+</tr>
+<tr>
+<td>Przejście do miejsca ostatniej edycji</td>
+<td><kbd>g</kbd><kbd>i</kbd></td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Wprowadzanie tekstu</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Połączenie dwóch linii tekstu</td>
+<td><kbd>J</kbd></td>
+</tr>
+<tr>
+<td>Copy/Cut/Paste</td>
+<td>Przechodzimy do trybu &ldquo;visual&rdquo; <kbd>v</kbd> lub <kbd>V</kbd> jeśli chcemy od razu zaznaczać całe linie i zaznaczamy interesujący nas tekst, <kbd>y</kbd> (skopiowanie) <kbd>d</kbd> (wycięcie), przechodzimy do miejsca w którym ma się pojawić skopiowany/wycięty tekst,<kbd>p</kbd> wklejenie za kursorem <kbd>P</kbd> wklejenie od miejsca w którym jest kursor</td>
+</tr>
+<tr>
+<td>Wcięcia</td>
+<td>Wyłącznie automatycznych wcięć przy wklejaniu <code>:set paste</code>, włączenie <code>:set nopaste</code></td>
+</tr>
+<tr>
+<td>Dodanie linii</td>
+<td>Poniżej kursora <kbd>o</kbd>, powyżej <kbd>O</kbd></td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Usuwanie</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pojedynczego znaku pod kursorem</td>
+<td><kbd>x</kbd>. W trybie edycji działają również <kbd>Delete</kbd>, <kbd>Backspace</kbd></td>
+</tr>
+<tr>
+<td>Cała linia</td>
+<td><kbd>d</kbd><kbd>d</kbd></td>
+</tr>
+<tr>
+<td>Od miejsca w którym jest kursor do początku linii</td>
+<td><kbd>d</kbd><kbd>0</kbd></td>
+</tr>
+<tr>
+<td>Od miejsca w którym jest kursor do końca linii</td>
+<td><kbd>d</kbd><kbd>$</kbd></td>
+</tr>
+<tr>
+<td>Od miejsca w którym jest kursor do początku pliku</td>
+<td><kbd>d</kbd><kbd>g</kbd><kbd>g</kbd></td>
+</tr>
+<tr>
+<td>Od miejsca w którym jest kursor do końca pliku</td>
+<td><kbd>d</kbd><kbd>G</kbd></td>
+</tr>
+<tr>
+<td>Usunięcie fragmentu tekstu</td>
+<td>Zaznaczamy od którego miejsca ma być usunięty tekst <kbd>m</kbd><kbd>a</kbd>, przechodzimy kursorem do końca fragmentu który chcemy usunąć i wpisujemy <kbd>d</kbd><kbd>&lsquo;</kbd><kbd>a</kbd></td>
+</tr>
+<tr>
+<td>Usuwanie w trybie blokowym</td>
+<td>Tryb edycji blokowej jest przydatny kiedy np. w akapicie na początku linii są niepotrzebne odstępy. Można je usunąć za jednym razem, przechodząc do trybu blokowego <kbd>Ctrl</kbd><kbd>v</kbd> i zaznaczyć kursorem kolejne linie, następnie <kbd>d</kbd> lub <kbd>x</kbd></td>
+</tr>
+<tr>
+<td>Usuwanie w trybie liniowym</td>
+<td>Włączamy tryb zaznaczania liniowego <kbd>Shift</kbd><kbd>v</kbd>, kursorem zaznaczamy linie do usunięcia a następnie usuwamy <kbd>d</kbd> lub <kbd>x</kbd></td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Wyszukiwanie</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><kbd> * </kbd></td>
+<td>Wyszukanie kolejnego wyrazu znajdującego się w miejscu kursora</td>
+</tr>
+<tr>
+<td><kbd>#</kbd></td>
+<td>Wyszukanie poprzedniego wyrazu znajdującego się w miejscu kursora</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Zamiana</h2>
+
+<h2>Zakładki</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Otwarcie nowej zakładki</td>
+<td><code>:tabnew</code></td>
+</tr>
+<tr>
+<td>Poruszanie się pomiedzy zakładkami</td>
+<td><kbd>g</kbd><kbd>t</kbd></td>
+</tr>
+<tr>
+<td>Przywrócenie przypadkowo zamkniętej zakładki</td>
+<td><code>:ls</code> - wyświetlnie bufora a następnie <code>:tabnew +Xbuf</code> gdzie X to numer pod którym plik jest w buforze</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Tips&amp;Tricks</h2>
+
+<table>
+<thead>
+<tr>
+<th>Operacja</th>
+<th>Kroki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mini Kalkulator</td>
+<td>W trybie &ldquo;insert&rdquo;, <kbd>Ctrl</kbd><kbd>r</kbd><kbd>=</kbd>, wpisujemy równanie po wciśnięciu <kbd>Enter</kbd> wynik pojawi się w miejscu kursora</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>.vimrc</h2>
+
+<table>
+<thead>
+<tr>
+<th>Wpis</th>
+<th>Opis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://itoutline.me/downloads/code/vim_autoindent_switch.txt">paste mode</a></td>
+<td>Umożliwi włączanie/wyłączanie automatycznego ustawiania odstępów za pomocą klawisza F2. Zamiast zabawy z <code>:set paste</code> i <code>:set nopaste</code></td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Jump Desktop i Centos]]></title>
+    <link href="http://itoutline.me/2013/12/15/jump-desktop-i-centos/"/>
+    <updated>2013-12-15T23:17:00+00:00</updated>
+    <id>http://itoutline.me/2013/12/15/jump-desktop-i-centos</id>
+    <content type="html"><![CDATA[<p>Jump Desktop to naprawdę przyjemny klient RDP i VNC na OSX, IOS i Androida. Zaczynamy od sprawdzenia czy server VNC jest zainstalowany:</p>
+
+<pre><code>rpm -qa \*vnc\*
+</code></pre>
+
+<p>Jeśli nie będzie pakietu <code>tigervnc-server</code>, instalujemy go:</p>
+
+<pre><code>yum install tigervnc-server
+</code></pre>
+
+<p>Konfiguracje serwera VNC na Centos 6.5 rozpoczynamy od edycji pliku <code>sudo vi /etc/sysconfig/vncservers</code>:</p>
+
+<pre><code>VNCSERVERS="1:itoutline"
+VNCSERVERARGS[1]="-geometry 1280x900 -localhost"
+</code></pre>
+
+<p>W zmiennej <code>VNCSERVERS</code> podajemy identyfikator ekranu i nazwę użytkownika a w <code>VNCSERVERARGS</code> parametry połączenia. <code>-localhost</code> powoduje, że możliwe będzie tylko nawiązywanie połaczeń lokalnych (z wykorzytaniem tunelu SSH). W sumie zdalny dostęp za pomocą &ldquo;czystego&rdquo; VNC jest mało rozsądny.</p>
+
+<!-- more -->
+
+
+<p>Ustawienie hasła VNC dla użytkownika (bez tego server VNC nie chce się uruchomić):</p>
+
+<pre><code>su - itoutline
+vncpasswd
+</code></pre>
+
+<p>Włączenie uruchamiania serwera VNC po każdym restarcie i uruchomienie go:</p>
+
+<pre><code>chkconfig vncserver on
+service vncserver start
+</code></pre>
+
+<p>Konfiguarcję połączenia w Jump Desktop rozpoczynamy od zdefiniowania połączenia SSH w ustawieniach globalnych (jak widać użyłem niestandardowego portu 2001):</p>
+
+<p><img src="http://itoutline.me/images/jump-ssh-servers.png"></p>
+
+<p>W konfiguracji serwera podajemy utworzony tunel SSH:</p>
+
+<p><img src="http://itoutline.me/images/jump-server-config-ssh.png"></p>
+
+<p>Na końcu podajemy adres naszego serwera, tutaj oczywiście wprowadzamy localhost ponieważ łączymy się za pomocą zestawionego wcześniej tunelu.</p>
+
+<p><img src="http://itoutline.me/images/jump-server-config.png"></p>
+
+<p>Port na którym będziemy się łaczyć to 5901 ponieważ użytkownik zdefiniowany w <code>/etc/sysconfig/vncservers</code> miał identyfikator 1. VNC standardowo pracuje na porcie 5900 ale wykorzystujac wspomniany plik i identyfikatory ekranów  przypisujemy im kolejne porty po 5900.</p>
+
+<p>Gdyby ktoś chciał zmienić standardowy port na którym pracuje VNC, można go zmodyfikować w pliku <code>/usr/bin/vncserver</code></p>
+
+<pre><code>$vncPort = 5900 + $displayNumber;
+</code></pre>
+
+<p>Ustawnie portu na np. 5905 spowoduje, że użytkownik o identyfikatorze ekranu 2, będzie się łączył na port 5907.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Airplay Everywhere]]></title>
+    <link href="http://itoutline.me/2013/07/13/airplay-everywhere/"/>
+    <updated>2013-07-13T21:09:36+00:00</updated>
+    <id>http://itoutline.me/2013/07/13/airplay-everywhere</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://itoutline.me/images/Airplay_on_Android_AOA_Service.png"></p>
+
+<p>Doczekałem się. W końcu znalazłem/jest aplikacja na Androida, która poprawnie strumieniuje dźwięk w trybie Airplay zarówno do RPi jak i AppleTv. Mowa o <a href="https://play.google.com/store/apps/details?id=com.nav.aoaservice&amp;hl=en">Airplay on Android AOA Service</a> Założę się, że nie na każdej wersji Androida powyżej 4.0 i telefonu będzie działać ale na moich obu urządzeniach (Sony Acro S - Cyanogenmod 10 i Nexus 7 - Cyanogenmod 10.1) w końcu nie ma z nią problemu. Na telefonie zaczeła działać poprawnie dopiero po ostatniej aktualizacji, wcześniej była straszna &ldquo;sieczka&rdquo;.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lirc i Raspberry Pi]]></title>
+    <link href="http://itoutline.me/2013/07/13/lirc-i-raspberry-pi/"/>
+    <updated>2013-07-13T19:47:28+00:00</updated>
+    <id>http://itoutline.me/2013/07/13/lirc-i-raspberry-pi</id>
+    <content type="html"><![CDATA[<p>Po dłuższym okresie czasu postanowiłem odkurzyć Harmony 900, od kiedy przesiadłem się na ATV zostałem przy natywnym pilocie do tego urządzenia. Trochę niesamowite jak fajny jest pilot do Apple Tv, jedyne czego mu brakuje to możliwość regulacji głośności. Przy okazji pomyślałem, że sprawdzę jak wygląda sytuacja z Lirc-em na RPi i okazuje się, że jest bardzo dobrze.</p>
+
+<h3>Podłączenie odbiornika IR</h3>
+
+<p>W swoim &ldquo;magazynku&rdquo; znalazłem czujnik TSOP34836 i przyznam, że wykorzystałem ten bo akurat taki miałem&hellip; Działa na zalecanym napięciu 3V (od 2,7 do 5,5V) i maksymalnie pobiera 3mA (w trakcie moich testów nie przekroczył 1,25mA), czyli nie powinien być żadnym problemem dla portu GPIO.</p>
+
+<p><img src="http://itoutline.me/images/rpi-lirc-tsop-ilustracja1.png"></p>
+
+<p>Podłączyłem go w następujący sposób:</p>
+
+<ul>
+<li>Pin 1 - Pin 16 (GPIO 23 RPi)</li>
+<li>Pin 2 - Pin 14 (GND RPi)</li>
+<li>Pin 3 - Pin 1 (3,3V RPi)</li>
+</ul>
+
+
+<!-- more -->
+
+
+<p><img src="http://itoutline.me/images/rpi-lirc-tsop34836.jpg"></p>
+
+<h3>Konfiguracja RPi</h3>
+
+<p>Instalacja Lirc-a:</p>
+
+<pre><code>sudo apt-get update
+sudo apt-get install lirc
+</code></pre>
+
+<p>Dodanie sterowników do <code>sudo vi /etc/modules</code>:</p>
+
+<pre><code>lirc_dev
+lirc_rpi gpio_in_pin=23 gpio_out_pin=22
+</code></pre>
+
+<p><code>gpio_in_pin=23</code> do pinu 23 podłączymy odbiornik podczerwieni a do 22 <code>gpio_out_pin=22</code> nadajnik. Po wydaniu polecenia <code>sudo modprobe lirc_rpi</code> sterowniki powinny się załadować. Można to sprawdzić za pomocą polecenia <code>lsmod | grep lirc</code>, powinniśmy zobaczyć coś takiego:</p>
+
+<pre><code>% lsmod | grep lirc
+lirc_rpi                7266  3
+lirc_dev               10156  1 lirc_rpi
+</code></pre>
+
+<p>Następnie w pliku <code>sudo vi /etc/lirc/hardware.conf</code> umieszczamy poniższą zawartość:</p>
+
+<figure class='code'><figcaption><span> (hardware.conf)</span> <a href='http://itoutline.me/downloads/code/hardware.conf'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">########################################################</span>
+</span><span class='line'><span class="c"># /etc/lirc/hardware.conf</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># Arguments which will be used when launching lircd</span>
+</span><span class='line'><span class="nv">LIRCD_ARGS</span><span class="o">=</span><span class="s2">&quot;--uinput&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Don&#39;t start lircmd even if there seems to be a good config file</span>
+</span><span class='line'><span class="c"># START_LIRCMD=false</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Don&#39;t start irexec, even if a good config file seems to exist.</span>
+</span><span class='line'><span class="c"># START_IREXEC=false</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Try to load appropriate kernel modules</span>
+</span><span class='line'><span class="nv">LOAD_MODULES</span><span class="o">=</span><span class="nb">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Run &quot;lircd --driver=help&quot; for a list of supported drivers.</span>
+</span><span class='line'><span class="nv">DRIVER</span><span class="o">=</span><span class="s2">&quot;default&quot;</span>
+</span><span class='line'><span class="c"># usually /dev/lirc0 is the correct setting for systems using udev</span>
+</span><span class='line'><span class="nv">DEVICE</span><span class="o">=</span><span class="s2">&quot;/dev/lirc0&quot;</span>
+</span><span class='line'><span class="nv">MODULES</span><span class="o">=</span><span class="s2">&quot;lirc_rpi&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Default configuration files for your hardware if any</span>
+</span><span class='line'><span class="nv">LIRCD_CONF</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nv">LIRCMD_CONF</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="c">########################################################</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>W kolejnym kroku musimy skonfigurować jakiegoś pilota w pliku <code>sudo vi /etc/lirc/lircd.conf</code>. Ja akurat znalazłem w &ldquo;szufladzie&rdquo; coś takiego (opisany jako Microsoft Model 1039):</p>
+
+<p><img src="http://itoutline.me/images/rpi-lirc-mce-1039.jpg"></p>
+
+<p>Pliki konfiguracyjne do naprawdę wielu różnych pilotów można pobrać z <a href="http://lirc.sourceforge.net/remotes/">http://lirc.sourceforge.net/remotes/</a>. Niestety są one różnej jakości, dlatego mimo wszystko postanowiłem przygotować swój za pomoca polecenia <code>sudo irrecord  -d /dev/lirc0 my_mce.conf</code> ;) Trzeba przyznać, że proces jest dosyć żmudny ale w rezultacie wygenerowałem plik oparty na protokole RC6 (bardzo nie lubię plików RAW, są mocno nieprecyzyjne i pilot może działać różnie. Chociaż czasami nie ma wyjścia jeśli producent użył jakiegoś abstrakcyjnego protokolu IR). Wygląda on tak:</p>
+
+<figure class='code'><figcaption><span> (my_mce.conf)</span> <a href='http://itoutline.me/downloads/code/my_mce.conf'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'># Please make this file available to others
+</span><span class='line'># by sending it to &lt;lirc@bartelmus.de&gt;
+</span><span class='line'>#
+</span><span class='line'># this config file was automatically generated
+</span><span class='line'># using lirc-0.9.0-pre1(default) on Thu Jul 11 13:36:11 2013
+</span><span class='line'>#
+</span><span class='line'># contributed by itoutline.me
+</span><span class='line'>#
+</span><span class='line'># brand:                      Harmony 900 (device profile MCE-1039)
+</span><span class='line'># model no. of remote control: fully compatible with OEM MCE 1039 (P/N X801143-102)
+</span><span class='line'># devices being controlled by this remote:
+</span><span class='line'>#
+</span><span class='line'># Tested on RPi with TSOP34836 connected to gpio_in_pin 23
+</span><span class='line'>
+</span><span class='line'>begin remote
+</span><span class='line'>
+</span><span class='line'>  name MCE
+</span><span class='line'>  bits           13
+</span><span class='line'>  flags RC6|CONST_LENGTH
+</span><span class='line'>  eps            30
+</span><span class='line'>  aeps          100
+</span><span class='line'>  header       2677   873
+</span><span class='line'>  one           466   419
+</span><span class='line'>  zero          466   419
+</span><span class='line'>  pre_data_bits   24
+</span><span class='line'>  pre_data       0x1BFF83
+</span><span class='line'>  gap          105884
+</span><span class='line'>  min_repeat      3
+</span><span class='line'>#  suppress_repeat 3
+</span><span class='line'>#  uncomment to suppress unwanted repeats
+</span><span class='line'>  toggle_bit_mask 0x8000
+</span><span class='line'>  rc6_mask    0x100000000
+</span><span class='line'>
+</span><span class='line'>      begin codes
+</span><span class='line'>          KEY_1                    0x1BFE
+</span><span class='line'>          KEY_2                    0x1BFD
+</span><span class='line'>          KEY_3                    0x1BFC
+</span><span class='line'>          KEY_4                    0x1BFB
+</span><span class='line'>          KEY_5                    0x1BFA
+</span><span class='line'>          KEY_6                    0x1BF9
+</span><span class='line'>          KEY_7                    0x1BF8
+</span><span class='line'>          KEY_8                    0x1BF7
+</span><span class='line'>          KEY_9                    0x1BF6
+</span><span class='line'>          KEY_0                    0x1BFF
+</span><span class='line'>          KEY_BLUE                 0x1BA1
+</span><span class='line'>          KEY_RED                  0x1BA4
+</span><span class='line'>          KEY_GREEN                0x1BA3
+</span><span class='line'>          KEY_YELLOW               0x1BA2
+</span><span class='line'>          KEY_MENU                 0x1BDB #&#39;Movies&#39; on Harmony 900 LCD and &#39;DVD Menu&#39; on MCE 1039 Remote
+</span><span class='line'>          KEY_INFO                 0x1BF0
+</span><span class='line'>          KEY_EXIT                 0x1BDC #&#39;Back&#39; on Harmony 900 LCD and MCE 1039 Remote
+</span><span class='line'>          KEY_UP                   0x1BE1
+</span><span class='line'>          KEY_DOWN                 0x1BE0
+</span><span class='line'>          KEY_LEFT                 0x1BDF
+</span><span class='line'>          KEY_RIGHT                0x1BDE
+</span><span class='line'>          KEY_OK                   0x1BDD
+</span><span class='line'>          KEY_VOLUMEDOWN           0x1BEE
+</span><span class='line'>          KEY_VOLUMEUP             0x1BEF
+</span><span class='line'>          KEY_MUTE                 0x1BF1
+</span><span class='line'>          KEY_START                0x1BF2
+</span><span class='line'>          KEY_CHANNELDOWN          0x1BEC
+</span><span class='line'>          KEY_CHANNELUP            0x1BED
+</span><span class='line'>          KEY_PLAY                 0x1BE9
+</span><span class='line'>          KEY_PAUSE                0x1BE7
+</span><span class='line'>          KEY_RECORD               0x1BE8
+</span><span class='line'>          KEY_STOP                 0x1BE6
+</span><span class='line'>          KEY_REWIND               0x1BEA
+</span><span class='line'>          KEY_FORWARD              0x1BEB
+</span><span class='line'>          KEY_PREVIOUS             0x1BE4
+</span><span class='line'>          KEY_NEXT                 0x1BE5
+</span><span class='line'>          KEY_ASCPECT              0x7BD8
+</span><span class='line'>          KEY_RECORDEDTV           0x1BB7
+</span><span class='line'>          KEY_LIVETV               0x1BDA
+</span><span class='line'>          KEY_MYRADIO              0x7BAF
+</span><span class='line'>          KEY_MYMUSIC              0x1BB8
+</span><span class='line'>          KEY_MYPICTURES           0x1BB6
+</span><span class='line'>          KEY_MYVIDEO              0x1BB5
+</span><span class='line'>          KEY_AUDIO                0x7BB3
+</span><span class='line'>          KEY_CLEAR                0x1BF5
+</span><span class='line'>          KEY_ENTER                0x1BF4
+</span><span class='line'>          KEY_NUMERIC_STAR         0x7BE2
+</span><span class='line'>          KEY_NUMERIC_POUND        0x7BE3
+</span><span class='line'>          KEY_AUDIO                0xEBB8
+</span><span class='line'>          KEY_POWER                0x7BF3
+</span><span class='line'>          KEY_OFF                  0x7BD5
+</span><span class='line'>          KEY_ON                   0x7BD6
+</span><span class='line'>          KEY_TELETEXT             0x1BA5
+</span><span class='line'>          KEY_SUBTITLE             0x7BB2
+</span><span class='line'>          KEY_GUIDE                0x7BD9
+</span><span class='line'>      end codes
+</span><span class='line'>end remote
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Jak widać jest tutaj trochę zamieszane a to dlatego, że powyższy plik w pełni obsługuje również profil &ldquo;MCE-1039&rdquo; zdefiniowany na Harmony 900:</p>
+
+<p><img src="http://itoutline.me/images/rpi-lirc-harmony-select-device.png"></p>
+
+<p>Czyli pilot ze zdjęcia powyżej działa prawidłowo jak i Harmony 900 ze zdefiniowanym urzadzeniem &ldquo;MCE-1039&rdquo;. W przypadku Harmony jest sporo dodatkowych przycisków, których nie ma na moim pilocie &ldquo;Microsoft Model 1039&rdquo;.</p>
+
+<p>Kopiujemy wygenerowany plik (lub pobrany z sieci do naszego pilota) w miejsce <code>/etc/lirc/lircd.conf</code> i można uruchamiać Lirc-a <code>sudo /etc/init.d/lirc start</code></p>
+
+<p><img src="http://itoutline.me/images/rpi-lirc-start.png"></p>
+
+<p>Za pomocą polecenia <code>irw</code> możemy sprawdzić czy rzeczywiście polcenia wysyłane przez pilota są odbierane przez Lirc-a:</p>
+
+<p><img src="http://itoutline.me/images/rpi-lirc-irw.png"></p>
+
+<p>U mnie dopiero po restarcie RPi zaczęło to działać.</p>
+
+<h3>Go deep</h3>
+
+<p>Z uwagi na to, że mam akurat pod ręką oscyloskop postanowiłem zobaczyć jak w rzeczywistości wygląda jakieś polecenie, trafiło na KEY_DOWN 0x1BE0 = 110111110000. Sondę podłączyłem bezpośrednio do wyjścia odbiornika IR.</p>
+
+<p>Przebieg wygląda następująco (RC6 używa &ldquo;Manchester Encoding&rdquo; do kodowania sygnału):</p>
+
+<p><img src="http://itoutline.me/images/key_down_mce_rc6.png"></p>
+
+<p>Ostatnie 13 bitów to kod polecenia (pokrywa się to z tym co mamy w lircd.conf), następnie są 24 &ldquo;pre_data_bits&rdquo; i po ich konwersji do hex otrzymujemy 0x1BFF83 czyli wartość &ldquo;pre_data&rdquo;.</p>
+
+<p>W sumie wszystko by się zgadzało :)</p>
+
+<h3>Problemy</h3>
+
+<ul>
+<li>Jeśli wygrzebaliśmy pilota z &ldquo;szuflady&rdquo; to zaczynamy od sprawdzenia czy generuje w ogóle jakiś sygnał. Potrzebne jest do tego tak specjalistyczne narzędzie jak telefon z aparatem ;) Naciskanie przycisków powinno powodować pojawienie się fioletowego światła na ekranie telefonu. Szanse na to, że pilot wysyła sygnał ale jest on nieprawidłowy są bliskie 0.</li>
+</ul>
+
+
+<p><img src="http://itoutline.me/images/rpi-lirc-phone1.jpg" width="400"></p>
+
+<ul>
+<li>Kolejnym krokiem jest sprawdzenie czy sterowniki są poprawnie zainstalowane, czyli <code>lsmod</code>. U mnie wygląda to tak:</li>
+</ul>
+
+
+<p><img src="http://itoutline.me/images/rpi-lirc-lsusb.png"></p>
+
+<ul>
+<li>Jeśli <code>irw</code> nic nie wyświetla warto sprawdzić czy coś w ogóle dociera do portu RPi za pomocą polecenia <code>mode2 -d /dev/lirc0</code>, wcześniej trzeba zatrzymać Lirc-a <code>sudo /etc/init.d/lirc stop</code>. Jeżeli zobaczymy tam jakieś dane to znaczy, że Lirc i konfiguracja pilota zdefiniowana w <code>/etc/lirc/lircd.conf</code> nie do końca chce współpracować z pilotem który mamy.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Typy plików obsługiwane przez XBMC]]></title>
+    <link href="http://itoutline.me/2013/07/09/typy-plikow-obslugiwane-przez-xbmc/"/>
+    <updated>2013-07-09T08:00:05+00:00</updated>
+    <id>http://itoutline.me/2013/07/09/typy-plikow-obslugiwane-przez-xbmc</id>
+    <content type="html"><![CDATA[<p>Mam w swoim archiwum pliki z rozszerzeniem .f4v, niezbyt ich dużo dlatego problem z wyświetlaniem ich podczas przeglądania zakładki Video nie pojawiał się zbyt często.</p>
+
+<p>Okazuje się, że dodanie/usunięcie nowych rozszerzeń obsługiwanych przez XBMC jest bardzo proste (oczywiście format pliku musi być przede wszystkim &ldquo;zjadliwy&rdquo; dla XBMC). W pliku <code>advancedsettings.xml</code> (w przypadku ATV2 plik ten należy stworzyć w katalogu <code>/private/var/mobile/Library/Preferences/XBMC/userdata</code>) dodajemy następującą sekcję:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;advancedsettings&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;videoextensions&gt;</span>
+</span><span class='line'>       <span class="nt">&lt;add&gt;</span>.f4v<span class="nt">&lt;/add&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/videoextensions&gt;</span>
+</span><span class='line'><span class="nt">&lt;/advancedsettings&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>W pliku <code>advancedsettings.xml</code> można spersonalizować o wiele więcej ustawień. Szczegóły: <a href="http://wiki.xbmc.org/index.php?title=Userdata/advancedsettings.xml">http://wiki.xbmc.org/index.php?title=Userdata/advancedsettings.xml</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Połączenie konsolowe Rasberry Pi]]></title>
+    <link href="http://itoutline.me/2013/06/25/polaczenie-konsolowe-rasberry-pi/"/>
+    <updated>2013-06-25T21:49:16+00:00</updated>
+    <id>http://itoutline.me/2013/06/25/polaczenie-konsolowe-rasberry-pi</id>
+    <content type="html"><![CDATA[<p>Ostatnio zakupiłem kabelek USB => RS TTL, pracujący na napięciu 3.3V. Wygląda on tak:</p>
+
+<p><img src="http://itoutline.me/images/rpi_serial_kabelek.jpg"></p>
+
+<p>Dzięki niemu możemy podłączyć się do Rpi za pomocą konsoli. Ma to ten plus, że nie potrzebujemy monitora, klawiatury, sieci a i tak wiadomo co się dzieje od samego początku czyli podłączenia zasilania do Rpi.</p>
+
+<p>Kabelek podłączamy w taki sposób:</p>
+
+<p><img src="http://itoutline.me/images/rpi_serial_2.jpg"></p>
+
+<p>Oczywiście musimy mieć zainstalowe sterowniki do chipsetu PL2303 (<a href="http://www.itoutline.me/pl2303-z-osx">jak to zrobić na OSX</a>). Następnie wydając polecenie:</p>
+
+<pre><code>picocom -b 115200 /dev/cu.PL2303-00001014
+</code></pre>
+
+<p>podłączamy się do konsoli Rpi. Konsola jest skonfigurowana w dystrybucji Raspbian “wheezy” (Ostatnia linia w <code>/etc/inittab</code>). W Arch Linux, trzeba ją ustawić (btw odpuściłem Arch-a na razie;)</p>
+
+<p>To wszystko, jesteśmy zalogowani przez ttyAMA0:</p>
+
+<p><img src="http://itoutline.me/images/rpi_serial_login_2_retina_gotowy.png"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Wyłączenie Dashboard-a na OSX]]></title>
+    <link href="http://itoutline.me/2013/06/09/wylaczenie-dashboard-a-na-osx/"/>
+    <updated>2013-06-09T22:26:46+00:00</updated>
+    <id>http://itoutline.me/2013/06/09/wylaczenie-dashboard-a-na-osx</id>
+    <content type="html"><![CDATA[<p><img src="http://itoutline.me/images/dashboard.jpg"></p>
+
+<p>Chyba nie przekonam się nigdy do tego rozwiązania. W każdym bądź razie wyłączam je permanentnie:</p>
+
+<pre><code>defaults write com.apple.dashboard mcx-disabled -boolean YES
+killall Dock
+</code></pre>
+
+<p>Gdybym jednak kiedyś zmienił zdanie:</p>
+
+<pre><code>defaults write com.apple.dashboard mcx-disabled -boolean NO
+killall Dock
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

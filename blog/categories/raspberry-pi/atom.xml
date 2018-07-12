@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: raspberry pi | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/raspberry-pi/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Lirc i Raspberry Pi]]></title>
+    <link href="http://itoutline.me/2013/07/13/lirc-i-raspberry-pi/"/>
+    <updated>2013-07-13T19:47:28+00:00</updated>
+    <id>http://itoutline.me/2013/07/13/lirc-i-raspberry-pi</id>
+    <content type="html"><![CDATA[<p>Po dłuższym okresie czasu postanowiłem odkurzyć Harmony 900, od kiedy przesiadłem się na ATV zostałem przy natywnym pilocie do tego urządzenia. Trochę niesamowite jak fajny jest pilot do Apple Tv, jedyne czego mu brakuje to możliwość regulacji głośności. Przy okazji pomyślałem, że sprawdzę jak wygląda sytuacja z Lirc-em na RPi i okazuje się, że jest bardzo dobrze.</p>
+
+<h3>Podłączenie odbiornika IR</h3>
+
+<p>W swoim &ldquo;magazynku&rdquo; znalazłem czujnik TSOP34836 i przyznam, że wykorzystałem ten bo akurat taki miałem&hellip; Działa na zalecanym napięciu 3V (od 2,7 do 5,5V) i maksymalnie pobiera 3mA (w trakcie moich testów nie przekroczył 1,25mA), czyli nie powinien być żadnym problemem dla portu GPIO.</p>
+
+<p><img src="/images/rpi-lirc-tsop-ilustracja1.png"></p>
+
+<p>Podłączyłem go w następujący sposób:</p>
+
+<ul>
+<li>Pin 1 - Pin 16 (GPIO 23 RPi)</li>
+<li>Pin 2 - Pin 14 (GND RPi)</li>
+<li>Pin 3 - Pin 1 (3,3V RPi)</li>
+</ul>
+
+
+<!-- more -->
+
+
+<p><img src="/images/rpi-lirc-tsop34836.jpg"></p>
+
+<h3>Konfiguracja RPi</h3>
+
+<p>Instalacja Lirc-a:</p>
+
+<pre><code>sudo apt-get update
+sudo apt-get install lirc
+</code></pre>
+
+<p>Dodanie sterowników do <code>sudo vi /etc/modules</code>:</p>
+
+<pre><code>lirc_dev
+lirc_rpi gpio_in_pin=23 gpio_out_pin=22
+</code></pre>
+
+<p><code>gpio_in_pin=23</code> do pinu 23 podłączymy odbiornik podczerwieni a do 22 <code>gpio_out_pin=22</code> nadajnik. Po wydaniu polecenia <code>sudo modprobe lirc_rpi</code> sterowniki powinny się załadować. Można to sprawdzić za pomocą polecenia <code>lsmod | grep lirc</code>, powinniśmy zobaczyć coś takiego:</p>
+
+<pre><code>% lsmod | grep lirc
+lirc_rpi                7266  3
+lirc_dev               10156  1 lirc_rpi
+</code></pre>
+
+<p>Następnie w pliku <code>sudo vi /etc/lirc/hardware.conf</code> umieszczamy poniższą zawartość:</p>
+
+<p><figure class='code'><figcaption><span> (hardware.conf)</span> <a href='/downloads/code/hardware.conf'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">########################################################</span>
+</span><span class='line'><span class="c"># /etc/lirc/hardware.conf</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># Arguments which will be used when launching lircd</span>
+</span><span class='line'><span class="nv">LIRCD_ARGS</span><span class="o">=</span><span class="s2">&quot;--uinput&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Don&#39;t start lircmd even if there seems to be a good config file</span>
+</span><span class='line'><span class="c"># START_LIRCMD=false</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Don&#39;t start irexec, even if a good config file seems to exist.</span>
+</span><span class='line'><span class="c"># START_IREXEC=false</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Try to load appropriate kernel modules</span>
+</span><span class='line'><span class="nv">LOAD_MODULES</span><span class="o">=</span><span class="nb">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Run &quot;lircd --driver=help&quot; for a list of supported drivers.</span>
+</span><span class='line'><span class="nv">DRIVER</span><span class="o">=</span><span class="s2">&quot;default&quot;</span>
+</span><span class='line'><span class="c"># usually /dev/lirc0 is the correct setting for systems using udev</span>
+</span><span class='line'><span class="nv">DEVICE</span><span class="o">=</span><span class="s2">&quot;/dev/lirc0&quot;</span>
+</span><span class='line'><span class="nv">MODULES</span><span class="o">=</span><span class="s2">&quot;lirc_rpi&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Default configuration files for your hardware if any</span>
+</span><span class='line'><span class="nv">LIRCD_CONF</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nv">LIRCMD_CONF</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="c">########################################################</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>W kolejnym kroku musimy skonfigurować jakiegoś pilota w pliku <code>sudo vi /etc/lirc/lircd.conf</code>. Ja akurat znalazłem w &ldquo;szufladzie&rdquo; coś takiego (opisany jako Microsoft Model 1039):</p>
+
+<p><img src="/images/rpi-lirc-mce-1039.jpg"></p>
+
+<p>Pliki konfiguracyjne do naprawdę wielu różnych pilotów można pobrać z <a href="http://lirc.sourceforge.net/remotes/">http://lirc.sourceforge.net/remotes/</a>. Niestety są one różnej jakości, dlatego mimo wszystko postanowiłem przygotować swój za pomoca polecenia <code>sudo irrecord  -d /dev/lirc0 my_mce.conf</code> ;) Trzeba przyznać, że proces jest dosyć żmudny ale w rezultacie wygenerowałem plik oparty na protokole RC6 (bardzo nie lubię plików RAW, są mocno nieprecyzyjne i pilot może działać różnie. Chociaż czasami nie ma wyjścia jeśli producent użył jakiegoś abstrakcyjnego protokolu IR). Wygląda on tak:</p>
+
+<p><figure class='code'><figcaption><span> (my_mce.conf)</span> <a href='/downloads/code/my_mce.conf'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'># Please make this file available to others
+</span><span class='line'># by sending it to &lt;lirc@bartelmus.de&gt;
+</span><span class='line'>#
+</span><span class='line'># this config file was automatically generated
+</span><span class='line'># using lirc-0.9.0-pre1(default) on Thu Jul 11 13:36:11 2013
+</span><span class='line'>#
+</span><span class='line'># contributed by itoutline.me
+</span><span class='line'>#
+</span><span class='line'># brand:                      Harmony 900 (device profile MCE-1039)
+</span><span class='line'># model no. of remote control: fully compatible with OEM MCE 1039 (P/N X801143-102)
+</span><span class='line'># devices being controlled by this remote:
+</span><span class='line'>#
+</span><span class='line'># Tested on RPi with TSOP34836 connected to gpio_in_pin 23
+</span><span class='line'>
+</span><span class='line'>begin remote
+</span><span class='line'>
+</span><span class='line'>  name MCE
+</span><span class='line'>  bits           13
+</span><span class='line'>  flags RC6|CONST_LENGTH
+</span><span class='line'>  eps            30
+</span><span class='line'>  aeps          100
+</span><span class='line'>  header       2677   873
+</span><span class='line'>  one           466   419
+</span><span class='line'>  zero          466   419
+</span><span class='line'>  pre_data_bits   24
+</span><span class='line'>  pre_data       0x1BFF83
+</span><span class='line'>  gap          105884
+</span><span class='line'>  min_repeat      3
+</span><span class='line'>#  suppress_repeat 3
+</span><span class='line'>#  uncomment to suppress unwanted repeats
+</span><span class='line'>  toggle_bit_mask 0x8000
+</span><span class='line'>  rc6_mask    0x100000000
+</span><span class='line'>
+</span><span class='line'>      begin codes
+</span><span class='line'>          KEY_1                    0x1BFE
+</span><span class='line'>          KEY_2                    0x1BFD
+</span><span class='line'>          KEY_3                    0x1BFC
+</span><span class='line'>          KEY_4                    0x1BFB
+</span><span class='line'>          KEY_5                    0x1BFA
+</span><span class='line'>          KEY_6                    0x1BF9
+</span><span class='line'>          KEY_7                    0x1BF8
+</span><span class='line'>          KEY_8                    0x1BF7
+</span><span class='line'>          KEY_9                    0x1BF6
+</span><span class='line'>          KEY_0                    0x1BFF
+</span><span class='line'>          KEY_BLUE                 0x1BA1
+</span><span class='line'>          KEY_RED                  0x1BA4
+</span><span class='line'>          KEY_GREEN                0x1BA3
+</span><span class='line'>          KEY_YELLOW               0x1BA2
+</span><span class='line'>          KEY_MENU                 0x1BDB #&#39;Movies&#39; on Harmony 900 LCD and &#39;DVD Menu&#39; on MCE 1039 Remote
+</span><span class='line'>          KEY_INFO                 0x1BF0
+</span><span class='line'>          KEY_EXIT                 0x1BDC #&#39;Back&#39; on Harmony 900 LCD and MCE 1039 Remote
+</span><span class='line'>          KEY_UP                   0x1BE1
+</span><span class='line'>          KEY_DOWN                 0x1BE0
+</span><span class='line'>          KEY_LEFT                 0x1BDF
+</span><span class='line'>          KEY_RIGHT                0x1BDE
+</span><span class='line'>          KEY_OK                   0x1BDD
+</span><span class='line'>          KEY_VOLUMEDOWN           0x1BEE
+</span><span class='line'>          KEY_VOLUMEUP             0x1BEF
+</span><span class='line'>          KEY_MUTE                 0x1BF1
+</span><span class='line'>          KEY_START                0x1BF2
+</span><span class='line'>          KEY_CHANNELDOWN          0x1BEC
+</span><span class='line'>          KEY_CHANNELUP            0x1BED
+</span><span class='line'>          KEY_PLAY                 0x1BE9
+</span><span class='line'>          KEY_PAUSE                0x1BE7
+</span><span class='line'>          KEY_RECORD               0x1BE8
+</span><span class='line'>          KEY_STOP                 0x1BE6
+</span><span class='line'>          KEY_REWIND               0x1BEA
+</span><span class='line'>          KEY_FORWARD              0x1BEB
+</span><span class='line'>          KEY_PREVIOUS             0x1BE4
+</span><span class='line'>          KEY_NEXT                 0x1BE5
+</span><span class='line'>          KEY_ASCPECT              0x7BD8
+</span><span class='line'>          KEY_RECORDEDTV           0x1BB7
+</span><span class='line'>          KEY_LIVETV               0x1BDA
+</span><span class='line'>          KEY_MYRADIO              0x7BAF
+</span><span class='line'>          KEY_MYMUSIC              0x1BB8
+</span><span class='line'>          KEY_MYPICTURES           0x1BB6
+</span><span class='line'>          KEY_MYVIDEO              0x1BB5
+</span><span class='line'>          KEY_AUDIO                0x7BB3
+</span><span class='line'>          KEY_CLEAR                0x1BF5
+</span><span class='line'>          KEY_ENTER                0x1BF4
+</span><span class='line'>          KEY_NUMERIC_STAR         0x7BE2
+</span><span class='line'>          KEY_NUMERIC_POUND        0x7BE3
+</span><span class='line'>          KEY_AUDIO                0xEBB8
+</span><span class='line'>          KEY_POWER                0x7BF3
+</span><span class='line'>          KEY_OFF                  0x7BD5
+</span><span class='line'>          KEY_ON                   0x7BD6
+</span><span class='line'>          KEY_TELETEXT             0x1BA5
+</span><span class='line'>          KEY_SUBTITLE             0x7BB2
+</span><span class='line'>          KEY_GUIDE                0x7BD9
+</span><span class='line'>      end codes
+</span><span class='line'>end remote
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Jak widać jest tutaj trochę zamieszane a to dlatego, że powyższy plik w pełni obsługuje również profil &ldquo;MCE-1039&rdquo; zdefiniowany na Harmony 900:</p>
+
+<p><img src="/images/rpi-lirc-harmony-select-device.png"></p>
+
+<p>Czyli pilot ze zdjęcia powyżej działa prawidłowo jak i Harmony 900 ze zdefiniowanym urzadzeniem &ldquo;MCE-1039&rdquo;. W przypadku Harmony jest sporo dodatkowych przycisków, których nie ma na moim pilocie &ldquo;Microsoft Model 1039&rdquo;.</p>
+
+<p>Kopiujemy wygenerowany plik (lub pobrany z sieci do naszego pilota) w miejsce <code>/etc/lirc/lircd.conf</code> i można uruchamiać Lirc-a <code>sudo /etc/init.d/lirc start</code></p>
+
+<p><img src="/images/rpi-lirc-start.png"></p>
+
+<p>Za pomocą polecenia <code>irw</code> możemy sprawdzić czy rzeczywiście polcenia wysyłane przez pilota są odbierane przez Lirc-a:</p>
+
+<p><img src="/images/rpi-lirc-irw.png"></p>
+
+<p>U mnie dopiero po restarcie RPi zaczęło to działać.</p>
+
+<h3>Go deep</h3>
+
+<p>Z uwagi na to, że mam akurat pod ręką oscyloskop postanowiłem zobaczyć jak w rzeczywistości wygląda jakieś polecenie, trafiło na KEY_DOWN 0x1BE0 = 110111110000. Sondę podłączyłem bezpośrednio do wyjścia odbiornika IR.</p>
+
+<p>Przebieg wygląda następująco (RC6 używa &ldquo;Manchester Encoding&rdquo; do kodowania sygnału):</p>
+
+<p><img src="/images/key_down_mce_rc6.png"></p>
+
+<p>Ostatnie 13 bitów to kod polecenia (pokrywa się to z tym co mamy w lircd.conf), następnie są 24 &ldquo;pre_data_bits&rdquo; i po ich konwersji do hex otrzymujemy 0x1BFF83 czyli wartość &ldquo;pre_data&rdquo;.</p>
+
+<p>W sumie wszystko by się zgadzało :)</p>
+
+<h3>Problemy</h3>
+
+<ul>
+<li>Jeśli wygrzebaliśmy pilota z &ldquo;szuflady&rdquo; to zaczynamy od sprawdzenia czy generuje w ogóle jakiś sygnał. Potrzebne jest do tego tak specjalistyczne narzędzie jak telefon z aparatem ;) Naciskanie przycisków powinno powodować pojawienie się fioletowego światła na ekranie telefonu. Szanse na to, że pilot wysyła sygnał ale jest on nieprawidłowy są bliskie 0.</li>
+</ul>
+
+
+<p><img src="/images/rpi-lirc-phone1.jpg" width="400"></p>
+
+<ul>
+<li>Kolejnym krokiem jest sprawdzenie czy sterowniki są poprawnie zainstalowane, czyli <code>lsmod</code>. U mnie wygląda to tak:</li>
+</ul>
+
+
+<p><img src="/images/rpi-lirc-lsusb.png"></p>
+
+<ul>
+<li>Jeśli <code>irw</code> nic nie wyświetla warto sprawdzić czy coś w ogóle dociera do portu RPi za pomocą polecenia <code>mode2 -d /dev/lirc0</code>, wcześniej trzeba zatrzymać Lirc-a <code>sudo /etc/init.d/lirc stop</code>. Jeżeli zobaczymy tam jakieś dane to znaczy, że Lirc i konfiguracja pilota zdefiniowana w <code>/etc/lirc/lircd.conf</code> nie do końca chce współpracować z pilotem który mamy.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Połączenie konsolowe Rasberry Pi]]></title>
+    <link href="http://itoutline.me/2013/06/25/polaczenie-konsolowe-rasberry-pi/"/>
+    <updated>2013-06-25T21:49:16+00:00</updated>
+    <id>http://itoutline.me/2013/06/25/polaczenie-konsolowe-rasberry-pi</id>
+    <content type="html"><![CDATA[<p>Ostatnio zakupiłem kabelek USB => RS TTL, pracujący na napięciu 3.3V. Wygląda on tak:</p>
+
+<p><img src="/images/rpi_serial_kabelek.jpg"></p>
+
+<p>Dzięki niemu możemy podłączyć się do Rpi za pomocą konsoli. Ma to ten plus, że nie potrzebujemy monitora, klawiatury, sieci a i tak wiadomo co się dzieje od samego początku czyli podłączenia zasilania do Rpi.</p>
+
+<p>Kabelek podłączamy w taki sposób:</p>
+
+<p><img src="/images/rpi_serial_2.jpg"></p>
+
+<p>Oczywiście musimy mieć zainstalowe sterowniki do chipsetu PL2303 (<a href="http://www.itoutline.me/pl2303-z-osx">jak to zrobić na OSX</a>). Następnie wydając polecenie:</p>
+
+<pre><code>picocom -b 115200 /dev/cu.PL2303-00001014
+</code></pre>
+
+<p>podłączamy się do konsoli Rpi. Konsola jest skonfigurowana w dystrybucji Raspbian “wheezy” (Ostatnia linia w <code>/etc/inittab</code>). W Arch Linux, trzeba ją ustawić (btw odpuściłem Arch-a na razie;)</p>
+
+<p>To wszystko, jesteśmy zalogowani przez ttyAMA0:</p>
+
+<p><img src="/images/rpi_serial_login_2_retina_gotowy.png"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Archlinux na Raspberry Pi]]></title>
+    <link href="http://itoutline.me/2012/10/14/archlinux-na-raspberry-pi/"/>
+    <updated>2012-10-14T23:30:31+00:00</updated>
+    <id>http://itoutline.me/2012/10/14/archlinux-na-raspberry-pi</id>
+    <content type="html"><![CDATA[<p>W końcu do mnie dotarł Raspberry Pi. Instalacja Archlinuxa, co do którego nie jestem jeszcze przekonany z uwagi na to, że &ldquo;prawie wszystko jest inaczej&rdquo; wyglądała następująco.</p>
+
+<p>Przygotowanie karty SD. Znalazłem jakąś kartę 4GB, image Archlinuxa na stronie <a href="http://www.raspberrypi.org/downloads">http://www.raspberrypi.org/downloads</a> ma 2GB w związku z czym trzeba się pobawić <code>parted</code>, którego na OSX nie ma. Nie wnikałem już czy da się przygotować kartę na OSX z wiadomych względów, czas naglił. Całość przygotowania karty przeprowadziłem na CentOS</p>
+
+<p>Pobranie obrazu:</p>
+
+<p><code>wget http://downloads.raspberrypi.org/images/archlinuxarm/archlinux-hf-2012-09-18/archlinux-hf-2012-09-18.zip</code></p>
+
+<p>Wypakowanie:</p>
+
+<p><code>unzip archlinux-hf-2012-09-18.zip</code></p>
+
+<p>Sprawdzenie w jaki sposób karta pojawiła się w systemie. Po włożeniu karty do slotu SD należy wydać polecenie:</p>
+
+<p><code>dmesg | tail -15</code></p>
+
+<pre><code>usbcore: registered new interface driver usb-storage
+USB Mass Storage support registered.
+usb-storage: device found at 3
+usb-storage: waiting for device to settle before scanning
+usb-storage: device scan complete
+scsi 8:0:0:0: Direct-Access     APPLE    SD Card Reader   2.00 PQ: 0 ANSI: 0
+sd 8:0:0:0: Attached scsi generic sg2 type 0
+sd 8:0:0:0: [sdb] 8040448 512-byte logical blocks: (4.11 GB/3.83 GiB)
+sd 8:0:0:0: [sdb] Write Protect is off
+sd 8:0:0:0: [sdb] Mode Sense: 0b 00 00 08
+sd 8:0:0:0: [sdb] Assuming drive cache: write through
+sd 8:0:0:0: [sdb] Assuming drive cache: write through
+ sdb: sdb1
+sd 8:0:0:0: [sdb] Assuming drive cache: write through
+sd 8:0:0:0: [sdb] Attached SCSI removable disk
+</code></pre>
+
+<p>Ponieważ uruchamiam CentOSa w <code>init 3</code> automontowanie jak widać nie działa <code>df</code>:</p>
+
+<pre><code>Filesystem           1K-blocks      Used Available Use% Mounted on
+/dev/mapper/vg_centos01-lv_root
+                     100670904   2620032  97028396   3% /
+tmpfs                   508396         0    508396   0% /dev/shm
+/dev/sda1               495844     56404    413840  12% /boot
+none                 4294967296         0 4294967296   0% /media/psf
+</code></pre>
+
+<p>I bardzo dobrze ;), można zapisywać obraz na kartę:</p>
+
+<p><code>sudo dd bs=4M if=archlinux-hf-2012-09-18.img of=/dev/sdb</code></p>
+
+<pre><code>471+1 records in
+471+1 records out
+1977614336 bytes (2.0 GB) copied, 120.311 s, 16.4 MB/s
+</code></pre>
+
+<p>Bardzo ważne jest, żeby podać właściwą nazwę dysku ponieważ powyższym poleceniem można uszkodzić system na którym karta jest przygotowywana. Jak widać u mnie karta zamontowała się jako sdb</p>
+
+<p>Zmiana rozmiaru partycji root</p>
+
+<p><code>sudo parted /dev/sdb</code></p>
+
+<pre><code>GNU Parted 2.1
+Using /dev/sdb
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+(parted) unit chs
+(parted) print
+Model: APPLE SD Card Reader (scsi)
+Disk /dev/sdb: 500,126,9
+Sector size (logical/physical): 512B/512B
+BIOS cylinder,head,sector geometry: 500,255,63.  Each cylinder is 8225kB.
+Partition Table: msdos
+
+Number  Start     End         Type     File system  Flags
+ 1      0,32,32   12,28,15    primary  fat16        boot, lba
+ 2      12,28,16  240,109,60  primary  ext4
+
+(parted) rm 2
+(parted) mkpart primary 12,28,16 500,126,8
+</code></pre>
+
+<p>Polecenie <code>unit chs</code> wyświetla informacje o zajętości przestrzeni na dysku w formacie &ldquo;cylinders, heads, sectors&rdquo;. Polecenie <code>print</code> wyświetla tablice partycji. <code>rm 2</code> usuwa drugą partycję, jest usuwana tylko informacja o partycji a nie dane jakie się na niej znajdują. Polecenie <code>mkpart primary 12,28,16 500,126,8</code> zakłada ponownie partycję zaczynającą się w tym samym miejscu ale kończącą na przedostatnim sektorze dysku (karty SD).</p>
+
+<p>Sprawdzenie poprawności struktury systemu plików:</p>
+
+<p><code>sudo e2fsck -f /dev/sdb2</code></p>
+
+<pre><code>Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+/dev/sdb2: 32513/114688 files (0.0% non-contiguous), 110601/458496 blocks
+</code></pre>
+
+<p>Rozszerzenie wielkości partycji do zadeklarowanej w tablicy partycji:</p>
+
+<p><code>sudo resize2fs /dev/sdb2</code></p>
+
+<pre><code>resize2fs 1.41.12 (17-May-2010)
+Resizing the filesystem on /dev/sdb2 to 980735 (4k) blocks.
+The filesystem on /dev/sdb2 is now 980735 blocks long.
+</code></pre>
+
+<p>To wszystko, można umieszczać kartę w Raspberry Pi</p>
+]]></content>
+  </entry>
+  
+</feed>

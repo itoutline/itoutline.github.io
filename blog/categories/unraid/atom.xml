@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: unraid | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/unraid/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Home Cloud]]></title>
+    <link href="http://itoutline.me/2017/12/01/Unraid-part-1/"/>
+    <updated>2017-12-01T16:10:00+00:00</updated>
+    <id>http://itoutline.me/2017/12/01/Unraid-part-1</id>
+    <content type="html"><![CDATA[<p>Kilka lat temu pozbyłem się z domu &ldquo;blaszaka&rdquo;. Nie gram, w związku z czym w miarę wydajny laptop miał mi spokojnie wystarczyć. No i w sumie tak było, brakowało mi tylko jednej rzeczy, jakiegoś wspólnego domowego zasobu sieciowego. Nie było to jakoś krytyczne, podejmowałem próby z BananaPi wyposażonym w port sata (bardzo słabo), podpinałem dysk do posiadanych routerów po USB3 (niewiele lepiej) a na dodatek ciągle miałem w głowie, że jeśli mi ten dysk padnie to tracę wszystko w związku z czym jakichś krytycznych rzeczy tam nie trzymałem. </br></br>
+W końcu zdecydowałem się jakoś docelowo rozwiązać problem i wybór padł na NAS Asus 6202T. Rozwiązanie sprawdzało się całkiem dobrze ale pojawiła się potrzeba &ldquo;upchnięcia&rdquo; trochę większej ilości wirtualnych maszyn, wersja Docker-a była nie tą, której potrzebowałem, brak wsparcia dla osobnych dysków SSD (w tamtym czasie) i jakieś inne drobne rzeczy skłoniły mnie do poszukania czegoś innego.
+</br></br>
+No i trafiłem na Unraid-a. Jest to dedykowany pod storage OS oparty na Linuxie. Podstawowe zalety w mojej ocenie:</p>
+
+<ul>
+<li>Wsparcie dla wirtualizacji/dokeryzacji.</li>
+<li>Obsługa SSD przez tzw. &ldquo;cache pool&rdquo;.</li>
+<li>Bardzo łatwe dodawanie nowych docker-ów.</li>
+<li>Niezależność od dostawcy sprzętu, to chyba największy plus, kupuje komponenty dokładnie take jakich potrzebuje. (Ludzie preferujący rozwiązania &ldquo;półkowe&rdquo; niekoniecznie uznają to za zaletę).</li>
+<li>Możliwość &ldquo;podpięcia&rdquo; karty graficznej bezpośrednio do VM, dzięki czemu nie ma różnicy pomiędzy pracą na maszynie fizycznej a VM.</li>
+<li>Całość ruchu sieciowego pomiędzy wszystkimi hostami odbywa się w obrębie jednej fizycznej maszyny:</li>
+</ul>
+
+
+<p> <img src="/images/unraid_hdd_speed.PNG"></p>
+
+<ul>
+<li>Duża frajda z posiadania własnej chmury, Plex + NextCloud + Collabora + draw.io (Collabora - pakiet biurowy, może odstaje nieco jakością od rozwiązań gigantów ale już z draw.io korzysta mi się lepiej niż z Visio).</li>
+<li>Wszytko jest na dyskach w RAID (co nie zwalnia z backup-ów ale zdecydowanie jest raźniej ;)</li>
+</ul>
+
+
+<p>Wady:</p>
+
+<ul>
+<li>Większe zużycie energii 50W, w przypadku Asus-a 10W (wartości mocno uśrednione). Coś za coś, I7 8700 vs Celeron</li>
+<li>Rozwiązanie nie jest darmowe.</li>
+<li>Nadal mam problem z podłączeniem zintegrowanej grafiki do VM Linuxowej (grubsza sprawa, musi dojść do przełączenia systemu obsługującego IGD z unRAID na VM).</li>
+</ul>
+
+
+<p>Całość wygląda tak:</p>
+
+<p> <img src="/images/unraid_schema.PNG"></p>
+
+<p>Historia zatoczyła koło, teraz potrzebuje byle jakiego laptopa i mogę pracować na VM zdalnie (w czym na pewno pomaga 50Mb upstream-u od dostawcy Internetu). Co najważniejsze, całość działa zaskakująco stabilnie. Niesamowite jak wiele funkcji może spełniać dzisiaj PC w domu (cztery ostatnie to VM) a wszystko to dzięki wirtualizacji i konteneryzacji.</p>
+
+<p> <img src="/images/unraid_list.PNG"></p>
+
+<p>Obciążenie CPU w tym czasie (żadna z maszyn nie robiła nic szczególnego, na Windows 10, Firefox z 20+ zakładkami i kilka pomniejszych programów):</p>
+
+<p> <img src="/images/unraid_cpu.PNG"></p>
+
+<p>Kiedyś bardzo optowałem za stawianiem drobnych rzeczy jak np. Home Assistant na RPI czy podobnych ale teraz wydaje mi się, że takie &ldquo;pudło&rdquo; jest zdecydowanie lepszym rozwiązaniem, ogarnia wszystko :)</p>
+
+<p> <img src="/images/unraid_hal.png"></p>
+]]></content>
+  </entry>
+  
+</feed>

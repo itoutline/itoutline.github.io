@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mavericks | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/mavericks/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Jump Desktop i Centos]]></title>
+    <link href="http://itoutline.me/2013/12/15/jump-desktop-i-centos/"/>
+    <updated>2013-12-15T23:17:00+00:00</updated>
+    <id>http://itoutline.me/2013/12/15/jump-desktop-i-centos</id>
+    <content type="html"><![CDATA[<p>Jump Desktop to naprawdę przyjemny klient RDP i VNC na OSX, IOS i Androida. Zaczynamy od sprawdzenia czy server VNC jest zainstalowany:</p>
+
+<pre><code>rpm -qa \*vnc\*
+</code></pre>
+
+<p>Jeśli nie będzie pakietu <code>tigervnc-server</code>, instalujemy go:</p>
+
+<pre><code>yum install tigervnc-server
+</code></pre>
+
+<p>Konfiguracje serwera VNC na Centos 6.5 rozpoczynamy od edycji pliku <code>sudo vi /etc/sysconfig/vncservers</code>:</p>
+
+<pre><code>VNCSERVERS="1:itoutline"
+VNCSERVERARGS[1]="-geometry 1280x900 -localhost"
+</code></pre>
+
+<p>W zmiennej <code>VNCSERVERS</code> podajemy identyfikator ekranu i nazwę użytkownika a w <code>VNCSERVERARGS</code> parametry połączenia. <code>-localhost</code> powoduje, że możliwe będzie tylko nawiązywanie połaczeń lokalnych (z wykorzytaniem tunelu SSH). W sumie zdalny dostęp za pomocą &ldquo;czystego&rdquo; VNC jest mało rozsądny.</p>
+
+<!-- more -->
+
+
+<p>Ustawienie hasła VNC dla użytkownika (bez tego server VNC nie chce się uruchomić):</p>
+
+<pre><code>su - itoutline
+vncpasswd
+</code></pre>
+
+<p>Włączenie uruchamiania serwera VNC po każdym restarcie i uruchomienie go:</p>
+
+<pre><code>chkconfig vncserver on
+service vncserver start
+</code></pre>
+
+<p>Konfiguarcję połączenia w Jump Desktop rozpoczynamy od zdefiniowania połączenia SSH w ustawieniach globalnych (jak widać użyłem niestandardowego portu 2001):</p>
+
+<p><img src="/images/jump-ssh-servers.png"></p>
+
+<p>W konfiguracji serwera podajemy utworzony tunel SSH:</p>
+
+<p><img src="/images/jump-server-config-ssh.png"></p>
+
+<p>Na końcu podajemy adres naszego serwera, tutaj oczywiście wprowadzamy localhost ponieważ łączymy się za pomocą zestawionego wcześniej tunelu.</p>
+
+<p><img src="/images/jump-server-config.png"></p>
+
+<p>Port na którym będziemy się łaczyć to 5901 ponieważ użytkownik zdefiniowany w <code>/etc/sysconfig/vncservers</code> miał identyfikator 1. VNC standardowo pracuje na porcie 5900 ale wykorzystujac wspomniany plik i identyfikatory ekranów  przypisujemy im kolejne porty po 5900.</p>
+
+<p>Gdyby ktoś chciał zmienić standardowy port na którym pracuje VNC, można go zmodyfikować w pliku <code>/usr/bin/vncserver</code></p>
+
+<pre><code>$vncPort = 5900 + $displayNumber;
+</code></pre>
+
+<p>Ustawnie portu na np. 5905 spowoduje, że użytkownik o identyfikatorze ekranu 2, będzie się łączył na port 5907.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: arduino | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/arduino/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Cuttle - Boldport Club]]></title>
+    <link href="http://itoutline.me/2016/09/27/the-cuttle/"/>
+    <updated>2016-09-27T20:15:00+00:00</updated>
+    <id>http://itoutline.me/2016/09/27/the-cuttle</id>
+    <content type="html"><![CDATA[<p>Świetne projekty elektroniczne DIY - <a href="http://www.boldport.club/">Boldport Club</a>, zapisałem się i zacząłem od klona Arduino <a href="http://www.boldport.club/shop/product/390973459">The Cuttle</a>. Nie był to cały kit tylko sama płytka i trochę nieudana, bo od spodu jest miejscami farba na padach do lutowania. Mimo wszystko działa :)</p>
+
+<p> <img src="/images/the_cuttle.JPG"></p>
+
+<p>W sumie pierwszy raz wgrywałem bootloader i tutaj bardzo pomocna okazała się stronka <a href="http://www.gammon.com.au/bootloader">http://www.gammon.com.au/bootloader</a> i sketch <a href="https://github.com/nickgammon/arduino_sketches">Atmega_Board_Programmer</a></p>
+
+<p> <img src="/images/the_cuttle_programming.JPG"></p>
+
+<p>Cały proces wyglądał tak:</p>
+
+<pre><code>Type 'C' when ready to continue with another chip ...
+Attempting to enter ICSP programming mode ...
+Entered programming mode OK.
+Signature = 0x1E 0x95 0x14
+Processor = ATmega328
+Flash memory size = 32768 bytes.
+LFuse = 0xFF
+HFuse = 0xD9
+EFuse = 0xFF
+Lock byte = 0xFF
+Clock calibration = 0xA9
+Type 'L' to use Lilypad (8 MHz) loader, or 'U' for Uno (16 MHz) loader ...
+Using Uno Optiboot 16 MHz loader.
+Bootloader address = 0x7E00
+Bootloader length = 512 bytes.
+Type 'Q' to quit, 'V' to verify, or 'G' to program the chip with the bootloader ...
+Erasing chip ...
+Writing bootloader ...
+Committing page starting at 0x7E00
+Committing page starting at 0x7E80
+Committing page starting at 0x7F00
+Committing page starting at 0x7F80
+Written.
+Verifying ...
+No errors found.
+Writing fuses ...
+LFuse = 0xFF
+HFuse = 0xDE
+EFuse = 0xFD
+Lock byte = 0xEF
+Clock calibration = 0xA9
+Done.
+Programming mode off.
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

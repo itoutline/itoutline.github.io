@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mountain lion | itoutline.me]]></title>
+  <link href="http://itoutline.me/blog/categories/mountain-lion/atom.xml" rel="self"/>
+  <link href="http://itoutline.me/"/>
+  <updated>2018-07-12T00:49:58+00:00</updated>
+  <id>http://itoutline.me/</id>
+  <author>
+    <name><![CDATA[itoutline.me]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Wyłączenie Dashboard-a na OSX]]></title>
+    <link href="http://itoutline.me/2013/06/09/wylaczenie-dashboard-a-na-osx/"/>
+    <updated>2013-06-09T22:26:46+00:00</updated>
+    <id>http://itoutline.me/2013/06/09/wylaczenie-dashboard-a-na-osx</id>
+    <content type="html"><![CDATA[<p><img src="/images/dashboard.jpg"></p>
+
+<p>Chyba nie przekonam się nigdy do tego rozwiązania. W każdym bądź razie wyłączam je permanentnie:</p>
+
+<pre><code>defaults write com.apple.dashboard mcx-disabled -boolean YES
+killall Dock
+</code></pre>
+
+<p>Gdybym jednak kiedyś zmienił zdanie:</p>
+
+<pre><code>defaults write com.apple.dashboard mcx-disabled -boolean NO
+killall Dock
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PL2303 z OSX]]></title>
+    <link href="http://itoutline.me/2013/06/09/pl2303-z-osx/"/>
+    <updated>2013-06-09T18:34:26+00:00</updated>
+    <id>http://itoutline.me/2013/06/09/pl2303-z-osx</id>
+    <content type="html"><![CDATA[<p>Zaskakująco łatwo można dodać sterowniki do konwerterów USB-TTL opartych na chipsecie PL2303. Wystarczy pobrać archiwum osx-pl2303.kext.tgz <a href="http://www.xbsd.nl/2011/07/pl2303-serial-usb-on-osx-lion.html">http://www.xbsd.nl/2011/07/pl2303-serial-usb-on-osx-lion.html</a></p>
+
+<p><img src="/images/PL2303.jpg"></p>
+
+<!-- more -->
+
+
+<p>Instalacja sprowadza się do następujących kroków:</p>
+
+<pre><code>cd $TMPDIR
+wget http://www.xbsd.nl/pub/osx-pl2303.kext.tgz
+tar -xzf osx-pl2303.kext.tgz
+sudo chmod -R 755 osx-pl2303.kext
+sudo chown -R root:wheel osx-pl2303.kext
+sudo cp -R osx-pl2303.kext /System/Library/Extensions/
+sudo kextload /System/Library/Extensions/osx-pl2303.kext
+sudo kextcache -system-cache
+cd -
+</code></pre>
+
+<p>Teraz po podłączeniu konwertera do portu USB powinien pojawić się w katalogu pod nazwami <code>/dev/cu.PL2303-XXX</code> i <code>/dev/tty.PL2303-XXX</code></p>
+
+<p><img src="/images/PL2303_dev_dir.png"></p>
+
+<p>Do komunikacji szeregowej używam <code>picocom</code>, w tym terminalu najbardziej podoba mi się, że jest taki &ldquo;pico&rdquo; ;). Można go zainstalować przez <code>brew install picocom</code></p>
+
+<p><img src="/images/PL2303_picocom.png"></p>
+
+<p>Podłączenie do jakiegoś urządzenia może wyglądać np. tak:</p>
+
+<p><img src="/images/PL2303_picocom_connection.png" width="350"></p>
+
+<p>Powyższe rozwiązanie bez problemu działa na OSX 10.8.4</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PartKeepr na OSX]]></title>
+    <link href="http://itoutline.me/2013/05/09/partkeepr-na-osx/"/>
+    <updated>2013-05-09T14:22:44+00:00</updated>
+    <id>http://itoutline.me/2013/05/09/partkeepr-na-osx</id>
+    <content type="html"><![CDATA[<p>Zauważyłem, że w związku z coraz większą ilością części elektronicznych w moim &ldquo;warsztacie&rdquo; coraz słabiej orientuje się co mam na &ldquo;stanie magazynowym&rdquo;. Pomyślałem, że stworzę prymitywną bazę z prostym frontendem i będę tam wrzucał informacje o zakupach. Zanim przystąpiłem do działania sprawdziłem czy przypadkiem nie ma już takiego rozwiązania i okazało się, że jest <a href="http://www.partkeepr.org">http://www.partkeepr.org</a></p>
+
+<p>Przy okazji znacznie wykraczające poza moje wymagania, postanowiłem tym razem nie wymyślać koła na nowo.</p>
+
+<p>Instalacja na OSX na pewno nie należy do kategorii &ldquo;agree, next, finish&rdquo;.</p>
+
+<!-- more -->
+
+
+<p>Zaczynamy od instalacji MySQL-a <code>brew install mysql</code>:</p>
+
+<p><img src="/images/PartKeepr_mysql_-prerequisites.png"></p>
+
+<p>Uruchamiamy bazę i tworzymy schemat z którego będzie korzystał Partkeepr:</p>
+
+<pre><code>mysql.server start
+mysql -uroot
+CREATE DATABASE partkeepr CHARACTER SET UTF8;
+GRANT USAGE ON *.* TO root@localhost IDENTIFIED BY '';
+GRANT ALL PRIVILEGES ON partkeepr.* TO root@localhost;
+</code></pre>
+
+<p><img src="/images/PartKeepr_mysql_sql_-prerequisites.png"></p>
+
+<p>Partkeepr wymaga również ImageMagick, DoctrineORM oraz Twig-a. Do instalacji ImageMagick użyłem Homebrew (wszystkie niestandardowe rzeczy staram się instalować za pomocą tego menadżera), &ldquo;niestety&rdquo; musimy dodać nieoficjalne źródła <code>brew tap josegonzalez/php</code> oraz <code>brew tap homebrew/dupes</code>:</p>
+
+<p><img src="/images/PartKeepr<em>-tap_1_prerequisites</em>.png&#8221; width=&#8221;640&#8221;></p>
+
+<p><img src="/images/PartKeepr<em>-tap_2_prerequisites</em>.png&#8221; width=&#8221;640&#8221;></p>
+
+<p>Potem <code>brew install josegonzalez/php/php54-imagick</code>. Jedną z zależności jest instalacja PHP w wersji 5.4. Generalnie zawsze staram się korzystać z natywnych narzędzi OSX (PHP jest w OSX) ale i tak później potrzebny jest <code>pear</code> a tego już nie ma.</p>
+
+<p>Na szczęscie można skorzystać z natywnego serwera Apache, trzeba tylko zmienić w pliku <code>/private/etc/apache2/httpd.conf</code> lokalizację PHP z <code>LoadModule php5_module libexec/apache2/libphp5.so</code> na <code>LoadModule php5_module /usr/local/opt/php54/libexec/apache2/libphp5.so</code></p>
+
+<p>Warto się upewnić czy wszystko poszło jak powinno, można to zrobić np. tak:</p>
+
+<pre><code>echo -e '' | sudo tee /Library/WebServer/Documents/phpinfo.php
+</code></pre>
+
+<p>Uruchamiamy Apache <code>sudo apachectl start</code>. Otwierając teraz w przeglądarce adres <a href="http://localhost/phpinfo.php">http://localhost/phpinfo.php</a> powinniśmy zobaczyć wersję PHP 5.4.15 i &ldquo;gdzieś na dole&rdquo; moduł imagick</p>
+
+<p>Kolejnym krokiem jest instalacja DoctrineORM oraz Twig-a, wydajemy następujące polecenia:</p>
+
+<pre><code>sudo pear channel-discover pear.symfony.com
+sudo pear channel-discover pear.doctrine-project.org
+sudo pear install pear.doctrine-project.org/DoctrineORM
+sudo pear install pear.doctrine-project.org/DoctrineSymfonyYaml
+sudo pear install pear.doctrine-project.org/DoctrineSymfonyConsole
+sudo pear channel-discover pear.twig-project.org
+sudo pear install twig/Twig
+</code></pre>
+
+<p>Pobieramy Partkeepr i ustawiamy uprawnienia do katalogu w którym chcemy umieścić Partkeepr, ja zainstalowałem go w <code>/Library/WebServer/Documents/partkeepr/</code></p>
+
+<pre><code>cd /Library/WebServer/Documents/
+sudo wget http://partkeepr.org/downloads/partkeepr-0.1.9.tbz2
+sudo tar -xvf partkeepr-0.1.9.tbz2
+sudo mv partkeepr-0.1.9 partkeepr
+sudo chown -R _www:_www /Library/WebServer/Documents/partkeepr
+</code></pre>
+
+<p>Instalator Partkeepr sprawdza strefę czasową, dlatego trzeba ją ustawić w <code>/usr/local/etc/php/5.4/php.ini</code> np. <code>date.timezone = "Europe/Warsaw"</code>. Warto również upewnić się, że <code>short_open_tag = Off</code></p>
+
+<p>Teraz można już uruchomić instalatora Partkeepr za pomocą linku: <a href="http://localhost/partkeepr/setup/">http://localhost/partkeepr/setup/</a></p>
+
+<p>Powinniśmy zobaczyć poniższy ekran:</p>
+
+<p><img src="/images/PartKeepr_Setup.png"></p>
+
+<p>W następnym kroku instalator sprawdzi czy nie ma jakichś problemów ze środowiskiem:</p>
+
+<p><img src="/images/PartKeepr_Setup_-prerequisites.png"></p>
+
+<p>Definiowanie dostępu do wcześniej stworzonej bazy:</p>
+
+<p><img src="/images/PartKeepr_Setup_db.png"></p>
+
+<p>Jeśli nie będzie problemów powinna rozpocząć się instalacja:</p>
+
+<p><img src="/images/PartKeepr_Setup_-db_ok.png"></p>
+
+<p>Zapis lub wyświetlenie pliku konfiguracyjnego:</p>
+
+<p><img src="/images/PartKeepr_Setup_-save_file.png"></p>
+
+<p>Informacje na temat konfiguracji cron-a:</p>
+
+<p><img src="/images/PartKeepr_Setup_cron.png"></p>
+
+<p>Koniec:</p>
+
+<p><img src="/images/PartKeepr_Setup_-finish.png"></p>
+
+<p>Po otworzeniu linku <a href="http://localhost/partkeepr/frontend/">http://localhost/partkeepr/frontend/</a> powinniśmy mieć możliwość zalogowania się do aplikacji (admin/admin):</p>
+
+<p><img src="/images/PartKeepr_page.png"></p>
+
+<p>Jak widać w mojej bazie jest już Arduino ;), pozostała najgorsza część zadania czyli uzupełnienie &ldquo;aplikacji magazynowej&rdquo;.</p>
+
+<p>Jeśli chcemy możemy uruchamiać MySQL-a od razu przy starcie systemu w tym celu należy wykonać polecenie:</p>
+
+<p><code>ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents</code></p>
+
+<p>Co ciekawe uruchomienie Apache-a poprzez <code>sudo apachectl start</code> spowoduje, że będzie on już uruchamiany przy starcie systemu.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Aplikacja" dla OSX]]></title>
+    <link href="http://itoutline.me/2013/04/09/aplikacja-dla-osx/"/>
+    <updated>2013-04-09T08:41:01+00:00</updated>
+    <id>http://itoutline.me/2013/04/09/aplikacja-dla-osx</id>
+    <content type="html"><![CDATA[<p>Słowo aplikacja nie bez powodu jest w cudzysłowiu. Tak naprawdę to bash-owy skrypt umieszczony w odpowiedniej strukturze katalogowej wykorzystujący narzędzie <a href="http://www.bluem.net/en/mac/pashua/">Pashua</a>. W sumie najbardziej mi odpowiada <a href="http://www.itoutline.me/xfreerdp-na-szybko/">ten sposób</a> ale pomyślałem sobie, że w ramach ćwiczeń spróbuje zrobić jak najprostsze ale w miarę funkcjonalne GUI do <code>xfreerdp</code>. Stąd cała zabawa z Pashua.</p>
+
+<p>Aplikacje w OSX są aplikacjami dzięki rozszerzeniu .app, tak naprawdę to katalog w którym są umieszczone pliki i zasoby niezbędne do działania programu. Moją &ldquo;aplikację&rdquo; postanowiłem nazwać &ldquo;XFreerdp Client&rdquo;. Jej zawartość wygląda następująco (&ldquo;Show package content&rdquo; z menu podręcznego):</p>
+
+<p><img src="/images/Xfreerdp_Client.app_directory.png" width="400"></p>
+
+<ul>
+<li><p>Info.plist - to plik zawierający informacje o aplikacji. Zdefiniowana jest w nim nazwa pliku, który ma byc uruchomiony, ikony, wersji, architektury itp.</p></li>
+<li><p>rdp_connect - to skrypt, który jest uruchamiany</p></li>
+<li><p>rdp_connect_image.png - obraz który jest wyświetlany w oknie Pashua</p></li>
+<li><p>rdp_connect.icns - ikona aplikacji Xfreerdp Client</p></li>
+</ul>
+
+
+<!-- more -->
+
+
+<p>Zawartość Info.plist:</p>
+
+<p><figure class='code'><figcaption><span> (Info.plist)</span> <a href='/downloads/code/Info.plist'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;dict&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>CFBundleDevelopmentRegion<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>en<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>CFBundleExecutable<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>rdp_connect<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>CFBundleIconFile<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>rdp_connect.icns<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>CFBundleIdentifier<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>itoutline.me.Xfreerdp_Client<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>CFBundleInfoDictionaryVersion<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>6.0<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>CFBundleName<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>Xfreerdp Client<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>CFBundlePackageType<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>APPL<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>CFBundleShortVersionString<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>1.0<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>CFBundleSignature<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>????<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>CFBundleVersion<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>1<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>LSApplicationCategoryType<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>public.app-category.utilities<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>LSMinimumSystemVersion<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>10.5.0<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>LSUIElement<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>1<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>NSHumanReadableCopyright<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>© 2013 itoutline.me<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>NSMainNibFile<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>MainMenu<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;key&gt;</span>NSPrincipalClass<span class="nt">&lt;/key&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;string&gt;</span>NSApplication<span class="nt">&lt;/string&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dict&gt;</span>
+</span><span class='line'><span class="nt">&lt;/plist&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Klucz <code>LSUIElement</code> z wartością ustawioną na <code>1</code> powoduje, że aplikacja nie pojawia się w Dock-u, co ma sens bo i tak po kliknięciu OK uruchamia się <code>xfreerdp</code>. Modyfikację powyższego klucza można wykorzystać w dowolnym programie, którego nie chcemy widzieć w Dock-u.</p>
+
+<p>Pashua daje całkiem spore możliwości jeżeli chodzi o wprowadzanie danych. Może to być pole tekstowe, pole hasła, check box, lista rozwijana, przycisk.</p>
+
+<p>Tak wygląda sam skrypt <code>rdp_connect</code>:</p>
+
+<pre><code class="bash rdp_connect">#!/bin/bash -l
+
+xfreerdp=`which xfreerdp`
+
+if [ ! -f $HOME/.serverauth.* ]
+    then
+        osascript -e 'launch application "Xquartz"'
+fi
+
+if [ ! "$DISPLAY" ]
+    then
+        export DISPLAY=:0
+fi
+
+pashua_run() {
+
+    # Write config file
+    pashua_configfile=`/usr/bin/mktemp /tmp/pashua_XXXXXXXXX`
+    echo "$1" &gt; $pashua_configfile
+
+    bundlepath="Pashua.app/Contents/MacOS/Pashua"
+    if [ "$3" = "" ]
+    then
+        mypath=`dirname "$0"`
+        for searchpath in "$mypath/Pashua" "$mypath/$bundlepath" "./$bundlepath" \
+                          "/Applications/$bundlepath" "$HOME/Applications/$bundlepath"
+        do
+            if [ -f "$searchpath" -a -x "$searchpath" ]
+            then
+                pashuapath=$searchpath
+                break
+            fi
+        done
+    else
+        # Directory given as argument
+        pashuapath="$3/$bundlepath"
+    fi
+
+    if [ ! "$pashuapath" ]
+    then
+        echo "Error: Pashua could not be found"
+        exit 1
+    fi
+
+    # Manage encoding
+    if [ "$2" = "" ]
+    then
+        encoding=""
+    else
+        encoding="-e $2"
+    fi
+
+    # Get result
+    result=`"$pashuapath" $encoding $pashua_configfile | sed 's/ /;;;/g'`
+
+    # Remove config file
+    rm $pashua_configfile
+
+    # Parse result
+    for line in $result
+    do
+        key=`echo $line | sed 's/^\([^=]*\)=.*$/\1/'`
+        value=`echo $line | sed 's/^[^=]*=\(.*\)$/\1/' | sed 's/;;;/ /g'`
+        varname=$key
+        varvalue="$value"
+        eval $varname='$varvalue'
+    done
+
+} # pashua_run()
+
+conf="
+# Set transparency: 0 is transparent, 1 is opaque
+*.transparency=1
+
+# Set window title
+*.title = Xfreerdp Client
+
+# Host
+txh.type = textfield
+txh.label = Host:Port
+txh.default = 192.168.1.1:8403
+txh.width = 150
+
+# User name
+txu.type = textfield
+txu.label = User
+txu.default = itoutline.me
+txu.width = 120
+
+# Password
+pw.type = password
+pw.label = Password
+pw.default = Secret!
+pw.width = 120
+
+# Resolution - radiobuttons
+res.type = radiobutton
+res.label = Resolution
+res.option = 1024x768
+res.option = 1280x800
+res.option = 1440x900
+res.option = 1920x1080
+res.option = fullscreen
+res.default = 1280x800
+
+# Connection Speed - popup menu
+popspeed.type = popup
+popspeed.label = Connection Speed
+popspeed.width = 100
+popspeed.option = lan
+popspeed.option = broadband
+popspeed.option = modem
+popspeed.default = lan
+
+# Console session
+cons.type = checkbox
+cons.label = Connect to console session
+cons.rely = -18
+cons.default = 0
+
+# Compression
+compres.type = checkbox
+compres.label = Enable compression
+compres.rely = -18
+compres.default = 1
+
+# desktop composition
+compos.type = checkbox
+compos.label = Enable desktop composition
+compos.rely = -18
+compos.default = 0
+
+# kill x after dissconection
+killx.type = checkbox
+killx.label = Exit Xquartz after disconnection
+killx.rely = -18
+killx.default = 0
+
+# Add a cancel button with default label
+cb.type=cancelbutton
+"
+
+# Set the images' paths relative to this file's path /
+# skip images if they can not be found in this file's path
+bgimg=$(dirname "$0")'/rdp_connect_image.png'
+
+if [ -e "$bgimg" ]
+then
+    # Display background image
+    conf="$conf
+          bg.type = image
+          bg.x = 70
+          bg.y = 40
+          bg.path = $bgimg"
+fi
+
+pashua_run "$conf"
+
+if [[ $cons == 1 ]]; then
+    cons="-0"
+else
+    cons=""
+fi
+
+if [[ $res == fullscreen ]]; then
+    res="-f"
+else
+    res="-g $res"
+fi
+
+if [[ $compres == 1 ]]; then
+    compres="-z"
+else
+    compres=""
+fi
+
+if [[ $compos == 1 ]]; then
+    compos="--composition"
+else
+    compos=""
+fi
+
+if [[ $cb != 1 ]]; then
+    $xfreerdp -u $txu -p $pw $res $cons $compres --no-rdp -x $popspeed $compos --plugin cliprdr --plugin rdpdr --data disk:HDD:$HOME -- $txh
+    if [[ $killx == 1 ]]; then
+        osascript -e 'tell application "Xquartz" to quit'
+    fi
+fi
+</code></pre>
+
+<p>W powyższym skrypcie wart wspomnienia jest sposób w jaki uruchamiany jest serwer X. Wykorzystałem do tego <code>osascript</code> i przyznam, że nie znalazłem jakiegoś lepszego rozwiązania.</p>
+
+<p>Uruchomienie serwera X:</p>
+
+<pre><code>osascript -e 'launch application "Xquartz"'
+</code></pre>
+
+<p>Zatrzymanie:</p>
+
+<pre><code>osascript -e 'tell application "Xquartz" to quit'
+</code></pre>
+
+<p>W poleceniu <code>xfreerdp</code> automatycznie ładowane są pluginy opowiedzialne za funkcjonalność schowka i dostępu do lokalnych dysków (<code>--plugin rdpdr --data disk:HDD:$HOME</code>), na Windowsie montowany jest katalog domowy.</p>
+
+<p>Konieczne jest również zainstalowanie aplikacji <a href="http://www.bluem.net/en/mac/pashua/">Pashua</a>. Można tego nie robić i umieść tylko binarkę (Pashua) w katalogu <code>XFreerdp Client.app/Contents/MacOS</code>. Ma to sens kiedy chcemy wykorzystać tylko do jednej &ldquo;aplikacji&rdquo; narzędzie Pashua ale jeśli chcemy przygotować więcej tego typu rozwiązań to nie najlepszym pomysłem jest umieszczanie w każdej paczce wspomnianej binarki.</p>
+
+<p>Po skopiowaniu <code>Xfreerdp Ciient.app</code> do katalogu <code>/Applications</code> w Launchpadzie wygląda bardzo dobrze:</p>
+
+<p><img src="/images/Xfreerdp_Client.app_lista.png" width="500"></p>
+
+<p>Okno generowane przez Pashua, w przypadku kiedy nie działa serwer X trzeba chwilę na nie poczekać. Pojawi się dopiero po zainicjowaniu serwera:</p>
+
+<p><img src="/images/Xfreerdp_Client_app.png" width="300"></p>
+
+<p>Nawiązana sesja:</p>
+
+<p><img src="/images/Xfreerdp_Client.app_connection.png" width="800"></p>
+
+<p>Jeśli ktoś nie przepada za shellem albo musi pomóc komuś kto tak ma, może w całkiem prosty sposób zrobić sobie nakładkę graficzną na dowolny program, który po uruchomieniu wymaga jakichś parametrów. Rozwiązanie jest bardzo proste i oczywiście ma w związku z tym swoje ograniczenia (np. kiepska obsługa błędów a w zasadzie jej brak).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Xfreerdp na szybko]]></title>
+    <link href="http://itoutline.me/2013/04/08/xfreerdp-na-szybko/"/>
+    <updated>2013-04-08T22:36:42+00:00</updated>
+    <id>http://itoutline.me/2013/04/08/xfreerdp-na-szybko</id>
+    <content type="html"><![CDATA[<p>Xfreerdp działa bardzo dobrze ale ma ten minus, że wymaga podania sporej ilości parametrów do każdego połączenia. Można &ldquo;przegrepować&rdquo; historię, wkleić linijkę do skryptu ale można też zrobić to tak:</p>
+
+<pre><code class="bash Funkcja start_rdp w .bash_profile">function start_rdp {
+
+    if [ ! -f ~/.serverauth.* ]
+        then
+            echo "Starting Xquartz..."
+            osascript -e 'launch application "Xquartz"'
+            sleep 3
+    fi
+
+    if [ ! "$DISPLAY" ]
+        then
+            export DISPLAY=:0
+    fi
+
+    case $1 in
+    workpc )
+        `which xfreerdp` -u user01 -g 1280x800 -z --no-rdp -x lan --plugin cliprdr --plugin rdpdr --data disk:HDD:$HOME -- 192.168.1.1:8403
+        ;;
+    testpc )
+        `which xfreerdp` -u itoutline.me -g 1280x800 -z --no-rdp -x lan --plugin cliprdr --plugin rdpdr --data disk:HDD:$HOME -- 192.168.1.1:8404
+        ;;
+    * )
+        echo "You need to provide hostname: workpc, testpc"
+        ;;
+    esac
+}
+
+alias rdp=start_rdp
+</code></pre>
+
+<p>Powyższy kawałek kodu należy umieścić w <code>.bash_profile</code> (o ile korzystamy właśnie z tego shell-a). Teraz, żeby połączyć się z hostem o nazwie <code>workpc</code> wystarczy w terminalu wpisać <code>rdp workpc</code>. Jak widać funkcja sprawdza czy jest uruchomiony serwer X oraz ustawiona zmienna <code>DISPLAY</code>. Niezbyt eleganckie jest użycie polecenia <code>sleep</code> ale Xquartz trochę się uruchamia&hellip;</p>
+
+<p><img src="/images/xfreerdp_na_szybko.png"></p>
+]]></content>
+  </entry>
+  
+</feed>
